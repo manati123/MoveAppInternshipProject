@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Color.red
+        OnboardingView(viewModel: OnboardingViewModel())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        OnboardingView(viewModel: OnboardingViewModel())
     }
 }

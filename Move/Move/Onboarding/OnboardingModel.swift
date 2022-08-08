@@ -25,8 +25,9 @@ struct OnboardingModel {
 
 class OnboardingViewModel: ObservableObject {
     @Published var onboardingModel = OnboardingModel()
-    var slideCounter = 0
-    var slides: [OnboardingSlide] = [.safety, .scan, .ride, .parking, .rules]
+    @Published var slideCounter = 0
+    @Published var slides: [OnboardingSlide] = [.safety, .scan, .ride, .parking, .rules]
+    @Published var shouldHide = false
     
     func changeInfo() {
         switch self.onboardingModel.onboardingSlide {
@@ -75,19 +76,36 @@ class OnboardingViewModel: ObservableObject {
                     Spacer()
                     
                     Button {
-                        print("pressed")
-//                        self.slideCounter += 1
-//                        self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
-//                        self.objectWillChange.send()
+                        //                        print("\(self.slideCounter + 1) - \(self.slides.count - 1)")
+                        if self.slideCounter + 1 >= self.slides.count - 1 {
+                            print("haibas")
+                            self.slideCounter += 1
+                            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
+                            self.changeInfo()
+                            self.shouldHide = true
+                            self.objectWillChange.send()
+                        }
+                        if self.shouldHide == false{
+                            self.slideCounter += 1
+                            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
+                            self.changeInfo()
+                            self.objectWillChange.send()
+                        }
+                        self.objectWillChange.send()
                     }
                 label: {
                     Text("Next \(Image(systemName: "arrow.right"))")
+                        .opacity(shouldHide ? 0 : 1)
                         .frame(minWidth: 0)
                         .padding()
                         .foregroundColor(.white)
-
-                }.clipShape(RoundedRectangle(cornerRadius: 25))
-                        .background(Color("NextButtonColor"))
+                    
+                }
+                .background(Color("NextButtonColor"))
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .opacity(shouldHide ? 0 : 1)
+                    
+                    
                 }.padding()
                 
                 Spacer()
