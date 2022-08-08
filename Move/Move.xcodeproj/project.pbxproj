@@ -14,6 +14,10 @@
 		F9A1A80328A1163400E8DFB9 /* MoveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80228A1163400E8DFB9 /* MoveTests.swift */; };
 		F9A1A80D28A1163500E8DFB9 /* MoveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80C28A1163500E8DFB9 /* MoveUITests.swift */; };
 		F9A1A80F28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */; };
+		F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */; };
+		F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = F9A1A81F28A1269C00E8DFB9 /* NavigationStack */; };
+		F9A1A82328A126E800E8DFB9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A82228A126E800E8DFB9 /* OnboardingView.swift */; };
+		F9A1A82528A1276B00E8DFB9 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A82428A1276B00E8DFB9 /* OnboardingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,9 @@
 		F9A1A80828A1163500E8DFB9 /* MoveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A80C28A1163500E8DFB9 /* MoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITests.swift; sourceTree = "<group>"; };
 		F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		F9A1A82228A126E800E8DFB9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F9A1A82428A1276B00E8DFB9 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +102,8 @@
 		F9A1A7F028A1163200E8DFB9 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				F9A1A82128A126D700E8DFB9 /* Onboarding */,
+				F9A1A81B28A11C7E00E8DFB9 /* Splash */,
 				F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */,
 				F9A1A7F328A1163200E8DFB9 /* ContentView.swift */,
 				F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */,
@@ -127,6 +137,23 @@
 			path = MoveUITests;
 			sourceTree = "<group>";
 		};
+		F9A1A81B28A11C7E00E8DFB9 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		F9A1A82128A126D700E8DFB9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F9A1A82228A126E800E8DFB9 /* OnboardingView.swift */,
+				F9A1A82428A1276B00E8DFB9 /* OnboardingModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +170,9 @@
 			dependencies = (
 			);
 			name = Move;
+			packageProductDependencies = (
+				F9A1A81F28A1269C00E8DFB9 /* NavigationStack */,
+			);
 			productName = Move;
 			productReference = F9A1A7EE28A1163200E8DFB9 /* Move.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +245,9 @@
 				Base,
 			);
 			mainGroup = F9A1A7E528A1163200E8DFB9;
+			packageReferences = (
+				F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+			);
 			productRefGroup = F9A1A7EF28A1163200E8DFB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,7 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
+				F9A1A82528A1276B00E8DFB9 /* OnboardingModel.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
+				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
+				F9A1A82328A126E800E8DFB9 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +613,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F9A1A81F28A1269C00E8DFB9 /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
+			productName = NavigationStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F9A1A7E628A1163200E8DFB9 /* Project object */;
 }
