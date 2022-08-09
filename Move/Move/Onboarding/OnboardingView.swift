@@ -1,79 +1,80 @@
 //
-//  OnboardingSafetyView.swift
+//  OnboardingView2.swift
 //  Move
 //
-//  Created by Silviu Preoteasa on 08.08.2022.
+//  Created by Preoteasa Ioan-Silviu on 09.08.2022.
 //
 
 import SwiftUI
 
+
 struct OnboardingView: View {
-    @StateObject var viewModel: OnboardingViewModel
-    var body: some View {
-        withAnimation {
-            self.getView()
-        }
+    
+    static let id = String(describing: Self.self)
+    @StateObject var viewModel = OnboardingViewModel()
+    let onFinished: () -> Void
         
+    var body: some View {
+        VStack {
+            imageContainer
+            detailContainer
+        }
     }
     
-    @ViewBuilder
-    func getView() -> some View {
-        AnyView(
-            VStack(alignment: .leading) {
-                Image(viewModel.onboardingModel.image)
-                    .resizable()
-                    .scaledToFit()
+    var detailContainer: some View {
+            VStack {
                 HStack {
-                    Text(viewModel.onboardingModel.title)
-                        .fontWeight(.heavy)
+                    Text(viewModel.currentSLide.title)
+                        .font(.system(size: 32))
                     Spacer()
-                    Button("Skip") { }
-                    
-                }.padding()
-                Text(viewModel.onboardingModel.text)
-                    .padding()
-                Spacer()
-                HStack {
-                    ForEach(0..<5) {
-                        if $0 == self.viewModel.slideCounter {
-                            Text("_")
-                        }
-                        else {
-                            Text(".")
-                        }
-                    }
-                    Spacer()
-                    
                     Button {
-                        withAnimation(.easeInOut(duration: 1)){
-                            self.viewModel.checkIfOnboardingIsFinal()
-                        }
+                        onFinished()
+                    } label: {
+                        Text("Skip")
+//                            .opaqueStyle()
                     }
-                label: {
-                    Text("Next \(Image(systemName: "arrow.right"))")
-                        .opacity(viewModel.shouldHide ? 0 : 1)
-                        .frame(minWidth: 0)
-                        .padding()
-                        .foregroundColor(.white)
-                    
                 }
-                .background(Color("NextButtonColor"))
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .opacity(viewModel.shouldHide ? 0 : 1)
-                    
-                    
-                }.padding()
+                .padding(.bottom, 12)
                 
+                Text(viewModel.currentSLide.text)
+//                    .descriptionStyle()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
-            }.ignoresSafeArea()
+                HStack {
+                    StepIndicatorView(numberOfSteps: viewModel.steps.count, currentStepIndex: viewModel.currentSlideIndex)
+                    Spacer()
+                    Button(action: {
+                        viewModel.nextSlide(onFinished: onFinished)
+                    }) {
+                        HStack {
+                            Text(viewModel.currentSLide.buttonText)
+                            Image(systemName: "arrow.forward")
+                        }.frame(minWidth: 0)
+                            .padding()
+                            .foregroundColor(.white)
+                    }
+                    .background(Color("NextButtonColor"))
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
+            }
+            .padding(EdgeInsets(top: 24, leading: 24, bottom: 40, trailing: 24))
+            .background(.white)
             
-            
-        )
-    }
+        }
+        
+        var imageContainer: some View {
+            Color.white.overlay (
+                Image(viewModel.currentSLide.image)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    
+            )
+        }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(viewModel: OnboardingViewModel())
+        OnboardingView(onFinished: {})
     }
 }
