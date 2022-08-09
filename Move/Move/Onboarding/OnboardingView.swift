@@ -25,13 +25,17 @@ struct OnboardingView: View {
             VStack {
                 HStack {
                     Text(viewModel.currentSLide.title)
-                        .font(.system(size: 32))
+                        .font(.custom("BaiJamjuree-BoldItalic", size: 32))
+                        .foregroundColor(Color("PrimaryBlue"))
+                        
+                        
                     Spacer()
                     Button {
                         onFinished()
                     } label: {
                         Text("Skip")
-//                            .opaqueStyle()
+                            .font(.custom("BaiJamjuree-Regular", size: 14))
+                            .opacity(0.4)
                     }
                 }
                 .padding(.bottom, 12)
@@ -39,6 +43,8 @@ struct OnboardingView: View {
                 Text(viewModel.currentSLide.text)
 //                    .descriptionStyle()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("PrimaryPurple"))
+                    .font(.custom("BaiJamjuree-Semibold", size: 16))
                 Spacer()
                 HStack {
                     StepIndicatorView(numberOfSteps: viewModel.steps.count, currentStepIndex: viewModel.currentSlideIndex)
