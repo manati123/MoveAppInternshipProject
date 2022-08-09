@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
+		03472A9728A24FFF008F51DE /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9628A24FFF008F51DE /* SliderView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -38,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03472A9628A24FFF008F51DE /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */,
+				03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +154,7 @@
 			children = (
 				F9A1A82228A126E800E8DFB9 /* OnboardingView.swift */,
 				F9A1A82428A1276B00E8DFB9 /* OnboardingModel.swift */,
+				03472A9628A24FFF008F51DE /* SliderView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			name = Move;
 			packageProductDependencies = (
 				F9A1A81F28A1269C00E8DFB9 /* NavigationStack */,
+				03472A9428A24AB9008F51DE /* NavigationStack */,
 			);
 			productName = Move;
 			productReference = F9A1A7EE28A1163200E8DFB9 /* Move.app */;
@@ -247,6 +253,7 @@
 			mainGroup = F9A1A7E528A1163200E8DFB9;
 			packageReferences = (
 				F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 			);
 			productRefGroup = F9A1A7EF28A1163200E8DFB9 /* Products */;
 			projectDirPath = "";
@@ -293,6 +300,7 @@
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
 				F9A1A82528A1276B00E8DFB9 /* OnboardingModel.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
+				03472A9728A24FFF008F51DE /* SliderView.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
 				F9A1A82328A126E800E8DFB9 /* OnboardingView.swift in Sources */,
 			);
@@ -615,6 +623,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
@@ -626,6 +642,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		03472A9428A24AB9008F51DE /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
+			productName = NavigationStack;
+		};
 		F9A1A81F28A1269C00E8DFB9 /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;

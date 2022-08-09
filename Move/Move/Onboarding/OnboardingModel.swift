@@ -54,6 +54,21 @@ class OnboardingViewModel: ObservableObject {
         }
     }
     
+    func checkIfOnboardingIsFinal() {
+        if self.slideCounter + 1 >= self.slides.count - 1 {
+            self.slideCounter += 1
+            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
+            self.changeInfo()
+            self.shouldHide = true
+        }
+        if self.shouldHide == false{
+            self.slideCounter += 1
+            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
+            self.changeInfo()
+        }
+        self.objectWillChange.send()
+    }
+    
     @ViewBuilder
     func getView() -> some View {
         AnyView(
@@ -76,22 +91,7 @@ class OnboardingViewModel: ObservableObject {
                     Spacer()
                     
                     Button {
-                        //                        print("\(self.slideCounter + 1) - \(self.slides.count - 1)")
-                        if self.slideCounter + 1 >= self.slides.count - 1 {
-                            print("haibas")
-                            self.slideCounter += 1
-                            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
-                            self.changeInfo()
-                            self.shouldHide = true
-                            self.objectWillChange.send()
-                        }
-                        if self.shouldHide == false{
-                            self.slideCounter += 1
-                            self.onboardingModel.onboardingSlide = self.slides[self.slideCounter]
-                            self.changeInfo()
-                            self.objectWillChange.send()
-                        }
-                        self.objectWillChange.send()
+                        self.checkIfOnboardingIsFinal()
                     }
                 label: {
                     Text("Next \(Image(systemName: "arrow.right"))")
