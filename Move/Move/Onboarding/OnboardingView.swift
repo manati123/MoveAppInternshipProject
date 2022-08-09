@@ -18,7 +18,7 @@ struct OnboardingView: View {
         VStack {
             imageContainer
             detailContainer
-        }
+        }.animation(.easeOut, value: viewModel.currentSlideIndex)
     }
     
     var detailContainer: some View {
