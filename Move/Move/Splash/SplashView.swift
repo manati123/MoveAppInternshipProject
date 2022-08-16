@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
+    let onFinished: () -> Void
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -29,14 +30,17 @@ struct SplashView: View {
 //            .padding(/*@START_MENU_TOKEN@*/140.0/*@END_MENU_TOKEN@*/)
             .background(Color("SplashBackground"))
         }
-    }
-}
-
-struct SplashView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            SplashView()
-            SplashView()
+        .onAppear() {
+            onFinished()
         }
     }
 }
+
+//struct SplashView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            SplashView()
+//            SplashView()
+//        }
+//    }
+//}

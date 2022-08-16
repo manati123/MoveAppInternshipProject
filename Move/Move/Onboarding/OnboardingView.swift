@@ -11,20 +11,21 @@ import SwiftUI
 struct OnboardingView: View {
     
     static let id = String(describing: Self.self)
-    @StateObject var viewModel = OnboardingViewModel()
+    var onboardingData: OnboardingModel
     let onFinished: () -> Void
+    let onNext: () -> Void
         
     var body: some View {
         VStack {
             imageContainer
             detailContainer
-        }.animation(.easeOut, value: viewModel.currentSlideIndex)
+        }
     }
     
     var detailContainer: some View {
             VStack {
                 HStack {
-                    Text(viewModel.currentSLide.title)
+                    Text(onboardingData.title)
                         .font(.custom("BaiJamjuree-BoldItalic", size: 32))
                         .foregroundColor(Color("PrimaryBlue"))
                         
@@ -40,20 +41,20 @@ struct OnboardingView: View {
                 }
                 .padding(.bottom, 12)
                 
-                Text(viewModel.currentSLide.text)
-//                    .descriptionStyle()
+                Text(onboardingData.text)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color("PrimaryPurple"))
-                    .font(.custom("BaiJamjuree-Semibold", size: 16))
+                    .font(.custom("BaiJamjuree-Regular", size: 16))
+                    .lineSpacing(4)
                 Spacer()
                 HStack {
-                    StepIndicatorView(numberOfSteps: viewModel.steps.count, currentStepIndex: viewModel.currentSlideIndex)
+                    StepIndicatorView(numberOfSteps: 5, currentStepIndex: onboardingData.step)
                     Spacer()
                     Button(action: {
-                        viewModel.nextSlide(onFinished: onFinished)
+                        onNext()
                     }) {
                         HStack {
-                            Text(viewModel.currentSLide.buttonText)
+                            Text(onboardingData.buttonText)
                             Image(systemName: "arrow.forward")
                         }.frame(minWidth: 0)
                             .padding()
@@ -70,7 +71,7 @@ struct OnboardingView: View {
         
         var imageContainer: some View {
             Color.white.overlay (
-                Image(viewModel.currentSLide.image)
+                Image(onboardingData.image)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
@@ -81,6 +82,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(onFinished: {})
+//        OnboardingView(onFinished: {}, onNext: {})
+        Text("F")
     }
 }

@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        AuthenticationView()
+//        AuthenticationView()
+        MainCoordinatorView()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(onFinished: {})
+        Text(":F")
     }
 }
