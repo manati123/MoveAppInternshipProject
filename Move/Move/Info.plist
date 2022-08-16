@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BaiJamjuree-ExtraLightItalic.tff</string>
+		<string>BaiJamjuree-BoldItalic.ttf</string>
+		<string>BaiJamjuree-ExtraLight.tff</string>
+		<string>BaiJamjuree-Bold.ttf</string>
+		<string>BaiJamjuree-Italic.ttf</string>
+		<string>BaiJamjuree-LightItalic.tff</string>
+		<string>BaiJamjuree-Light.tff</string>
+		<string>BaiJamjuree-Medium.tff</string>
+		<string>BaiJamjuree-MediumItalic.tff</string>
+		<string>BaiJamjuree-Regular.tff</string>
+		<string>BaiJamjuree-SemiBold.tff</string>
+		<string>BaiJamjuree-SemiBoldItalic.tff</string>
+	</array>
+</dict>
+</plist>

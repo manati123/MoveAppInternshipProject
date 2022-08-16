@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
+		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
+		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
+		03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9E28A2611F008F51DE /* OnboardingView.swift */; };
+		03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472AA028A2655E008F51DE /* SlideIndicatorView.swift */; };
+		03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472AA228A26950008F51DE /* OnboardingViewModel.swift */; };
+		03472B0C28A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0028A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf */; };
+		03472B0D28A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0128A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf */; };
+		03472B0E28A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0228A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf */; };
+		03472B0F28A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0328A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf */; };
+		03472B1028A27ED0008F51DE /* BaiJamjuree-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0428A27ED0008F51DE /* BaiJamjuree-Light.ttf */; };
+		03472B1128A27ED0008F51DE /* BaiJamjuree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0528A27ED0008F51DE /* BaiJamjuree-Regular.ttf */; };
+		03472B1228A27ED0008F51DE /* BaiJamjuree-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0628A27ED0008F51DE /* BaiJamjuree-Italic.ttf */; };
+		03472B1328A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0728A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf */; };
+		03472B1428A27ED0008F51DE /* BaiJamjuree-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0828A27ED0008F51DE /* BaiJamjuree-Bold.ttf */; };
+		03472B1528A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0928A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf */; };
+		03472B1628A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */; };
+		03472B1728A27ED0008F51DE /* BaiJamjuree-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */; };
+		03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */; };
+		036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -14,6 +34,8 @@
 		F9A1A80328A1163400E8DFB9 /* MoveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80228A1163400E8DFB9 /* MoveTests.swift */; };
 		F9A1A80D28A1163500E8DFB9 /* MoveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80C28A1163500E8DFB9 /* MoveUITests.swift */; };
 		F9A1A80F28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */; };
+		F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */; };
+		F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = F9A1A81F28A1269C00E8DFB9 /* NavigationStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +56,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		03472AA028A2655E008F51DE /* SlideIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideIndicatorView.swift; sourceTree = "<group>"; };
+		03472AA228A26950008F51DE /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		03472ACB28A272CF008F51DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03472B0028A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-MediumItalic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-MediumItalic.ttf"; sourceTree = "<group>"; };
+		03472B0128A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-BoldItalic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-BoldItalic.ttf"; sourceTree = "<group>"; };
+		03472B0228A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-ExtraLightItalic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		03472B0328A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-SemiBoldItalic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		03472B0428A27ED0008F51DE /* BaiJamjuree-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-Light.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-Light.ttf"; sourceTree = "<group>"; };
+		03472B0528A27ED0008F51DE /* BaiJamjuree-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-Regular.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-Regular.ttf"; sourceTree = "<group>"; };
+		03472B0628A27ED0008F51DE /* BaiJamjuree-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-Italic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-Italic.ttf"; sourceTree = "<group>"; };
+		03472B0728A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-SemiBold.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-SemiBold.ttf"; sourceTree = "<group>"; };
+		03472B0828A27ED0008F51DE /* BaiJamjuree-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-Bold.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-Bold.ttf"; sourceTree = "<group>"; };
+		03472B0928A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-LightItalic.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-LightItalic.ttf"; sourceTree = "<group>"; };
+		03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-ExtraLight.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-ExtraLight.ttf"; sourceTree = "<group>"; };
+		03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BaiJamjuree-Medium.ttf"; path = "../../../../Downloads/Bai_Jamjuree/BaiJamjuree-Medium.ttf"; sourceTree = "<group>"; };
+		03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
+		036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +86,7 @@
 		F9A1A80828A1163500E8DFB9 /* MoveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A80C28A1163500E8DFB9 /* MoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITests.swift; sourceTree = "<group>"; };
 		F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */,
+				03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +116,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03472A9828A252F5008F51DE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				03472A9928A25328008F51DE /* AuthenticationModel.swift */,
+				03472A9B28A25336008F51DE /* AuthenticationView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		03472A9D28A260EA008F51DE /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				03472A9E28A2611F008F51DE /* OnboardingView.swift */,
+				03472AA028A2655E008F51DE /* SlideIndicatorView.swift */,
+				03472AA228A26950008F51DE /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		03472B2528AB83C0008F51DE /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */,
+				036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		F9A1A7E528A1163200E8DFB9 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +167,23 @@
 		F9A1A7F028A1163200E8DFB9 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				03472B2528AB83C0008F51DE /* Coordinators */,
+				03472B0828A27ED0008F51DE /* BaiJamjuree-Bold.ttf */,
+				03472B0128A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf */,
+				03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */,
+				03472B0228A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf */,
+				03472B0628A27ED0008F51DE /* BaiJamjuree-Italic.ttf */,
+				03472B0428A27ED0008F51DE /* BaiJamjuree-Light.ttf */,
+				03472B0928A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf */,
+				03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */,
+				03472B0028A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf */,
+				03472B0528A27ED0008F51DE /* BaiJamjuree-Regular.ttf */,
+				03472B0728A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf */,
+				03472B0328A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf */,
+				03472ACB28A272CF008F51DE /* Info.plist */,
+				03472A9D28A260EA008F51DE /* Onboarding */,
+				03472A9828A252F5008F51DE /* Authentication */,
+				F9A1A81B28A11C7E00E8DFB9 /* Splash */,
 				F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */,
 				F9A1A7F328A1163200E8DFB9 /* ContentView.swift */,
 				F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */,
@@ -127,6 +217,14 @@
 			path = MoveUITests;
 			sourceTree = "<group>";
 		};
+		F9A1A81B28A11C7E00E8DFB9 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +241,10 @@
 			dependencies = (
 			);
 			name = Move;
+			packageProductDependencies = (
+				F9A1A81F28A1269C00E8DFB9 /* NavigationStack */,
+				03472A9428A24AB9008F51DE /* NavigationStack */,
+			);
 			productName = Move;
 			productReference = F9A1A7EE28A1163200E8DFB9 /* Move.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +317,10 @@
 				Base,
 			);
 			mainGroup = F9A1A7E528A1163200E8DFB9;
+			packageReferences = (
+				F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+			);
 			productRefGroup = F9A1A7EF28A1163200E8DFB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,7 +338,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A1A7F928A1163400E8DFB9 /* Preview Assets.xcassets in Resources */,
+				03472B1428A27ED0008F51DE /* BaiJamjuree-Bold.ttf in Resources */,
+				03472B1128A27ED0008F51DE /* BaiJamjuree-Regular.ttf in Resources */,
+				03472B1228A27ED0008F51DE /* BaiJamjuree-Italic.ttf in Resources */,
+				03472B0E28A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf in Resources */,
+				03472B1728A27ED0008F51DE /* BaiJamjuree-Medium.ttf in Resources */,
+				03472B1528A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf in Resources */,
+				03472B0D28A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf in Resources */,
 				F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */,
+				03472B1628A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf in Resources */,
+				03472B0C28A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf in Resources */,
+				03472B0F28A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf in Resources */,
+				03472B1028A27ED0008F51DE /* BaiJamjuree-Light.ttf in Resources */,
+				03472B1328A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +375,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
+				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
+				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
+				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
+				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
+				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
+				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,
+				03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -399,6 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -419,6 +547,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Move/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +576,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Move/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -577,6 +707,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03472A9428A24AB9008F51DE /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
+			productName = NavigationStack;
+		};
+		F9A1A81F28A1269C00E8DFB9 /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
+			productName = NavigationStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F9A1A7E628A1163200E8DFB9 /* Project object */;
 }
