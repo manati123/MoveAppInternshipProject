@@ -12,9 +12,6 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @StateObject var viewModel = UserViewModel()
-    @State var username: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
     
     var body: some View {
         ZStack {
@@ -35,11 +32,11 @@ struct AuthenticationView: View {
                         VStack(spacing: 30) {
                             
                             VStack {
-                                FloatingTextField(title: "Email", text: $email)
+                                FloatingTextField(title: "Email", text: $viewModel.email)
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Username", text: $username)
+                                FloatingTextField(title: "Username", text: $viewModel.username)
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Password", text: $password)
+                                FloatingTextField(title: "Password", text: $viewModel.password)
                                     .font(Font.baiJamjuree.caption2)
                             }
                             VStack(alignment: .leading, spacing: 2){
@@ -59,17 +56,17 @@ struct AuthenticationView: View {
     }
     
     func validateEmail() -> Bool {
-        if self.email.count > 100 {
+        if viewModel.email.count > 100 {
                 return false
             }
             let emailFormat = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" + "z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5" + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-" + "9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21" + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
             //let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
             let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluate(with: self.email)
+        return emailPredicate.evaluate(with: viewModel.email)
     }
     
     func fieldAreCorrect() -> Bool {
-        return validateEmail() && self.username.count >= 3 && self.password.count >= 9
+        return validateEmail() && viewModel.username.count >= 3 && viewModel.password.count >= 9
     }
     
     var logInText: some View {

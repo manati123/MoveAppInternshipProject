@@ -10,7 +10,7 @@ import SwiftUI
 struct FloatingTextField: View {
     let title: String
     @State var isTouched = false
-    let text: Binding<String>
+    var text: Binding<String>
     var body: some View {
         ZStack(alignment: .leading) {
                 Text(title)

@@ -7,14 +7,10 @@
 
 import Foundation
 
-struct UserModel {
-    var email: String = ""
-    var username: String = ""
-    var password: String = ""
-}
-
 class UserViewModel: ObservableObject {
-    @Published var userModel = UserModel()
+    @Published var email: String = ""
+    @Published var username: String = ""
+    @Published var password: String = ""
     
     
 }

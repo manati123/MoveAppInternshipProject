@@ -12,18 +12,18 @@ struct MainCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: getSplashView().navigationBarHidden(true), tag: "Splash", selection: $selection) {
+                NavigationLink(destination: getSplashView().transition(.slide.animation(.default)).navigationBarHidden(true), tag: "Splash", selection: $selection) {
                     EmptyView()
                 }
-                .transition(.slide)
+                .transition(.slide.animation(.default))
                 NavigationLink(destination: OnboardingCoordinatorView(){
                     self.selection = "Authentication"
                 }.navigationBarHidden(true), tag: "Onboarding", selection: $selection) {
                     EmptyView()
-                }.transition(.slide)
-                NavigationLink(destination: AuthenticationView(), tag: "Authentication", selection: $selection) {
+                }.transition(.slide.animation(.default))
+                NavigationLink(destination: SignUpCoordinatorView(), tag: "Authentication", selection: $selection) {
                     EmptyView()
-                }.transition(.slide)
+                }.transition(.slide.animation(.default))
             }
         }
     }

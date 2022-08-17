@@ -33,6 +33,7 @@
 		036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87B28ABC513004C913A /* TextExtensions.swift */; };
 		036FF87E28ABD5EE004C913A /* ChangeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87D28ABD5EE004C913A /* ChangeableButton.swift */; };
 		036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87F28AD01CB004C913A /* FontExtensions.swift */; };
+		036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 		036FF87B28ABC513004C913A /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		036FF87D28ABD5EE004C913A /* ChangeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableButton.swift; sourceTree = "<group>"; };
 		036FF87F28AD01CB004C913A /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinatorView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */,
 				036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */,
+				036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
+				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
 				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,
 				03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */,
