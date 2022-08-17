@@ -10,47 +10,32 @@ import SwiftUI
 struct OnboardingCoordinatorView: View {
     @StateObject var viewModel = OnboardingViewModel()
     @State private var onboardingSlide: OnboardingSlide? = .safety
-    
+    private let onboardingSlides = OnboardingData.getAll()
     let onFinished:() -> Void
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: OnboardingView(onboardingData: OnboardingData.safety(), onFinished: onFinished, onNext: {onboardingSlide = .scan})
-                    .navigationBarHidden(true)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .animation(.default),
-                               tag: OnboardingSlide.safety, selection: $onboardingSlide) {
-                    EmptyView()
-                }
-                NavigationLink(destination: OnboardingView(onboardingData: OnboardingData.scan(), onFinished: onFinished, onNext: {onboardingSlide = .ride})
-                    .navigationBarHidden(true)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .animation(.default),
-                               tag: OnboardingSlide.scan, selection: $onboardingSlide) {
-                    EmptyView()
-                }
-                NavigationLink(destination: OnboardingView(onboardingData: OnboardingData.ride(), onFinished: onFinished, onNext: {onboardingSlide = .parking})
-                    .navigationBarHidden(true)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .animation(.default),
-                               tag: OnboardingSlide.ride, selection: $onboardingSlide) {
-                    EmptyView()
-                }
-                NavigationLink(destination: OnboardingView(onboardingData: OnboardingData.parking(), onFinished: onFinished, onNext: {onboardingSlide = .rules})
-                    .navigationBarHidden(true)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .animation(.default),
-                               tag: OnboardingSlide.parking, selection: $onboardingSlide) {
-                    EmptyView()
-                }
-                NavigationLink(destination: OnboardingView(onboardingData: OnboardingData.rules(), onFinished: onFinished, onNext: onFinished)
-                    .navigationBarHidden(true)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .animation(.default),
-                               tag: OnboardingSlide.rules, selection: $onboardingSlide) {
-                    EmptyView()
+                ForEach(0..<5) {index in
+                    if index == 4 {
+                        NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: onFinished).navigationBarHidden(true)
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            .animation(.default),
+                                       tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
+                            EmptyView()
+                        }
+                        
+                    } else {
+                        NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: {onboardingSlide = onboardingSlides[index+1].onboardingSlide})
+                            .navigationBarHidden(true)
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            .animation(.default),
+                                       tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
+                            EmptyView()
+                        }
+                    }
                 }
             }
+            
         }
     }
 }
