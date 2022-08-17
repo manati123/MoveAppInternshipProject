@@ -18,8 +18,7 @@ struct OnboardingCoordinatorView: View {
                 ForEach(0..<5) {index in
                     if index == 4 {
                         NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: onFinished).navigationBarHidden(true)
-                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            .animation(.default),
+                            .transition(.opacity.animation(.default)),
                                        tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
                             EmptyView()
                         }
@@ -27,8 +26,7 @@ struct OnboardingCoordinatorView: View {
                     } else {
                         NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: {onboardingSlide = onboardingSlides[index+1].onboardingSlide})
                             .navigationBarHidden(true)
-                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            .animation(.default),
+                            .transition(.opacity.animation(.default)),
                                        tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
                             EmptyView()
                         }
