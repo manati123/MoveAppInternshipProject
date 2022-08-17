@@ -6,16 +6,16 @@
 	<array>
 		<string>BaiJamjuree-ExtraLightItalic.tff</string>
 		<string>BaiJamjuree-BoldItalic.ttf</string>
-		<string>BaiJamjuree-ExtraLight.tff</string>
+		<string>BaiJamjuree-ExtraLight.ttf</string>
 		<string>BaiJamjuree-Bold.ttf</string>
 		<string>BaiJamjuree-Italic.ttf</string>
-		<string>BaiJamjuree-LightItalic.tff</string>
-		<string>BaiJamjuree-Light.tff</string>
-		<string>BaiJamjuree-Medium.tff</string>
-		<string>BaiJamjuree-MediumItalic.tff</string>
-		<string>BaiJamjuree-Regular.tff</string>
-		<string>BaiJamjuree-SemiBold.tff</string>
-		<string>BaiJamjuree-SemiBoldItalic.tff</string>
+		<string>BaiJamjuree-LightItalic.ttf</string>
+		<string>BaiJamjuree-Light.ttf</string>
+		<string>BaiJamjuree-Medium.ttf</string>
+		<string>BaiJamjuree-MediumItalic.ttf</string>
+		<string>BaiJamjuree-Regular.ttf</string>
+		<string>BaiJamjuree-SemiBold.ttf</string>
+		<string>BaiJamjuree-SemiBoldItalic.ttf</string>
 	</array>
 </dict>
 </plist>
