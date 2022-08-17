@@ -25,6 +25,11 @@ struct OnboardingModel {
 }
 
 class OnboardingData {
+    
+    static func getAll() -> [OnboardingModel] {
+        [safety(),scan(),ride(),parking(),rules()]
+    }
+    
     static func safety() -> OnboardingModel {
         OnboardingModel(image: "SafetyImage", title: "Safety", text: "Please wear a helmet and protect yourself while riding.", onboardingSlide: .safety, buttonText: "Next", step: 0)
     }

@@ -16,9 +16,14 @@ struct MainCoordinatorView: View {
                     EmptyView()
                 }
                 .transition(.slide)
-                NavigationLink(destination: OnboardingCoordinatorView().navigationBarHidden(true), tag: "Onboarding", selection: $selection) {
+                NavigationLink(destination: OnboardingCoordinatorView(){
+                    self.selection = "Authentication"
+                }.navigationBarHidden(true), tag: "Onboarding", selection: $selection) {
                     EmptyView()
-                }
+                }.transition(.slide)
+                NavigationLink(destination: AuthenticationView(), tag: "Authentication", selection: $selection) {
+                    EmptyView()
+                }.transition(.slide)
             }
         }
     }

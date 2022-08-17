@@ -26,7 +26,7 @@ struct OnboardingView: View {
             VStack {
                 HStack {
                     Text(onboardingData.title)
-                        .font(.custom("BaiJamjuree-BoldItalic", size: 32))
+                        .font(Font.baiJamjuree.heading1)
                         .foregroundColor(Color("PrimaryBlue"))
                         
                         
@@ -35,7 +35,7 @@ struct OnboardingView: View {
                         onFinished()
                     } label: {
                         Text("Skip")
-                            .font(.custom("BaiJamjuree-Regular", size: 14))
+                            .font(Font.baiJamjuree.body2)
                             .opacity(0.4)
                     }
                 }
@@ -44,7 +44,7 @@ struct OnboardingView: View {
                 Text(onboardingData.text)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color("PrimaryPurple"))
-                    .font(.custom("BaiJamjuree-Regular", size: 16))
+                    .font(Font.baiJamjuree.smallText)
                     .lineSpacing(4)
                 Spacer()
                 HStack {

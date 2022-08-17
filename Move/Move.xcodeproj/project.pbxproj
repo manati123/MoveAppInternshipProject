@@ -28,6 +28,11 @@
 		03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */; };
 		036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */; };
 		036FF87428AB9F11004C913A /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 036FF87328AB9F11004C913A /* NavigationStack */; };
+		036FF87728ABB925004C913A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87628ABB925004C913A /* ViewExtensions.swift */; };
+		036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87928ABBC3C004C913A /* FloatingTextField.swift */; };
+		036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87B28ABC513004C913A /* TextExtensions.swift */; };
+		036FF87E28ABD5EE004C913A /* ChangeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87D28ABD5EE004C913A /* ChangeableButton.swift */; };
+		036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87F28AD01CB004C913A /* FontExtensions.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -77,6 +82,11 @@
 		03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Medium.ttf"; sourceTree = "<group>"; };
 		03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorView.swift; sourceTree = "<group>"; };
+		036FF87628ABB925004C913A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		036FF87928ABBC3C004C913A /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
+		036FF87B28ABC513004C913A /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		036FF87D28ABD5EE004C913A /* ChangeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableButton.swift; sourceTree = "<group>"; };
+		036FF87F28AD01CB004C913A /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -146,6 +156,44 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		036FF87528ABB917004C913A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				036FF87628ABB925004C913A /* ViewExtensions.swift */,
+				036FF87B28ABC513004C913A /* TextExtensions.swift */,
+				036FF87F28AD01CB004C913A /* FontExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		036FF87828ABBC2E004C913A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				036FF87928ABBC3C004C913A /* FloatingTextField.swift */,
+				036FF87D28ABD5EE004C913A /* ChangeableButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		036FF88128AD06F0004C913A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				03472B0828A27ED0008F51DE /* BaiJamjuree-Bold.ttf */,
+				03472B0128A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf */,
+				03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */,
+				03472B0228A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf */,
+				03472B0628A27ED0008F51DE /* BaiJamjuree-Italic.ttf */,
+				03472B0428A27ED0008F51DE /* BaiJamjuree-Light.ttf */,
+				03472B0928A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf */,
+				03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */,
+				03472B0028A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf */,
+				03472B0528A27ED0008F51DE /* BaiJamjuree-Regular.ttf */,
+				03472B0728A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf */,
+				03472B0328A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		F9A1A7E528A1163200E8DFB9 = {
 			isa = PBXGroup;
 			children = (
@@ -169,19 +217,10 @@
 		F9A1A7F028A1163200E8DFB9 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				036FF88128AD06F0004C913A /* Fonts */,
+				036FF87828ABBC2E004C913A /* Components */,
+				036FF87528ABB917004C913A /* Extensions */,
 				03472B2528AB83C0008F51DE /* Coordinators */,
-				03472B0828A27ED0008F51DE /* BaiJamjuree-Bold.ttf */,
-				03472B0128A27ED0008F51DE /* BaiJamjuree-BoldItalic.ttf */,
-				03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */,
-				03472B0228A27ED0008F51DE /* BaiJamjuree-ExtraLightItalic.ttf */,
-				03472B0628A27ED0008F51DE /* BaiJamjuree-Italic.ttf */,
-				03472B0428A27ED0008F51DE /* BaiJamjuree-Light.ttf */,
-				03472B0928A27ED0008F51DE /* BaiJamjuree-LightItalic.ttf */,
-				03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */,
-				03472B0028A27ED0008F51DE /* BaiJamjuree-MediumItalic.ttf */,
-				03472B0528A27ED0008F51DE /* BaiJamjuree-Regular.ttf */,
-				03472B0728A27ED0008F51DE /* BaiJamjuree-SemiBold.ttf */,
-				03472B0328A27ED0008F51DE /* BaiJamjuree-SemiBoldItalic.ttf */,
 				03472ACB28A272CF008F51DE /* Info.plist */,
 				03472A9D28A260EA008F51DE /* Onboarding */,
 				03472A9828A252F5008F51DE /* Authentication */,
@@ -379,16 +418,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036FF87728ABB925004C913A /* ViewExtensions.swift in Sources */,
 				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
+				036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
+				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
+				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
 				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,
 				03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */,
+				036FF87E28ABD5EE004C913A /* ChangeableButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +593,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
+				DEVELOPMENT_TEAM = UC457FQPMT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Move/Info.plist;
@@ -562,7 +607,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tapptitude.Move;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tapptitude.silviu807.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -578,6 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
+				DEVELOPMENT_TEAM = UC457FQPMT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Move/Info.plist;
@@ -591,7 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tapptitude.Move;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tapptitude.silviu807.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -16,7 +16,7 @@ struct StepIndicatorView: View {
         HStack {
             ForEach(0..<numberOfSteps) { index in
                 Capsule()
-                    .fill(index == currentStepIndex ? Color.gray : Color.black)
+                    .fill(index == currentStepIndex ? Color.black : Color.gray)
                     .frame(width: index == currentStepIndex ? 16: 4, height: 4)
                     .animation(.default)
             }

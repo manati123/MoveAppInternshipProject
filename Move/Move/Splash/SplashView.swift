@@ -32,6 +32,13 @@ struct SplashView: View {
         }
         .onAppear() {
             onFinished()
+//            for family in UIFont.familyNames {
+//                    print(family)
+//
+//                    for names in UIFont.fontNames(forFamilyName: family){
+//                    print("== \(names)")
+//                    }
+//               }
         }
     }
 }
