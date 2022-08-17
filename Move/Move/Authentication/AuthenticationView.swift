@@ -43,10 +43,10 @@ struct AuthenticationView: View {
                                     .font(Font.baiJamjuree.caption2)
                             }
                             VStack(alignment: .leading, spacing: 2){
-                            Text("By continuing you agree to Move's")
-                                .font(Font.baiJamjuree.smallText)
-                                .foregroundColor(.white)
-                            termsAndConditions
+                                Text("By continuing you agree to Move's")
+                                    .font(Font.baiJamjuree.smallText)
+                                    .foregroundColor(.white)
+                                termsAndConditions
                             }.frame(maxWidth: .infinity)
                             ChangeableButton()
                             logInText
@@ -57,76 +57,93 @@ struct AuthenticationView: View {
         }
         
     }
-}
+    
+    func validateEmail() -> Bool {
+        if self.email.count > 100 {
+                return false
+            }
+            let emailFormat = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" + "z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5" + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-" + "9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21" + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+            //let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: self.email)
+    }
+    
+    func fieldAreCorrect() -> Bool {
+        return validateEmail() && self.username.count >= 3 && self.password.count >= 9
+    }
+    
+    var logInText: some View {
+        HStack(spacing: 0) {
+            Text("You already have an account? You can")
+                .font(Font.baiJamjuree.smallText)
+                .foregroundColor(.white)
+            Button {
+                print("LMAOCUAIE")
+            } label: {
+                Text(" log in here")
+                    .underline()
+                    .font(Font.baiJamjuree.smallText)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .accentColor(.white)
+            }
+        }
+    }
 
-var logInText: some View {
-    HStack(spacing: 0) {
-        Text("You already have an account? You can")
-            .font(Font.baiJamjuree.smallText)
-            .foregroundColor(.white)
-        Button {
-            print("LMAOCUAIE")
-        } label: {
-            Text(" log in here")
+    var termsAndConditions: some View {
+        HStack(spacing: 0) {
+            Text("[Terms and Conditions](https://tapptitude.com)")
                 .underline()
                 .font(Font.baiJamjuree.smallText)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .accentColor(.white)
-        }
-    }
-}
-
-var termsAndConditions: some View {
-    HStack(spacing: 0) {
-        Text("[Terms and Conditions](https://tapptitude.com)")
-            .underline()
-            .font(Font.baiJamjuree.smallText)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .accentColor(.white)
-        Text(" and ")
-            .font(Font.baiJamjuree.smallText)
-            .foregroundColor(.white)
-        Text("[Privacy Policy](https://tapptitude.com)")
-            .underline()
-            .font(Font.baiJamjuree.smallText)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .accentColor(.white)
-
-    }.padding(.trailing, 82).frame(maxWidth: .infinity)
-
-}
-
-var backgroundView: some View {
-    GeometryReader { g in
-        VStack(spacing: 40) {
-            HStack(spacing: 200) {
-                Spacer()
-                //                    Spacer()
-                RoundedRectangle(cornerRadius: 130)
-                    .frame(width: g.size.width * 1, height: g.size.height * 0.5)
-                    .foregroundColor(.white)
-                    .opacity(0.1)
-                    .rotationEffect(.degrees(-25))
-                
-            }
-            HStack(spacing: 200) {
-                
-                //                    Spacer()
-                RoundedRectangle(cornerRadius: 180)
-                    .frame(width: g.size.width * 1, height: g.size.height * 0.5)
-                    .foregroundColor(.white)
-                    .opacity(0.1)
-                    .rotationEffect(.degrees(5))
-                    .offset(x: g.size.width / -2.5, y: 0)
-                Spacer()
-            } .frame(maxWidth: UIScreen.main.bounds.width)
-        }
+            Text(" and ")
+                .font(Font.baiJamjuree.smallText)
+                .foregroundColor(.white)
+            Text("[Privacy Policy](https://tapptitude.com)")
+                .underline()
+                .font(Font.baiJamjuree.smallText)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .accentColor(.white)
+            
+        }.padding(.trailing, 82).frame(maxWidth: .infinity)
         
-    }.background(Color("SplashBackground"))
-        .ignoresSafeArea()
+    }
+
+    var backgroundView: some View {
+        GeometryReader { g in
+            VStack(spacing: 40) {
+                HStack(spacing: 200) {
+                    Spacer()
+                    //                    Spacer()
+                    RoundedRectangle(cornerRadius: 130)
+                        .frame(width: g.size.width * 1, height: g.size.height * 0.5)
+                        .foregroundColor(.white)
+                        .opacity(0.1)
+                        .rotationEffect(.degrees(-25))
+                    
+                }
+                HStack(spacing: 200) {
+                    
+                    //                    Spacer()
+                    RoundedRectangle(cornerRadius: 180)
+                        .frame(width: g.size.width * 1, height: g.size.height * 0.5)
+                        .foregroundColor(.white)
+                        .opacity(0.1)
+                        .rotationEffect(.degrees(5))
+                        .offset(x: g.size.width / -2.5, y: 0)
+                    Spacer()
+                } .frame(maxWidth: UIScreen.main.bounds.width)
+            }
+            
+        }.background(Color("SplashBackground"))
+            .ignoresSafeArea()
+    }
+
+
+
 }
 
 

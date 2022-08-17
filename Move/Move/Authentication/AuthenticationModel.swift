@@ -15,4 +15,6 @@ struct UserModel {
 
 class UserViewModel: ObservableObject {
     @Published var userModel = UserModel()
+    
+    
 }
