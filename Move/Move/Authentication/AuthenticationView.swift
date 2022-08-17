@@ -76,7 +76,7 @@ struct AuthenticationView: View {
     
     var backgroundView: some View {
         GeometryReader { g in
-            VStack {
+            VStack(spacing: 40) {
                 HStack(spacing: 200) {
                     Spacer()
                     //                    Spacer()
@@ -90,14 +90,14 @@ struct AuthenticationView: View {
                 HStack(spacing: 200) {
                     
                     //                    Spacer()
-                    RoundedRectangle(cornerRadius: 130)
+                    RoundedRectangle(cornerRadius: 180)
                         .frame(width: g.size.width * 1, height: g.size.height * 0.5)
                         .foregroundColor(.white)
                         .opacity(0.1)
-                        .rotationEffect(.degrees(-25))
+                        .rotationEffect(.degrees(5))
+                        .offset(x: g.size.width / -2.5, y: 0)
                     Spacer()
-                    
-                }
+                } .frame(maxWidth: UIScreen.main.bounds.width)
             }
             
         }.background(Color("SplashBackground"))
