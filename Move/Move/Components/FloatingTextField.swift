@@ -11,6 +11,7 @@ struct FloatingTextField: View {
     let title: String
     @State var isTouched = false
     var text: Binding<String>
+    var isSecured = false
     var body: some View {
         ZStack(alignment: .leading) {
                 Text(title)
@@ -18,8 +19,8 @@ struct FloatingTextField: View {
                     .offset(y: text.wrappedValue.isEmpty ? 0 : -25)
                     .scaleEffect(isTouched ? 1 : 0.8, anchor: .leading)
                     .opacity(0.5)
-                switch self.title{
-                case "Password":
+                switch self.isSecured{
+                case true:
                     VStack(alignment: .leading, spacing: 0) {
                         SecureField("", text: text)
                             .foregroundColor(.white)

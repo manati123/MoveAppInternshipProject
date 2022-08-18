@@ -4,14 +4,11 @@
 //
 //  Created by Preoteasa Ioan-Silviu on 09.08.2022.
 //
-
+import Foundation
 import SwiftUI
 
-
-
-
 struct AuthenticationView: View {
-    @StateObject var viewModel = UserViewModel()
+    @StateObject var viewModel: UserViewModel
     
     var body: some View {
         ZStack {
@@ -19,9 +16,7 @@ struct AuthenticationView: View {
             GeometryReader { g in
                 VStack(alignment: .leading){
                     Image("SmallLogoWhite")
-                    //                    .offset(x: -155, y: 10)
                     VStack(alignment: .leading, spacing: 20) {
-                        //                    Spacer()
                         Text("Let's get started")
                             .font(Font.baiJamjuree.heading1)
                             .foregroundColor(.white)
@@ -31,12 +26,12 @@ struct AuthenticationView: View {
                             .opacity(0.3)
                         VStack(spacing: 30) {
                             
-                            VStack {
-                                FloatingTextField(title: "Email", text: $viewModel.email)
+                            VStack(spacing: 20) {
+                                FloatingTextField(title: "Email", text: $viewModel.email,isSecured: false)
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Username", text: $viewModel.username)
+                                FloatingTextField(title: "Username", text: $viewModel.username, isSecured: false)
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Password", text: $viewModel.password)
+                                FloatingTextField(title: "Password", text: $viewModel.password, isSecured: true)
                                     .font(Font.baiJamjuree.caption2)
                             }
                             VStack(alignment: .leading, spacing: 2){
@@ -45,29 +40,25 @@ struct AuthenticationView: View {
                                     .foregroundColor(.white)
                                 termsAndConditions
                             }.frame(maxWidth: .infinity)
-                            ChangeableButton()
+                            Button() {
+                                print("on get started click")
+                            } label: {
+                                Text("Get started!")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.filledButton)
+                            .disabled(viewModel.fieldAreCorrect() ? false : true)
+                            .animation(.default, value: viewModel.fieldAreCorrect())
                             logInText
                         }
                     }
-                }.padding()
+                }
+                .padding()
             }
         }
         
     }
     
-    func validateEmail() -> Bool {
-        if viewModel.email.count > 100 {
-                return false
-            }
-            let emailFormat = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" + "z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5" + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-" + "9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21" + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
-            //let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluate(with: viewModel.email)
-    }
-    
-    func fieldAreCorrect() -> Bool {
-        return validateEmail() && viewModel.username.count >= 3 && viewModel.password.count >= 9
-    }
     
     var logInText: some View {
         HStack(spacing: 0) {
@@ -84,9 +75,9 @@ struct AuthenticationView: View {
                     .foregroundColor(.white)
                     .accentColor(.white)
             }
-        }
+        }.frame(maxWidth: .infinity)
     }
-
+    
     var termsAndConditions: some View {
         HStack(spacing: 0) {
             Text("[Terms and Conditions](https://tapptitude.com)")
@@ -95,6 +86,8 @@ struct AuthenticationView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .accentColor(.white)
+                
+            
             Text(" and ")
                 .font(Font.baiJamjuree.smallText)
                 .foregroundColor(.white)
@@ -105,10 +98,11 @@ struct AuthenticationView: View {
                 .foregroundColor(.white)
                 .accentColor(.white)
             
-        }.padding(.trailing, 82).frame(maxWidth: .infinity)
+        }.padding(.trailing, 82)
+            .frame(maxWidth: .infinity, alignment: .leading)
         
     }
-
+    
     var backgroundView: some View {
         GeometryReader { g in
             VStack(spacing: 40) {
@@ -138,14 +132,16 @@ struct AuthenticationView: View {
         }.background(Color("SplashBackground"))
             .ignoresSafeArea()
     }
-
-
-
+    
+    
+    
+    
 }
 
 
 struct AuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthenticationView()
+        AuthenticationView(viewModel: UserViewModel())
+            .previewInterfaceOrientation(.portrait)
     }
 }

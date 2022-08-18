@@ -15,10 +15,11 @@ enum LogState: String{
 
 struct SignUpCoordinatorView: View {
     @State var logState: LogState? = .signUp
+    @StateObject var viewModel = UserViewModel()
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: AuthenticationView(), tag: .signUp, selection: $logState) {
+                NavigationLink(destination: AuthenticationView(viewModel: viewModel), tag: .signUp, selection: $logState) {
                     EmptyView()
                 }
             }
