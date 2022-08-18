@@ -12,7 +12,7 @@ struct AuthenticationView: View {
     
     var body: some View {
         ZStack {
-            backgroundView
+            AuthenticationBackground()
             GeometryReader { g in
                 VStack(alignment: .leading){
                     Image("SmallLogoWhite")
@@ -27,11 +27,11 @@ struct AuthenticationView: View {
                         VStack(spacing: 30) {
                             
                             VStack(spacing: 20) {
-                                FloatingTextField(title: "Email", text: $viewModel.email,isSecured: false)
+                                FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.email, icon: "clear-text")
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Username", text: $viewModel.username, isSecured: false)
+                                FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.username, icon: "")
                                     .font(Font.baiJamjuree.caption2)
-                                FloatingTextField(title: "Password", text: $viewModel.password, isSecured: true)
+                                FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.password, icon: "eye-closed")
                                     .font(Font.baiJamjuree.caption2)
                             }
                             VStack(alignment: .leading, spacing: 2){
@@ -54,6 +54,7 @@ struct AuthenticationView: View {
                     }
                 }
                 .padding()
+                
             }
         }
         
@@ -102,40 +103,6 @@ struct AuthenticationView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         
     }
-    
-    var backgroundView: some View {
-        GeometryReader { g in
-            VStack(spacing: 40) {
-                HStack(spacing: 200) {
-                    Spacer()
-                    //                    Spacer()
-                    RoundedRectangle(cornerRadius: 130)
-                        .frame(width: g.size.width * 1, height: g.size.height * 0.5)
-                        .foregroundColor(.white)
-                        .opacity(0.1)
-                        .rotationEffect(.degrees(-25))
-                    
-                }
-                HStack(spacing: 200) {
-                    
-                    //                    Spacer()
-                    RoundedRectangle(cornerRadius: 180)
-                        .frame(width: g.size.width * 1, height: g.size.height * 0.5)
-                        .foregroundColor(.white)
-                        .opacity(0.1)
-                        .rotationEffect(.degrees(5))
-                        .offset(x: g.size.width / -2.5, y: 0)
-                    Spacer()
-                } .frame(maxWidth: UIScreen.main.bounds.width)
-            }
-            
-        }.background(Color("SplashBackground"))
-            .ignoresSafeArea()
-    }
-    
-    
-    
-    
 }
 
 

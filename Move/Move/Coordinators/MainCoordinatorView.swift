@@ -12,16 +12,16 @@ struct MainCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: getSplashView().transition(.slide.animation(.default)).navigationBarHidden(true), tag: "Splash", selection: $selection) {
+                NavigationLink(destination: getSplashView().transition(.slide.animation(.default)).navigationBarHidden(true).preferredColorScheme(.dark), tag: "Splash", selection: $selection) {
                     EmptyView()
                 }
                 .transition(.slide.animation(.default))
                 NavigationLink(destination: OnboardingCoordinatorView(){
                     self.selection = "Authentication"
-                }.navigationBarHidden(true), tag: "Onboarding", selection: $selection) {
+                }.navigationBarHidden(true).preferredColorScheme(.dark), tag: "Onboarding", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                NavigationLink(destination: SignUpCoordinatorView(), tag: "Authentication", selection: $selection) {
+                NavigationLink(destination: SignUpCoordinatorView().preferredColorScheme(.dark), tag: "Authentication", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
             }
