@@ -19,7 +19,25 @@ struct SignUpCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: AuthenticationView(viewModel: viewModel), tag: .signUp, selection: $logState) {
+                NavigationLink(destination: AuthenticationView(viewModel: viewModel, onFinished: {
+                    logState = .logIn
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .signUp, selection: $logState) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                NavigationLink(destination: LogInView(viewModel: viewModel, onFinished: {
+                    
+                }, onGoAuth: {
+                    logState = .signUp
+                }, onForgotPassword:  {
+                    logState = .forgotPassword
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .logIn, selection: $logState) {
+                    EmptyView()
+                }
+                NavigationLink(destination: ForgotPasswordView(viewModel: viewModel, onFinished: {
+
+                }, onGoBack: {
+                    logState = .logIn
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .forgotPassword, selection: $logState) {
                     EmptyView()
                 }
             }

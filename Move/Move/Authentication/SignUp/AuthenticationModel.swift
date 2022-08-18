@@ -23,8 +23,12 @@ class UserViewModel: ObservableObject {
         return emailPredicate.evaluate(with: self.email)
     }
     
-    func fieldAreCorrect() -> Bool {
+    func fieldsAreCorrect() -> Bool {
         return validateEmail() && self.username.count >= 3 && self.password.count >= 9
+    }
+    
+    func loginFieldsAreCorrect() -> Bool {
+        return validateEmail() && self.password.count >= 9
     }
     
 }

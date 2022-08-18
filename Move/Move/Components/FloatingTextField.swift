@@ -37,15 +37,18 @@ struct FloatingTextField: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 10)
                             .background(Color.white)
-                            .opacity(0.4)
+                            .opacity(isTouched ? 1 : 0.4)
                     }
                     Button {
                         isSecured.toggle()
-                        self.icon = isSecured ? "eye-closed" : "eye-open"
+                        if self.text.wrappedValue != "" {
+                            self.icon = isSecured ? "eye-closed" : "eye-open"
+                        }
                     }label: {
-                        Image(self.icon)
-                            .offset(x:0, y: -5)
-                        //                                .renderingMode(.original)
+                        if self.text.wrappedValue != "" {
+                            Image(self.icon)
+                                .offset(x:0, y: -5)
+                        }
                         
                     }.frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -65,21 +68,26 @@ struct FloatingTextField: View {
                             .frame(height: 1)
                             .padding(.horizontal, 10)
                             .background(Color.white)
-                            .opacity(0.4)
+                            .opacity(isTouched ? 1 : 0.4)
                     }
                     
                     Button {
                         if isPasswordField {
                             isSecured.toggle()
-                            self.icon = isSecured ? "eye-closed" : "eye-open"
+                            if text.wrappedValue != "" {
+                                self.icon = isSecured ? "eye-closed" : "eye-open"
+                            }
                         }
                         else {
                             self.text.wrappedValue = ""
+                            self.icon = ""
                         }
                     }label: {
-                        Image(self.icon)
-                            .renderingMode(.original)
-                            .offset(x:0, y: -5)
+                        if self.text.wrappedValue != "" {
+                            Image(self.icon)
+                                .renderingMode(.original)
+                                .offset(x:0, y: -5)
+                        }
                     }.frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
