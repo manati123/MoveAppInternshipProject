@@ -18,7 +18,7 @@ struct StepIndicatorView: View {
                 Capsule()
                     .fill(index == currentStepIndex ? Color.black : Color.gray)
                     .frame(width: index == currentStepIndex ? 16: 4, height: 4)
-                    .animation(.default)
+//                    .animation(.default)
             }
         }
     }

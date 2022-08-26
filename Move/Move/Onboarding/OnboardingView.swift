@@ -16,12 +16,10 @@ struct OnboardingView: View {
     let onNext: () -> Void
         
     var body: some View {
-        
         VStack(spacing: 0) {
             imageContainer
             detailContainer
-            }
-        
+        }
     }
     
     var detailContainer: some View {

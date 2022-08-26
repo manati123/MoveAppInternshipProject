@@ -9,33 +9,34 @@ import SwiftUI
 
 struct OnboardingCoordinatorView: View {
     @StateObject var viewModel = OnboardingViewModel()
-    @State private var onboardingSlide: OnboardingSlide? = .safety
-    private let onboardingSlides = OnboardingData.getAll()
+//    @State private var onboardingSlide: OnboardingSlide? = .safety
+//    private let onboardingSlides = OnboardingData.getAll()
     let onFinished:() -> Void
     var body: some View {
-        NavigationView {
-            ZStack {
-                ForEach(0..<5) {index in
-                    if index == 4 {
-                        NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: onFinished).navigationBarHidden(true)
-                            .transition(.opacity.animation(.default)),
-                                       tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
-                            EmptyView()
-                        }
-                        
-                    } else {
-                        NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: {onboardingSlide = onboardingSlides[index+1].onboardingSlide})
-                            .navigationBarHidden(true)
-                            .transition(.opacity.animation(.default)),
-                                       tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
-                            EmptyView()
-                        }
-                    }
-                }
-            }
-            
+        ZStack {
+            Color.clear
+            currentSlideView()
+                .id(viewModel.currentSlideIndex)
+                .transition(.opacity)
         }
+        .animation(.default, value: viewModel.currentSlideIndex)
     }
+    
+    func currentSlideView() -> some View {
+        return OnboardingView(onboardingData: viewModel.currentSLide, onFinished: {
+            self.onFinished()
+        }, onNext: {
+            if viewModel.currentSlideIndex == 4 {
+            viewModel.nextSlide {
+                onFinished()
+            }
+            } else {
+                viewModel.nextSlide(onFinished: {})
+            }
+        })
+    }
+    
+    
 }
 
 struct OnboardingCoordinatorView_Previews: PreviewProvider {
