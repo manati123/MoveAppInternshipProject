@@ -31,7 +31,7 @@ class OnboardingData {
     }
     
     static func safety() -> OnboardingModel {
-        OnboardingModel(image: "SafetyImage", title: "Safety", text: "Please wear a helmet and protect yourself while riding.", onboardingSlide: .safety, buttonText: "Next", step: 0)
+        OnboardingModel(image: "Safety", title: "Safety", text: "Please wear a helmet and protect yourself while riding.", onboardingSlide: .safety, buttonText: "Next", step: 0)
     }
     
     static func scan() -> OnboardingModel {

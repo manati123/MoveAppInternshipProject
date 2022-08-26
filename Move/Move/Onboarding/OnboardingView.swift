@@ -16,10 +16,12 @@ struct OnboardingView: View {
     let onNext: () -> Void
         
     var body: some View {
-        VStack {
+        
+        VStack(spacing: 0) {
             imageContainer
             detailContainer
-        }
+            }
+        
     }
     
     var detailContainer: some View {
@@ -74,7 +76,8 @@ struct OnboardingView: View {
                 Image(onboardingData.image)
                     .resizable()
                     .scaledToFill()
-                    .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 3/5)
+                    .clipped()
                     
             )
         }

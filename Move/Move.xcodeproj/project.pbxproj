@@ -39,6 +39,7 @@
 		036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87B28ABC513004C913A /* TextExtensions.swift */; };
 		036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87F28AD01CB004C913A /* FontExtensions.swift */; };
 		036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */; };
+		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		036FF87B28ABC513004C913A /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		036FF87F28AD01CB004C913A /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinatorView.swift; sourceTree = "<group>"; };
+		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */ = {
+			isa = PBXGroup;
+			children = (
+				03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */,
+			);
+			path = DrivingLicenseView;
+			sourceTree = "<group>";
+		};
 		F9A1A7E528A1163200E8DFB9 = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +269,7 @@
 		F9A1A7F028A1163200E8DFB9 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */,
 				036FF88128AD06F0004C913A /* Fonts */,
 				036FF87828ABBC2E004C913A /* Components */,
 				036FF87528ABB917004C913A /* Extensions */,
@@ -479,6 +490,7 @@
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
+				03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */,
 				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,
 				03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */,
 			);

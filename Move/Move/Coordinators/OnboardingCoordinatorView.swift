@@ -21,7 +21,7 @@ struct OnboardingCoordinatorView: View {
                             .transition(.opacity.animation(.default)),
                                        tag: onboardingSlides[index].onboardingSlide, selection: $onboardingSlide) {
                             EmptyView()
-                        }.transition(.slide.animation(.default))
+                        }
                         
                     } else {
                         NavigationLink(destination: OnboardingView(onboardingData: onboardingSlides[index], onFinished: onFinished, onNext: {onboardingSlide = onboardingSlides[index+1].onboardingSlide})

@@ -91,28 +91,20 @@ struct AuthenticationView: View {
     var termsAndConditions: some View {
         HStack(spacing: 0) {
             Text("[Terms and Conditions](https://tapptitude.com)")
-                .underline()
-                .font(Font.baiJamjuree.smallText)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .accentColor(.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(maxHeight: .infinity)
-            
-            
-            Text(" and ")
-                .font(Font.baiJamjuree.smallText)
-                .foregroundColor(.white)
-            Text("[Privacy Policy](https://tapptitude.com)")
-                .underline()
-                .font(Font.baiJamjuree.smallText)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .accentColor(.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(maxHeight: .infinity)
-            
-            
+                                            .underline()
+                                            .font(Font.baiJamjuree.smallText.bold())
+                                            .accentColor(.neutralWhite)
+                                        
+                                        Text(" and ")
+                                            .foregroundColor(.neutralWhite)
+                                            .font(Font.baiJamjuree.smallText)
+                                        
+                                        Text("[Privacy Policy](https://tapptitude.com)")
+                                            .underline()
+                                            .accentColor(.neutralWhite)
+                                            .font(Font.baiJamjuree.smallText
+                                                .bold())
+
         }.padding(.trailing, 82)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(maxHeight: .infinity)
