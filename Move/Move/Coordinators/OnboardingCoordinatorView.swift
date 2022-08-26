@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-
+import NavigationStack
 struct OnboardingCoordinatorView: View {
     @StateObject var viewModel = OnboardingViewModel()
-//    @State private var onboardingSlide: OnboardingSlide? = .safety
-//    private let onboardingSlides = OnboardingData.getAll()
     let onFinished:() -> Void
     var body: some View {
         ZStack {
@@ -20,6 +18,7 @@ struct OnboardingCoordinatorView: View {
                 .transition(.opacity)
         }
         .animation(.default, value: viewModel.currentSlideIndex)
+        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))        
     }
     
     func currentSlideView() -> some View {
@@ -27,9 +26,9 @@ struct OnboardingCoordinatorView: View {
             self.onFinished()
         }, onNext: {
             if viewModel.currentSlideIndex == 4 {
-            viewModel.nextSlide {
-                onFinished()
-            }
+                viewModel.nextSlide {
+                    onFinished()
+                }
             } else {
                 viewModel.nextSlide(onFinished: {})
             }
