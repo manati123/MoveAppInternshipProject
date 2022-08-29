@@ -33,7 +33,7 @@ struct ForgotPasswordView: View {
                         .font(Font.baiJamjuree.caption1)
                         .foregroundColor(Color.neutralGray)
                     VStack(spacing: 52){
-                        FloatingTextField(title: "Email Address", isSecured: false, isPasswordField: false, text: $viewModel.email, icon: "")
+                        FloatingTextField(title: "Email Address", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "")
                         .foregroundColor(Color.neutralWhite)
                     
                     Button() {

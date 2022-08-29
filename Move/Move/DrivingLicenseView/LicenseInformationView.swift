@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LicenseInformationView: View {
+    @State private var showingSheet = false
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -30,7 +31,7 @@ struct LicenseInformationView: View {
                 }
                 
                 Button() {
-                    print("Touched!")
+                    showingSheet.toggle()
                 } label: {
                     Text("Add driving license")
                         .frame(maxWidth: .infinity)
@@ -39,8 +40,38 @@ struct LicenseInformationView: View {
                 .disabled(false)
                 .animation(.default)
                 .padding(.horizontal, 24)
+                .sheet(isPresented: $showingSheet) {
+                    optionsSheet
+                }
                 
             }.foregroundColor(Color.primaryPurple)
+        }
+    }
+    
+    var optionsSheet: some View {
+        VStack {
+            Button() {
+                print("haha")
+            } label: {
+                Text("Upload from gallery")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.filledButton)
+            .disabled(false)
+            .animation(.default)
+            .padding(.horizontal, 24)
+            
+            
+            Button() {
+                print("haha")
+            } label: {
+                Text("Take photo")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.filledButton)
+            .disabled(false)
+            .animation(.default)
+            .padding(.horizontal, 24)
         }
     }
     

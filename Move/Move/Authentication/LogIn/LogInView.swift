@@ -30,8 +30,8 @@ struct LogInView: View {
                         
                         VStack(spacing: 30) {
                             VStack(spacing: 20) {
-                                FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.email, icon: "")
-                                FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.password, icon: "eye-closed")
+                                FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "")
+                                FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
                                     .font(Font.baiJamjuree.caption2)
                             }
                             VStack(alignment: .leading, spacing: 40) {

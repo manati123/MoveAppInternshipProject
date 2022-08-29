@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @StateObject var viewModel: UserViewModel
+    var apiService = AuthenticationAPI()
     let onFinished: () -> Void
     
     var body: some View {
@@ -29,11 +30,11 @@ struct AuthenticationView: View {
                             VStack(spacing: 30) {
                                 
                                 VStack(spacing: 20) {
-                                    FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.email, icon: "clear-text")
+                                    FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "clear-text")
                                         .font(Font.baiJamjuree.caption2)
-                                    FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.username, icon: "")
+                                    FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.user.name, icon: "")
                                         .font(Font.baiJamjuree.caption2)
-                                    FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.password, icon: "eye-closed")
+                                    FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
                                         .font(Font.baiJamjuree.caption2)
                                 }
                                 VStack(alignment: .leading, spacing: 2){
@@ -43,6 +44,7 @@ struct AuthenticationView: View {
                                     termsAndConditions
                                 }.frame(maxWidth: .infinity)
                                 Button() {
+                                    self.apiService.registerUser(user: self.viewModel.user)
                                     onFinished()
                                 } label: {
                                     Text("Get started!")
