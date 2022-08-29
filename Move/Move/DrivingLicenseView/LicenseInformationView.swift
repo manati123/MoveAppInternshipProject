@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LicenseInformationView: View {
     @State private var showingSheet = false
+    let onFinished:() -> Void
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -17,34 +18,42 @@ struct LicenseInformationView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: geometry.size.width)
+                    .frame(maxHeight: geometry.size.height / 2)
                     .offset(x: 60, y: 0)
                 VStack(spacing: 20) {
                     Text("Before you can start riding")
                         .font(Font.baiJamjuree.heading1)
-                    
-                        .frame(maxWidth: geometry.size.width, alignment: .leading)
+                        .frame(maxWidth: geometry.size.width,maxHeight: .infinity,  alignment: .leading)
                         .padding(.leading, 24)
                         .padding(.trailing, 44)
+                    
                     Text("Please take a photo or upload the front side of your driving license so we can make sure that it is valid.")
                         .font(Font.baiJamjuree.caption2)
                         .padding(.horizontal, 24)
+                    
+                    Button() {
+    //                    onFinished()
+                        print("lmao varule")
+                    } label: {
+                        Text("Add driving license")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.filledButton)
+                    .disabled(false)
+                    .animation(.default)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 14)
+                    .sheet(isPresented: $showingSheet) {
+                        optionsSheet
+                    }
                 }
+//                .padding(.vertical, 24)
                 
-                Button() {
-                    showingSheet.toggle()
-                } label: {
-                    Text("Add driving license")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.filledButton)
-                .disabled(false)
-                .animation(.default)
-                .padding(.horizontal, 24)
-                .sheet(isPresented: $showingSheet) {
-                    optionsSheet
-                }
+                
                 
             }.foregroundColor(Color.primaryPurple)
+                .background(.white)
+                
         }
     }
     
@@ -92,6 +101,7 @@ struct LicenseInformationView: View {
 
 struct LicenseInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        LicenseInformationView()
+        LicenseInformationView(onFinished: {})
+            .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }

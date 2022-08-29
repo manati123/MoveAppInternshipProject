@@ -16,6 +16,7 @@ enum LogState: String{
 struct SignUpCoordinatorView: View {
     @State var logState: LogState? = .signUp
     @StateObject var viewModel = UserViewModel()
+    let onFinished:() -> Void
     var body: some View {
         NavigationView {
             ZStack {
@@ -25,7 +26,7 @@ struct SignUpCoordinatorView: View {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 NavigationLink(destination: LogInView(viewModel: viewModel, onFinished: {
-                    
+                    onFinished()
                 }, onGoAuth: {
                     logState = .signUp
                 }, onForgotPassword:  {
@@ -47,6 +48,6 @@ struct SignUpCoordinatorView: View {
 
 struct SingUpCoordinatorView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpCoordinatorView()
+        SignUpCoordinatorView(onFinished: {})
     }
 }

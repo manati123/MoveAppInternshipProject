@@ -45,25 +45,15 @@ struct LogInView: View {
                                         .accentColor(Color.neutralWhite)
                                 }
                                 Button() {
-//                                    DispatchQueue.main.async {
-//                                        var response = userAPI.shareInstance.doLogin(user: viewModel.user)
-//                                        switch response.token == "" {
-//                                        case true:
-//    //                                        print(response)
-//                                            print("Bubitz")
-//                                        case false:
-//                                            print("bunbunbun")
-//                                            onFinished()
-//                                        }
-//                                    }
                                     
                                     AuthenticationAPI.shareInstance.loginUser(user: viewModel.user) { error, user in
                                         if error == nil {
                                             self.viewModel.sessionUser = user!
                                                 print(self.viewModel.sessionUser)
+                                            self.onFinished()
                                         }
                                         else {
-                                       print(error)
+                                            print(error!)
                                         }
                                     }
                                    

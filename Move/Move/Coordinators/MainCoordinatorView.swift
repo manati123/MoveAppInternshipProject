@@ -17,12 +17,22 @@ struct MainCoordinatorView: View {
                     EmptyView()
                 }
                 .transition(.slide.animation(.default))
+                
                 NavigationLink(destination: OnboardingCoordinatorView(){
                     self.selection = "Authentication"
                 }.navigationBarHidden(true).preferredColorScheme(.dark), tag: "Onboarding", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                NavigationLink(destination: SignUpCoordinatorView().preferredColorScheme(.dark), tag: "Authentication", selection: $selection) {
+                
+                NavigationLink(destination: SignUpCoordinatorView(){
+                    self.selection = "License"
+                }.preferredColorScheme(.dark), tag: "Authentication", selection: $selection) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: DriverLicenseCoordinatorView(){
+                    self.selection = ""
+                }.preferredColorScheme(.light), tag: "License", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
             }

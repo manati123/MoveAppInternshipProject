@@ -25,6 +25,7 @@ struct ActivityIndicator: UIViewRepresentable {
 }
 
 struct WaitingForValidationView: View {
+    let onFinished:() -> Void
     var body: some View {
         ZStack {
             AuthenticationBackground()
@@ -44,6 +45,6 @@ struct WaitingForValidationView: View {
 
 struct WaitingForValidationView_Previews: PreviewProvider {
     static var previews: some View {
-        WaitingForValidationView()
+        WaitingForValidationView(onFinished: {})
     }
 }

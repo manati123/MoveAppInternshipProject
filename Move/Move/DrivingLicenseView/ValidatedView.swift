@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ValidatedView: View {
+    let onFinished:() -> Void
     var body: some View {
         ZStack {
             AuthenticationBackground()
@@ -38,6 +39,6 @@ struct ValidatedView: View {
 
 struct ValidatedView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatedView()
+        ValidatedView(onFinished: {})
     }
 }
