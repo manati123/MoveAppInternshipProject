@@ -33,7 +33,8 @@ struct LicenseInformationView: View {
                     
                     Button() {
     //                    onFinished()
-                        print("lmao varule")
+//                        print("lmao varule")
+                        showingSheet.toggle()
                     } label: {
                         Text("Add driving license")
                             .frame(maxWidth: .infinity)
@@ -44,7 +45,7 @@ struct LicenseInformationView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 14)
                     .sheet(isPresented: $showingSheet) {
-                        optionsSheet
+                        ImagePickerView()
                     }
                 }
 //                .padding(.vertical, 24)
