@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LogInView: View {
     @StateObject var viewModel: UserViewModel
+    var userAPI = AuthenticationAPI()
     let onFinished: () -> Void
     let onGoAuth: () -> Void
     let onForgotPassword: () -> Void
@@ -45,6 +46,7 @@ struct LogInView: View {
                                         .accentColor(Color.neutralWhite)
                                 }
                                 Button() {
+                                    userAPI.loginUser(user: viewModel.user)
                                     onFinished()
                                 } label: {
                                     Text("Login")
