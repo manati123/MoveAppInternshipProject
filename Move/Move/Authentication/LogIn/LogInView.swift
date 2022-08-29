@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LogInView: View {
     @StateObject var viewModel: UserViewModel
-    var userAPI = AuthenticationAPI()
     let onFinished: () -> Void
     let onGoAuth: () -> Void
     let onForgotPassword: () -> Void
@@ -46,8 +45,30 @@ struct LogInView: View {
                                         .accentColor(Color.neutralWhite)
                                 }
                                 Button() {
-                                    userAPI.loginUser(user: viewModel.user)
-                                    onFinished()
+//                                    DispatchQueue.main.async {
+//                                        var response = userAPI.shareInstance.doLogin(user: viewModel.user)
+//                                        switch response.token == "" {
+//                                        case true:
+//    //                                        print(response)
+//                                            print("Bubitz")
+//                                        case false:
+//                                            print("bunbunbun")
+//                                            onFinished()
+//                                        }
+//                                    }
+                                    
+                                    AuthenticationAPI.shareInstance.loginUser(user: viewModel.user) { error, user in
+                                        if error == nil {
+                                            self.viewModel.sessionUser = user!
+                                                print(self.viewModel.sessionUser)
+                                        }
+                                        else {
+                                       print(error)
+                                        }
+                                    }
+                                   
+                                    
+                                    
                                 } label: {
                                     Text("Login")
                                         .frame(maxWidth: .infinity)

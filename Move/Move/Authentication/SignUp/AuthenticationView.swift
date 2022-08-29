@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @StateObject var viewModel: UserViewModel
-    var apiService = AuthenticationAPI()
     let onFinished: () -> Void
     
     var body: some View {
@@ -44,7 +43,7 @@ struct AuthenticationView: View {
                                     termsAndConditions
                                 }.frame(maxWidth: .infinity)
                                 Button() {
-                                    self.apiService.registerUser(user: self.viewModel.user)
+                                    AuthenticationAPI().registerUser(user: self.viewModel.user)
                                     onFinished()
                                 } label: {
                                     Text("Get started!")

@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-
+import SwiftUI
 struct User: Hashable, Decodable {
     var name: String
     var password: String
@@ -40,14 +40,18 @@ struct LoggedUser: Decodable {
 
 
 class AuthenticationAPI {
-    
-    func loginUser(user: User) {
+
+    @State var finalUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
+    static let shareInstance = AuthenticationAPI()
+    func loginUser(user: User, completionHandler:@escaping (Error?, LoggedUser?) -> ()) {
+//        var requestSuccessfull = true
+        var decodedUser = LoggedUser(user: user, token: "")
         let parameters = [
             "email": user.email,
             "password": user.password
         ]
         
-        AF.request("https://scooter-app.herokuapp.com/user/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
+        let response = AF.request("https://scooter-app.herokuapp.com/user/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
                 switch response.result {
                     case .success(let data):
@@ -65,18 +69,44 @@ class AuthenticationAPI {
                                 return
                             }
                             
-                            let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
-                            print(decodedUser)
-                    
-//                            print(prettyPrintedJson)
+                            decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
+                            completionHandler(nil, decodedUser)
+//                            print(decodedUser)
+                            
                         } catch {
                             print("Error: Trying to convert JSON data to string")
+                            completionHandler(error, nil)
                             return
                         }
                     case .failure(let error):
                         print(error)
                 }
         }
+        
+        
+//        print("_____\(response) _____")
+        
+    }
+    
+    func doLogin(user: User) -> LoggedUser {
+        self.loginUser(user: user) { error, response in
+//            print(response!)
+                print("=========================")
+                print(response!)
+                self.finalUser.token = response!.token
+                print(self.finalUser)
+                print("=========================")
+            
+//            self.finalUser = response!
+            
+        }
+//        print(finalUser)
+        return self.finalUser
+    }
+    
+    
+    func loginDone(user: LoggedUser) -> LoggedUser {
+        return user
     }
     
     func registerUser(user: User) {

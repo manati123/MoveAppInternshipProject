@@ -9,7 +9,7 @@ import Foundation
 
 class UserViewModel: ObservableObject {
     @Published var user = User(name: "", password: "", email: "")
-    
+    @Published var sessionUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
  
     func validateEmail() -> Bool {
         if self.user.email.count > 100 {
