@@ -8,10 +8,15 @@
 import SwiftUI
 import UIKit
 
+class ImagePickerViewModel: ObservableObject {
+    @Published var image: Image = Image("")
+    @Published var isPresented: Bool = false
+}
+
 struct SUImagePickerView: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var image: Image?
+    @Binding var image: Image
     @Binding var isPresented: Bool
     
     func makeCoordinator() -> ImagePickerViewCoordinator {
@@ -24,19 +29,19 @@ struct SUImagePickerView: UIViewControllerRepresentable {
         pickerController.delegate = context.coordinator
         return pickerController
     }
-
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
         // Nothing to update here
     }
-
+    
 }
 
 class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    @Binding var image: Image?
+    @Binding var image: Image
     @Binding var isPresented: Bool
     
-    init(image: Binding<Image?>, isPresented: Binding<Bool>) {
+    init(image: Binding<Image>, isPresented: Binding<Bool>) {
         self._image = image
         self._isPresented = isPresented
     }
@@ -56,21 +61,24 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
 
 struct ImagePickerView: View {
     
-    @State private var image: Image? = Image("")
-        @State private var shouldPresentImagePicker = false
-        @State private var shouldPresentActionScheet = false
-        @State private var shouldPresentCamera = false
+    @StateObject var viewModel: ImagePickerViewModel
+    @State private var shouldPresentImagePicker = false
+    @State private var shouldPresentActionScheet = false
+    @State private var shouldPresentCamera = false
     var body: some View {
-        image!
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 300, height: 300)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 10)
-                    .onTapGesture { self.shouldPresentActionScheet = true }
-                    .sheet(isPresented: $shouldPresentImagePicker) {
-                        SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker)
+        VStack {
+            viewModel.image
+                .resizable()
+                .frame(maxWidth: UIScreen.main.bounds.size.width * 0.8)
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 300)
+                .clipShape(RoundedRectangle(cornerRadius: 34))
+                .overlay(RoundedRectangle(cornerRadius: 34).stroke(Color.neutralGray, lineWidth: 4))
+//                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                .shadow(radius: 10)
+                .onTapGesture { self.shouldPresentActionScheet = true }
+                .sheet(isPresented: $shouldPresentImagePicker) {
+                    SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$viewModel.image, isPresented: self.$shouldPresentImagePicker)
                 }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
                     ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                         self.shouldPresentImagePicker = true
@@ -80,12 +88,20 @@ struct ImagePickerView: View {
                         self.shouldPresentCamera = false
                     }), ActionSheet.Button.cancel()])
                 }
+            Spacer()
+            Button("Upload selected photo?") {
+                
+            }.buttonStyle(.filledButton)
+                .disabled(viewModel.image != Image("") ? false : true)
+                .animation(.default, value: viewModel.image != Image(""))
             
+        }
     }
 }
 
 struct ImagePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePickerView()
+        ImagePickerView(viewModel: ImagePickerViewModel())
+//        Text("F")
     }
 }

@@ -40,9 +40,18 @@ struct MainCoordinatorView: View {
     }
     
     func getSplashView() -> some View {
+//        if UserDefaults.standard.value(forKey: "DoneOnboarding") == nil {
+//            UserDefaults.standard.setValue(false, forUndefinedKey: "DoneOnboarding")
+//        }
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.selection = "Onboarding"
+                let isOnboarded = UserDefaults.standard.bool(forKey: "DoneOnboarding")
+                if isOnboarded  {
+                    self.selection = "Authentication"
+                }
+                else {
+                    self.selection = "Onboarding"
+                }
             }
         }
     }

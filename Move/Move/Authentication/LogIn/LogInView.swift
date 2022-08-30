@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LogInView: View {
     @StateObject var viewModel: UserViewModel
+    @State var error: String = ""
+    @State var showError: Bool = false
     let onFinished: () -> Void
     let onGoAuth: () -> Void
     let onForgotPassword: () -> Void
@@ -54,12 +56,10 @@ struct LogInView: View {
                                             self.onFinished()
                                         }
                                         else {
-                                            print(error!)
+                                            self.error = error!.localizedDescription
+                                            self.showError = true
                                         }
                                     }
-                                   
-                                    
-                                    
                                 } label: {
                                     Text("Login")
                                         .frame(maxWidth: .infinity)
@@ -67,6 +67,9 @@ struct LogInView: View {
                                 .buttonStyle(.filledButton)
                                 .disabled(viewModel.loginFieldsAreCorrect() ? false : true)
                                 .animation(.default, value: viewModel.loginFieldsAreCorrect())
+                                .alert(isPresented: $showError) {
+                                    Alert(title: Text("Something went wrong"), message: Text(self.error), dismissButton: .default(Text("Ok")))
+                                        }
                                 
                                 HStack(spacing: 0) {
                                     Text("Don’t have an account? You can")

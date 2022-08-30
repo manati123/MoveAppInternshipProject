@@ -51,7 +51,7 @@ class AuthenticationAPI {
             "password": user.password
         ]
         
-        let response = AF.request("https://scooter-app.herokuapp.com/user/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
+        AF.request("https://scooter-app.herokuapp.com/user/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
                 switch response.result {
                     case .success(let data):
@@ -79,7 +79,7 @@ class AuthenticationAPI {
                             return
                         }
                     case .failure(let error):
-                        print(error)
+                        completionHandler(error, nil)
                 }
         }
         
@@ -105,9 +105,7 @@ class AuthenticationAPI {
     }
     
     
-    func loginDone(user: LoggedUser) -> LoggedUser {
-        return user
-    }
+  
     
     func registerUser(user: User) {
         let parameters = [
