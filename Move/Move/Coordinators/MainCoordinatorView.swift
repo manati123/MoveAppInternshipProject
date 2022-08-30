@@ -19,13 +19,18 @@ struct MainCoordinatorView: View {
                 .transition(.slide.animation(.default))
                 
                 NavigationLink(destination: OnboardingCoordinatorView(){
-                    self.selection = "Authentication"
+                    if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
+                        self.selection = "License"
+                    }
+                    else {
+                        self.selection = "Authentication"
+                    }
                 }.navigationBarHidden(true).preferredColorScheme(.dark), tag: "Onboarding", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
                 NavigationLink(destination: SignUpCoordinatorView(){
-                    self.selection = "License"
+                        self.selection = "License"
                 }.preferredColorScheme(.dark), tag: "Authentication", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
@@ -45,9 +50,14 @@ struct MainCoordinatorView: View {
 //        }
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                UserDefaults.standard.removeObject(forKey: "LoggedUser")
                 let isOnboarded = UserDefaults.standard.bool(forKey: "DoneOnboarding")
                 if isOnboarded  {
-                    self.selection = "Authentication"
+                    if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
+                        self.selection = "License"
+                    } else {
+                        self.selection = "Authentication"
+                    }
                 }
                 else {
                     self.selection = "Onboarding"

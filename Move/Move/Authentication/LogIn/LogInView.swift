@@ -11,6 +11,7 @@ struct LogInView: View {
     @StateObject var viewModel: UserViewModel
     @State var error: String = ""
     @State var showError: Bool = false
+    @State var waitingForResponse: Bool = false
     let onFinished: () -> Void
     let onGoAuth: () -> Void
     let onForgotPassword: () -> Void
@@ -19,75 +20,76 @@ struct LogInView: View {
             AuthenticationBackground()
             GeometryReader { geometry in
                 ScrollView {
-                VStack(alignment: .leading) {
-                    Image("SmallLogoWhite")
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Login")
-                            .font(Font.baiJamjuree.heading1)
-                            .foregroundColor(.white)
-                        Text("Enter your account credentials and start riding away")
-                            .font(Font.baiJamjuree.heading2)
-                            .foregroundColor(.white)
-                            .opacity(0.3)
-                        
-                        VStack(spacing: 30) {
-                            VStack(spacing: 20) {
-                                FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "")
-                                FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
-                                    .font(Font.baiJamjuree.caption2)
-                                    
-                            }
-                            VStack(alignment: .leading, spacing: 40) {
-                                Button {
-                                    onForgotPassword()
-                                }label: {
-                                    Text("Forgot your password?")
-                                        .underline()
-                                        .font(Font.baiJamjuree.smallText)
-                                        .foregroundColor(Color.neutralWhite)
-                                        .accentColor(Color.neutralWhite)
+                    VStack(alignment: .leading) {
+                        Image("SmallLogoWhite")
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text("Login")
+                                .font(Font.baiJamjuree.heading1)
+                                .foregroundColor(.white)
+                            Text("Enter your account credentials and start riding away")
+                                .font(Font.baiJamjuree.heading2)
+                                .foregroundColor(.white)
+                                .opacity(0.3)
+                            
+                            VStack(spacing: 30) {
+                                VStack(spacing: 20) {
+                                    FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "")
+                                    FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
+                                        .font(Font.baiJamjuree.caption2)
                                 }
-                                Button() {
-                                    
-                                    AuthenticationAPI.shareInstance.loginUser(user: viewModel.user) { error, user in
-                                        if error == nil {
-                                            self.viewModel.sessionUser = user!
-                                                print(self.viewModel.sessionUser)
-                                            self.onFinished()
-                                        }
-                                        else {
-                                            self.error = error!.localizedDescription
-                                            self.showError = true
-                                        }
-                                    }
-                                } label: {
-                                    Text("Login")
-                                        .frame(maxWidth: .infinity)
-                                }
-                                .buttonStyle(.filledButton)
-                                .disabled(viewModel.loginFieldsAreCorrect() ? false : true)
-                                .animation(.default, value: viewModel.loginFieldsAreCorrect())
-                                .alert(isPresented: $showError) {
-                                    Alert(title: Text("Something went wrong"), message: Text(self.error), dismissButton: .default(Text("Ok")))
-                                        }
-                                
-                                HStack(spacing: 0) {
-                                    Text("Don’t have an account? You can")
-                                        .font(Font.baiJamjuree.smallText)
-                                        .foregroundColor(Color.neutralWhite)
-                                    Button{
-                                        onGoAuth()
+                                VStack(alignment: .leading, spacing: 40) {
+                                    Button {
+                                        onForgotPassword()
                                     }label: {
-                                        Text(" start with one here")
+                                        Text("Forgot your password?")
                                             .underline()
                                             .font(Font.baiJamjuree.smallText)
-                                            .fontWeight(.bold)
                                             .foregroundColor(Color.neutralWhite)
+                                            .accentColor(Color.neutralWhite)
+                                    }
+                                    Button() {
+                                        self.waitingForResponse = true
+                                        AuthenticationAPI.shareInstance.loginUser(user: viewModel.user) { error, user in
+                                            if error == nil {
+                                                self.viewModel.sessionUser = user!
+                                                print(self.viewModel.sessionUser)
+                                                self.waitingForResponse = false
+                                                self.viewModel.convertUserToJSON()
+                                                self.onFinished()
+                                            }
+                                            else {
+                                                self.waitingForResponse = false
+                                                self.viewModel.showError(message: error!.localizedDescription)
+                                            }
+                                        }
+                                    } label: {
+                                        Text("Login")
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                    .buttonStyle(.filledButton)
+                                    .disabled(viewModel.loginFieldsAreCorrect() ? false : true)
+                                    .animation(.default, value: viewModel.loginFieldsAreCorrect())
+                                    
+                                    ActivityIndicator(isAnimating: .constant(self.waitingForResponse), color: .white, style: .large)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    HStack(spacing: 0) {
+                                        
+                                        Text("Don’t have an account? You can")
+                                            .font(Font.baiJamjuree.smallText)
+                                            .foregroundColor(Color.neutralWhite)
+                                        Button{
+                                            onGoAuth()
+                                        }label: {
+                                            Text(" start with one here")
+                                                .underline()
+                                                .font(Font.baiJamjuree.smallText)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.neutralWhite)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
                     }.padding()
                 }
                 

@@ -7,6 +7,7 @@ target 'Move' do
 
   # Pods for Move
 	pod 'Alamofire'
+  pod 'SwiftMessages'
   target 'MoveTests' do
     inherit! :search_paths
  

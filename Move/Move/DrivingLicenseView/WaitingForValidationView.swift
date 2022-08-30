@@ -35,7 +35,7 @@ struct WaitingForValidationView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color.neutralWhite)
                 ActivityIndicator(isAnimating: .constant(true), color: .white, style: .large)
-                    .foregroundColor(.white)
+                    
             }
             .padding(.leading, 28)
             .padding(.trailing, 29)

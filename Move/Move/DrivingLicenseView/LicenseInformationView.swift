@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftMessages
 struct LicenseInformationView: View {
     @State private var showingSheet = false
     @ObservedObject var imagePickerViewModel = ImagePickerViewModel()
@@ -33,8 +33,6 @@ struct LicenseInformationView: View {
                         .padding(.horizontal, 24)
                     
                     Button() {
-    //                    onFinished()
-//                        print("lmao varule")
                         showingSheet.toggle()
                     } label: {
                         Text("Add driving license")

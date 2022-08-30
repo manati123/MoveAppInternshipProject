@@ -48,6 +48,7 @@
 		F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95C0B3028BCD6AB0081122D /* DriverLicenseCoordinator.swift */; };
 		F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95C0B3228BCE3420081122D /* ImagePickerView.swift */; };
 		F99B07B628BDF8A700F94ECB /* LicenseUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B528BDF8A700F94ECB /* LicenseUploadAPI.swift */; };
+		F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B828BE1B9200F94ECB /* MapView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -123,6 +124,7 @@
 		F95C0B3028BCD6AB0081122D /* DriverLicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLicenseCoordinator.swift; sourceTree = "<group>"; };
 		F95C0B3228BCE3420081122D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F99B07B528BDF8A700F94ECB /* LicenseUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseUploadAPI.swift; sourceTree = "<group>"; };
+		F99B07B828BE1B9200F94ECB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -306,6 +308,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		F99B07B728BE104900F94ECB /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				F99B07B828BE1B9200F94ECB /* MapView.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
 		F9A1A7E528A1163200E8DFB9 = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +341,7 @@
 		F9A1A7F028A1163200E8DFB9 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				F99B07B728BE104900F94ECB /* MapView */,
 				F94A968728BCA5F900231B2E /* API */,
 				03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */,
 				036FF88128AD06F0004C913A /* Fonts */,
@@ -663,6 +674,7 @@
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
 				F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */,
+				F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,

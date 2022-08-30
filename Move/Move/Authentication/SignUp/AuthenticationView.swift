@@ -6,7 +6,7 @@
 //
 import Foundation
 import SwiftUI
-
+import SwiftMessages
 struct AuthenticationView: View {
     @StateObject var viewModel: UserViewModel
     let onFinished: () -> Void
@@ -43,8 +43,15 @@ struct AuthenticationView: View {
                                     termsAndConditions
                                 }.frame(maxWidth: .infinity)
                                 Button() {
-                                    AuthenticationAPI().registerUser(user: self.viewModel.user)
-                                    onFinished()
+                                    AuthenticationAPI().registerUser(user: self.viewModel.user, completionHandler: { error, user in
+                                        if error == nil {
+                                            self.onFinished()
+                                        }
+                                        else {
+                                            viewModel.showError(message: "User already exists!")
+                                        }
+                                    })
+//                                    onFinished()
                                 } label: {
                                     Text("Get started!")
                                         .frame(maxWidth: .infinity)
@@ -113,6 +120,24 @@ struct AuthenticationView: View {
             .navigationBarHidden(true)
         
     }
+    
+//    func showError() {
+//        let view = MessageView.viewFromNib(layout: .cardView)
+//        view.configureTheme(.warning)
+//
+//        view.configureDropShadow()
+//
+//        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
+//        view.configureContent(title: "Something went wrong", body: "User already exists", iconText: iconText)
+//
+//        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//
+//        // Reduce the corner radius (applicable to layouts featuring rounded corners).
+//        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+//
+//        // Show the message.
+//        SwiftMessages.show(view: view)
+//    }
 }
 
 

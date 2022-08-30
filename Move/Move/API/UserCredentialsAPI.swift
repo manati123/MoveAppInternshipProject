@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 import SwiftUI
-struct User: Hashable, Decodable {
+struct User: Hashable, Codable {
     var name: String
     var password: String
     var email: String
@@ -18,7 +18,7 @@ struct User: Hashable, Decodable {
     var createdAt: String?
 }
 
-struct LoggedUser: Decodable {
+struct LoggedUser: Codable {
     var user: User
     var token: String
 }
@@ -43,6 +43,7 @@ class AuthenticationAPI {
 
     @State var finalUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
     static let shareInstance = AuthenticationAPI()
+    
     func loginUser(user: User, completionHandler:@escaping (Error?, LoggedUser?) -> ()) {
 //        var requestSuccessfull = true
         var decodedUser = LoggedUser(user: user, token: "")
@@ -83,31 +84,12 @@ class AuthenticationAPI {
                 }
         }
         
-        
-//        print("_____\(response) _____")
+
         
     }
-    
-    func doLogin(user: User) -> LoggedUser {
-        self.loginUser(user: user) { error, response in
-//            print(response!)
-                print("=========================")
-                print(response!)
-                self.finalUser.token = response!.token
-                print(self.finalUser)
-                print("=========================")
-            
-//            self.finalUser = response!
-            
-        }
-//        print(finalUser)
-        return self.finalUser
-    }
-    
-    
   
     
-    func registerUser(user: User) {
+    func registerUser(user: User, completionHandler:@escaping (Error?, LoggedUser?) -> ()) {
         let parameters = [
             "name": user.name,
             "email": user.email,
@@ -130,13 +112,15 @@ class AuthenticationAPI {
                                print("Error: Could print JSON in String")
                                return
                            }
-                   
-                           print(prettyPrintedJson)
+                           let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
+                           completionHandler(nil, decodedUser)
                        } catch {
                            print("Error: Trying to convert JSON data to string")
+                           completionHandler(error, nil)
                            return
                        }
                    case .failure(let error):
+                       completionHandler(error, nil)
                        print(error)
                }
            }
