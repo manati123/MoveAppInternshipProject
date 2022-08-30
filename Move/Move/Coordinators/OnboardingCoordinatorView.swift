@@ -18,7 +18,8 @@ struct OnboardingCoordinatorView: View {
                 .transition(.opacity)
         }
         .animation(.default, value: viewModel.currentSlideIndex)
-        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))        
+        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+        .navigationBarHidden(true)
     }
     
     func currentSlideView() -> some View {

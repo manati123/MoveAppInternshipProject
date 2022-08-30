@@ -69,14 +69,11 @@ struct ImagePickerView: View {
         VStack {
             viewModel.image
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: UIScreen.main.bounds.size.width * 0.8)
-                .aspectRatio(contentMode: .fill)
                 .frame(height: 300)
                 .clipShape(RoundedRectangle(cornerRadius: 34))
-                .overlay(RoundedRectangle(cornerRadius: 34).stroke(Color.neutralGray, lineWidth: 4))
-//                .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 10)
-                .onTapGesture { self.shouldPresentActionScheet = true }
                 .sheet(isPresented: $shouldPresentImagePicker) {
                     SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$viewModel.image, isPresented: self.$shouldPresentImagePicker)
                 }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
@@ -88,7 +85,13 @@ struct ImagePickerView: View {
                         self.shouldPresentCamera = false
                     }), ActionSheet.Button.cancel()])
                 }
+            
             Spacer()
+            Button("Pick photo") {
+                self.shouldPresentActionScheet = true
+            }.buttonStyle(.filledButton)
+                .disabled(false)
+                .animation(.default, value: viewModel.image != Image(""))
             Button("Upload selected photo?") {
                 
             }.buttonStyle(.filledButton)

@@ -18,6 +18,7 @@ struct MainCoordinatorView: View {
                 }
                 .transition(.slide.animation(.default))
                 
+                
                 NavigationLink(destination: OnboardingCoordinatorView(){
                     if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
                         self.selection = "License"
@@ -28,19 +29,22 @@ struct MainCoordinatorView: View {
                 }.navigationBarHidden(true).preferredColorScheme(.dark), tag: "Onboarding", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                    
                 
                 NavigationLink(destination: SignUpCoordinatorView(){
                         self.selection = "License"
-                }.preferredColorScheme(.dark), tag: "Authentication", selection: $selection) {
+                }.preferredColorScheme(.dark).navigationBarHidden(true), tag: "Authentication", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                    
                 
                 NavigationLink(destination: DriverLicenseCoordinatorView(){
                     self.selection = ""
-                }.preferredColorScheme(.light), tag: "License", selection: $selection) {
+                }.preferredColorScheme(.light).navigationBarHidden(true), tag: "License", selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-            }
+                    
+            }.navigationBarHidden(true)
         }
     }
     
@@ -50,7 +54,6 @@ struct MainCoordinatorView: View {
 //        }
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UserDefaults.standard.removeObject(forKey: "LoggedUser")
                 let isOnboarded = UserDefaults.standard.bool(forKey: "DoneOnboarding")
                 if isOnboarded  {
                     if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
@@ -63,7 +66,7 @@ struct MainCoordinatorView: View {
                     self.selection = "Onboarding"
                 }
             }
-        }
+        }.navigationBarHidden(true)
     }
 }
 

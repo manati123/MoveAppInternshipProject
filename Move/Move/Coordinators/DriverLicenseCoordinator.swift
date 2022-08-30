@@ -24,7 +24,9 @@ struct DriverLicenseCoordinatorView: View {
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                    
             }
+            .navigationBarHidden(true)
         }
     }
 }

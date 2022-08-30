@@ -47,12 +47,14 @@ struct LicenseInformationView: View {
                         ImagePickerView(viewModel: self.imagePickerViewModel)
                     }
                 }
+                
 //                .padding(.vertical, 24)
                 
                 
                 
             }.foregroundColor(Color.primaryPurple)
                 .background(.white)
+                
                 
         }
     }
@@ -102,6 +104,6 @@ struct LicenseInformationView: View {
 struct LicenseInformationView_Previews: PreviewProvider {
     static var previews: some View {
         LicenseInformationView(onFinished: {})
-            .previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
