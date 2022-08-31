@@ -28,20 +28,77 @@ class UserViewModel: ObservableObject {
         return validateEmail() && self.user.password.count >= 9
     }
     
-    func convertUserToJSON() {
+    func fieldsAreLongEnoughSignUp() -> Bool {
+        return self.user.name.count >= 3 && self.user.password.count >= 9
+    }
+    
+    func fieldsNotEmptyLogin() -> Bool {
+        return self.user.email.count != 0 && self.user.password.count != 0
+    }
+    
+    func loginErrorHandling() {
+        var errorString = ""
+        if self.user.password.count < 9 {
+            errorString +=  "Password not long enough!\n"
+        }
+        if !self.validateEmail() {
+            errorString += "Email is not valid!"
+        }
+        self.showError(message: errorString)
+    }
+    
+    
+    func saveUserToUserDefaults() {
         do {
-            // Create JSON Encoder
             let encoder = JSONEncoder()
-
-            // Encode Note
             let data = try encoder.encode(self.sessionUser)
-
-            // Write/Set Data
             UserDefaults.standard.set(data, forKey: "LoggedUser")
-
         } catch {
             print("Unable to Encode LoggedUser (\(error))")
         }
+    }
+    
+    func signUpErrorHandling() {
+        var errorString = ""
+        if !self.fieldsAreLongEnoughSignUp() {
+            errorString +=  "Username or password are not long enough!\n"
+        }
+        if !self.validateEmail() {
+            errorString += "Email is not valid!"
+        }
+        if errorString == "" {
+            errorString += "User with that email already exists!"
+        }
+        self.showError(message: errorString)
+    }
+    
+    func authenticate() {
+        AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
+            switch result {
+            case .success(let user):
+                print(user)
+            case .failure(_)://TODO: find out how to access error message from server
+                self.signUpErrorHandling()
+            }
+        })
+    }
+    
+    func login(waiting: @escaping () -> Void, success: @escaping () -> Void) {
+        AuthenticationAPI.shareInstance.loginUser(user: self.user) { response in
+            print(response)
+            switch response {
+            case .success(let user):
+                self.sessionUser = user
+                self.saveUserToUserDefaults()
+                success()
+            case .failure(let error):
+                self.loginErrorHandling()
+            }
+            waiting()
+            
+//            self.waitingForResponse = false
+        }
+        
     }
     
     func showError(message: String) {
@@ -58,7 +115,6 @@ class UserViewModel: ObservableObject {
         // Reduce the corner radius (applicable to layouts featuring rounded corners).
         (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 
-        // Show the message.
         SwiftMessages.show(view: view)
     }
     

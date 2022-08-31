@@ -52,6 +52,7 @@ struct MainCoordinatorView: View {
 //        if UserDefaults.standard.value(forKey: "DoneOnboarding") == nil {
 //            UserDefaults.standard.setValue(false, forUndefinedKey: "DoneOnboarding")
 //        }
+        UserDefaults.standard.removeObject(forKey: "LoggedUser")
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 let isOnboarded = UserDefaults.standard.bool(forKey: "DoneOnboarding")

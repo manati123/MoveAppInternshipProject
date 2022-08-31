@@ -23,105 +23,77 @@ struct LoggedUser: Codable {
     var token: String
 }
 
+struct ServerError: Decodable {
+    var message: String
+}
 
 
-//{
-//    "user": {
-//        "_id": "630c78c291a7989d3fbf6be5",
-//        "name": "Duamneajutasameargarequestu",
-//        "email": "Silviu807@gmail.com",
-//        "password": "$2b$10$m2e.eb1a3ir9u1Nr99y4h.YkHgvmaK7jRtOH1lvHB4HdNb6fAZ5T.",
-//        "createdAt": "2022-08-29T08:28:50.079Z",
-//        "updatedAt": "2022-08-29T08:28:50.079Z",
-//        "__v": 0
-//    },
-//    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzBjNzhjMjkxYTc5ODlkM2ZiZjZiZTUiLCJpYXQiOjE2NjE3NjE3ODJ9.Jsz7pCudOHf1ZciGGRwsI8QMx18ofiSNWF6TaFROZMs"
+
+typealias Result<Success> = Swift.Result<Success, Error>
+
+//extension Result {
+//    func map<NewSuccess>(_ mapping: (Success) throws -> NewSuccess) -> Result<NewSuccess> {
+//        //Cine face body-u asta e tare si are 10 lei
+//    }
 //}
 
-
 class AuthenticationAPI {
-
-    @State var finalUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
+    
+    
+    
+    private let baseUrl = "https://scooter-app.herokuapp.com/user"
     static let shareInstance = AuthenticationAPI()
     
-    func loginUser(user: User, completionHandler:@escaping (Error?, LoggedUser?) -> ()) {
-//        var requestSuccessfull = true
-        var decodedUser = LoggedUser(user: user, token: "")
+    
+    
+    func loginUser(user: User, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
         let parameters = [
             "email": user.email,
             "password": user.password
         ]
         
-        AF.request("https://scooter-app.herokuapp.com/user/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
+        AF.request("\(baseUrl)/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
-                switch response.result {
-                    case .success(let data):
-                        do {
-                            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                                print("Error: Cannot convert data to JSON object")
-                                return
-                            }
-                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                                print("Error: Cannot convert JSON object to Pretty JSON data")
-                                return
-                            }
-                            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                                print("Error: Could print JSON in String")
-                                return
-                            }
-                            
-                            decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
-                            completionHandler(nil, decodedUser)
-//                            print(decodedUser)
-                            
-                        } catch {
-                            print("Error: Trying to convert JSON data to string")
-                            completionHandler(error, nil)
-                            return
-                        }
-                    case .failure(let error):
-                        completionHandler(error, nil)
-                }
+            switch response.result {
+                case .success(let data):
+                    do {
+                        let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
+                        completionHandler(.success(decodedUser))
+                    } catch(let error) {
+                        completionHandler(.failure(error))
+                    }
+                case .failure(let error):
+                    completionHandler(.failure(error))
+            }
         }
-        
-
-        
     }
   
     
-    func registerUser(user: User, completionHandler:@escaping (Error?, LoggedUser?) -> ()) {
+    
+    func registerUser(user: User, completionHandler:@escaping (Result<LoggedUser>) -> ()) {
         let parameters = [
             "name": user.name,
             "email": user.email,
             "password": user.password
         ]
         
-        AF.request("https://scooter-app.herokuapp.com/user/register", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData { response in
+        AF.request("\(baseUrl)/register", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
+            response in
                switch response.result {
                    case .success(let data):
                        do {
-                           guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                               print("Error: Cannot convert data to JSON object")
-                               return
-                           }
-                           guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                               print("Error: Cannot convert JSON object to Pretty JSON data")
-                               return
-                           }
-                           guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                               print("Error: Could print JSON in String")
-                               return
-                           }
                            let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
-                           completionHandler(nil, decodedUser)
+                           completionHandler(.success(decodedUser))
                        } catch {
-                           print("Error: Trying to convert JSON data to string")
-                           completionHandler(error, nil)
+                           completionHandler(.failure(error))
                            return
                        }
                    case .failure(let error):
-                       completionHandler(error, nil)
-                       print(error)
+//                   print(try! JSONDecoder().decode(ServerError.self, from: response.data!))
+//                   error.failureReason = try! JSONDecoder().decode(ServerError.self, from: response.data!)
+                   
+                   completionHandler(.failure(error))
+//                   throw error
                }
            }
         

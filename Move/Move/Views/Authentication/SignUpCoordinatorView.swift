@@ -25,7 +25,7 @@ struct SignUpCoordinatorView: View {
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .signUp, selection: $logState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                NavigationLink(destination: LogInView(viewModel: viewModel, onFinished: {
+                NavigationLink(destination: LogInView(userViewModel: viewModel, onFinished: {
                     onFinished()
                 }, onGoAuth: {
                     logState = .signUp

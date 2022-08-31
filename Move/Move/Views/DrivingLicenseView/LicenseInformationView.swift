@@ -7,9 +7,10 @@
 
 import SwiftUI
 import SwiftMessages
+
 struct LicenseInformationView: View {
     @State private var showingSheet = false
-    @ObservedObject var imagePickerViewModel = ImagePickerViewModel()
+    @StateObject var imagePickerViewModel = ImagePickerViewModel()
     let onFinished:() -> Void
     var body: some View {
         GeometryReader { geometry in
@@ -45,6 +46,7 @@ struct LicenseInformationView: View {
                     .padding(.vertical, 14)
                     .sheet(isPresented: $showingSheet) {
                         ImagePickerView(viewModel: self.imagePickerViewModel)
+                        
                     }
                 }
                 

@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 import SwiftMessages
 struct AuthenticationView: View {
-    @StateObject var viewModel: UserViewModel
+    @ObservedObject var viewModel: UserViewModel
     let onFinished: () -> Void
     
     var body: some View {
@@ -43,22 +43,14 @@ struct AuthenticationView: View {
                                     termsAndConditions
                                 }.frame(maxWidth: .infinity)
                                 Button() {
-                                    AuthenticationAPI().registerUser(user: self.viewModel.user, completionHandler: { error, user in
-                                        if error == nil {
-                                            self.onFinished()
-                                        }
-                                        else {
-                                            viewModel.showError(message: "User already exists!")
-                                        }
-                                    })
-//                                    onFinished()
+                                    self.viewModel.authenticate()
                                 } label: {
                                     Text("Get started!")
                                         .frame(maxWidth: .infinity)
                                 }
                                 .buttonStyle(.filledButton)
-                                .disabled(viewModel.fieldsAreCorrect() ? false : true)
-                                .animation(.default, value: viewModel.fieldsAreCorrect())
+                                .disabled(fieldsAreFilled() ? false : true)
+                                .animation(.default, value: fieldsAreFilled())
                                 logInText
                                 //                                Spacer()
                             }
@@ -119,6 +111,10 @@ struct AuthenticationView: View {
             .minimumScaleFactor(0.01)
             .navigationBarHidden(true)
         
+    }
+    
+    func fieldsAreFilled() -> Bool {
+        return self.viewModel.user.email != "" && self.viewModel.user.password != "" && self.viewModel.user.name != ""
     }
     
 //    func showError() {
