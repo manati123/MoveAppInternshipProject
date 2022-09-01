@@ -25,15 +25,16 @@ class DriverLicenseAPI {
         ]
         
         AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "baftalalicentza", fileName: "\(loggedUser.token).jpeg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData, withName: "drivinglicense", fileName: "\(loggedUser.token).jpeg", mimeType: "image/jpeg")
             for (key, value) in parameters {
                 multipartFormData.append((value.data(using: String.Encoding.utf8)!), withName: key)
                     } //Optional for extra parameters
         }, to: "https://scooter-app.herokuapp.com/user/login", method: .put)
         
-            .responseDecodable(of: LoggedUser.self) { response in
-                completionHandler(response)
-            }
+//            .responseDecodable(of: LoggedUser.self) { response in
+//                print(response)
+//                completionHandler(response)
+//            }
     }
 }
 
