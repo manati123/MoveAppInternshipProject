@@ -44,6 +44,7 @@ struct AuthenticationView: View {
                                 }.frame(maxWidth: .infinity)
                                 Button() {
                                     self.viewModel.authenticate()
+                                    self.onFinished()
                                 } label: {
                                     Text("Get started!")
                                         .frame(maxWidth: .infinity)

@@ -47,8 +47,14 @@
 		F94A968928BCA61F00231B2E /* UserCredentialsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94A968828BCA61F00231B2E /* UserCredentialsAPI.swift */; };
 		F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95C0B3028BCD6AB0081122D /* DriverLicenseCoordinator.swift */; };
 		F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95C0B3228BCE3420081122D /* ImagePickerView.swift */; };
-		F98CE2E228BF400300B1F71B /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CE2E128BF400300B1F71B /* ScannerView.swift */; };
-		F99B07B628BDF8A700F94ECB /* LicenseUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B528BDF8A700F94ECB /* LicenseUploadAPI.swift */; };
+		F998FC0528C0935C00DBB961 /* OnboardingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0428C0935C00DBB961 /* OnboardingEnum.swift */; };
+		F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0628C0948D00DBB961 /* UserDefaultsEnum.swift */; };
+		F998FC0A28C0978A00DBB961 /* ImagePickerUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0928C0978A00DBB961 /* ImagePickerUIKit.swift */; };
+		F998FC0C28C09DF900DBB961 /* DriverLicenseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */; };
+		F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0D28C0A17A00DBB961 /* ErrorExtensions.swift */; };
+		F998FC1028C0AA2B00DBB961 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0F28C0AA2B00DBB961 /* LocationManager.swift */; };
+		F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC1128C0B47900DBB961 /* ScooterCardView.swift */; };
+		F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */; };
 		F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B828BE1B9200F94ECB /* MapView.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
@@ -124,8 +130,14 @@
 		F94A968828BCA61F00231B2E /* UserCredentialsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsAPI.swift; sourceTree = "<group>"; };
 		F95C0B3028BCD6AB0081122D /* DriverLicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLicenseCoordinator.swift; sourceTree = "<group>"; };
 		F95C0B3228BCE3420081122D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		F98CE2E128BF400300B1F71B /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		F99B07B528BDF8A700F94ECB /* LicenseUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseUploadAPI.swift; sourceTree = "<group>"; };
+		F998FC0428C0935C00DBB961 /* OnboardingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEnum.swift; sourceTree = "<group>"; };
+		F998FC0628C0948D00DBB961 /* UserDefaultsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEnum.swift; sourceTree = "<group>"; };
+		F998FC0928C0978A00DBB961 /* ImagePickerUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerUIKit.swift; sourceTree = "<group>"; };
+		F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLicenseAPI.swift; sourceTree = "<group>"; };
+		F998FC0D28C0A17A00DBB961 /* ErrorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtensions.swift; sourceTree = "<group>"; };
+		F998FC0F28C0AA2B00DBB961 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F998FC1128C0B47900DBB961 /* ScooterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCardView.swift; sourceTree = "<group>"; };
+		F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
 		F99B07B828BE1B9200F94ECB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
@@ -233,6 +245,7 @@
 				036FF87B28ABC513004C913A /* TextExtensions.swift */,
 				036FF87F28AD01CB004C913A /* FontExtensions.swift */,
 				035033F528AE20540084762F /* ColorExtensions.swift */,
+				F998FC0D28C0A17A00DBB961 /* ErrorExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,12 +282,11 @@
 		03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */ = {
 			isa = PBXGroup;
 			children = (
+				F998FC0828C0977600DBB961 /* ImagePicker */,
 				F95C0B3028BCD6AB0081122D /* DriverLicenseCoordinator.swift */,
 				03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */,
 				03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */,
 				03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */,
-				F95C0B3228BCE3420081122D /* ImagePickerView.swift */,
-				F98CE2E128BF400300B1F71B /* ScannerView.swift */,
 			);
 			path = DrivingLicenseView;
 			sourceTree = "<group>";
@@ -306,7 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				F94A968828BCA61F00231B2E /* UserCredentialsAPI.swift */,
-				F99B07B528BDF8A700F94ECB /* LicenseUploadAPI.swift */,
+				F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -326,6 +338,7 @@
 		F998FC0228BFA6E800DBB961 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F998FC0328C0934700DBB961 /* Enums */,
 				036FF88128AD06F0004C913A /* Fonts */,
 				036FF87528ABB917004C913A /* Extensions */,
 				036FF87828ABBC2E004C913A /* Components */,
@@ -333,10 +346,31 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F998FC0328C0934700DBB961 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				F998FC0428C0935C00DBB961 /* OnboardingEnum.swift */,
+				F998FC0628C0948D00DBB961 /* UserDefaultsEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		F998FC0828C0977600DBB961 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				F95C0B3228BCE3420081122D /* ImagePickerView.swift */,
+				F998FC0928C0978A00DBB961 /* ImagePickerUIKit.swift */,
+				F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
 		F99B07B728BE104900F94ECB /* MapView */ = {
 			isa = PBXGroup;
 			children = (
 				F99B07B828BE1B9200F94ECB /* MapView.swift */,
+				F998FC0F28C0AA2B00DBB961 /* LocationManager.swift */,
+				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -677,24 +711,30 @@
 				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
 				036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
-				F99B07B628BDF8A700F94ECB /* LicenseUploadAPI.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
+				F998FC0C28C09DF900DBB961 /* DriverLicenseAPI.swift in Sources */,
 				03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */,
 				035033F828AE26C00084762F /* AuthenticationBackground.swift in Sources */,
+				F998FC0528C0935C00DBB961 /* OnboardingEnum.swift in Sources */,
+				F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */,
 				F94A968928BCA61F00231B2E /* UserCredentialsAPI.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
+				F998FC1028C0AA2B00DBB961 /* LocationManager.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
 				035033F428AE1FB80084762F /* Buttons.swift in Sources */,
+				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
-				F98CE2E228BF400300B1F71B /* ScannerView.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
+				F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */,
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
 				F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */,
+				F998FC0A28C0978A00DBB961 /* ImagePickerUIKit.swift in Sources */,
 				F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */,
+				F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,

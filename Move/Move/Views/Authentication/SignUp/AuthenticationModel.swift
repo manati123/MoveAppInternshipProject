@@ -36,7 +36,7 @@ class UserViewModel: ObservableObject {
         return self.user.email.count != 0 && self.user.password.count != 0
     }
     
-    func loginErrorHandling() {
+    func loginErrorHandling(error: Error) {
         var errorString = ""
         if self.user.password.count < 9 {
             errorString +=  "Password not long enough!\n"
@@ -44,6 +44,7 @@ class UserViewModel: ObservableObject {
         if !self.validateEmail() {
             errorString += "Email is not valid!"
         }
+        errorString += error.localizedDescription
         self.showError(message: errorString)
     }
     
@@ -58,7 +59,7 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func signUpErrorHandling() {
+    func signUpErrorHandling(error: Error) {
         var errorString = ""
         if !self.fieldsAreLongEnoughSignUp() {
             errorString +=  "Username or password are not long enough!\n"
@@ -69,6 +70,7 @@ class UserViewModel: ObservableObject {
         if errorString == "" {
             errorString += "User with that email already exists!"
         }
+        errorString += error.localizedDescription
         self.showError(message: errorString)
     }
     
@@ -76,9 +78,13 @@ class UserViewModel: ObservableObject {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
             switch result {
             case .success(let user):
-                print(user)
-            case .failure(_)://TODO: find out how to access error message from server
-                self.signUpErrorHandling()
+//                print("\n\n\n\nGUSTER\(user)GUSTER\n\n\n\n")
+                self.sessionUser.user = user.user
+                
+            case .failure(let error):
+                self.signUpErrorHandling(error: error)
+                
+                
             }
         })
     }
@@ -92,7 +98,7 @@ class UserViewModel: ObservableObject {
                 self.saveUserToUserDefaults()
                 success()
             case .failure(let error):
-                self.loginErrorHandling()
+                self.loginErrorHandling(error: error)
             }
             waiting()
             

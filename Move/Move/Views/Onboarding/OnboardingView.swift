@@ -68,6 +68,8 @@ struct OnboardingView: View {
             .background(.white)
             
         }
+    
+    
         
         var imageContainer: some View {
             Color.white.overlay (

@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftMessages
 
 struct LicenseInformationView: View {
-    @State private var showingSheet = false
-    @StateObject var imagePickerViewModel = ImagePickerViewModel()
+    @StateObject var viewModel = LicenseViewModel()
+    
     let onFinished:() -> Void
     var body: some View {
         GeometryReader { geometry in
@@ -34,7 +34,7 @@ struct LicenseInformationView: View {
                         .padding(.horizontal, 24)
                     
                     Button() {
-                        showingSheet.toggle()
+                        viewModel.showingSheet.toggle()
                     } label: {
                         Text("Add driving license")
                             .frame(maxWidth: .infinity)
@@ -44,8 +44,11 @@ struct LicenseInformationView: View {
                     .animation(.default)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 14)
-                    .sheet(isPresented: $showingSheet) {
-                        ImagePickerView(viewModel: self.imagePickerViewModel)
+                    .sheet(isPresented: $viewModel.showingSheet) {
+                        ImagePickerView(viewModel: self.viewModel.imageViewModel, onUpload: {
+                            self.viewModel.sendImageForUpload()
+                            self.onFinished()
+                        })
                         
                     }
                 }
@@ -58,33 +61,6 @@ struct LicenseInformationView: View {
                 .background(.white)
                 
                 
-        }
-    }
-    
-    var optionsSheet: some View {
-        VStack {
-            Button() {
-                print("haha")
-            } label: {
-                Text("Upload from gallery")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.filledButton)
-            .disabled(false)
-            .animation(.default)
-            .padding(.horizontal, 24)
-            
-            
-            Button() {
-                print("haha")
-            } label: {
-                Text("Take photo")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.filledButton)
-            .disabled(false)
-            .animation(.default)
-            .padding(.horizontal, 24)
         }
     }
     

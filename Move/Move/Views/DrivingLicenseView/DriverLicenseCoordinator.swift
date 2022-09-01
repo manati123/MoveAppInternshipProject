@@ -24,6 +24,12 @@ struct DriverLicenseCoordinatorView: View {
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: WaitingForValidationView(onFinished: {
+                    driverState = .validated
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .waiting, selection: $driverState) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
                     
             }
             .navigationBarHidden(true)

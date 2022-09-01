@@ -28,7 +28,7 @@ struct OnboardingCoordinatorView: View {
         }, onNext: {
             if viewModel.currentSlideIndex == 4 {
                 viewModel.nextSlide {
-                    UserDefaults.standard.set(true, forKey: "DoneOnboarding")
+                    UserDefaults.standard.set(true, forKey: UserDefaultsEnum.onboarded.rawValue)
                     onFinished()
                 }
             } else {
