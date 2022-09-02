@@ -21,6 +21,7 @@ struct ValidatedView: View {
                     .foregroundColor(Color.neutralWhite)
                     .padding(.horizontal, 24)
                 Spacer()
+                Spacer()
                 Button() {
                     print("Touched!")
                 } label: {

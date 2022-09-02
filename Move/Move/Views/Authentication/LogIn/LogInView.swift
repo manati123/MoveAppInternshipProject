@@ -63,15 +63,7 @@ struct LogInView: View {
                     .accentColor(Color.neutralWhite)
             }
             Button() {
-                self.viewModel.waitingForResponse = true
-                self.userViewModel.login(waiting: {
-                    self.viewModel.waitingForResponse = false
-                }, success: onFinished)
-                
-                
-                //TODO: chestia aia cu model in model
-                
-                
+                callLogin()
             } label: {
                 Text("Login")
                     .frame(maxWidth: .infinity)
@@ -111,10 +103,11 @@ struct LogInView: View {
                 .font(Font.baiJamjuree.caption2)
         }
     }
+    
+    func callLogin() {
+        self.viewModel.waitingForResponse = true
+        self.userViewModel.login(waiting: {
+            self.viewModel.waitingForResponse = false
+        }, success: onFinished)
+    }
 }
-
-//struct LogInView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LogInView(viewModel: UserViewModel(), onFinished: {}, onGoAuth: {}, onForgotPassword:  {})
-//    }
-//}

@@ -59,6 +59,8 @@ class UserViewModel: ObservableObject {
         }
     }
     
+    
+    //TODO: move this
     func signUpErrorHandling(error: Error) {
         var errorString = ""
         if !self.fieldsAreLongEnoughSignUp() {
@@ -101,8 +103,6 @@ class UserViewModel: ObservableObject {
                 self.loginErrorHandling(error: error)
             }
             waiting()
-            
-//            self.waitingForResponse = false
         }
         
     }

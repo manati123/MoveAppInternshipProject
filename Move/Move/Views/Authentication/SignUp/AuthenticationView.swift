@@ -27,21 +27,8 @@ struct AuthenticationView: View {
                                 .foregroundColor(.white)
                                 .opacity(0.3)
                             VStack(spacing: 30) {
-                                
-                                VStack(spacing: 20) {
-                                    FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "clear-text")
-                                        .font(Font.baiJamjuree.caption2)
-                                    FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.user.name, icon: "")
-                                        .font(Font.baiJamjuree.caption2)
-                                    FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
-                                        .font(Font.baiJamjuree.caption2)
-                                }
-                                VStack(alignment: .leading, spacing: 2){
-                                    Text("By continuing you agree to Move's")
-                                        .font(Font.baiJamjuree.smallText)
-                                        .foregroundColor(.white)
-                                    termsAndConditions
-                                }.frame(maxWidth: .infinity)
+                                textFields
+                                termsAndConditions
                                 Button() {
                                     self.viewModel.authenticate()
                                     self.onFinished()
@@ -63,6 +50,17 @@ struct AuthenticationView: View {
             }
         }
         
+    }
+    
+    var textFields: some View {
+        VStack(spacing: 20) {
+            FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "clear-text")
+                .font(Font.baiJamjuree.caption2)
+            FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.user.name, icon: "")
+                .font(Font.baiJamjuree.caption2)
+            FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
+                .font(Font.baiJamjuree.caption2)
+        }
     }
     
     
@@ -90,51 +88,41 @@ struct AuthenticationView: View {
     }
     
     var termsAndConditions: some View {
-        HStack(spacing: 0) {
-            Text("[Terms and Conditions](https://tapptitude.com)")
-                                            .underline()
-                                            .font(Font.baiJamjuree.smallText.bold())
-                                            .accentColor(.neutralWhite)
-                                        
-                                        Text(" and ")
-                                            .foregroundColor(.neutralWhite)
-                                            .font(Font.baiJamjuree.smallText)
-                                        
-                                        Text("[Privacy Policy](https://tapptitude.com)")
-                                            .underline()
-                                            .accentColor(.neutralWhite)
-                                            .font(Font.baiJamjuree.smallText
-                                                .bold())
-
-        }.padding(.trailing, 82)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(maxHeight: .infinity)
-            .minimumScaleFactor(0.01)
-            .navigationBarHidden(true)
+        
+        VStack(alignment: .leading, spacing: 2){
+            Text("By continuing you agree to Move's")
+                .font(Font.baiJamjuree.smallText)
+                .foregroundColor(.white)
+            
+            HStack(spacing: 0) {
+                Text("[Terms and Conditions](https://tapptitude.com)")
+                    .underline()
+                    .font(Font.baiJamjuree.smallText.bold())
+                    .accentColor(.neutralWhite)
+                
+                Text(" and ")
+                    .foregroundColor(.neutralWhite)
+                    .font(Font.baiJamjuree.smallText)
+                
+                Text("[Privacy Policy](https://tapptitude.com)")
+                    .underline()
+                    .accentColor(.neutralWhite)
+                    .font(Font.baiJamjuree.smallText
+                        .bold())
+                
+            }.padding(.trailing, 82)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxHeight: .infinity)
+                .minimumScaleFactor(0.01)
+                .navigationBarHidden(true)
+            
+        }.frame(maxWidth: .infinity)
         
     }
     
     func fieldsAreFilled() -> Bool {
         return self.viewModel.user.email != "" && self.viewModel.user.password != "" && self.viewModel.user.name != ""
     }
-    
-//    func showError() {
-//        let view = MessageView.viewFromNib(layout: .cardView)
-//        view.configureTheme(.warning)
-//
-//        view.configureDropShadow()
-//
-//        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
-//        view.configureContent(title: "Something went wrong", body: "User already exists", iconText: iconText)
-//
-//        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//
-//        // Reduce the corner radius (applicable to layouts featuring rounded corners).
-//        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
-//
-//        // Show the message.
-//        SwiftMessages.show(view: view)
-//    }
 }
 
 

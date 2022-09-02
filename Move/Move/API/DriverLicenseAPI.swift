@@ -18,23 +18,19 @@ class DriverLicenseAPI {
     func uploadForValidation(image: Image, completionHandler: @escaping (UploadResult<LoggedUser>) -> Void ) {
         let loggedUser = try! JSONDecoder().decode(LoggedUser.self, from: UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) as! Data)
         
+        let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
         let imageData = image.asUIImage().jpegData(compressionQuality: 0.85)!
-        
-        let parameters = [
-            "email" : loggedUser.user.email
-        ]
-        
+        //        image.frame(maxWidth: .infinity, maxHeight: image.)
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageData, withName: "drivinglicense", fileName: "\(loggedUser.token).jpeg", mimeType: "image/jpeg")
-            for (key, value) in parameters {
-                multipartFormData.append((value.data(using: String.Encoding.utf8)!), withName: key)
-                    } //Optional for extra parameters
-        }, to: "https://scooter-app.herokuapp.com/user/login", method: .put)
+        }, to: "https://scooter-app.herokuapp.com/user/driving-license",
+                  method: .put,
+                  headers: header)
+        .response { response in
+            print(response)
+        }
         
-//            .responseDecodable(of: LoggedUser.self) { response in
-//                print(response)
-//                completionHandler(response)
-//            }
+        
     }
 }
 

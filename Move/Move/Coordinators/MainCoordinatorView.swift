@@ -39,6 +39,8 @@ struct MainCoordinatorView: View {
                     
                 
                 NavigationLink(destination: DriverLicenseCoordinatorView(){
+                    self.selection = OnboardingEnum.authentication
+                } onFinished: {
                     self.selection = OnboardingEnum.none
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .license, selection: $selection) {
                     EmptyView()

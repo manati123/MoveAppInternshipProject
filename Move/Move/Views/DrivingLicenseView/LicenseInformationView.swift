@@ -11,6 +11,7 @@ import SwiftMessages
 struct LicenseInformationView: View {
     @StateObject var viewModel = LicenseViewModel()
     
+    let onLogOut:() -> Void
     let onFinished:() -> Void
     var body: some View {
         GeometryReader { geometry in
@@ -67,7 +68,7 @@ struct LicenseInformationView: View {
     var header: some View {
         HStack {
             Button {
-                print("PressedButton")
+                viewModel.logOut(onLogOut: onLogOut)
             }label: {
                 Image("arrow-back-blue")
             }
@@ -81,7 +82,7 @@ struct LicenseInformationView: View {
 
 struct LicenseInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        LicenseInformationView(onFinished: {})
+        LicenseInformationView(onLogOut: {}, onFinished: {})
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }

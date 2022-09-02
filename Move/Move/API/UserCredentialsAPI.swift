@@ -34,7 +34,7 @@ struct User: Hashable, Codable  {
     
 }
 
-struct UserInUser: Hashable, Codable {
+struct UserDTO: Hashable, Codable {
     var user: User
 }
 
@@ -74,14 +74,18 @@ class AuthenticationAPI {
             "password": user.password
         ]
         
+        
+        print(parameters)
         AF.request("\(baseUrl)/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
             switch response.result {
                 case .success(let data):
                     do {
                         let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
+                        print(decodedUser)
                         completionHandler(.success(decodedUser))
                     } catch(let error) {
+                        print(error)
                         completionHandler(.failure(error))
                     }
                 case .failure(let error):
@@ -94,24 +98,26 @@ class AuthenticationAPI {
             }
         }
     }
+    
+    
   
     
     
-    func registerUser(user: User, completionHandler:@escaping (Result<UserInUser>) -> ()) {
+    func registerUser(user: User, completionHandler:@escaping (Result<UserDTO>) -> ()) {
         let parameters = [
             "name": user.name,
             "password": user.password,
             "email": user.email
         ]
-        print("\n PARAMETERS: \(parameters) \n")
-        
+        print(parameters)
         AF.request("\(baseUrl)/register", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
                switch response.result {
                    case .success(let data):
 //                   print("\n data: \(try! JSONDecoder().decode(User.self, from: data)) \n")
                        do {
-                           let decodedUser = try JSONDecoder().decode(UserInUser.self, from: data)
+                           let decodedUser = try JSONDecoder().decode(UserDTO.self, from: data)
+                           print(decodedUser)
                            completionHandler(.success(decodedUser))
                            
                        } catch let DecodingError.dataCorrupted(context) {
@@ -138,6 +144,20 @@ class AuthenticationAPI {
 //                   throw error
                }
            }
+        
+    }
+    
+    func logOut(loggedUser: LoggedUser, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
+        let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
+        
+        AF.request("https://scooter-app.herokuapp.com/user/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
+                switch response.result {
+                    case .success(let data):
+                        print("Success")
+                    case .failure(let error):
+                        print(error)
+                }
+            }
         
     }
 }

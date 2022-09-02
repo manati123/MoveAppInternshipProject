@@ -15,11 +15,12 @@ enum DriverState: String {
 
 struct DriverLicenseCoordinatorView: View {
     @State private var driverState: DriverState? = .info
+    let logOut:() -> Void
     let onFinished:() -> Void
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: LicenseInformationView(onFinished: {
+                NavigationLink(destination: LicenseInformationView(onLogOut: logOut, onFinished: {
                     driverState = .waiting
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
                     EmptyView()
