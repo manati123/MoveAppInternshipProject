@@ -13,6 +13,7 @@ struct LicenseInformationView: View {
     
     let onLogOut:() -> Void
     let onFinished:() -> Void
+    let onUploadDone:() -> Void
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -47,7 +48,7 @@ struct LicenseInformationView: View {
                     .padding(.vertical, 14)
                     .sheet(isPresented: $viewModel.showingSheet) {
                         ImagePickerView(viewModel: self.viewModel.imageViewModel, onUpload: {
-                            self.viewModel.sendImageForUpload()
+                            self.viewModel.sendImageForUpload(onUploadDone: self.onUploadDone)
                             self.onFinished()
                         })
                         
@@ -82,7 +83,7 @@ struct LicenseInformationView: View {
 
 struct LicenseInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        LicenseInformationView(onLogOut: {}, onFinished: {})
+        LicenseInformationView(onLogOut: {}, onFinished: {}, onUploadDone: {})
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }

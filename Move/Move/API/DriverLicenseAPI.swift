@@ -15,7 +15,7 @@ class DriverLicenseAPI {
     
     static let shareInstance = DriverLicenseAPI()
     
-    func uploadForValidation(image: Image, completionHandler: @escaping (UploadResult<LoggedUser>) -> Void ) {
+    func uploadForValidation(image: Image, completionHandler: @escaping (Result<User>) -> Void ) {
         let loggedUser = try! JSONDecoder().decode(LoggedUser.self, from: UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) as! Data)
         
         let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
@@ -27,7 +27,13 @@ class DriverLicenseAPI {
                   method: .put,
                   headers: header)
         .response { response in
-            print(response)
+            do {
+                let decoded = try JSONDecoder().decode(User.self, from: response.data!)
+                print(decoded)
+                completionHandler(.success(decoded))
+            } catch {
+                completionHandler(.failure(error))
+            }
         }
         
         

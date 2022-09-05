@@ -41,8 +41,16 @@ struct MainCoordinatorView: View {
                 NavigationLink(destination: DriverLicenseCoordinatorView(){
                     self.selection = OnboardingEnum.authentication
                 } onFinished: {
-                    self.selection = OnboardingEnum.none
+                    self.selection = OnboardingEnum.map
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .license, selection: $selection) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: MapCoordinatorView(){
+                    self.selection = OnboardingEnum.authentication
+                } onFinished: {
+                    self.selection = OnboardingEnum.none
+                }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                     

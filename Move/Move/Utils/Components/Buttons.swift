@@ -56,6 +56,25 @@ struct TransparentButton: ButtonStyle {
     }
 }
 
+struct SimpleMapButton: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(8)
+            .background(RoundedRectangle(cornerRadius: 16)
+                .foregroundColor(.neutralWhite)
+                .shadow(radius: CGFloat(20))
+            )
+    }
+}
+
+extension ButtonStyle where Self == SimpleMapButton {
+    static var simpleMapButton: Self {
+        return .init()
+    }
+}
+
 extension ButtonStyle where Self == FilledButton {
     static var filledButton: Self {
         return .init()
@@ -70,11 +89,12 @@ extension ButtonStyle where Self == TransparentButton {
 
 struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
-        Button("QweqwE") {
+        Button {
             
+        } label: {
+            Image("UserNotCenteredPin")
         }
-        .buttonStyle(.filledButton)
-        .disabled(true)
+        .buttonStyle(.simpleMapButton)
     }
 }
 

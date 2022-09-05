@@ -23,7 +23,7 @@ struct ValidatedView: View {
                 Spacer()
                 Spacer()
                 Button() {
-                    print("Touched!")
+                    onFinished()
                 } label: {
                     Text("Find scooters")
                         .frame(maxWidth: .infinity)

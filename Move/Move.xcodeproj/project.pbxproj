@@ -65,6 +65,8 @@
 		F9A1A80F28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */; };
 		F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */; };
 		F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = F9A1A81F28A1269C00E8DFB9 /* NavigationStack */; };
+		F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */; };
+		F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,8 @@
 		F9A1A80C28A1163500E8DFB9 /* MoveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITests.swift; sourceTree = "<group>"; };
 		F9A1A80E28A1163500E8DFB9 /* MoveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,7 @@
 		03472A9828A252F5008F51DE /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				03472A9928A25328008F51DE /* AuthenticationModel.swift */,
 				036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */,
 				0356772228AE628C00FDB6BC /* ForgotPassword */,
 				0356771D28AE3CE200FDB6BC /* LogIn */,
@@ -216,7 +221,6 @@
 		0356771C28AE3CC400FDB6BC /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				03472A9928A25328008F51DE /* AuthenticationModel.swift */,
 				03472A9B28A25336008F51DE /* AuthenticationView.swift */,
 			);
 			path = SignUp;
@@ -256,6 +260,7 @@
 				036FF87928ABBC3C004C913A /* FloatingTextField.swift */,
 				035033F328AE1FB80084762F /* Buttons.swift */,
 				035033F728AE26C00084762F /* AuthenticationBackground.swift */,
+				F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				F99B07B828BE1B9200F94ECB /* MapView.swift */,
 				F998FC0F28C0AA2B00DBB961 /* LocationManager.swift */,
 				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
+				F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -722,6 +728,7 @@
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				F998FC1028C0AA2B00DBB961 /* LocationManager.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
+				F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */,
 				035033F428AE1FB80084762F /* Buttons.swift in Sources */,
 				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
@@ -736,6 +743,7 @@
 				F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */,
 				F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
+				F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,
 				03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */,

@@ -15,7 +15,7 @@ struct Scooter: Identifiable {
     var name: String
 }
 
-class mapViewViewModel: ObservableObject {
+class MapViewViewModel: ObservableObject {
     @Published var locationManager = LocationModel()
     @Published var locationIfDenied = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.77000000, longitude: 23.59138889),
                                                          latitudinalMeters: 4000,
@@ -30,19 +30,35 @@ class mapViewViewModel: ObservableObject {
 }
 
 struct MapView: View {
-    @StateObject var viewModel = mapViewViewModel()
+    @StateObject var viewModel = MapViewViewModel()
     
     var body: some View {
+        ZStack(alignment: .top) {
+            map
+                .onAppear {
+                    self.viewModel.locationManager.requestAuthorisation()
+                }
+            topSideButtons
+        }
+        
+    }
+    
+    var map: some View {
         Map(
             coordinateRegion: $viewModel.locationManager.region,
-           interactionModes: MapInteractionModes.all,
-           showsUserLocation: true,
+            interactionModes: MapInteractionModes.all,
+            showsUserLocation: true,
             userTrackingMode: $viewModel.tracking,
             annotationItems: viewModel.scooters,
             annotationContent: { scooter in
                 MapAnnotation(coordinate: scooter.location) {
                     Button {
                         print("hello brosci")
+                        let url = URL(string: "maps://?saddr=&daddr=\(scooter.location.latitude),\(scooter.location.longitude)")
+                        
+                        if UIApplication.shared.canOpenURL(url!) {
+                            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                        }
                     }
                 label: {
                     Image("ClusterDefault")
@@ -52,10 +68,26 @@ struct MapView: View {
             }
         )
         .ignoresSafeArea()
-        .onAppear {
-            self.viewModel.locationManager.requestAuthorisation()
-        }
-        
+    }
+    
+    var topSideButtons: some View {
+        HStack {
+            Button {
+                
+            } label: {
+                Image("GotoMenuPin")
+            }
+            .buttonStyle(.simpleMapButton)
+            
+            Spacer()
+            
+            Button {
+                
+            } label: {
+                Image("UserNotCenteredPin")
+            }
+            .buttonStyle(.simpleMapButton)
+        }.padding(.horizontal, 24)
     }
 }
 

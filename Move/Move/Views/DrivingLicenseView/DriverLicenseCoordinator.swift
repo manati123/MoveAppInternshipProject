@@ -22,13 +22,19 @@ struct DriverLicenseCoordinatorView: View {
             ZStack {
                 NavigationLink(destination: LicenseInformationView(onLogOut: logOut, onFinished: {
                     driverState = .waiting
-                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
+                }, onUploadDone: {driverState = .validated}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
                 NavigationLink(destination: WaitingForValidationView(onFinished: {
                     driverState = .validated
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .waiting, selection: $driverState) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: ValidatedView(onFinished: {
+                    onFinished()
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .validated, selection: $driverState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                     

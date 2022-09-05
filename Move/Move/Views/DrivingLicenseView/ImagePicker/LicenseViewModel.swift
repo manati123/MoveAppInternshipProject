@@ -12,9 +12,14 @@ class LicenseViewModel: ObservableObject {
     @Published var showingSheet = false
     @Published var imageViewModel = ImagePickerViewModel()
     
-    func sendImageForUpload() {
+    func sendImageForUpload(onUploadDone: @escaping () -> Void) {
         DriverLicenseAPI().uploadForValidation(image: imageViewModel.image) { result in
-            print(result)
+            switch result {
+            case .success:
+                onUploadDone()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
