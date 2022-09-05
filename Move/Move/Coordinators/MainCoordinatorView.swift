@@ -9,38 +9,48 @@ import SwiftUI
 
 
 struct MainCoordinatorView: View {
-    @State private var selection: String? = "Splash"
+    @State private var selection: OnboardingEnum? = .splash
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: getSplashView().transition(.slide.animation(.default)).navigationBarHidden(true).preferredColorScheme(.dark), tag: "Splash", selection: $selection) {
+                NavigationLink(destination: getSplashView().transition(.slide.animation(.default)).navigationBarHidden(true).preferredColorScheme(.dark), tag: .splash, selection: $selection) {
                     EmptyView()
                 }
                 .transition(.slide.animation(.default))
                 
                 
                 NavigationLink(destination: OnboardingCoordinatorView(){
-                    if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
-                        self.selection = "License"
+                    if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
+                        self.selection = .license
                     }
                     else {
-                        self.selection = "Authentication"
+                        self.selection = .authentication
                     }
-                }.navigationBarHidden(true).preferredColorScheme(.dark), tag: "Onboarding", selection: $selection) {
+                }.navigationBarHidden(true).preferredColorScheme(.dark), tag: .onboarding, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                     
                 
                 NavigationLink(destination: SignUpCoordinatorView(){
-                        self.selection = "License"
-                }.preferredColorScheme(.dark).navigationBarHidden(true), tag: "Authentication", selection: $selection) {
+                    self.selection = .license
+                }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                     
                 
                 NavigationLink(destination: DriverLicenseCoordinatorView(){
-                    self.selection = ""
-                }.preferredColorScheme(.light).navigationBarHidden(true), tag: "License", selection: $selection) {
+                    self.selection = OnboardingEnum.authentication
+                } onFinished: {
+                    self.selection = OnboardingEnum.map
+                }.preferredColorScheme(.light).navigationBarHidden(true), tag: .license, selection: $selection) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: MapCoordinatorView(){
+                    self.selection = OnboardingEnum.authentication
+                } onFinished: {
+                    self.selection = OnboardingEnum.none
+                }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                     
@@ -54,16 +64,16 @@ struct MainCoordinatorView: View {
 //        }
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let isOnboarded = UserDefaults.standard.bool(forKey: "DoneOnboarding")
+                let isOnboarded = UserDefaults.standard.bool(forKey: UserDefaultsEnum.onboarded.rawValue)
                 if isOnboarded  {
-                    if UserDefaults.standard.value(forKey: "LoggedUser") != nil {
-                        self.selection = "License"
+                    if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
+                        self.selection = .license
                     } else {
-                        self.selection = "Authentication"
+                        self.selection = .authentication
                     }
                 }
                 else {
-                    self.selection = "Onboarding"
+                    self.selection = .onboarding
                 }
             }
         }.navigationBarHidden(true)
