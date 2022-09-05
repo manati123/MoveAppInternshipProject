@@ -67,6 +67,8 @@
 		F9A1A82028A1269C00E8DFB9 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = F9A1A81F28A1269C00E8DFB9 /* NavigationStack */; };
 		F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */; };
 		F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */; };
+		F9CFA17E28C5F3F7007029F1 /* TestMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17D28C5F3F7007029F1 /* TestMapView.swift */; };
+		F9CFA18028C62A36007029F1 /* OpenedClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +156,8 @@
 		F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinatorView.swift; sourceTree = "<group>"; };
+		F9CFA17D28C5F3F7007029F1 /* TestMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapView.swift; sourceTree = "<group>"; };
+		F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedClusterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,10 +377,12 @@
 		F99B07B728BE104900F94ECB /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				F9CFA17C28C5F3E9007029F1 /* Testing */,
 				F99B07B828BE1B9200F94ECB /* MapView.swift */,
 				F998FC0F28C0AA2B00DBB961 /* LocationManager.swift */,
 				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 				F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */,
+				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -450,6 +456,14 @@
 				F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		F9CFA17C28C5F3E9007029F1 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				F9CFA17D28C5F3F7007029F1 /* TestMapView.swift */,
+			);
+			path = Testing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -716,6 +730,7 @@
 				0356772428AE629D00FDB6BC /* ForgotPasswordView.swift in Sources */,
 				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
 				036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */,
+				F9CFA18028C62A36007029F1 /* OpenedClusterView.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
 				F998FC0C28C09DF900DBB961 /* DriverLicenseAPI.swift in Sources */,
@@ -741,6 +756,7 @@
 				F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */,
 				F998FC0A28C0978A00DBB961 /* ImagePickerUIKit.swift in Sources */,
 				F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */,
+				F9CFA17E28C5F3F7007029F1 /* TestMapView.swift in Sources */,
 				F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */,

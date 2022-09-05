@@ -24,8 +24,12 @@ class MapViewViewModel: ObservableObject {
     
     var scooters = [
         Scooter(location: CLLocationCoordinate2D(latitude: 46.77000000, longitude: 23.7), name: "C1"),
-        Scooter(location: CLLocationCoordinate2D(latitude: 46.77000000, longitude: 23.6), name: "C2"),
-        Scooter(location: CLLocationCoordinate2D(latitude: 46.77000000, longitude: 23.4), name: "C3")
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77300000, longitude: 23.7), name: "C4"),
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77200000, longitude: 23.7), name: "C5"),
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77100000, longitude: 23.7), name: "C6"),
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77400000, longitude: 23.7), name: "C7"),
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77500000, longitude: 23.6), name: "C2"),
+        Scooter(location: CLLocationCoordinate2D(latitude: 46.77600000, longitude: 23.4), name: "C3")
     ]
 }
 
