@@ -13,7 +13,9 @@ struct ContentView: View {
    
     var body: some View {
 //        AuthenticationView()
-        MainCoordinatorView()
+//        MainCoordinatorView()
+        MapView()
+            .ignoresSafeArea()
        
 //        MapView()
     }
