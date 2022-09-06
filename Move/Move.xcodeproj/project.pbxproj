@@ -70,6 +70,8 @@
 		F9CFA18228C7231D007029F1 /* ScooterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */; };
 		F9CFA18428C73F3F007029F1 /* MapViewUIKIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */; };
 		F9CFA18628C744A1007029F1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18528C744A1007029F1 /* MapViewModel.swift */; };
+		F9CFA18B28C74536007029F1 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18A28C74536007029F1 /* ErrorService.swift */; };
+		F9CFA18E28C74564007029F1 /* UserCredentialsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18D28C74564007029F1 /* UserCredentialsModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +162,8 @@
 		F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterAnnotation.swift; sourceTree = "<group>"; };
 		F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUIKIT.swift; sourceTree = "<group>"; };
 		F9CFA18528C744A1007029F1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		F9CFA18A28C74536007029F1 /* ErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		F9CFA18D28C74564007029F1 /* UserCredentialsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +332,7 @@
 		F94A968728BCA5F900231B2E /* API */ = {
 			isa = PBXGroup;
 			children = (
-				F94A968828BCA61F00231B2E /* UserCredentialsAPI.swift */,
+				F9CFA18C28C74553007029F1 /* UserCredentials */,
 				F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */,
 			);
 			path = API;
@@ -349,6 +353,7 @@
 		F998FC0228BFA6E800DBB961 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F9CFA18728C74519007029F1 /* Services */,
 				F998FC0328C0934700DBB961 /* Enums */,
 				036FF88128AD06F0004C913A /* Fonts */,
 				036FF87528ABB917004C913A /* Extensions */,
@@ -417,7 +422,6 @@
 			children = (
 				F998FC0228BFA6E800DBB961 /* Utils */,
 				F998FC0128BFA6BC00DBB961 /* Views */,
-				F94A968728BCA5F900231B2E /* API */,
 				03472B2528AB83C0008F51DE /* Coordinators */,
 				03472ACB28A272CF008F51DE /* Info.plist */,
 				F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */,
@@ -459,6 +463,32 @@
 				F9A1A81C28A11C9100E8DFB9 /* SplashView.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		F9CFA18728C74519007029F1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F9CFA18828C74523007029F1 /* ErrorServices */,
+				F94A968728BCA5F900231B2E /* API */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F9CFA18828C74523007029F1 /* ErrorServices */ = {
+			isa = PBXGroup;
+			children = (
+				F9CFA18A28C74536007029F1 /* ErrorService.swift */,
+			);
+			path = ErrorServices;
+			sourceTree = "<group>";
+		};
+		F9CFA18C28C74553007029F1 /* UserCredentials */ = {
+			isa = PBXGroup;
+			children = (
+				F94A968828BCA61F00231B2E /* UserCredentialsAPI.swift */,
+				F9CFA18D28C74564007029F1 /* UserCredentialsModels.swift */,
+			);
+			path = UserCredentials;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -725,6 +755,7 @@
 				0356772428AE629D00FDB6BC /* ForgotPasswordView.swift in Sources */,
 				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
 				036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */,
+				F9CFA18B28C74536007029F1 /* ErrorService.swift in Sources */,
 				F9CFA18228C7231D007029F1 /* ScooterAnnotation.swift in Sources */,
 				F9CFA18028C62A36007029F1 /* OpenedClusterView.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
@@ -743,6 +774,7 @@
 				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
+				F9CFA18E28C74564007029F1 /* UserCredentialsModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
 				F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */,
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,

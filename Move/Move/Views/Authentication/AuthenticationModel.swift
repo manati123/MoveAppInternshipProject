@@ -45,7 +45,7 @@ class UserViewModel: ObservableObject {
             errorString += "Email is not valid!"
         }
         errorString += error.localizedDescription
-        self.showError(message: errorString)
+        ErrorService().showError(message: errorString)
     }
     
     
@@ -73,16 +73,14 @@ class UserViewModel: ObservableObject {
             errorString += "User with that email already exists!"
         }
         errorString += error.localizedDescription
-        self.showError(message: errorString)
+        ErrorService().showError(message: errorString)
     }
     
     func authenticate() {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
             switch result {
             case .success(let user):
-//                print("\n\n\n\nGUSTER\(user)GUSTER\n\n\n\n")
                 self.sessionUser.user = user.user
-                
             case .failure(let error):
                 self.signUpErrorHandling(error: error)
                 
@@ -106,22 +104,4 @@ class UserViewModel: ObservableObject {
         }
         
     }
-    
-    func showError(message: String) {
-        let view = MessageView.viewFromNib(layout: .cardView)
-        view.configureTheme(.warning)
-
-        view.configureDropShadow()
-
-        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
-        view.configureContent(title: "Something went wrong", body: message, iconText: iconText)
-        view.button?.isHidden = true
-        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-
-        // Reduce the corner radius (applicable to layouts featuring rounded corners).
-        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
-
-        SwiftMessages.show(view: view)
-    }
-    
 }

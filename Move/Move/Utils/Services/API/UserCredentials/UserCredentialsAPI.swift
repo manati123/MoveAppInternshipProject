@@ -8,50 +8,7 @@
 import Foundation
 import Alamofire
 import SwiftUI
-struct User: Hashable, Codable  {
-    var name: String
-    var password: String
-    var email: String
-    var _id: String?
-    var __v: Int?
-    var updatedAt: String?
-    var createdAt: String?
-    var drivinglicense: String?
-    var validated: Bool?
-    
-    enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case password = "password"
-        case email = "email"
-        case _id = "_id"
-        case __v = "__v"
-        case updatedAt = "updatedAt"
-        case createdAt = "createdAt"
-        case drivinglicense = "drivinglicense"
-        case validated = "validated"
-       }
 
-    
-}
-
-struct UserDTO: Hashable, Codable {
-    var user: User
-}
-
-struct LoggedUser: Codable {
-    var user: User
-    var token: String
-}
-
-struct ServerError: Decodable {
-    var message: String
-}
-
-
-
-typealias Result<Success> = Swift.Result<Success, Error>
-
-typealias UploadResult<Success> = DataResponse<LoggedUser, AFError>
 
 //extension Result {
 //    func map<NewSuccess>(_ mapping: (Success) throws -> NewSuccess) -> Result<NewSuccess> {
@@ -60,21 +17,14 @@ typealias UploadResult<Success> = DataResponse<LoggedUser, AFError>
 //}
 
 class AuthenticationAPI {
-    
-    
-    
     private let baseUrl = "https://scooter-app.herokuapp.com/user"
     static let shareInstance = AuthenticationAPI()
-    
-    
     
     func loginUser(user: User, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
         let parameters = [
             "email": user.email,
             "password": user.password
         ]
-        
-        
         print(parameters)
         AF.request("\(baseUrl)/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in

@@ -18,7 +18,7 @@ class LicenseViewModel: ObservableObject {
             case .success:
                 onUploadDone()
             case .failure(let error):
-                print(error)
+                ErrorService().showError(message: error.localizedDescription)
             }
         }
     }
@@ -28,6 +28,12 @@ class LicenseViewModel: ObservableObject {
         let decodedUser = try! JSONDecoder().decode(LoggedUser.self, from: encodedUser as! Data)
         AuthenticationAPI().logOut(loggedUser: decodedUser) { result in
             print(result)
+            switch result {
+            case .success:
+                print("success")
+            case .failure:
+                ErrorService().showError(message: "User could not be logged out!")
+            }
         }
         UserDefaults.standard.removeObject(forKey: UserDefaultsEnum.loggedUser.rawValue)
         onLogOut()
