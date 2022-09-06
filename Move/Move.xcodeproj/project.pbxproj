@@ -41,6 +41,7 @@
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
+		03FDD3CA28C76650001D7A44 /* SerialNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FDD3C928C76650001D7A44 /* SerialNumberView.swift */; };
 		40B76836468B34F34ADA0E87 /* Pods_MoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E87E137A12647164664F69B /* Pods_MoveTests.framework */; };
 		9B0EC048ACDC99413EFBC8F7 /* Pods_Move_MoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C83EF8B12F95B27F5BA2EE /* Pods_Move_MoveUITests.framework */; };
 		BCEC1E2D35D19CE6D34D4EDF /* Pods_Move.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E867692D79AB178751228CEF /* Pods_Move.framework */; };
@@ -125,6 +126,7 @@
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
+		03FDD3C928C76650001D7A44 /* SerialNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberView.swift; sourceTree = "<group>"; };
 		248BCD4C9A3ED0BD3370D941 /* Pods-Move-MoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Move-MoveUITests.release.xcconfig"; path = "Target Support Files/Pods-Move-MoveUITests/Pods-Move-MoveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		58142A9E78918E9180F60432 /* Pods-Move-MoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Move-MoveUITests.debug.xcconfig"; path = "Target Support Files/Pods-Move-MoveUITests/Pods-Move-MoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72C83EF8B12F95B27F5BA2EE /* Pods_Move_MoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Move_MoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,6 +308,15 @@
 			path = DrivingLicenseView;
 			sourceTree = "<group>";
 		};
+		03FDD3C828C76630001D7A44 /* ScooterViews */ = {
+			isa = PBXGroup;
+			children = (
+				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
+				03FDD3C928C76650001D7A44 /* SerialNumberView.swift */,
+			);
+			path = ScooterViews;
+			sourceTree = "<group>";
+		};
 		405DEDA70057F1F1CC008FF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +352,7 @@
 		F998FC0128BFA6BC00DBB961 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				03FDD3C828C76630001D7A44 /* ScooterViews */,
 				F9A1A81B28A11C7E00E8DFB9 /* Splash */,
 				03472A9828A252F5008F51DE /* Authentication */,
 				03472A9D28A260EA008F51DE /* Onboarding */,
@@ -386,7 +398,6 @@
 			children = (
 				F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */,
 				F99B07B828BE1B9200F94ECB /* MapView.swift */,
-				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 				F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */,
 				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
 				F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */,
@@ -779,6 +790,7 @@
 				F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */,
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
+				03FDD3CA28C76650001D7A44 /* SerialNumberView.swift in Sources */,
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
 				F9CFA18428C73F3F007029F1 /* MapViewUIKIT.swift in Sources */,
 				F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */,

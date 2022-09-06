@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import MapKit
+import UIKit
 
 class ScooterAnnotation: NSObject, MKAnnotation {
     let title: String?
@@ -40,5 +41,9 @@ class ScooterAnnotation: NSObject, MKAnnotation {
                               subtitle: "Ardial no",
                               coordinate: .init(latitude: 46.770439, longitude:  23.591423))
         ]
+    }
+    
+    @objc func someFunctionality() {
+        print(self.title ?? "No title")
     }
 }

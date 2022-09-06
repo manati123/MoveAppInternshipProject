@@ -24,6 +24,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
           let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customView")
           annotationView.canShowCallout = true
           
+          
           if annotation is MKUserLocation {
               let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
               mapView.setRegion(mapRegion, animated: true)
@@ -31,19 +32,23 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
           }
 
           annotationView.clusteringIdentifier = "customView"
+          let btn = UIButton(type: .detailDisclosure)
+          btn.addTarget(self, action: #selector(lalala), for: .touchDown)
+          
+          annotationView.rightCalloutAccessoryView = btn
+//          let bu
           //Your custom image icon
           annotationView.image = UIImage(named: "ClusterDefault")
           
           if annotation is MKClusterAnnotation {
-
+              //change data about the clusters
               let clusterConvertedAnnotation = annotation as! MKClusterAnnotation
               let numberOfItems = clusterConvertedAnnotation.memberAnnotations.count
               if numberOfItems > 1 {
                   let lbl = UILabel(frame: CGRect(x: 6, y: 3, width: 35, height: 15))
                   lbl.text = String(numberOfItems)
                   lbl.translatesAutoresizingMaskIntoConstraints = false
-                  let rightButton = UIButton(type: .contactAdd)
-                  annotationView.addSubview(rightButton)
+                  
                   annotationView.addSubview(lbl)
               }
               
@@ -51,6 +56,13 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
           
           return annotationView
        }
+    
+    @objc func lalala() {
+        print("Killmeplz")
+    }
+    
+    
+    
     
    
 }

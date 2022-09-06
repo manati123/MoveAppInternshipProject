@@ -12,12 +12,13 @@ class LicenseViewModel: ObservableObject {
     @Published var showingSheet = false
     @Published var imageViewModel = ImagePickerViewModel()
     
-    func sendImageForUpload(onUploadDone: @escaping () -> Void) {
+    func sendImageForUpload(onUploadDone: @escaping () -> Void, onFailure: @escaping () -> Void) {
         DriverLicenseAPI().uploadForValidation(image: imageViewModel.image) { result in
             switch result {
             case .success:
                 onUploadDone()
             case .failure(let error):
+                onFailure()
                 ErrorService().showError(message: error.localizedDescription)
             }
         }
