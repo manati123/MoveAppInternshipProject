@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+struct ScooterModel {
+    let id: String?
+    let batteryPercentage: Int?
+    let address: String?
+}
+
 struct ScooterCardView: View {
     var id = UUID()
+    var scooterData: ScooterModel
     var body: some View {
         
         ZStack {
@@ -28,7 +35,7 @@ struct ScooterCardView: View {
             HStack(alignment: .top) {
                 Image(ImagesEnum.clearMapPin.rawValue)
                     .foregroundColor(.neutralPurple)
-                Text("Str. Lotrului Numarul \n 6, Brezoi")
+                Text(scooterData.address!)
                     .font(Font.baiJamjuree.body2)
                     .foregroundColor(Color.primaryPurple)
             }
@@ -51,12 +58,12 @@ struct ScooterCardView: View {
                 .scaledToFit()
             VStack {
                 Text("Scooter")
-                Text("ScooterTag")
+                Text(self.scooterData.id!)
                     .font(Font.baiJamjuree.heading2)
                     .fontWeight(.bold)
                 HStack {
                     Image(systemName: "battery.100")
-                    Text("100%")
+                    Text("\(self.scooterData.batteryPercentage!)")
                         .font(Font.baiJamjuree.smallText)
                 }
                 HStack {
@@ -88,7 +95,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-        ScooterCardView()
+//        ScooterCardView(sc)
         }
             
     }

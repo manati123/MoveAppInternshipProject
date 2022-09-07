@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct OpenedClusterView: View {
-    @State var scooters = [ScooterCardView(),ScooterCardView(),ScooterCardView(),ScooterCardView(),ScooterCardView()]
+    @State var scooters = []
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(scooters, id: \.id) { scooter in
-                    scooter
-                }
+//                ForEach(scooters, id: \.id) { scooter in
+//                    scooter
+//                }
             }
         }
     }

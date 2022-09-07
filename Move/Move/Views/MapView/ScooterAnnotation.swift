@@ -11,16 +11,13 @@ import MapKit
 import UIKit
 
 class ScooterAnnotation: NSObject, MKAnnotation {
-    let title: String?
-    let subtitle: String?
+    
     let coordinate: CLLocationCoordinate2D
+    let scooterData: ScooterModel
 
-    init(title: String?,
-         subtitle: String?,
-         coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.subtitle = subtitle
+    init(coordinate: CLLocationCoordinate2D,scooterData: ScooterModel) {
         self.coordinate = coordinate
+        self.scooterData = scooterData
     }
     
     static func requestMockData()-> [ScooterAnnotation]{
@@ -31,16 +28,8 @@ class ScooterAnnotation: NSObject, MKAnnotation {
 //            ScooterAnnotation(title: "Mumbai",
 //                               subtitle:"Mumbai (formerly called Bombay) is a densely populated city on India’s west coast",
 //                               coordinate: .init(latitude: 19.0760, longitude: 72.8777)),
-            ScooterAnnotation(title: "Bucuresti",
-                              subtitle: "Capitala",
-                              coordinate: .init(latitude: 44.439663, longitude:  26.096306)),
-            ScooterAnnotation(title: "Cluj",
-                              subtitle: "Ardial no",
-                              coordinate: .init(latitude: 46.770439, longitude:  23.591423))
+            ScooterAnnotation(coordinate: .init(latitude: 44.439663, longitude:  26.096306), scooterData: ScooterModel(id: "#AB23", batteryPercentage: 66, address: "Str. Avram Iancu nr.26 Cladirea 2")),
+            ScooterAnnotation(coordinate: .init(latitude: 46.770439, longitude:  23.591423), scooterData: ScooterModel(id: "#AB25", batteryPercentage: 66, address: "Str. Avram Iancu nr.26 Cladirea 2"))
         ]
-    }
-    
-    @objc func someFunctionality() {
-        print(self.title ?? "No title")
     }
 }

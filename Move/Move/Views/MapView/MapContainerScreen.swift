@@ -48,7 +48,7 @@ struct MapContainerScreen: View{
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView()
+                ScooterCardView(scooterData: selectedScooter.scooterData)
             }
         }
     }
