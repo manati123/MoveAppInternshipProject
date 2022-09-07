@@ -65,12 +65,16 @@ struct ScooterCardView: View {
                     switch self.scooterData.batteryPercentage! {
                     case 90..<101:
                         Image(systemName: "battery.100")
+                            .foregroundColor(.green)
                     case 75..<90:
                         Image(systemName: "battery.75")
+                            .foregroundColor(.orange)
                     case 50..<75:
                         Image(systemName: "battery.50")
+                            .foregroundColor(.yellow)
                     case 25..<50:
                         Image(systemName: "battery.25")
+                            .foregroundColor(.red)
                     case 0..<25:
                         Image(systemName: "battery.0")
                     default:

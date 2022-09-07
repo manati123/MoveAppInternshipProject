@@ -9,19 +9,6 @@ import Foundation
 import SwiftUI
 import MapKit
 
-class MapViewCoordinator: NSObject, MKMapViewDelegate {
-    
-      var mapViewController: ScooterMapView
-    
-        
-      init(_ control: ScooterMapView) {
-          self.mapViewController = control
-      }
-        
-    
-   
-}
-
 class ScooterMapViewModel: NSObject, ObservableObject {
     var scooters: [ScooterAnnotation] = [] {
         didSet {
@@ -102,9 +89,6 @@ extension ScooterMapViewModel: MKMapViewDelegate {
 struct ScooterMapView: UIViewRepresentable {
     let viewModel: ScooterMapViewModel
     
-    func makeCoordinator() -> MapViewCoordinator {
-        MapViewCoordinator(self)
-    }
     /**
      - Description - Replace the body with a make UIView(context:) method that creates and return an empty MKMapView
      */
