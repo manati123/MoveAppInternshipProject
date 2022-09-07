@@ -36,7 +36,6 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
           btn.addTarget(self, action: #selector(lalala), for: .touchDown)
           
           annotationView.rightCalloutAccessoryView = btn
-//          let bu
           //Your custom image icon
           annotationView.image = UIImage(named: "ClusterDefault")
           
@@ -51,11 +50,26 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                   
                   annotationView.addSubview(lbl)
               }
-              
           }
+          
+          
           
           return annotationView
        }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation {
+            return
+        }
+        view.image = UIImage(named: "SelectedPin")
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation {
+            return
+        }
+        view.image = UIImage(named: "ClusterDefault")
+    }
     
     @objc func lalala() {
         print("Killmeplz")
