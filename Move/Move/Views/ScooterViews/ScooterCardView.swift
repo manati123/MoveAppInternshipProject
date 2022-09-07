@@ -62,11 +62,24 @@ struct ScooterCardView: View {
                     .font(Font.baiJamjuree.heading2)
                     .fontWeight(.bold)
                 HStack {
-                    Image(systemName: "battery.100")
+                    switch self.scooterData.batteryPercentage! {
+                    case 90..<101:
+                        Image(systemName: "battery.100")
+                    case 75..<90:
+                        Image(systemName: "battery.75")
+                    case 50..<75:
+                        Image(systemName: "battery.50")
+                    case 25..<50:
+                        Image(systemName: "battery.25")
+                    case 0..<25:
+                        Image(systemName: "battery.0")
+                    default:
+                        Image(systemName: "minus.plus.batteryblock.fill")
+                    }
                     Text("\(self.scooterData.batteryPercentage!)")
                         .font(Font.baiJamjuree.smallText)
                 }
-                HStack {
+                HStack(spacing: 24) {
                     Button() {
                         print("LMAO")
                     } label: {
@@ -84,7 +97,7 @@ struct ScooterCardView: View {
                     .buttonStyle(.simpleMapButton)
                     .disabled(false)
                     
-                }
+                }.padding(.trailing, 24)
             }
             .foregroundColor(Color.primaryPurple)
         }
@@ -95,7 +108,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-//        ScooterCardView(sc)
+        ScooterCardView(scooterData: ScooterModel(id: "#kdjfn", batteryPercentage: 100, address: "strada lu skjnfskdfn"))
         }
             
     }

@@ -29,7 +29,7 @@ class ScooterAnnotation: NSObject, MKAnnotation {
 //                               subtitle:"Mumbai (formerly called Bombay) is a densely populated city on India’s west coast",
 //                               coordinate: .init(latitude: 19.0760, longitude: 72.8777)),
             ScooterAnnotation(coordinate: .init(latitude: 44.439663, longitude:  26.096306), scooterData: ScooterModel(id: "#AB23", batteryPercentage: 66, address: "Str. Avram Iancu nr.26 Cladirea 2")),
-            ScooterAnnotation(coordinate: .init(latitude: 46.770439, longitude:  23.591423), scooterData: ScooterModel(id: "#AB25", batteryPercentage: 66, address: "Str. Avram Iancu nr.26 Cladirea 2"))
+            ScooterAnnotation(coordinate: .init(latitude: 46.770439, longitude:  23.591423), scooterData: ScooterModel(id: "#AB25", batteryPercentage: 25, address: "Str. Avram Iancu nr.26 Cladirea 2"))
         ]
     }
 }
