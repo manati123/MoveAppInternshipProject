@@ -42,6 +42,7 @@
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
 		03FDD3CA28C76650001D7A44 /* SerialNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FDD3C928C76650001D7A44 /* SerialNumberView.swift */; };
+		03FDD40428C884DD001D7A44 /* ImagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FDD40328C884DD001D7A44 /* ImagesEnum.swift */; };
 		40B76836468B34F34ADA0E87 /* Pods_MoveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E87E137A12647164664F69B /* Pods_MoveTests.framework */; };
 		9B0EC048ACDC99413EFBC8F7 /* Pods_Move_MoveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C83EF8B12F95B27F5BA2EE /* Pods_Move_MoveUITests.framework */; };
 		BCEC1E2D35D19CE6D34D4EDF /* Pods_Move.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E867692D79AB178751228CEF /* Pods_Move.framework */; };
@@ -55,7 +56,7 @@
 		F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC0D28C0A17A00DBB961 /* ErrorExtensions.swift */; };
 		F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC1128C0B47900DBB961 /* ScooterCardView.swift */; };
 		F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */; };
-		F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B828BE1B9200F94ECB /* MapView.swift */; };
+		F99B07B928BE1B9200F94ECB /* MapContainerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B07B828BE1B9200F94ECB /* MapContainerScreen.swift */; };
 		F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */; };
 		F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1A7F328A1163200E8DFB9 /* ContentView.swift */; };
 		F9A1A7F628A1163400E8DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A1A7F528A1163400E8DFB9 /* Assets.xcassets */; };
@@ -69,7 +70,7 @@
 		F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */; };
 		F9CFA18028C62A36007029F1 /* OpenedClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */; };
 		F9CFA18228C7231D007029F1 /* ScooterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */; };
-		F9CFA18428C73F3F007029F1 /* MapViewUIKIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */; };
+		F9CFA18428C73F3F007029F1 /* ScooterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18328C73F3F007029F1 /* ScooterMapView.swift */; };
 		F9CFA18628C744A1007029F1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18528C744A1007029F1 /* MapViewModel.swift */; };
 		F9CFA18B28C74536007029F1 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18A28C74536007029F1 /* ErrorService.swift */; };
 		F9CFA18E28C74564007029F1 /* UserCredentialsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFA18D28C74564007029F1 /* UserCredentialsModels.swift */; };
@@ -127,6 +128,7 @@
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
 		03FDD3C928C76650001D7A44 /* SerialNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberView.swift; sourceTree = "<group>"; };
+		03FDD40328C884DD001D7A44 /* ImagesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesEnum.swift; sourceTree = "<group>"; };
 		248BCD4C9A3ED0BD3370D941 /* Pods-Move-MoveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Move-MoveUITests.release.xcconfig"; path = "Target Support Files/Pods-Move-MoveUITests/Pods-Move-MoveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		58142A9E78918E9180F60432 /* Pods-Move-MoveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Move-MoveUITests.debug.xcconfig"; path = "Target Support Files/Pods-Move-MoveUITests/Pods-Move-MoveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72C83EF8B12F95B27F5BA2EE /* Pods_Move_MoveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Move_MoveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +148,7 @@
 		F998FC0D28C0A17A00DBB961 /* ErrorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtensions.swift; sourceTree = "<group>"; };
 		F998FC1128C0B47900DBB961 /* ScooterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCardView.swift; sourceTree = "<group>"; };
 		F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
-		F99B07B828BE1B9200F94ECB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F99B07B828BE1B9200F94ECB /* MapContainerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainerScreen.swift; sourceTree = "<group>"; };
 		F9A1A7EE28A1163200E8DFB9 /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A1A7F128A1163200E8DFB9 /* MoveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveApp.swift; sourceTree = "<group>"; };
 		F9A1A7F328A1163200E8DFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinatorView.swift; sourceTree = "<group>"; };
 		F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedClusterView.swift; sourceTree = "<group>"; };
 		F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterAnnotation.swift; sourceTree = "<group>"; };
-		F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUIKIT.swift; sourceTree = "<group>"; };
+		F9CFA18328C73F3F007029F1 /* ScooterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterMapView.swift; sourceTree = "<group>"; };
 		F9CFA18528C744A1007029F1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		F9CFA18A28C74536007029F1 /* ErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
 		F9CFA18D28C74564007029F1 /* UserCredentialsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsModels.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				F998FC0428C0935C00DBB961 /* OnboardingEnum.swift */,
 				F998FC0628C0948D00DBB961 /* UserDefaultsEnum.swift */,
+				03FDD40328C884DD001D7A44 /* ImagesEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -397,10 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */,
-				F99B07B828BE1B9200F94ECB /* MapView.swift */,
+				F99B07B828BE1B9200F94ECB /* MapContainerScreen.swift */,
 				F9CFA17A28C5DBD7007029F1 /* MapCoordinatorView.swift */,
 				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
-				F9CFA18328C73F3F007029F1 /* MapViewUIKIT.swift */,
+				F9CFA18328C73F3F007029F1 /* ScooterMapView.swift */,
 				F9CFA18528C744A1007029F1 /* MapViewModel.swift */,
 			);
 			path = MapView;
@@ -780,6 +783,7 @@
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
+				03FDD40428C884DD001D7A44 /* ImagesEnum.swift in Sources */,
 				F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */,
 				035033F428AE1FB80084762F /* Buttons.swift in Sources */,
 				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
@@ -792,10 +796,10 @@
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
 				03FDD3CA28C76650001D7A44 /* SerialNumberView.swift in Sources */,
 				036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */,
-				F9CFA18428C73F3F007029F1 /* MapViewUIKIT.swift in Sources */,
+				F9CFA18428C73F3F007029F1 /* ScooterMapView.swift in Sources */,
 				F95C0B3128BCD6AB0081122D /* DriverLicenseCoordinator.swift in Sources */,
 				F998FC0A28C0978A00DBB961 /* ImagePickerUIKit.swift in Sources */,
-				F99B07B928BE1B9200F94ECB /* MapView.swift in Sources */,
+				F99B07B928BE1B9200F94ECB /* MapContainerScreen.swift in Sources */,
 				F9CFA18628C744A1007029F1 /* MapViewModel.swift in Sources */,
 				F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,

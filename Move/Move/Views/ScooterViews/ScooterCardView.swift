@@ -12,7 +12,7 @@ struct ScooterCardView: View {
     var body: some View {
         
         ZStack {
-            Image("ScooterCardBackground")
+            Image(ImagesEnum.scooterCardBackground.rawValue)
                 .resizable()
                 .scaledToFit()
             VStack(spacing: 24) {
@@ -26,7 +26,7 @@ struct ScooterCardView: View {
     var bottomSide: some View {
         VStack{
             HStack(alignment: .top) {
-                Image("ClearPin")
+                Image(ImagesEnum.clearMapPin.rawValue)
                     .foregroundColor(.neutralPurple)
                 Text("Str. Lotrului Numarul \n 6, Brezoi")
                     .font(Font.baiJamjuree.body2)
@@ -46,7 +46,7 @@ struct ScooterCardView: View {
     
     var topSide: some View {
         HStack {
-            Image("CardViewScooter")
+            Image(ImagesEnum.cardViewScooterRightOrientation.rawValue)
                 .resizable()
                 .scaledToFit()
             VStack {
@@ -63,7 +63,7 @@ struct ScooterCardView: View {
                     Button() {
                         print("LMAO")
                     } label: {
-                        Image("ScooterRingPin")
+                        Image(ImagesEnum.ringScooterPin.rawValue)
                     }
                     .buttonStyle(.simpleMapButton)
                     .disabled(false)
@@ -72,7 +72,7 @@ struct ScooterCardView: View {
                     Button() {
                         print("LMAO")
                     } label: {
-                        Image("ScooterLocationPin")
+                        Image(ImagesEnum.centerMapOnUserPin.rawValue)
                     }
                     .buttonStyle(.simpleMapButton)
                     .disabled(false)

@@ -14,9 +14,6 @@ class ScooterAnnotation: NSObject, MKAnnotation {
     let title: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
-//    var scooterID: String?
-//    var scooterBatteryPercentage: Int
-//    var scooterAddress: String
 
     init(title: String?,
          subtitle: String?,

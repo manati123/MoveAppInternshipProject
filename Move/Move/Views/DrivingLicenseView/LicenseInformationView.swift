@@ -19,7 +19,7 @@ struct LicenseInformationView: View {
         GeometryReader { geometry in
             VStack {
                 header
-                Image("DriverLicense")
+                Image(ImagesEnum.driverLicenseImage.rawValue)
                     .resizable()
                     .scaledToFit()
                     .frame(width: geometry.size.width)
@@ -72,7 +72,7 @@ struct LicenseInformationView: View {
             Button {
                 viewModel.logOut(onLogOut: onLogOut)
             }label: {
-                Image("arrow-back-blue")
+                Image(ImagesEnum.arrowBackBlue.rawValue)
             }
             Spacer()
             Text("Driving License")

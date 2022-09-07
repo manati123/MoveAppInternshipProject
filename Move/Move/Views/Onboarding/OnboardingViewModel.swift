@@ -16,7 +16,7 @@ enum OnboardingSlide: Int {
 }
 
 struct OnboardingModel {
-    var image: String = "SafetyImage"
+    var image: String = ImagesEnum.safetyImage.rawValue
     var title: String = "Safety"
     var text: String = "Please wear a helmet and protect yourself while riding"
     var onboardingSlide: OnboardingSlide
@@ -26,11 +26,11 @@ struct OnboardingModel {
 
 class OnboardingViewModel: ObservableObject {
     let steps: [OnboardingModel] = [
-        OnboardingModel(image: "Safety", title: "Safety", text: "Please wear a helmet and protect yourself while riding.", onboardingSlide: .safety, buttonText: "Next", step: 0),
-        OnboardingModel(image: "Scan", title: "Scan", text: "Scan the QR code or NFC sticker on top of the scooter to unlock and ride.", onboardingSlide: .scan, buttonText: "Next", step: 1),
-        OnboardingModel(image: "Ride", title: "Ride", text: "Step on the scooter with one foot and kick off the ground. When the scooter starts to coast, push the right throttle to accelerate.", onboardingSlide: .ride, buttonText: "Next",step: 2),
-        OnboardingModel(image: "Parking", title: "Parking", text: "If convenient, park at a bike rack. If not, park close to the edge of the sidewalk closest to the street. Do not block sidewalks, doors or ramps.", onboardingSlide: .parking, buttonText: "Next", step: 3),
-        OnboardingModel(image: "Rules", title: "Rules", text: "You must be 18 years or and older with a valid driving licence to operate a scooter. Please follow all street signs, signals and markings, and obey local traffic laws.", onboardingSlide: .rules, buttonText: "Get Started", step: 4)
+        OnboardingModel(image: ImagesEnum.safetyImage.rawValue, title: "Safety", text: "Please wear a helmet and protect yourself while riding.", onboardingSlide: .safety, buttonText: "Next", step: 0),
+        OnboardingModel(image: ImagesEnum.scanImage.rawValue, title: "Scan", text: "Scan the QR code or NFC sticker on top of the scooter to unlock and ride.", onboardingSlide: .scan, buttonText: "Next", step: 1),
+        OnboardingModel(image: ImagesEnum.rideImage.rawValue, title: "Ride", text: "Step on the scooter with one foot and kick off the ground. When the scooter starts to coast, push the right throttle to accelerate.", onboardingSlide: .ride, buttonText: "Next",step: 2),
+        OnboardingModel(image: ImagesEnum.parkingImage.rawValue, title: "Parking", text: "If convenient, park at a bike rack. If not, park close to the edge of the sidewalk closest to the street. Do not block sidewalks, doors or ramps.", onboardingSlide: .parking, buttonText: "Next", step: 3),
+        OnboardingModel(image: ImagesEnum.rulesImage.rawValue, title: "Rules", text: "You must be 18 years or and older with a valid driving licence to operate a scooter. Please follow all street signs, signals and markings, and obey local traffic laws.", onboardingSlide: .rules, buttonText: "Get Started", step: 4)
         ]
     
     

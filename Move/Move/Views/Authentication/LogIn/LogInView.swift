@@ -29,7 +29,7 @@ struct LogInView: View {
             GeometryReader { geometry in
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Image("SmallLogoWhite")
+                        Image(ImagesEnum.smallWhiteLogo.rawValue)
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Login")
                                 .font(Font.baiJamjuree.heading1)
@@ -99,7 +99,7 @@ struct LogInView: View {
     var textFields: some View {
         VStack(spacing: 20) {
             FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $userViewModel.user.email, icon: "")
-            FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $userViewModel.user.password, icon: "eye-closed")
+            FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $userViewModel.user.password, icon: ImagesEnum.closedEyeIcon.rawValue)
                 .font(Font.baiJamjuree.caption2)
         }
     }

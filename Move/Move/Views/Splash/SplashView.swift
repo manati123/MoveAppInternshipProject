@@ -15,10 +15,10 @@ struct SplashView: View {
         ZStack {
             Color.primaryPurple
                 .ignoresSafeArea()
-            Image("CenterGroup")
-            Image("ScooterPNG")
+            Image(ImagesEnum.centerGroup.rawValue)
+            Image(ImagesEnum.scooterSplashImage.rawValue)
                 .offset(x: -116)
-            Image("MOVE")
+            Image(ImagesEnum.grayMoveLogo.rawValue)
         }
         .onAppear() {
             onFinished()

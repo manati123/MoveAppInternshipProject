@@ -14,7 +14,7 @@ struct ValidatedView: View {
             AuthenticationBackground()
             VStack(spacing: 67) {
                 Spacer()
-                Image("CheckmarkBig")
+                Image(ImagesEnum.bigCheckmark.rawValue)
                 Text("We've succesfully validated your driving license")
                     .font(Font.baiJamjuree.heading1)
                     .multilineTextAlignment(.center)

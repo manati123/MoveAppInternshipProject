@@ -21,7 +21,7 @@ struct ForgotPasswordView: View {
                         Button {
                             onGoBack()
                         }label: {
-                            Image("arrow-back")
+                            Image(ImagesEnum.arrowBack.rawValue)
                         }
                         Spacer()
                     }

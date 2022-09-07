@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
 //        AuthenticationView()
 //        MainCoordinatorView()
-        MapView()
+        MapContainerScreen()
             .ignoresSafeArea()
        
 //        MapView()
@@ -23,6 +23,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Text(":F")
+        ContentView()
     }
 }

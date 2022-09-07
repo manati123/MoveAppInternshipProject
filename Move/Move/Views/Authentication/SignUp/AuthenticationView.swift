@@ -17,7 +17,7 @@ struct AuthenticationView: View {
             GeometryReader { g in
                 ScrollView {
                     VStack(alignment: .leading){
-                        Image("SmallLogoWhite")
+                        Image(ImagesEnum.smallWhiteLogo.rawValue)
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Let's get started")
                                 .font(Font.baiJamjuree.heading1)
@@ -54,11 +54,11 @@ struct AuthenticationView: View {
     
     var textFields: some View {
         VStack(spacing: 20) {
-            FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: "clear-text")
+            FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: ImagesEnum.clearTextFieldIcon.rawValue)
                 .font(Font.baiJamjuree.caption2)
             FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.user.name, icon: "")
                 .font(Font.baiJamjuree.caption2)
-            FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: "eye-closed")
+            FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: ImagesEnum.closedEyeIcon.rawValue)
                 .font(Font.baiJamjuree.caption2)
         }
     }

@@ -18,7 +18,7 @@ struct MapCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MapView()
+                NavigationLink(destination: MapContainerScreen()
                     .navigationBarHidden(true)
                     .transition(.slide.animation(.default)),
                                tag: .mapView,
