@@ -16,11 +16,7 @@ struct MapContainerScreen: View{
     
     var body: some View {
         ZStack(alignment: .top) {
-            
             ScooterMapView(viewModel: viewModel.mapViewModel)
-            selectedScooterView
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 100)
             HStack {
                 Button {
                     print("menu")
@@ -39,19 +35,21 @@ struct MapContainerScreen: View{
                 .buttonStyle(.simpleMapButton)
             }.padding(.vertical, 64)
                 .padding(.horizontal, 24)
+            
+            selectedScooterView
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .padding(.vertical, 46)
                 
         }.onAppear{
             viewModel.loadScooters()
         }
     }
-    
-    
-    
-    
     @ViewBuilder
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
-            Text(selectedScooter.title ?? "Nil")
+            withAnimation {
+                ScooterCardView()
+            }
         }
     }
 }
@@ -66,6 +64,10 @@ extension MapContainerScreen {
 //            mapViewModel = ScooterMapViewModel(scooters: ScooterAnnotation.requestMockData())
             mapViewModel.onSelectedScooter = { scooter in
                 self.selectedScooter = scooter
+            }
+            
+            mapViewModel.onDeselectedScooter = {
+                self.selectedScooter = nil
             }
             
         }
