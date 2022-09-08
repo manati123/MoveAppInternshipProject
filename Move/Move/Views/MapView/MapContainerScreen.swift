@@ -32,6 +32,7 @@ struct MapContainerScreen: View{
                 
                 Button {
                     print("center")
+                    self.viewModel.mapViewModel.toggleUserFollow()
                 } label: {
                     Image(ImagesEnum.centerMapOnUserPin.rawValue)
                 }
@@ -67,7 +68,6 @@ extension MapContainerScreen {
         var mapViewModel: ScooterMapViewModel = .init()
         
         init () {
-//            mapViewModel = ScooterMapViewModel(scooters: ScooterAnnotation.requestMockData())
             mapViewModel.onSelectedScooter = { scooter in
                 self.selectedScooter = scooter
             }
