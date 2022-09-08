@@ -17,7 +17,6 @@ extension CLLocationCoordinate2D {
 
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
-    @Published var followUser = true
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -35,10 +34,9 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     }()
     
     func followUserOnMap() -> Bool {
-        self.followUser.toggle()
-        print(mapView.center)
+        print(mapView.centerCoordinate)
         print(locationManager?.location?.coordinate)
-        return mapView.region.center == locationManager?.location!.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        return mapView.centerCoordinate == locationManager?.location!.coordinate ?? mapView.region.center
     }
     
     func checkIfLocationServiceIsEnabled() {
@@ -65,7 +63,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             print("Denied location")
         case .authorizedAlways, .authorizedWhenInUse:
             print("here")
-            mapView.region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+            mapView.centerCoordinate = locationManager.location!.coordinate
+//            MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         @unknown default:
             break
         }
@@ -95,7 +94,10 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         if annotation is MKUserLocation {
             let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapView.setRegion(mapRegion, animated: true)
-            return nil
+            let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
+            userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
+            return userAnnotationView
+            
         }
         annotationView.clusteringIdentifier = "customView"
         //Your custom image icon
