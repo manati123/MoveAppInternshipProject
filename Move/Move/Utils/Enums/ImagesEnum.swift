@@ -9,6 +9,7 @@ import Foundation
 
 
 enum ImagesEnum: String {
+    case scooterLocationPin = "ScooterLocationPin"
     case icon = "AppIcon"
     case arrowBackBlue = "arrow-back-blue"
     case arrowBack = "arrow-back"

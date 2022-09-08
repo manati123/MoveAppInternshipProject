@@ -16,6 +16,7 @@ struct ScooterModel {
 struct ScooterCardView: View {
     var id = UUID()
     var scooterData: ScooterModel
+    let getLocationHandler:() -> Void
     var body: some View {
         
         ZStack {
@@ -94,9 +95,9 @@ struct ScooterCardView: View {
                     
                     
                     Button() {
-                        print("LMAO")
+                        getLocationHandler()
                     } label: {
-                        Image(ImagesEnum.centerMapOnUserPin.rawValue)
+                        Image(ImagesEnum.scooterLocationPin.rawValue)
                     }
                     .buttonStyle(.simpleMapButton)
                     .disabled(false)
@@ -112,7 +113,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-        ScooterCardView(scooterData: ScooterModel(id: "#kdjfn", batteryPercentage: 100, address: "strada lu skjnfskdfn"))
+            ScooterCardView(scooterData: ScooterModel(id: "#kdjfn", batteryPercentage: 100, address: "strada lu skjnfskdfn"), getLocationHandler: {})
         }
             
     }

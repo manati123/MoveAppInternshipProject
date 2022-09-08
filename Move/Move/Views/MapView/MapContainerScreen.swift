@@ -17,6 +17,9 @@ struct MapContainerScreen: View{
     var body: some View {
         ZStack(alignment: .top) {
             ScooterMapView(viewModel: viewModel.mapViewModel)
+                .onAppear {
+                    viewModel.mapViewModel.checkIfLocationServiceIsEnabled()
+                }
             HStack {
                 Button {
                     print("menu")
@@ -48,7 +51,10 @@ struct MapContainerScreen: View{
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView(scooterData: selectedScooter.scooterData)
+                ScooterCardView(scooterData: selectedScooter.scooterData, getLocationHandler: {
+                    self.viewModel.goToScooterLocation()
+                })
+                    .shadow(radius: 10)
             }
         }
     }
@@ -70,6 +76,13 @@ extension MapContainerScreen {
                 self.selectedScooter = nil
             }
             
+        }
+        
+        func goToScooterLocation() {
+            // Open and show coordinate
+            let url = "maps://?saddr=&daddr=\( selectedScooter!.coordinate.latitude),\(selectedScooter!.coordinate.longitude)"
+            print(url)
+            UIApplication.shared.openURL(URL(string:url)!)
         }
         
         func loadScooters() {
