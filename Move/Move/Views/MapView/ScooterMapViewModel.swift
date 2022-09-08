@@ -9,6 +9,12 @@ import Foundation
 import MapKit
 
 
+extension CLLocationCoordinate2D {
+    static func ==(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> Bool {
+        return left.latitude == right.latitude && left.longitude == right.longitude
+    }
+}
+
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var followUser = true
@@ -24,19 +30,15 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
        let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
-        switch self.followUser {
-        case true:
-            mapView.userTrackingMode = .follow
-        case false:
-            mapView.userTrackingMode = .none
-        }
         return mapView
         
     }()
     
-    func toggleUserFollow() {
+    func followUserOnMap() -> Bool {
         self.followUser.toggle()
-        print("toggled")
+        print(mapView.center)
+        print(locationManager?.location?.coordinate)
+        return mapView.region.center == locationManager?.location!.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
     }
     
     func checkIfLocationServiceIsEnabled() {
@@ -51,12 +53,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else {
-            print("CUAIE?")
             return
         }
-        
-        print("ksjdnfks")
-        
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
@@ -66,12 +64,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         case .denied:
             print("Denied location")
         case .authorizedAlways, .authorizedWhenInUse:
-            if self.followUser {
+            print("here")
             mapView.region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-                print("region  changed")
-            }
-            
-            
         @unknown default:
             break
         }
@@ -80,6 +74,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
+        print("Checked")
 //        print("checked")
     }
     
