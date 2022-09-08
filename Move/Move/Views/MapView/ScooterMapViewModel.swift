@@ -26,16 +26,19 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     var onDeselectedScooter: () -> Void = {}
     
     lazy var mapView: MKMapView = {
-       let mapView = MKMapView(frame: .zero)
+        let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
         return mapView
         
     }()
     
-    func followUserOnMap() -> Bool {
-        print(mapView.centerCoordinate)
-        print(locationManager?.location?.coordinate)
+    func centerOnUser() {
+        let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(mapRegion, animated: true)
+    }
+    
+    func isCenteredOnUser() -> Bool {
         return mapView.centerCoordinate == locationManager?.location!.coordinate ?? mapView.region.center
     }
     
@@ -62,19 +65,20 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         case .denied:
             print("Denied location")
         case .authorizedAlways, .authorizedWhenInUse:
-            print("here")
             mapView.centerCoordinate = locationManager.location!.coordinate
-//            MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+            
+            //            MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         @unknown default:
             break
         }
-
+        
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
+        //        checkIfLocationServiceIsEnabled()
         print("Checked")
-//        print("checked")
+        //        print("checked")
     }
     
     func refreshScooterList() {
@@ -85,8 +89,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
 
 extension ScooterMapViewModel: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor
-         annotation: MKAnnotation) -> MKAnnotationView?{
-       //Custom View for Annotation
+                 annotation: MKAnnotation) -> MKAnnotationView?{
+        //Custom View for Annotation
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customView")
         
         
@@ -116,13 +120,13 @@ extension ScooterMapViewModel: MKMapViewDelegate {
                 NSLayoutConstraint.activate([
                     lbl.widthAnchor.constraint(equalTo: annotationView.widthAnchor, multiplier: 0.5),
                     lbl.heightAnchor.constraint(equalTo: annotationView.heightAnchor),
-                  lbl.centerXAnchor.constraint(equalTo: annotationView.centerXAnchor),
+                    lbl.centerXAnchor.constraint(equalTo: annotationView.centerXAnchor),
                     lbl.centerYAnchor.constraint(equalTo: annotationView.centerYAnchor, constant: -4)
                 ])
             }
         }
         return annotationView
-     }
+    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation is MKUserLocation {

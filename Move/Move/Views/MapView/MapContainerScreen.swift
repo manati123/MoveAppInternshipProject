@@ -31,10 +31,9 @@ struct MapContainerScreen: View{
                 Spacer()
                 
                 Button {
-                    self.viewModel.mapViewModel.followUserOnMap()
-//                    print("f")
+                    self.viewModel.mapViewModel.centerOnUser()
                 } label: {
-                    Image(self.viewModel.mapViewModel.followUserOnMap() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
+                    Image(self.viewModel.mapViewModel.isCenteredOnUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
                 }
                 .buttonStyle(.simpleMapButton)
             }.padding(.vertical, 64)
