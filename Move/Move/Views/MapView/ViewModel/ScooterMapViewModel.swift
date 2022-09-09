@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import MapKit
 
 
@@ -17,9 +18,11 @@ extension CLLocationCoordinate2D {
 
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
+    @Published var locationChanged: Bool = true
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
+            
         }
     }
     var onSelectedScooter: (ScooterAnnotation) -> Void = { _ in }
@@ -35,18 +38,26 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func centerOnUser() {
         let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(mapRegion, animated: true)
+        withAnimation {
+            mapView.setRegion(mapRegion, animated: true)
+        }
+        
     }
     
     func isCenteredOnUser() -> Bool {
-        return mapView.centerCoordinate == locationManager?.location!.coordinate ?? mapView.region.center
+        guard let locationManager = locationManager else {
+            return false
+        }
+        if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
+            return mapView.centerCoordinate == locationManager.location?.coordinate ?? mapView.region.center
+        }
+        return false
     }
     
     func checkIfLocationServiceIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager!.delegate = self
-            locationManager!.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         } else {
             print("Location not enabled")
         }
@@ -64,10 +75,10 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             print("Restricted")
         case .denied:
             print("Denied location")
+            mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
         case .authorizedAlways, .authorizedWhenInUse:
+            print("f")
             mapView.centerCoordinate = locationManager.location!.coordinate
-            
-            //            MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         @unknown default:
             break
         }
@@ -96,8 +107,6 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         
         
         if annotation is MKUserLocation {
-            let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-            mapView.setRegion(mapRegion, animated: true)
             let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
             userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
             return userAnnotationView
@@ -106,7 +115,6 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         annotationView.clusteringIdentifier = "customView"
         //Your custom image icon
         annotationView.image = UIImage(named: "ClusterDefault")
-        
         if annotation is MKClusterAnnotation {
             //change data about the clusters
             let clusterConvertedAnnotation = annotation as! MKClusterAnnotation
@@ -120,9 +128,10 @@ extension ScooterMapViewModel: MKMapViewDelegate {
                 NSLayoutConstraint.activate([
                     lbl.widthAnchor.constraint(equalTo: annotationView.widthAnchor, multiplier: 0.5),
                     lbl.heightAnchor.constraint(equalTo: annotationView.heightAnchor),
-                    lbl.centerXAnchor.constraint(equalTo: annotationView.centerXAnchor),
-                    lbl.centerYAnchor.constraint(equalTo: annotationView.centerYAnchor, constant: -4)
+                    lbl.centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: 2.5),
+                    lbl.centerYAnchor.constraint(equalTo: annotationView.centerYAnchor, constant: -3.5)
                 ])
+                
             }
         }
         return annotationView

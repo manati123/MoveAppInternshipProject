@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ScooterModel {
     let id: String?
@@ -13,22 +14,41 @@ struct ScooterModel {
     let address: String?
 }
 
+
+
 struct ScooterCardView: View {
     var id = UUID()
-    var scooterData: ScooterModel
+    var scooterData: Scooter
+    @State var address: String = ""
     let getLocationHandler:() -> Void
+    
     var body: some View {
         
         ZStack {
             Image(ImagesEnum.scooterCardBackground.rawValue)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
             VStack(spacing: 24) {
                 topSide
                 bottomSide
             }
         }.overlay(RoundedRectangle(cornerRadius: 30).fill(.clear))
-            .frame(maxWidth: UIScreen.main.bounds.size.width * 0.6, maxHeight: UIScreen.main.bounds.size.height * 0.35)
+            .frame(maxWidth: UIScreen.main.bounds.size.width * 0.7, maxHeight: UIScreen.main.bounds.size.height * 0.35)
+            .onAppear {
+                convertLocation()
+            }
+    }
+    
+    func convertLocation() {
+        let location = CLLocation(latitude: scooterData.location?.coordinates?[1] ?? 0, longitude: scooterData.location?.coordinates?[0] ?? 0)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            if error == nil {
+                self.address = placemarks?.first?.name ?? "MOR"
+            }
+            else {
+                print(error)
+            }
+        }
     }
     
     var bottomSide: some View {
@@ -36,7 +56,7 @@ struct ScooterCardView: View {
             HStack(alignment: .top) {
                 Image(ImagesEnum.clearMapPin.rawValue)
                     .foregroundColor(.neutralPurple)
-                Text(scooterData.address!)
+                Text(self.address)
                     .font(Font.baiJamjuree.body2)
                     .foregroundColor(Color.primaryPurple)
             }
@@ -46,6 +66,7 @@ struct ScooterCardView: View {
                 Text("Unlock")
                     .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal, 20)
             .buttonStyle(.filledButton)
             .disabled(false)
             
@@ -59,11 +80,11 @@ struct ScooterCardView: View {
                 .scaledToFit()
             VStack {
                 Text("Scooter")
-                Text(self.scooterData.id!)
+                Text(verbatim: "#\(self.scooterData.number!)")
                     .font(Font.baiJamjuree.heading2)
                     .fontWeight(.bold)
                 HStack {
-                    switch self.scooterData.batteryPercentage! {
+                    switch self.scooterData.battery! {
                     case 90..<101:
                         Image(systemName: "battery.100")
                             .foregroundColor(.green)
@@ -81,7 +102,7 @@ struct ScooterCardView: View {
                     default:
                         Image(systemName: "minus.plus.batteryblock.fill")
                     }
-                    Text("\(self.scooterData.batteryPercentage!)")
+                    Text("\(self.scooterData.battery!)")
                         .font(Font.baiJamjuree.smallText)
                 }
                 HStack(spacing: 24) {
@@ -99,22 +120,27 @@ struct ScooterCardView: View {
                     } label: {
                         Image(ImagesEnum.scooterLocationPin.rawValue)
                     }
+                    
                     .buttonStyle(.simpleMapButton)
                     .disabled(false)
+                    
                     
                 }.padding(.trailing, 24)
             }
             .foregroundColor(Color.primaryPurple)
         }
     }
+    
+    
 }
 
 struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-            ScooterCardView(scooterData: ScooterModel(id: "#kdjfn", batteryPercentage: 100, address: "strada lu skjnfskdfn"), getLocationHandler: {})
+            ScooterCardView(scooterData: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, locked_status: true, book_status: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {})
         }
+//        ZStack{}
             
     }
 }

@@ -33,19 +33,28 @@ struct MapContainerScreen: View{
                 Button {
                     self.viewModel.mapViewModel.centerOnUser()
                 } label: {
+                    
+                    
                     Image(self.viewModel.mapViewModel.isCenteredOnUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
                 }
                 .buttonStyle(.simpleMapButton)
             }.padding(.vertical, 64)
                 .padding(.horizontal, 24)
             
-            selectedScooterView
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(.vertical, 46)
+//            selectedScooterView
+                
                 
         }.onAppear{
             viewModel.loadScooters()
         }
+        .overlay(content: {
+            ZStack {
+                selectedScooterView
+                    .transition(.opacity.animation(.default))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                    .padding(.vertical, 46)
+            }
+        })
     }
     @ViewBuilder
     var selectedScooterView: some View {
@@ -64,6 +73,7 @@ struct MapContainerScreen: View{
 extension MapContainerScreen {
     class ViewModel: ObservableObject {
         @Published var selectedScooter: ScooterAnnotation?
+        @Published var scooters: [Scooter] = .init()
         var mapViewModel: ScooterMapViewModel = .init()
         
         init () {
@@ -85,7 +95,36 @@ extension MapContainerScreen {
         }
         
         func loadScooters() {
-            mapViewModel.scooters = ScooterAnnotation.requestMockData()
+            ScooterAPI().getAllScooters(completionHandler: { result  in
+                switch result {
+                case .success(let result):
+                    self.scooters = result
+                    self.convertScootersToAnnotations()
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
+        
+        func convertCoordinatesToAddress(scooter: Scooter, completionHandler: @escaping (String) -> Void) {
+            let location = CLLocation(latitude: scooter.location!.coordinates![1], longitude: scooter.location!.coordinates![0])
+            var address = ""
+            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                if error == nil {
+                    address = placemarks?.first?.name ?? "No address"
+                    completionHandler(address)
+                }
+                else {
+                    print(error as Any)
+                }
+            }
+        }
+        
+        func convertScootersToAnnotations() {
+            for var scooter in scooters {
+                let scooterAnnotation = ScooterAnnotation(coordinate: CLLocationCoordinate2D(latitude: (scooter.location?.coordinates?[1])!, longitude: (scooter.location?.coordinates?[0])!), scooterData: scooter)
+                self.mapViewModel.scooters.append(scooterAnnotation)
+            }
         }
         
     }

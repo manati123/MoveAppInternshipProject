@@ -59,15 +59,23 @@ struct MainCoordinatorView: View {
     }
     
     func getSplashView() -> some View {
-//        if UserDefaults.standard.value(forKey: "DoneOnboarding") == nil {
-//            UserDefaults.standard.setValue(false, forUndefinedKey: "DoneOnboarding")
-//        }
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 let isOnboarded = UserDefaults.standard.bool(forKey: UserDefaultsEnum.onboarded.rawValue)
                 if isOnboarded  {
-                    if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
-                        self.selection = .license
+                    let user = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
+                    if user != nil {
+                        do {
+                            let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: user as! Data)
+                            if decodedUser.user.validated ?? false {
+                                self.selection = .map
+                            }
+                            else {
+                                self.selection = .license
+                            }
+                        } catch {
+                            print(error)
+                        }
                     } else {
                         self.selection = .authentication
                     }
