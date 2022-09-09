@@ -44,7 +44,8 @@ struct MapContainerScreen: View{
 //            selectedScooterView
                 
                 
-        }.onAppear{
+        }
+        .onAppear{
             viewModel.loadScooters()
         }
         .overlay(content: {
@@ -72,8 +73,11 @@ struct MapContainerScreen: View{
 
 extension MapContainerScreen {
     class ViewModel: ObservableObject {
+        @Published var timer = Timer()
         @Published var selectedScooter: ScooterAnnotation?
         @Published var scooters: [Scooter] = .init()
+        
+        
         var mapViewModel: ScooterMapViewModel = .init()
         
         init () {
@@ -84,6 +88,10 @@ extension MapContainerScreen {
             mapViewModel.onDeselectedScooter = {
                 self.selectedScooter = nil
             }
+            
+            self.timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
+                self.mapViewModel.refreshScooterList()
+            })
             
         }
         
