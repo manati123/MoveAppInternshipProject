@@ -12,8 +12,7 @@ import MapKit
 
 struct MapContainerScreen: View{
     
-    @StateObject private var viewModel = ViewModel()
-    
+    @StateObject private var viewModel: ViewModel = .init()
     var body: some View {
         ZStack(alignment: .top) {
             ScooterMapView(viewModel: viewModel.mapViewModel)
@@ -37,8 +36,6 @@ struct MapContainerScreen: View{
                 Button {
                     self.viewModel.mapViewModel.centerOnUser()
                 } label: {
-                    
-                    
                     Image(self.viewModel.mapViewModel.isCenteredOnUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
                 }
                 .buttonStyle(.simpleMapButton)

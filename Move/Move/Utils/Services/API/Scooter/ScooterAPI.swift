@@ -30,7 +30,6 @@ struct Scooter: Codable {
 
 class ScooterAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com/scooter"
-    static let shareInstance = ScooterAPI()
     
     func getAllScooters(completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         AF.request("\(baseUrl)", method: .get)

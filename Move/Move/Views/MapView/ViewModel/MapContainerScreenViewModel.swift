@@ -17,7 +17,7 @@ extension MapContainerScreen {
         @Published var scooters: [Scooter] = .init()
         @Published var mapViewModel: ScooterMapViewModel = .init()
         @Published var userLocation: String = ""
-        
+        var scooterAPI: ScooterAPI = .init()
         init () {
             self.convertUserCoordinatesToAddress()
             mapViewModel.onSelectedScooter = { scooter in
@@ -59,7 +59,7 @@ extension MapContainerScreen {
         }
         
         func loadScooters() {
-            ScooterAPI().getAllScooters(completionHandler: { result  in
+            self.scooterAPI.getAllScooters(completionHandler: { result  in
                 switch result {
                 case .success(let result):
                     self.scooters = result
