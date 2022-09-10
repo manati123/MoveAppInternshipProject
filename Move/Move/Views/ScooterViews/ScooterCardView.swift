@@ -43,7 +43,7 @@ struct ScooterCardView: View {
         let location = CLLocation(latitude: scooterData.location?.coordinates?[1] ?? 0, longitude: scooterData.location?.coordinates?[0] ?? 0)
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             if error == nil {
-                self.address = placemarks?.first?.name ?? "MOR"
+                self.address = placemarks?.first?.name ?? "Address Unavailable"
             }
             else {
                 print(error)

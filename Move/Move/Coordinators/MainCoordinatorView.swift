@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainCoordinatorView: View {
     @State private var selection: OnboardingEnum? = .splash
+    var userDefaultsService: UserDefaultsService = .init()
     var body: some View {
         NavigationView {
             ZStack {
@@ -29,14 +30,14 @@ struct MainCoordinatorView: View {
                 }.navigationBarHidden(true).preferredColorScheme(.dark), tag: .onboarding, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                    
+                
                 
                 NavigationLink(destination: SignUpCoordinatorView(){
                     self.selection = .license
                 }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                    
+                
                 
                 NavigationLink(destination: DriverLicenseCoordinatorView(){
                     self.selection = OnboardingEnum.authentication
@@ -53,7 +54,7 @@ struct MainCoordinatorView: View {
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                    
+                
             }.navigationBarHidden(true)
         }
     }
@@ -61,20 +62,14 @@ struct MainCoordinatorView: View {
     func getSplashView() -> some View {
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let isOnboarded = UserDefaults.standard.bool(forKey: UserDefaultsEnum.onboarded.rawValue)
-                if isOnboarded  {
-                    let user = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
-                    if user != nil {
-                        do {
-                            let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: user as! Data)
-                            if decodedUser.user.validated ?? false {
-                                self.selection = .map
-                            }
-                            else {
-                                self.selection = .license
-                            }
-                        } catch {
-                            print(error)
+                if self.userDefaultsService.isOnboarded()  {
+                    if self.userDefaultsService.userIsLogged() {
+                        let decodedUser = self.userDefaultsService.loadUserFromDefaults()
+                        if decodedUser!.user.validated ?? false {
+                            self.selection = .map
+                        }
+                        else {
+                            self.selection = .license
                         }
                     } else {
                         self.selection = .authentication

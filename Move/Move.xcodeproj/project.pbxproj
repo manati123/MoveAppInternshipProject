@@ -38,8 +38,9 @@
 		036FF87C28ABC513004C913A /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87B28ABC513004C913A /* TextExtensions.swift */; };
 		036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87F28AD01CB004C913A /* FontExtensions.swift */; };
 		036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */; };
-		03875A7728C9E00800E751B0 /* ScooterCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7628C9E00800E751B0 /* ScooterCardViewModel.swift */; };
 		03875A7A28CB11C800E751B0 /* ScooterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7928CB11C800E751B0 /* ScooterAPI.swift */; };
+		03875A7F28CBCEA400E751B0 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */; };
+		03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */; };
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
@@ -126,8 +127,9 @@
 		036FF87B28ABC513004C913A /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		036FF87F28AD01CB004C913A /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		036FF88228AD1C20004C913A /* SignUpCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinatorView.swift; sourceTree = "<group>"; };
-		03875A7628C9E00800E751B0 /* ScooterCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCardViewModel.swift; sourceTree = "<group>"; };
 		03875A7928CB11C800E751B0 /* ScooterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterAPI.swift; sourceTree = "<group>"; };
+		03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainerScreenViewModel.swift; sourceTree = "<group>"; };
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
@@ -272,7 +274,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		036FF87828ABBC2E004C913A /* Components */ = {
+		036FF87828ABBC2E004C913A /* ReusableComponents */ = {
 			isa = PBXGroup;
 			children = (
 				036FF87928ABBC3C004C913A /* FloatingTextField.swift */,
@@ -280,7 +282,7 @@
 				035033F728AE26C00084762F /* AuthenticationBackground.swift */,
 				F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */,
 			);
-			path = Components;
+			path = ReusableComponents;
 			sourceTree = "<group>";
 		};
 		036FF88128AD06F0004C913A /* Fonts */ = {
@@ -323,8 +325,25 @@
 			children = (
 				F9CFA18128C7231D007029F1 /* ScooterAnnotation.swift */,
 				F9CFA18528C744A1007029F1 /* ScooterMapViewModel.swift */,
+				03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		03875A7D28CBCE9400E751B0 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		03875A8228CCF92A00E751B0 /* DrivingLicense */ = {
+			isa = PBXGroup;
+			children = (
+				F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */,
+			);
+			path = DrivingLicense;
 			sourceTree = "<group>";
 		};
 		03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */ = {
@@ -345,7 +364,6 @@
 				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
 				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 				03FDD3C928C76650001D7A44 /* SerialNumberView.swift */,
-				03875A7628C9E00800E751B0 /* ScooterCardViewModel.swift */,
 			);
 			path = ScooterViews;
 			sourceTree = "<group>";
@@ -376,9 +394,9 @@
 		F94A968728BCA5F900231B2E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				03875A8228CCF92A00E751B0 /* DrivingLicense */,
 				03875A7828CB11B800E751B0 /* Scooter */,
 				F9CFA18C28C74553007029F1 /* UserCredentials */,
-				F998FC0B28C09DF900DBB961 /* DriverLicenseAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -403,7 +421,7 @@
 				F998FC0328C0934700DBB961 /* Enums */,
 				036FF88128AD06F0004C913A /* Fonts */,
 				036FF87528ABB917004C913A /* Extensions */,
-				036FF87828ABBC2E004C913A /* Components */,
+				036FF87828ABBC2E004C913A /* ReusableComponents */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -512,6 +530,7 @@
 		F9CFA18728C74519007029F1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				03875A7D28CBCE9400E751B0 /* UserDefaults */,
 				F9CFA18828C74523007029F1 /* ErrorServices */,
 				F94A968728BCA5F900231B2E /* API */,
 			);
@@ -812,7 +831,6 @@
 				F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */,
 				F94A968928BCA61F00231B2E /* UserCredentialsAPI.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
-				03875A7728C9E00800E751B0 /* ScooterCardViewModel.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
 				03FDD40428C884DD001D7A44 /* ImagesEnum.swift in Sources */,
@@ -836,7 +854,9 @@
 				F998FC0728C0948D00DBB961 /* UserDefaultsEnum.swift in Sources */,
 				036FF88328AD1C20004C913A /* SignUpCoordinatorView.swift in Sources */,
 				F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */,
+				03875A7F28CBCEA400E751B0 /* UserDefaultsService.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
+				03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */,
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,
 				03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */,
 				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,

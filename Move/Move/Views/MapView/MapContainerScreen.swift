@@ -29,6 +29,10 @@ struct MapContainerScreen: View{
                 .buttonStyle(.simpleMapButton)
                 
                 Spacer()
+                Text(self.viewModel.userLocation)
+                    .font(Font.baiJamjuree.heading2)
+                    .foregroundColor(Color.primaryPurple)
+                Spacer()
                 
                 Button {
                     self.viewModel.mapViewModel.centerOnUser()
@@ -47,6 +51,7 @@ struct MapContainerScreen: View{
         }
         .onAppear{
             viewModel.loadScooters()
+            viewModel.convertUserCoordinatesToAddress()
         }
         .overlay(content: {
             ZStack {
@@ -71,72 +76,6 @@ struct MapContainerScreen: View{
 }
 
 
-extension MapContainerScreen {
-    class ViewModel: ObservableObject {
-        @Published var timer = Timer()
-        @Published var selectedScooter: ScooterAnnotation?
-        @Published var scooters: [Scooter] = .init()
-        
-        
-        var mapViewModel: ScooterMapViewModel = .init()
-        
-        init () {
-            mapViewModel.onSelectedScooter = { scooter in
-                self.selectedScooter = scooter
-            }
-            
-            mapViewModel.onDeselectedScooter = {
-                self.selectedScooter = nil
-            }
-            
-            self.timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
-                self.mapViewModel.refreshScooterList()
-            })
-            
-        }
-        
-        func goToScooterLocation() {
-            // Open and show coordinate
-            let url = "maps://?saddr=&daddr=\( selectedScooter!.coordinate.latitude),\(selectedScooter!.coordinate.longitude)"
-            print(url)
-            UIApplication.shared.openURL(URL(string:url)!)
-        }
-        
-        func loadScooters() {
-            ScooterAPI().getAllScooters(completionHandler: { result  in
-                switch result {
-                case .success(let result):
-                    self.scooters = result
-                    self.convertScootersToAnnotations()
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        }
-        
-        func convertCoordinatesToAddress(scooter: Scooter, completionHandler: @escaping (String) -> Void) {
-            let location = CLLocation(latitude: scooter.location!.coordinates![1], longitude: scooter.location!.coordinates![0])
-            var address = ""
-            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-                if error == nil {
-                    address = placemarks?.first?.name ?? "No address"
-                    completionHandler(address)
-                }
-                else {
-                    print(error as Any)
-                }
-            }
-        }
-        
-        func convertScootersToAnnotations() {
-            for var scooter in scooters {
-                let scooterAnnotation = ScooterAnnotation(coordinate: CLLocationCoordinate2D(latitude: (scooter.location?.coordinates?[1])!, longitude: (scooter.location?.coordinates?[0])!), scooterData: scooter)
-                self.mapViewModel.scooters.append(scooterAnnotation)
-            }
-        }
-        
-    }
-}
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {

@@ -94,7 +94,9 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func refreshScooterList() {
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotations(scooters)
+        if scooters.count != mapView.annotations.count {
+            mapView.addAnnotations(scooters)
+        }
     }
 }
 
@@ -109,6 +111,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         if annotation is MKUserLocation {
             let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
             userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
+            
             return userAnnotationView
             
         }
