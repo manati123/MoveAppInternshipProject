@@ -46,13 +46,16 @@ struct TransparentButton: ButtonStyle {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color.accentPink, lineWidth: 1)
                                 .foregroundColor(.clear)
+                                
                         ) :
                         AnyView(
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color.neutralPurple, lineWidth: 1)
                                 .foregroundColor(.clear)
+                                
                         ))
             .foregroundColor(isEnabled ? Color.accentPink : .neutralPurple)
+            .frame(width:96, height: 56)
     }
 }
 

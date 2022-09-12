@@ -63,6 +63,16 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         }
     }
     
+    func locationIsDisabled() -> Bool {
+        guard let locationManager = locationManager else {
+            return false
+        }
+        if locationManager.authorizationStatus == .denied {
+            return true
+        }
+        return false
+    }
+    
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else {
             return

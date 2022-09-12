@@ -28,7 +28,7 @@ struct MapContainerScreen: View{
                 .buttonStyle(.simpleMapButton)
                 
                 Spacer()
-                Text(self.viewModel.userLocation)
+                Text(self.viewModel.mapViewModel.locationIsDisabled() ? "Allow location" : self.viewModel.userLocation)
                     .font(Font.baiJamjuree.heading2)
                     .foregroundColor(Color.primaryPurple)
                 Spacer()
@@ -46,6 +46,7 @@ struct MapContainerScreen: View{
                 
                 
         }
+        
         .onAppear{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
@@ -56,17 +57,30 @@ struct MapContainerScreen: View{
                     .transition(.opacity.animation(.default))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.vertical, 46)
+                    .sheet(isPresented: self.$viewModel.showUnlockingSheet) {
+                        scooterToBeUnlockedView
+                    }
             }
         })
+        
     }
     @ViewBuilder
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView(scooterData: selectedScooter.scooterData, getLocationHandler: {
+                ScooterCardView(scooter: selectedScooter.scooterData, getLocationHandler: {
                     self.viewModel.goToScooterLocation()
-                })
+                }, showSheet: {self.viewModel.showUnlockingSheet = true})
                     .shadow(radius: 10)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var scooterToBeUnlockedView: some View {
+        if let selectedScooter = viewModel.selectedScooter {
+            withAnimation {
+                UnlockScooterSheetView(scooter: selectedScooter.scooterData)
             }
         }
     }

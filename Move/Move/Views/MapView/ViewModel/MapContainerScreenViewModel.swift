@@ -17,6 +17,7 @@ extension MapContainerScreen {
         @Published var scooters: [Scooter] = .init()
         @Published var mapViewModel: ScooterMapViewModel = .init()
         @Published var userLocation: String = ""
+        @Published var showUnlockingSheet = false
         var scooterAPI: ScooterAPI = .init()
         init () {
             self.convertUserCoordinatesToAddress()

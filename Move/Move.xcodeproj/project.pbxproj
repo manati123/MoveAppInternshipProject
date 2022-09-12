@@ -42,6 +42,7 @@
 		03875A7F28CBCEA400E751B0 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */; };
 		03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */; };
 		03875A8728CD144700E751B0 /* UnlockScooterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */; };
+		03875A8A28CF171500E751B0 /* ScooterCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8928CF171500E751B0 /* ScooterCardViewModel.swift */; };
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
@@ -132,6 +133,7 @@
 		03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainerScreenViewModel.swift; sourceTree = "<group>"; };
 		03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterSheetView.swift; sourceTree = "<group>"; };
+		03875A8928CF171500E751B0 /* ScooterCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCardViewModel.swift; sourceTree = "<group>"; };
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
@@ -348,6 +350,14 @@
 			path = DrivingLicense;
 			sourceTree = "<group>";
 		};
+		03875A8828CF170400E751B0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				03875A8928CF171500E751B0 /* ScooterCardViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		03AFACAD28B8AB7400DD0DE7 /* DrivingLicenseView */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +373,7 @@
 		03FDD3C828C76630001D7A44 /* ScooterViews */ = {
 			isa = PBXGroup;
 			children = (
+				03875A8828CF170400E751B0 /* ViewModels */,
 				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
 				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 				03FDD3C928C76650001D7A44 /* SerialNumberView.swift */,
@@ -832,6 +843,7 @@
 				035033F828AE26C00084762F /* AuthenticationBackground.swift in Sources */,
 				F998FC0528C0935C00DBB961 /* OnboardingEnum.swift in Sources */,
 				F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */,
+				03875A8A28CF171500E751B0 /* ScooterCardViewModel.swift in Sources */,
 				F94A968928BCA61F00231B2E /* UserCredentialsAPI.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
