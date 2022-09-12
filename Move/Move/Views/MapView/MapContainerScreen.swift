@@ -19,32 +19,7 @@ struct MapContainerScreen: View{
                 .onAppear {
                     viewModel.mapViewModel.checkIfLocationServiceIsEnabled()
                 }
-            HStack {
-                Button {
-                    print("menu")
-                } label: {
-                    Image(ImagesEnum.goToMenuPin.rawValue)
-                }
-                .buttonStyle(.simpleMapButton)
-                
-                Spacer()
-                Text(self.viewModel.mapViewModel.locationIsDisabled() ? "Allow location" : self.viewModel.userLocation)
-                    .font(Font.baiJamjuree.heading2)
-                    .foregroundColor(Color.primaryPurple)
-                Spacer()
-                
-                Button {
-//                    self.viewModel.mapViewModel.centerOnUser()
-                    withAnimation {
-                        self.viewModel.mapViewModel.toggleUserTrackingMode()
-                    }
-                } label: {
-                    Image(self.viewModel.followingUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
-                        .animation(.default, value: self.viewModel.followingUser())
-                }
-                .buttonStyle(.simpleMapButton)
-            }.padding(.vertical, 64)
-                .padding(.horizontal, 24)
+            topTitleBar
         }
         
         .onAppear{
@@ -64,6 +39,36 @@ struct MapContainerScreen: View{
         })
         
     }
+    
+    var topTitleBar: some View {
+        HStack {
+            Button {
+                print("menu")
+            } label: {
+                Image(ImagesEnum.goToMenuPin.rawValue)
+            }
+            .buttonStyle(.simpleMapButton)
+            
+            Spacer()
+            Text(self.viewModel.mapViewModel.locationIsDisabled() ? "Allow location" : self.viewModel.userLocation)
+                .font(Font.baiJamjuree.heading2)
+                .foregroundColor(Color.primaryPurple)
+            Spacer()
+            
+            Button {
+//                    self.viewModel.mapViewModel.centerOnUser()
+                withAnimation {
+                    self.viewModel.mapViewModel.toggleUserTrackingMode()
+                }
+            } label: {
+                Image(self.viewModel.followingUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
+                    .animation(.default, value: self.viewModel.followingUser())
+            }
+            .buttonStyle(.simpleMapButton)
+        }.padding(.vertical, 64)
+            .padding(.horizontal, 24)
+    }
+    
     @ViewBuilder
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {

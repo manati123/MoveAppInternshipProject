@@ -29,7 +29,8 @@ extension MapContainerScreen {
                 self.selectedScooter = nil
             }
             
-            self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
+            self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { _ in
+//                self.loadScooters()
                 self.mapViewModel.refreshScooterList()
             })
             
@@ -64,15 +65,19 @@ extension MapContainerScreen {
         }
         
         func loadScooters() {
-            self.scooterAPI.getAllScooters(completionHandler: { result  in
+
+            
+            self.scooterAPI.getScootersByLocation(userLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423)) { result in
                 switch result {
                 case .success(let result):
-                    self.scooters = result
-                    self.convertScootersToAnnotations()
-                case .failure(let error):
-                    print(error)
+                self.scooters = result
+                self.convertScootersToAnnotations()
+            case .failure(let error):
+                print(error)
+                    
                 }
-            })
+                            
+            }
         }
         
         func convertCoordinatesToAddress(scooter: Scooter, completionHandler: @escaping (String) -> Void) {

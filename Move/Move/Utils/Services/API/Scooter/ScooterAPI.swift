@@ -21,8 +21,8 @@ struct Scooter: Codable {
     var number: Int?
     var internal_id: Int?
     var battery: Int?
-    var locked_status: Bool?
-    var book_status: String?
+    var lockedStatus: Bool?
+    var bookStatus: String?
     var createdAt: String?
     var updatedAt: String?
     var __v: Int?
@@ -36,11 +36,33 @@ class ScooterAPI {
             .validate()
             .responseDecodable(of: [Scooter].self) { response in
                 do {
-                    var decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
+                    let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
                     completionHandler(.success(decoded))
-                }catch {
+                } catch {
                     completionHandler(.failure(error))
                 }
             }
-    }    
+    }
+    
+    func getScootersByLocation(userLocation: CLLocationCoordinate2D, completionHandler: @escaping (Result<[Scooter]>) -> ()) {
+        let parameters = [
+            "latitudine": "\(userLocation.latitude)",
+            "longitudine": "\(userLocation.longitude)"
+        ]
+//        print(headers)
+        
+        AF.request("\(baseUrl)", method: .get, parameters: parameters)
+            .validate()
+            .responseDecodable(of: [Scooter].self) { response in
+                
+                do {
+                    print(response.data!)
+                    let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
+                    
+                    completionHandler(.success(decoded))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }
+    }
 }
