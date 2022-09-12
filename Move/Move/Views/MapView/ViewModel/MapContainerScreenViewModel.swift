@@ -41,6 +41,10 @@ extension MapContainerScreen {
             
         }
         
+        func followingUser() -> Bool {
+            return self.mapViewModel.mapView.userTrackingMode == .followWithHeading
+        }
+        
         func goToScooterLocation() {
             // Open and show coordinate
             let url = "maps://?saddr=&daddr=\( selectedScooter!.coordinate.latitude),\(selectedScooter!.coordinate.longitude)"

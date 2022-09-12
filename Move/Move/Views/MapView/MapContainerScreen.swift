@@ -34,17 +34,17 @@ struct MapContainerScreen: View{
                 Spacer()
                 
                 Button {
-                    self.viewModel.mapViewModel.centerOnUser()
+//                    self.viewModel.mapViewModel.centerOnUser()
+                    withAnimation {
+                        self.viewModel.mapViewModel.toggleUserTrackingMode()
+                    }
                 } label: {
-                    Image(self.viewModel.mapViewModel.isCenteredOnUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
+                    Image(self.viewModel.followingUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
+                        .animation(.default, value: self.viewModel.followingUser())
                 }
                 .buttonStyle(.simpleMapButton)
             }.padding(.vertical, 64)
                 .padding(.horizontal, 24)
-            
-//            selectedScooterView
-                
-                
         }
         
         .onAppear{

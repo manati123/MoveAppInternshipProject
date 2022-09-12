@@ -129,7 +129,5 @@ struct ScooterCardView_Previews: PreviewProvider {
             Color.black
             ScooterCardView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, locked_status: true, book_status: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
         }
-//        ZStack{}
-            
     }
 }

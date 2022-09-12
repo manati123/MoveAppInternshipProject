@@ -43,6 +43,8 @@
 		03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */; };
 		03875A8728CD144700E751B0 /* UnlockScooterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */; };
 		03875A8A28CF171500E751B0 /* ScooterCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8928CF171500E751B0 /* ScooterCardViewModel.swift */; };
+		03875A8C28CF262400E751B0 /* BoxNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8B28CF262400E751B0 /* BoxNumberField.swift */; };
+		03875A8F28CF2C2700E751B0 /* ScooterSerialNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8E28CF2C2700E751B0 /* ScooterSerialNumberView.swift */; };
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
@@ -134,6 +136,8 @@
 		03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainerScreenViewModel.swift; sourceTree = "<group>"; };
 		03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterSheetView.swift; sourceTree = "<group>"; };
 		03875A8928CF171500E751B0 /* ScooterCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCardViewModel.swift; sourceTree = "<group>"; };
+		03875A8B28CF262400E751B0 /* BoxNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNumberField.swift; sourceTree = "<group>"; };
+		03875A8E28CF2C2700E751B0 /* ScooterSerialNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterSerialNumberView.swift; sourceTree = "<group>"; };
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				035033F328AE1FB80084762F /* Buttons.swift */,
 				035033F728AE26C00084762F /* AuthenticationBackground.swift */,
 				F9CFA17828C5D1C3007029F1 /* ActivityIndicator.swift */,
+				03875A8B28CF262400E751B0 /* BoxNumberField.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				F998FC1128C0B47900DBB961 /* ScooterCardView.swift */,
 				03FDD3C928C76650001D7A44 /* SerialNumberView.swift */,
 				03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */,
+				03875A8E28CF2C2700E751B0 /* ScooterSerialNumberView.swift */,
 			);
 			path = ScooterViews;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				03875A7A28CB11C800E751B0 /* ScooterAPI.swift in Sources */,
 				F9A1A7F228A1163200E8DFB9 /* MoveApp.swift in Sources */,
 				F998FC0C28C09DF900DBB961 /* DriverLicenseAPI.swift in Sources */,
+				03875A8C28CF262400E751B0 /* BoxNumberField.swift in Sources */,
 				03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */,
 				035033F828AE26C00084762F /* AuthenticationBackground.swift in Sources */,
 				F998FC0528C0935C00DBB961 /* OnboardingEnum.swift in Sources */,
@@ -858,6 +865,7 @@
 				F9CFA18E28C74564007029F1 /* UserCredentialsModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
 				F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */,
+				03875A8F28CF2C2700E751B0 /* ScooterSerialNumberView.swift in Sources */,
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
 				03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */,
 				03FDD3CA28C76650001D7A44 /* SerialNumberView.swift in Sources */,

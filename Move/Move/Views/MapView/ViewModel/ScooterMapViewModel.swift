@@ -18,7 +18,7 @@ extension CLLocationCoordinate2D {
 
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
-    @Published var locationChanged: Bool = true
+    @Published var trackingUser = true
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -32,9 +32,20 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
         return mapView
         
     }()
+    
+    func toggleUserTrackingMode() {
+        if mapView.userTrackingMode == .followWithHeading {
+            trackingUser = false
+            mapView.userTrackingMode = .none
+        } else {
+            trackingUser = true
+            mapView.userTrackingMode = .followWithHeading
+        }
+    }
     
     func centerOnUser() {
         let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)

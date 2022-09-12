@@ -59,6 +59,23 @@ struct TransparentButton: ButtonStyle {
     }
 }
 
+struct TransparentWhiteButton: ButtonStyle {
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(Font.baiJamjuree.button1)
+            .padding(16)
+            .background(AnyView(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.neutralWhite, lineWidth: 1)
+//                                .fill(.green)
+//                                .foregroundColor(.neutralWhite)
+            ))
+                .foregroundColor(Color.neutralWhite)
+            .frame(width:96, height: 56)
+    }
+}
+
 struct SimpleMapButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
@@ -90,14 +107,24 @@ extension ButtonStyle where Self == TransparentButton {
     }
 }
 
+extension ButtonStyle where Self == TransparentWhiteButton {
+    static var transparentWhiteButton: Self {
+        return .init()
+    }
+}
+
 struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
+        ZStack {
+            Color.primaryPurple
         Button {
             
         } label: {
-            Image("UserNotCenteredPin")
+//            Image("UserNotCenteredPin")
+            Text("QR")
         }
-        .buttonStyle(.simpleMapButton)
+        .buttonStyle(.transparentWhiteButton)
+        }
     }
 }
 
