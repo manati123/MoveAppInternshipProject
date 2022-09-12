@@ -11,7 +11,7 @@ struct ScooterSerialNumberView: View {
     var body: some View {
         ZStack {
             AuthenticationBackground()
-            VStack(spacing: 16) {
+            VStack(spacing: 24) {
                 HStack {
                     Button {
                         
@@ -42,13 +42,13 @@ struct ScooterSerialNumberView: View {
                     Text("Alternately you can unlock using")
                     .font(Font.baiJamjuree.heading3)
                     .fontWeight(.bold)
-                HStack {
+                HStack(spacing: 21) {
                     Button {
                         
                     }label: {
                         Text("QR")
                     }
-                    .buttonStyle(.filledButton)
+                    .buttonStyle(.transparentWhiteButton)
                     
                     Text("or")
                         .font(Font.baiJamjuree.heading3)
@@ -58,7 +58,8 @@ struct ScooterSerialNumberView: View {
                     }label: {
                         Text("NFC")
                     }
-                    .buttonStyle(.filledButton)
+                    .buttonStyle(.transparentWhiteButton)
+                    
                 }
                 Spacer()
             }

@@ -15,23 +15,23 @@ struct Buttons: View {
 
 struct FilledButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
-        
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .font(isEnabled ? Font.baiJamjuree.button1 : Font.baiJamjuree.body1)
-                .padding(16)
-                .background(isEnabled ?
-                            AnyView(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundColor(Color.accentPink)
-                            ) :
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(isEnabled ? Font.baiJamjuree.button1 : Font.baiJamjuree.body1)
+            .padding(16)
+            .background(isEnabled ?
+                        AnyView(
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundColor(Color.accentPink)
+                        ) :
                             AnyView(
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(Color.accentPink, lineWidth: 1)
                                     .foregroundColor(.clear)
                             ))
-                .foregroundColor(isEnabled ? .neutralWhite : .neutralPurple)
-        }
+            .foregroundColor(isEnabled ? .neutralWhite : .neutralPurple)
+    }
 }
 
 struct TransparentButton: ButtonStyle {
@@ -46,14 +46,14 @@ struct TransparentButton: ButtonStyle {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color.accentPink, lineWidth: 1)
                                 .foregroundColor(.clear)
-                                
+                            
                         ) :
-                        AnyView(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.neutralPurple, lineWidth: 1)
-                                .foregroundColor(.clear)
+                            AnyView(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.neutralPurple, lineWidth: 1)
+                                    .foregroundColor(.clear)
                                 
-                        ))
+                            ))
             .foregroundColor(isEnabled ? Color.accentPink : .neutralPurple)
             .frame(width:96, height: 56)
     }
@@ -64,15 +64,20 @@ struct TransparentWhiteButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(Font.baiJamjuree.button1)
-            .padding(16)
-            .background(AnyView(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.neutralWhite, lineWidth: 1)
-//                                .fill(.green)
-//                                .foregroundColor(.neutralWhite)
-            ))
-                .foregroundColor(Color.neutralWhite)
-            .frame(width:96, height: 56)
+            .background(RoundedRectangle(cornerRadius: 16)
+                .fill(Color.neutralWhite.opacity(0.2))
+                .frame(width: 56, height: 56)
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.neutralWhite, lineWidth: 1)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            )
+            .foregroundColor(Color.neutralWhite)
+            .frame(maxWidth: 56, maxHeight: 56)
+            
     }
 }
 
@@ -116,14 +121,24 @@ extension ButtonStyle where Self == TransparentWhiteButton {
 struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.primaryPurple
-        Button {
+            //            Color.primaryPurple
+            AuthenticationBackground()
+            HStack {
+            Button {
+                
+            } label: {
+                //            Image("UserNotCenteredPin")
+                Text("NFC")
+            }
             
-        } label: {
-//            Image("UserNotCenteredPin")
-            Text("QR")
-        }
-        .buttonStyle(.transparentWhiteButton)
+                Button {
+                    
+                } label: {
+                    //            Image("UserNotCenteredPin")
+                    Text("QR")
+                }
+            }
+            .buttonStyle(.transparentWhiteButton)
         }
     }
 }

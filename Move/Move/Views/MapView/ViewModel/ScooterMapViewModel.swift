@@ -32,7 +32,6 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
-        mapView.userTrackingMode = .followWithHeading
         return mapView
         
     }()
