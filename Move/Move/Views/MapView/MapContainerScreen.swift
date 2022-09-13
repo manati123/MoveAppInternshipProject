@@ -37,6 +37,7 @@ struct MapContainerScreen: View{
                     }
             }
         })
+        .navigationBarHidden(true)
         
     }
     

@@ -15,6 +15,7 @@ enum DriverState: String {
 
 struct DriverLicenseCoordinatorView: View {
     @State private var driverState: DriverState? = .info
+    var userDefaults: UserDefaultsService
     let logOut:() -> Void
     let onFinished:() -> Void
     var body: some View {
@@ -22,7 +23,12 @@ struct DriverLicenseCoordinatorView: View {
             ZStack {
                 NavigationLink(destination: LicenseInformationView(onLogOut: logOut, onFinished: {
                     driverState = .waiting
-                }, onUploadDone: {driverState = .validated}, onUploadFailed: {driverState = .info}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
+                }, onUploadDone: {
+                    driverState = .validated
+                    userDefaults.markAsValidated()
+                }, onUploadFailed: {
+                    driverState = .info
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 

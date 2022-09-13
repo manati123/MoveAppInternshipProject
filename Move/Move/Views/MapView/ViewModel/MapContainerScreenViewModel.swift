@@ -30,7 +30,6 @@ extension MapContainerScreen {
             }
             
             self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { _ in
-//                self.loadScooters()
                 self.mapViewModel.refreshScooterList()
             })
             
@@ -53,7 +52,7 @@ extension MapContainerScreen {
         }
         
         func convertUserCoordinatesToAddress() {
-//            let location = self.mapViewModel.locationManager?.location
+            //            let location = self.mapViewModel.locationManager?.location
             CLGeocoder().reverseGeocodeLocation(self.mapViewModel.locationManager?.location ?? CLLocation(latitude: 0, longitude: 0)) { placemarks, error in
                 if error == nil {
                     self.userLocation = placemarks?.first?.name ?? "Address Unavailable"
@@ -65,18 +64,18 @@ extension MapContainerScreen {
         }
         
         func loadScooters() {
-
+            
             
             self.scooterAPI.getScootersByLocation(userLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423)) { result in
                 switch result {
                 case .success(let result):
-                self.scooters = result
-                self.convertScootersToAnnotations()
-            case .failure(let error):
-                print(error)
+                    self.scooters = result
+                    self.convertScootersToAnnotations()
+                case .failure(let error):
+                    print(error)
                     
                 }
-                            
+                
             }
         }
         

@@ -69,24 +69,24 @@ struct ScooterCardView: View {
                 .scaledToFit()
             VStack {
                 Text("Scooter")
-                Text(verbatim: "#\(self.viewModel.scooterData.number!)")
-                    .font(Font.baiJamjuree.heading2)
-                    .fontWeight(.bold)
+//                Text(verbatim: "#\(self.viewModel.scooterData.number!)")
+//                    .font(Font.baiJamjuree.heading2)
+//                    .fontWeight(.bold)
                 HStack {
                     switch self.viewModel.scooterData.battery! {
                     case 80..<101:
                         Image(systemName: "battery.100")
                             .foregroundColor(.green)
-                    case 75..<80:
+                    case 60..<80:
                         Image(systemName: "battery.75")
                             .foregroundColor(.orange)
-                    case 50..<75:
+                    case 40..<60:
                         Image(systemName: "battery.50")
                             .foregroundColor(.yellow)
-                    case 25..<50:
+                    case 20..<40:
                         Image(systemName: "battery.25")
                             .foregroundColor(.red)
-                    case 0..<25:
+                    case 0..<20:
                         Image(systemName: "battery.0")
                     default:
                         Image(systemName: "minus.plus.batteryblock.fill")

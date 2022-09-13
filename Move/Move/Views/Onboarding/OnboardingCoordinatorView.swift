@@ -9,6 +9,7 @@ import SwiftUI
 import NavigationStack
 struct OnboardingCoordinatorView: View {
     @StateObject var viewModel = OnboardingViewModel()
+    var userDefaultsService: UserDefaultsService
     let onFinished:() -> Void
     var body: some View {
         ZStack {
@@ -25,10 +26,11 @@ struct OnboardingCoordinatorView: View {
     func currentSlideView() -> some View {
         return OnboardingView(onboardingData: viewModel.currentSLide, onFinished: {
             self.onFinished()
+            userDefaultsService.markAsOnboarded()
         }, onNext: {
             if viewModel.currentSlideIndex == 4 {
                 viewModel.nextSlide {
-                    UserDefaults.standard.set(true, forKey: UserDefaultsEnum.onboarded.rawValue)
+                    userDefaultsService.markAsOnboarded()
                     onFinished()
                 }
             } else {
@@ -40,8 +42,8 @@ struct OnboardingCoordinatorView: View {
     
 }
 
-struct OnboardingCoordinatorView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingCoordinatorView(onFinished: {})
-    }
-}
+//struct OnboardingCoordinatorView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OnboardingCoordinatorView(onFinished: {})
+//    }
+//}

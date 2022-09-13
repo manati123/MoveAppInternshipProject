@@ -26,4 +26,17 @@ class UserDefaultsService {
     func userIsLogged() -> Bool {
         return loadUserFromDefaults() != nil
     }
+    
+    func markAsOnboarded() {
+        UserDefaults.standard.set(true, forKey: UserDefaultsEnum.onboarded.rawValue)
+    }
+    
+    func markAsValidated() {
+        let encodedUser = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
+        var user = try? JSONDecoder().decode(LoggedUser.self, from: encodedUser as! Data)
+        user!.user.validated = true
+        if let encoded = try? JSONEncoder().encode(user!) {
+            UserDefaults.standard.set(encoded, forKey: UserDefaultsEnum.loggedUser.rawValue)
+        }
+    }
 }

@@ -20,7 +20,7 @@ struct MainCoordinatorView: View {
                 .transition(.slide.animation(.default))
                 
                 
-                NavigationLink(destination: OnboardingCoordinatorView(){
+                NavigationLink(destination: OnboardingCoordinatorView(userDefaultsService: userDefaultsService){
                     if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
                         self.selection = .license
                     }
@@ -39,7 +39,7 @@ struct MainCoordinatorView: View {
                 }.transition(.slide.animation(.default))
                 
                 
-                NavigationLink(destination: DriverLicenseCoordinatorView(){
+                NavigationLink(destination: DriverLicenseCoordinatorView(userDefaults: userDefaultsService){
                     self.selection = OnboardingEnum.authentication
                 } onFinished: {
                     self.selection = OnboardingEnum.map
@@ -66,9 +66,11 @@ struct MainCoordinatorView: View {
                     if self.userDefaultsService.userIsLogged() {
                         let decodedUser = self.userDefaultsService.loadUserFromDefaults()
                         if decodedUser!.user.validated ?? false {
+                            print("MAP")
                             self.selection = .map
                         }
                         else {
+                            
                             self.selection = .license
                         }
                     } else {

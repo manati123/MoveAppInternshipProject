@@ -160,9 +160,25 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         return annotationView
     }
     
+    
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation is MKUserLocation {
             return
+        }
+        
+        if let clusterAnnotation = view.annotation as? MKClusterAnnotation {
+            var maxBattery = -1
+            var maxAnnotation: ScooterAnnotation = ScooterAnnotation(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), scooterData: Scooter())
+            for annotation in clusterAnnotation.memberAnnotations {
+                if let scooter = annotation as? ScooterAnnotation {
+                    if scooter.scooterData.battery! > maxBattery {
+                        maxBattery = scooter.scooterData.battery!
+                        maxAnnotation = scooter
+                    }
+                }
+            }
+            self.onSelectedScooter(maxAnnotation)
         }
         
         if let scooterAnnotation = view.annotation as? ScooterAnnotation {
