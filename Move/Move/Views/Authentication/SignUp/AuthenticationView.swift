@@ -125,14 +125,14 @@ struct AuthenticationView: View {
     }
 }
 
-
-struct AuthenticationView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
-                .previewInterfaceOrientation(.portrait)
-            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
-                .previewInterfaceOrientation(.portrait)
-        }
-    }
-}
+//
+//struct AuthenticationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
+//                .previewInterfaceOrientation(.portrait)
+//            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
+//                .previewInterfaceOrientation(.portrait)
+//        }
+//    }
+//}

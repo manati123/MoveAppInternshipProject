@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopBarWithBackAndIcon: View {
-    var userName: String
+    var text: String
     let onGoBack:() -> Void
     var body: some View {
         HStack {
@@ -18,7 +18,7 @@ struct TopBarWithBackAndIcon: View {
                 Image(ImagesEnum.arrowBackBlue.rawValue)
             }
             Spacer()
-            Text("Hi \(userName)!")
+            Text("\(text)")
                 .font(Font.baiJamjuree.heading3)
                 .foregroundColor(Color.primaryPurple)
             Spacer()

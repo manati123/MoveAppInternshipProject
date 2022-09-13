@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainCoordinatorView: View {
     @State private var selection: OnboardingEnum? = .splash
+    @StateObject var userViewModel: UserViewModel = .init(userDefaultsService: UserDefaultsService())
     var userDefaultsService: UserDefaultsService = .init()
     var body: some View {
         NavigationView {
@@ -32,7 +33,7 @@ struct MainCoordinatorView: View {
                 }.transition(.slide.animation(.default))
                 
                 
-                NavigationLink(destination: SignUpCoordinatorView(){
+                NavigationLink(destination: SignUpCoordinatorView(viewModel: userViewModel){
                     self.selection = .license
                 }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
@@ -47,8 +48,10 @@ struct MainCoordinatorView: View {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
-                NavigationLink(destination: MapCoordinatorView(){
+                NavigationLink(destination: MapCoordinatorView(userViewModel: userViewModel){
                     self.selection = OnboardingEnum.authentication
+                    self.userDefaultsService.removeUserFromDefaults()
+                    AuthenticationAPI().logOut(loggedUser: self.userViewModel.sessionUser, completionHandler: {_ in })
                 } onFinished: {
                     self.selection = OnboardingEnum.none
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {

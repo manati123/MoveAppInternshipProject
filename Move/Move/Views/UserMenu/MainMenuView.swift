@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct MainMenuView: View {
+    @ObservedObject var userViewModel: UserViewModel
     let onGoBack:() -> Void
+    let onGoToAccount:() -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
-                TopBarWithBackAndIcon(userName: "Gioni", onGoBack: onGoBack)
+                TopBarWithBackAndIcon(text: "Hi \(userViewModel.user.name)!", onGoBack: onGoBack)
 //                Spacer()
                 PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
                     .padding(.leading, 15)
@@ -33,7 +35,7 @@ struct MainMenuView: View {
             BasicIconButton(iconName: "gear", buttonText: "General settings")
                 
             Button{
-                
+                onGoToAccount()
             } label: {
                 Text("Account")
                     .foregroundColor(Color.primaryPurple)
@@ -70,8 +72,8 @@ struct MainMenuView: View {
     }
 }
 
-struct MainMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainMenuView(onGoBack: {})
-    }
-}
+//struct MainMenuView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainMenuView(onGoBack: {})
+//    }
+//}

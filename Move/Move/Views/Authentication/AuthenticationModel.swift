@@ -8,9 +8,15 @@
 import Foundation
 import SwiftMessages
 class UserViewModel: ObservableObject {
-    @Published var user = User(name: "", password: "", email: "")
-    @Published var sessionUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
- 
+    @Published var user: User
+    @Published var sessionUser: LoggedUser
+    var userDefaultsService: UserDefaultsService
+    init(userDefaultsService: UserDefaultsService) {
+        self.userDefaultsService = userDefaultsService
+        sessionUser = userDefaultsService.loadUserFromDefaults() ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "")
+        user = userDefaultsService.loadUserFromDefaults()?.user ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "").user
+    }
+    
     func validateEmail() -> Bool {
         if self.user.email.count > 100 {
                 return false

@@ -15,7 +15,7 @@ enum LogState: String{
 
 struct SignUpCoordinatorView: View {
     @State var logState: LogState? = .signUp
-    @StateObject var viewModel = UserViewModel()
+    @ObservedObject var viewModel: UserViewModel
     let onFinished:() -> Void
     var body: some View {
         NavigationView {
@@ -46,8 +46,8 @@ struct SignUpCoordinatorView: View {
     }
 }
 
-struct SingUpCoordinatorView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpCoordinatorView(onFinished: {})
-    }
-}
+//struct SingUpCoordinatorView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUpCoordinatorView(onFinished: {})
+//    }
+//}

@@ -12,12 +12,13 @@ struct FloatingTextField: View {
     @State var isTouched = false
     @State var isSecured = false
     @State var isPasswordField = false
+    var foregroundColor: Color = .white
     var text: Binding<String>
     @State var icon: String = ""
     var body: some View {
         ZStack(alignment: .leading) {
             Text(title)
-                .foregroundColor(.white)
+                .foregroundColor(foregroundColor)
                 .offset(y: text.wrappedValue.isEmpty ? 0 : -25)
                 .scaleEffect(isTouched ? 1 : 0.8, anchor: .leading)
                 .opacity(0.5)
@@ -26,8 +27,8 @@ struct FloatingTextField: View {
                 ZStack{
                     VStack(alignment: .leading, spacing: 0) {
                         SecureField("", text: text)
-                            .foregroundColor(.white)
-                            .accentColor(.white)
+                            .foregroundColor(foregroundColor)
+                            .accentColor(foregroundColor)
                             .disableAutocorrection(true)
                             .onTapGesture {
                                 self.isTouched = true
@@ -36,7 +37,7 @@ struct FloatingTextField: View {
                             .frame(height: 1)
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 10)
-                            .background(Color.white)
+                            .background(foregroundColor)
                             .opacity(isTouched ? 1 : 0.4)
                     }
                     Button {
@@ -58,8 +59,8 @@ struct FloatingTextField: View {
                     VStack(alignment: .leading, spacing: 0) {
                         
                         TextField("", text: text)
-                            .foregroundColor(.white)
-                            .accentColor(.white)
+                            .foregroundColor(foregroundColor)
+                            .accentColor(foregroundColor)
                             .disableAutocorrection(true)
                             .onTapGesture {
                                 self.isTouched = true
@@ -67,7 +68,7 @@ struct FloatingTextField: View {
                         Divider()
                             .frame(height: 1)
                             .padding(.horizontal, 10)
-                            .background(Color.white)
+                            .background(foregroundColor)
                             .opacity(isTouched ? 1 : 0.4)
                     }
                     

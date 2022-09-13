@@ -49,6 +49,7 @@
 		03875A9728D0680900E751B0 /* TopBarWithBackAndIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9628D0680900E751B0 /* TopBarWithBackAndIcon.swift */; };
 		03875A9928D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */; };
 		03875A9B28D086D300E751B0 /* BasicIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9A28D086D300E751B0 /* BasicIconButton.swift */; };
+		03875A9D28D098FA00E751B0 /* UserAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9C28D098FA00E751B0 /* UserAccountView.swift */; };
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
@@ -146,6 +147,7 @@
 		03875A9628D0680900E751B0 /* TopBarWithBackAndIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarWithBackAndIcon.swift; sourceTree = "<group>"; };
 		03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleBackgroundInformativeWithButton.swift; sourceTree = "<group>"; };
 		03875A9A28D086D300E751B0 /* BasicIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicIconButton.swift; sourceTree = "<group>"; };
+		03875A9C28D098FA00E751B0 /* UserAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountView.swift; sourceTree = "<group>"; };
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				03875A9328D067C900E751B0 /* MainMenuView.swift */,
+				03875A9C28D098FA00E751B0 /* UserAccountView.swift */,
 			);
 			path = UserMenu;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				03875A8728CD144700E751B0 /* UnlockScooterSheetView.swift in Sources */,
 				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
+				03875A9D28D098FA00E751B0 /* UserAccountView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
 				F9CFA18E28C74564007029F1 /* UserCredentialsModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
