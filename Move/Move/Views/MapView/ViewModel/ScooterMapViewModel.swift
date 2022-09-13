@@ -18,11 +18,9 @@ extension CLLocationCoordinate2D {
 
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
-    @Published var trackingUser = true
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
-            
         }
     }
     var onSelectedScooter: (ScooterAnnotation) -> Void = { _ in }
@@ -38,10 +36,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func toggleUserTrackingMode() {
         if mapView.userTrackingMode == .followWithHeading {
-            trackingUser = false
             mapView.userTrackingMode = .none
         } else {
-            trackingUser = true
             mapView.userTrackingMode = .followWithHeading
         }
     }

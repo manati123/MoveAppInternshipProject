@@ -33,7 +33,7 @@ extension MapContainerScreen {
                 self.mapViewModel.refreshScooterList()
             })
             
-            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
                 self.convertUserCoordinatesToAddress()
             })
             

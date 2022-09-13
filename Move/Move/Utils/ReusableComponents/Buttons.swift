@@ -81,6 +81,16 @@ struct TransparentWhiteButton: ButtonStyle {
     }
 }
 
+//struct ButtonWithIconAndBoldText: ButtonStyle {
+//    var icon: String
+//
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+//            .font(Font.baiJamjuree.button1)
+//            .foregroundColor(<#T##color: Color?##Color?#>)
+//    }
+//}
+
 struct SimpleMapButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
@@ -117,13 +127,19 @@ extension ButtonStyle where Self == TransparentWhiteButton {
         return .init()
     }
 }
+//
+//extension ButtonStyle where Self == ButtonWithIconAndBoldText {
+//    static var buttonWithIconAndBoldText: Self {
+//        return .init(icon: "")
+//    }
+//}
 
 struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             //            Color.primaryPurple
             AuthenticationBackground()
-            HStack {
+            VStack {
             Button {
                 
             } label: {
