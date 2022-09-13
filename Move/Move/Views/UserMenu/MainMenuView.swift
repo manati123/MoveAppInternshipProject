@@ -16,12 +16,8 @@ struct MainMenuView: View {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
                 TopBarWithBackAndIcon(text: "Hi \(userViewModel.user.name)!", onGoBack: onGoBack)
-//                Spacer()
                 PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
                     .padding(.leading, 15)
-                    
-                    
-//                Spacer()
                 buttons
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 Spacer()
@@ -33,7 +29,7 @@ struct MainMenuView: View {
     var buttons: some View {
         VStack(alignment: .leading, spacing: 50) {
             BasicIconButton(iconName: "gear", buttonText: "General settings")
-                
+            
             Button{
                 onGoToAccount()
             } label: {
@@ -42,17 +38,23 @@ struct MainMenuView: View {
                     .font(Font.baiJamjuree.button2)
             }
             .padding(.leading, 75)
+            
             Button{
-                
+                if let url = URL(string: "https://www.tapptitude.com") {
+                       UIApplication.shared.open(url)
+                    }
             } label: {
                 Text("Change passowrd")
                     .foregroundColor(Color.primaryPurple)
                     .font(Font.baiJamjuree.button2)
             }
             .padding(.leading, 75)
+            
             BasicIconButton(iconName: "flag", buttonText: "Legal")
             Button{
-                
+                if let url = URL(string: "https://tapptitude.com/") {
+                       UIApplication.shared.open(url)
+                    }
             } label: {
                 Text("Terms and conditions")
                     .foregroundColor(Color.primaryPurple)
@@ -60,7 +62,9 @@ struct MainMenuView: View {
             }
             .padding(.leading, 75)
             Button{
-                
+                if let url = URL(string: "https://www.tapptitude.com") {
+                       UIApplication.shared.open(url)
+                    }
             } label: {
                 Text("Privacy policy")
                     .foregroundColor(Color.primaryPurple)
