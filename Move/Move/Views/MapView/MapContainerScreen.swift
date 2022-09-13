@@ -13,6 +13,7 @@ import MapKit
 struct MapContainerScreen: View{
     
     @StateObject private var viewModel: ViewModel = .init()
+    let onGoToMenu:() -> Void
     var body: some View {
         ZStack(alignment: .top) {
             ScooterMapView(viewModel: viewModel.mapViewModel)
@@ -44,7 +45,7 @@ struct MapContainerScreen: View{
     var topTitleBar: some View {
         HStack {
             Button {
-                print("menu")
+                onGoToMenu()
             } label: {
                 Image(ImagesEnum.goToMenuPin.rawValue)
             }
@@ -96,7 +97,7 @@ struct MapContainerScreen: View{
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainerScreen()
+        MapContainerScreen(onGoToMenu: {})
             .ignoresSafeArea()
     }
 }

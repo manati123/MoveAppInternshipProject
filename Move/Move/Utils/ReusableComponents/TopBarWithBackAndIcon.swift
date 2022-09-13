@@ -9,10 +9,14 @@ import SwiftUI
 
 struct TopBarWithBackAndIcon: View {
     var userName: String
+    let onGoBack:() -> Void
     var body: some View {
         HStack {
-            
-            Image(ImagesEnum.arrowBackBlue.rawValue)
+            Button {
+                onGoBack()
+            }label: {
+                Image(ImagesEnum.arrowBackBlue.rawValue)
+            }
             Spacer()
             Text("Hi \(userName)!")
                 .font(Font.baiJamjuree.heading3)
@@ -27,6 +31,7 @@ struct TopBarWithBackAndIcon: View {
 
 struct TopBarWithBackAndIcon_Previews: PreviewProvider {
     static var previews: some View {
-        TopBarWithBackAndIcon(userName: "connor")
+//        TopBarWithBackAndIcon(userName: "connor")
+        Text("F")
     }
 }

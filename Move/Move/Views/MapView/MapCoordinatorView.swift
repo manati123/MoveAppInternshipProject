@@ -9,6 +9,7 @@ import SwiftUI
 
 enum MapCoordinatorStates: String {
     case mapView = "MapView"
+    case menu = "Menu"
 }
 
 struct MapCoordinatorView: View {
@@ -18,10 +19,19 @@ struct MapCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MapContainerScreen()
+                NavigationLink(destination: MapContainerScreen(onGoToMenu: {self.mapState = .menu})
                     .navigationBarHidden(true)
+                    .ignoresSafeArea()
                     .transition(.slide.animation(.default)),
                                tag: .mapView,
+                               selection: $mapState
+                ){
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                NavigationLink(destination: MainMenuView(onGoBack: {self.mapState = .mapView})
+                    .navigationBarHidden(true)
+                    .transition(.slide.animation(.default)),
+                               tag: .menu,
                                selection: $mapState
                 ){
                     EmptyView()

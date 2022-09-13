@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct MainMenuView: View {
-    
+    let onGoBack:() -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
-                TopBarWithBackAndIcon(userName: "Gioni")
+                TopBarWithBackAndIcon(userName: "Gioni", onGoBack: onGoBack)
 //                Spacer()
                 PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
+                    .padding(.leading, 15)
                     
                     
 //                Spacer()
@@ -71,6 +72,6 @@ struct MainMenuView: View {
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView()
+        MainMenuView(onGoBack: {})
     }
 }
