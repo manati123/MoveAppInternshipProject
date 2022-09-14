@@ -138,7 +138,7 @@ struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             //            Color.primaryPurple
-            AuthenticationBackground()
+            PurpleBackground()
             VStack {
             Button {
                 

@@ -14,7 +14,7 @@ struct ForgotPasswordView: View {
     var onGoBack: () -> Void
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             ScrollView{
                 VStack(alignment: .leading, spacing: 30) {
                     HStack {

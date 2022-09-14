@@ -4,6 +4,24 @@
 //
 //  Created by Preoteasa Ioan-Silviu on 09.08.2022.
 //
+import SwiftUI
+struct Profile {
+    
+}
+
+extension Profile {
+    struct ContentView: View {
+        var body: some View {
+            Text("F")
+        }
+    }
+}
+
+extension Profile {
+    class ViewModel: ObservableObject {
+        
+    }
+}
 
 import Foundation
 import SwiftMessages
@@ -13,8 +31,8 @@ class UserViewModel: ObservableObject {
     var userDefaultsService: UserDefaultsService
     init(userDefaultsService: UserDefaultsService) {
         self.userDefaultsService = userDefaultsService
-        sessionUser = userDefaultsService.loadUserFromDefaults() ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "")
-        user = userDefaultsService.loadUserFromDefaults()?.user ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "").user
+        sessionUser = try! userDefaultsService.loadUserFromDefaults() ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "")
+        user = try! userDefaultsService.loadUserFromDefaults()?.user ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "").user
     }
     
     func validateEmail() -> Bool {

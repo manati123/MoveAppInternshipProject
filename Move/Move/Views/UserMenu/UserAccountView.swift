@@ -7,9 +7,25 @@
 
 import SwiftUI
 
+class UserAccountViewModel: ObservableObject {
+    private var authenticationAPI: AuthenticationAPI = .init()
+    
+    
+    func logOut(user: LoggedUser) {
+        authenticationAPI.logOut(loggedUser: user) { result in
+            switch result {
+            case .success:
+                print("Success")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
 struct UserAccountView: View {
     @ObservedObject var userViewModel: UserViewModel
-    @State var user2: User = .init(name: "gionutz", password: "SDKJFNSKF", email: "gionu@hatz.kelutzu")
+    @StateObject var viewModel: UserAccountViewModel = .init()
     let onLogOut:() -> Void
     let onGoBack:() -> Void
     var body: some View {
@@ -23,6 +39,7 @@ struct UserAccountView: View {
             Spacer()
             Button {
                 onLogOut()
+                viewModel.logOut(user: userViewModel.sessionUser)
             }label: {
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right")

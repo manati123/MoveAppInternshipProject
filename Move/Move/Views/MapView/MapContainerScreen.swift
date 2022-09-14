@@ -27,18 +27,23 @@ struct MapContainerScreen: View{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
         }
+        .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
+            scooterToBeUnlockedView
+        } onEnd: {
+            self.viewModel.showUnlockingSheet = false
+        }
         .overlay(content: {
             ZStack {
                 selectedScooterView
                     .transition(.opacity.animation(.default))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.vertical, 46)
-                    .sheet(isPresented: self.$viewModel.showUnlockingSheet) {
-                        scooterToBeUnlockedView
-                    }
+                    
             }
+            
         })
         .navigationBarHidden(true)
+        
         
     }
     
@@ -58,7 +63,6 @@ struct MapContainerScreen: View{
             Spacer()
             
             Button {
-//                    self.viewModel.mapViewModel.centerOnUser()
                 withAnimation {
                     self.viewModel.mapViewModel.toggleUserTrackingMode()
                 }

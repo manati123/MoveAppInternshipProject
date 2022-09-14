@@ -25,7 +25,7 @@ struct LogInView: View {
     let onForgotPassword: () -> Void
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             GeometryReader { geometry in
                 ScrollView {
                     VStack(alignment: .leading) {

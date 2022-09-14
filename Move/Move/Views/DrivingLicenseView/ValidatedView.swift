@@ -11,7 +11,7 @@ struct ValidatedView: View {
     let onFinished:() -> Void
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             VStack(spacing: 67) {
                 Spacer()
                 Image(ImagesEnum.bigCheckmark.rawValue)

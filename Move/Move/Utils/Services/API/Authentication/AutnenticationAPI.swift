@@ -17,7 +17,7 @@ import SwiftUI
 //}
 
 class AuthenticationAPI {
-    private let baseUrl = "https://scooter-app.herokuapp.com/user"
+    private let baseUrl = "https://scooter-app.herokuapp.com/auth"
     static let shareInstance = AuthenticationAPI()
     
     func loginUser(user: User, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
@@ -100,7 +100,7 @@ class AuthenticationAPI {
     func logOut(loggedUser: LoggedUser, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
         let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
         
-        AF.request("https://scooter-app.herokuapp.com/user/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
+        AF.request("https://scooter-app.herokuapp.com/auth/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
                 switch response.result {
                     case .success(let data):
                         print("Success")

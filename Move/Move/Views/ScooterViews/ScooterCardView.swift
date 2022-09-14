@@ -69,9 +69,9 @@ struct ScooterCardView: View {
                 .scaledToFit()
             VStack {
                 Text("Scooter")
-//                Text(verbatim: "#\(self.viewModel.scooterData.number!)")
-//                    .font(Font.baiJamjuree.heading2)
-//                    .fontWeight(.bold)
+                Text(verbatim: "#\(self.viewModel.scooterData.number!)")
+                    .font(Font.baiJamjuree.heading2)
+                    .fontWeight(.bold)
                 HStack {
                     switch self.viewModel.scooterData.battery! {
                     case 80..<101:

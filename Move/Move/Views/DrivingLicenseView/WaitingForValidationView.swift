@@ -13,7 +13,7 @@ struct WaitingForValidationView: View {
     let onFinished:() -> Void
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             VStack(alignment: .center) {
                 Text("We are currently verifying your driving license")
                     .font(Font.baiJamjuree.heading1)

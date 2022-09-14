@@ -66,14 +66,12 @@ struct MainCoordinatorView: View {
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 if self.userDefaultsService.isOnboarded()  {
-                    if self.userDefaultsService.userIsLogged() {
-                        let decodedUser = self.userDefaultsService.loadUserFromDefaults()
-                        if decodedUser!.user.validated ?? false {
+                    if let decodedUser = try? self.userDefaultsService.loadUserFromDefaults() {
+                        if decodedUser.user.validated ?? false {
                             print("MAP")
                             self.selection = .map
                         }
                         else {
-                            
                             self.selection = .license
                         }
                     } else {

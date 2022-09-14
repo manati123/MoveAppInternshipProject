@@ -9,10 +9,13 @@ import Foundation
 
 
 class UserDefaultsService {
-    func loadUserFromDefaults() -> LoggedUser? {
-        let encodedUser = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
-        let decodedUser = try? JSONDecoder().decode(LoggedUser.self, from: encodedUser as! Data)
-        return decodedUser   
+    
+    func loadUserFromDefaults() throws -> LoggedUser? {
+        guard let encodedUser = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) as? Data else {
+            return nil
+        }
+        let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: encodedUser)
+        return decodedUser
     }
     
     func removeUserFromDefaults() {
@@ -24,7 +27,8 @@ class UserDefaultsService {
     }
     
     func userIsLogged() -> Bool {
-        return loadUserFromDefaults() != nil
+        
+        return (try? loadUserFromDefaults()) != nil
     }
     
     func markAsOnboarded() {

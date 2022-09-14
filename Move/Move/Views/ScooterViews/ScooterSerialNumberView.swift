@@ -10,7 +10,7 @@ import SwiftUI
 struct ScooterSerialNumberView: View {
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             VStack(spacing: 24) {
                 HStack {
                     Button {

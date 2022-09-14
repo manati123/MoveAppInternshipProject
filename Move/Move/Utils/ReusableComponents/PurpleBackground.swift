@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-struct AuthenticationBackground: View {
+struct PurpleBackground: View {
     var body: some View {
         GeometryReader { g in
             VStack(spacing: 40) {

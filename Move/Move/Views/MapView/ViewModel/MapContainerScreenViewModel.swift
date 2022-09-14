@@ -17,7 +17,11 @@ extension MapContainerScreen {
         @Published var scooters: [Scooter] = .init()
         @Published var mapViewModel: ScooterMapViewModel = .init()
         @Published var userLocation: String = ""
-        @Published var showUnlockingSheet = false
+        @Published var showUnlockingSheet = false {
+            didSet {
+                print("VALUE IS \(showUnlockingSheet)")
+            }
+        }
         var scooterAPI: ScooterAPI = .init()
         init () {
             self.convertUserCoordinatesToAddress()
@@ -25,15 +29,15 @@ extension MapContainerScreen {
                 self.selectedScooter = scooter
             }
             
-            mapViewModel.onDeselectedScooter = {
+            mapViewModel.onDeselectedScooter = { 
                 self.selectedScooter = nil
             }
             
-            self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { _ in
+            self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
                 self.mapViewModel.refreshScooterList()
             })
             
-            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
                 self.convertUserCoordinatesToAddress()
             })
             

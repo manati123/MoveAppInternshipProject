@@ -13,7 +13,7 @@ struct AuthenticationView: View {
     
     var body: some View {
         ZStack {
-            AuthenticationBackground()
+            PurpleBackground()
             GeometryReader { g in
                 ScrollView {
                     VStack(alignment: .leading){

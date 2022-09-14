@@ -18,6 +18,7 @@ extension CLLocationCoordinate2D {
 
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
+    @Published var firstPopulation = false
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -109,9 +110,28 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     }
     
     func refreshScooterList() {
-        mapView.removeAnnotations(mapView.annotations)
-        if scooters.count != mapView.annotations.count {
-            mapView.addAnnotations(scooters)
+        
+        var scooterAnnotations = [MKAnnotation]()
+        
+        for scooter in scooters {
+            if let scooterAnnotation = scooter as? ScooterAnnotation {
+                scooterAnnotations.append(scooterAnnotation)
+            }
+            
+            if let scooterAnnotation = scooter as? MKUserLocation {
+                scooterAnnotations.append(scooterAnnotation)
+            }
+        }
+        
+        if !firstPopulation {
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(scooterAnnotations)
+            firstPopulation = true
+        }
+        
+        if scooters.count != scooterAnnotations.count - 1 {
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(scooterAnnotations)
         }
     }
 }
@@ -124,7 +144,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         
         
         
-        if annotation is MKUserLocation {
+        if annotation is MKUserLocation { 
             let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
             userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
             
