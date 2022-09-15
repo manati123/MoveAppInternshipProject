@@ -15,7 +15,7 @@ struct MainMenuView: View {
         ZStack(alignment: .bottom) {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
-                TopBarWithBackAndIcon(text: "Hi \(userViewModel.user.name)!", onGoBack: onGoBack)
+                TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack)
                 PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
                     .padding(.leading, 15)
                 buttons

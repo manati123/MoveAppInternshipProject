@@ -9,13 +9,14 @@ import SwiftUI
 
 class UserAccountViewModel: ObservableObject {
     private var authenticationAPI: AuthenticationAPI = .init()
+    private var userDefaultsService: UserDefaultsService = .init()
     
     
     func logOut(user: LoggedUser) {
         authenticationAPI.logOut(loggedUser: user) { result in
             switch result {
             case .success:
-                print("Success")
+                self.userDefaultsService.removeTokenFromDefaults()
             case .failure(let error):
                 print(error)
             }
@@ -32,9 +33,9 @@ struct UserAccountView: View {
         VStack(spacing: 44) {
             TopBarWithBackAndIcon(text: "Account", onGoBack: self.onGoBack)
             VStack(spacing: 28) {
-                FloatingTextField(title: "Username", isTouched: false, isSecured: false, isPasswordField: false, foregroundColor: Color.black, text: $userViewModel.user.name, icon: "")
+                FloatingTextField(title: "Username", isTouched: false, isSecured: false, isPasswordField: false, foregroundColor: Color.black, text: $userViewModel.sessionUser.user.name, icon: "")
                 
-                FloatingTextField(title: "Email Address", isTouched: false, isSecured: false, isPasswordField: false, foregroundColor: Color.black, text: $userViewModel.user.email, icon: "")
+                FloatingTextField(title: "Email Address", isTouched: false, isSecured: false, isPasswordField: false, foregroundColor: Color.black, text: $userViewModel.sessionUser.user.email, icon: "")
             }.padding(.horizontal, 24)
             Spacer()
             Button {

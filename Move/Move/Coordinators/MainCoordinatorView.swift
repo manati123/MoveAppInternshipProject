@@ -9,8 +9,9 @@ import SwiftUI
 
 
 struct MainCoordinatorView: View {
-    @State private var selection: OnboardingEnum? = .splash
+    @StateObject private var viewModel: ViewModel = .init()
     @StateObject var userViewModel: UserViewModel = .init(userDefaultsService: UserDefaultsService())
+    @State var selection: OnboardingEnum? = .splash
     var userDefaultsService: UserDefaultsService = .init()
     var body: some View {
         NavigationView {
@@ -19,11 +20,9 @@ struct MainCoordinatorView: View {
                     EmptyView()
                 }
                 .transition(.slide.animation(.default))
-                
-                
                 NavigationLink(destination: OnboardingCoordinatorView(userDefaultsService: userDefaultsService){
                     if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
-                        self.selection = .license
+                        self.selection = OnboardingEnum.license
                     }
                     else {
                         self.selection = .authentication
@@ -34,7 +33,12 @@ struct MainCoordinatorView: View {
                 
                 
                 NavigationLink(destination: SignUpCoordinatorView(viewModel: userViewModel){
-                    self.selection = .license
+                    switch userViewModel.user.drivinglicense != "" {
+                    case true:
+                        self.selection = OnboardingEnum.map
+                    case false:
+                        self.selection = OnboardingEnum.license
+                    }
                 }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
@@ -50,7 +54,6 @@ struct MainCoordinatorView: View {
                 
                 NavigationLink(destination: MapCoordinatorView(userViewModel: userViewModel){
                     self.selection = OnboardingEnum.authentication
-                    self.userDefaultsService.removeUserFromDefaults()
                     AuthenticationAPI().logOut(loggedUser: self.userViewModel.sessionUser, completionHandler: {_ in })
                 } onFinished: {
                     self.selection = OnboardingEnum.none
@@ -59,28 +62,66 @@ struct MainCoordinatorView: View {
                 }.transition(.slide.animation(.default))
                 
             }.navigationBarHidden(true)
+                .onAppear {
+                    
+                }
         }
+    }
+    
+    func setFlowOfApplication() {
+        let token = userDefaultsService.loadTokenFromDefaults()
+        if token != "" {
+            print("Token not null")
+            AuthenticationAPI().getUser(token: token) { result in
+                print("In request")
+                switch result {
+                case .success(let user):
+                    print("Success")
+                    self.userViewModel.sessionUser.user = user
+                    self.userViewModel.sessionUser.token = token
+                    if user.drivinglicense != "" {
+                        self.selection = .map
+                    } else {
+                        self.selection = .license
+                    }
+                case .failure:
+                    print("Failure")
+                    self.selection = .authentication
+                }
+            }
+        } else {
+            print("Here")
+            self.selection = .onboarding
+        }
+        
     }
     
     func getSplashView() -> some View {
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.userDefaultsService.isOnboarded()  {
-                    if let decodedUser = try? self.userDefaultsService.loadUserFromDefaults() {
-                        if decodedUser.user.validated ?? false {
-                            print("MAP")
-                            self.selection = .map
-                        }
-                        else {
-                            self.selection = .license
-                        }
-                    } else {
-                        self.selection = .authentication
-                    }
-                }
-                else {
-                    self.selection = .onboarding
-                }
+                setFlowOfApplication()
+//                if self.userDefaultsService.isOnboarded()  {
+//
+//                    let token = userDefaultsService.loadTokenFromDefaults()
+//                    print(token)
+//                    AuthenticationAPI().getUser(token: token) { result in
+//                        print(result)
+//                    }
+//                    if let decodedUser = try? self.userDefaultsService.loadUserFromDefaults() {
+//                        if decodedUser.user.validated ?? false {
+//                            print("MAP")
+//                            self.selection = .map
+//                        }
+//                        else {
+//                            self.selection = .license
+//                        }
+//                    } else {
+//                        self.selection = .authentication
+//                    }
+//                }
+//                else {
+//                    self.selection = .onboarding
+//                }
             }
         }.navigationBarHidden(true)
     }

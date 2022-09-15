@@ -26,13 +26,11 @@ extension Profile {
 import Foundation
 import SwiftMessages
 class UserViewModel: ObservableObject {
-    @Published var user: User
-    @Published var sessionUser: LoggedUser
+    @Published var user: User = User(name: "", password: "", email: "")
+    @Published var sessionUser: LoggedUser = LoggedUser(user: User(name: "", password: "", email: ""), token: "")
     var userDefaultsService: UserDefaultsService
     init(userDefaultsService: UserDefaultsService) {
         self.userDefaultsService = userDefaultsService
-        sessionUser = try! userDefaultsService.loadUserFromDefaults() ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "")
-        user = try! userDefaultsService.loadUserFromDefaults()?.user ?? LoggedUser(user: User(name: "", password: "", email: ""), token: "").user
     }
     
     func validateEmail() -> Bool {

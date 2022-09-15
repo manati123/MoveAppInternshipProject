@@ -10,4 +10,5 @@ import Foundation
 enum UserDefaultsEnum: String {
     case loggedUser = "LoggedUser"
     case onboarded = "DoneOnboarding"
+    case token = "Token"
 }

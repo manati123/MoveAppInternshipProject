@@ -41,6 +41,7 @@
 		0371A9E028D1EF46009FDF7F /* RideServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371A9DF28D1EF46009FDF7F /* RideServices.swift */; };
 		0371A9E328D1EF5B009FDF7F /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371A9E228D1EF5B009FDF7F /* RideModel.swift */; };
 		0371A9E528D1F0BA009FDF7F /* HalfSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */; };
+		0371A9E728D31796009FDF7F /* MainCoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371A9E628D31796009FDF7F /* MainCoordinatorViewModel.swift */; };
 		03875A7A28CB11C800E751B0 /* ScooterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7928CB11C800E751B0 /* ScooterAPI.swift */; };
 		03875A7F28CBCEA400E751B0 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */; };
 		03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */; };
@@ -142,6 +143,7 @@
 		0371A9DF28D1EF46009FDF7F /* RideServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideServices.swift; sourceTree = "<group>"; };
 		0371A9E228D1EF5B009FDF7F /* RideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
 		0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSheetModal.swift; sourceTree = "<group>"; };
+		0371A9E628D31796009FDF7F /* MainCoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorViewModel.swift; sourceTree = "<group>"; };
 		03875A7928CB11C800E751B0 /* ScooterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterAPI.swift; sourceTree = "<group>"; };
 		03875A7E28CBCEA400E751B0 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		03875A8028CCECB000E751B0 /* MapContainerScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainerScreenViewModel.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */,
+				0371A9E628D31796009FDF7F /* MainCoordinatorViewModel.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				F9CFA17B28C5DBD7007029F1 /* MapCoordinatorView.swift in Sources */,
 				03875A7F28CBCEA400E751B0 /* UserDefaultsService.swift in Sources */,
 				03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */,
+				0371A9E728D31796009FDF7F /* MainCoordinatorViewModel.swift in Sources */,
 				03875A8128CCECB000E751B0 /* MapContainerScreenViewModel.swift in Sources */,
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,
 				03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */,

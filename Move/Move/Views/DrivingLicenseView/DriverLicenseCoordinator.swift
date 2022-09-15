@@ -25,7 +25,6 @@ struct DriverLicenseCoordinatorView: View {
                     driverState = .waiting
                 }, onUploadDone: {
                     driverState = .validated
-                    userDefaults.markAsValidated()
                 }, onUploadFailed: {
                     driverState = .info
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .info, selection: $driverState) {
