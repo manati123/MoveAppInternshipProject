@@ -12,8 +12,8 @@ class UserAccountViewModel: ObservableObject {
     private var userDefaultsService: UserDefaultsService = .init()
     
     
-    func logOut(user: LoggedUser) {
-        authenticationAPI.logOut(loggedUser: user) { result in
+    func logOut(token: String) {
+        authenticationAPI.logOut(token: token) { result in
             switch result {
             case .success:
                 self.userDefaultsService.removeTokenFromDefaults()
@@ -40,7 +40,7 @@ struct UserAccountView: View {
             Spacer()
             Button {
                 onLogOut()
-                viewModel.logOut(user: userViewModel.sessionUser)
+                viewModel.logOut(token: userViewModel.sessionUser.token)
             }label: {
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right")

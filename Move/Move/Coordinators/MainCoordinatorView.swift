@@ -49,7 +49,7 @@ struct MainCoordinatorView: View {
                 
                 NavigationLink(destination: MapCoordinatorView(userViewModel: userViewModel){
                     self.selection = OnboardingEnum.authentication
-                    AuthenticationAPI().logOut(loggedUser: self.userViewModel.sessionUser, completionHandler: {_ in })
+                    AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
                 } onFinished: {
                     self.selection = OnboardingEnum.none
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {

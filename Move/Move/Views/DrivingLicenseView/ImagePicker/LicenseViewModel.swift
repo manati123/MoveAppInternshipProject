@@ -27,7 +27,7 @@ class LicenseViewModel: ObservableObject {
     func logOut(onLogOut: () -> Void) {
         let encodedUser = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
         let decodedUser = try! JSONDecoder().decode(LoggedUser.self, from: encodedUser as! Data)
-        AuthenticationAPI().logOut(loggedUser: decodedUser) { result in
+        AuthenticationAPI().logOut(token: decodedUser.token) { result in
             print(result)
             switch result {
             case .success:

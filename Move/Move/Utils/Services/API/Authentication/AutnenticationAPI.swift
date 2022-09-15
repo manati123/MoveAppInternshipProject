@@ -38,7 +38,7 @@ class AuthenticationAPI {
                     print(error)
                     completionHandler(.failure(error))
                 }
-            case .failure(let error):
+            case .failure:
                 do {
                     let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
                     completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
@@ -97,12 +97,12 @@ class AuthenticationAPI {
         
     }
     
-    func logOut(loggedUser: LoggedUser, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
-        let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
+    func logOut(token: String, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
+        let header : HTTPHeaders = ["Authorization": "Bearer \(token)"]
         
         AF.request("\(baseUrl)/auth/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
-            case .success(let data):
+            case .success:
                 print("Success")
             case .failure(let error):
                 print(error)
