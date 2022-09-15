@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Bitmap-3.png",
+      "filename" : "Ride.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Ride@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Ride@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
