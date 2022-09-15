@@ -84,7 +84,6 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
     }
 }
 
-
 class CustomHostingController<Content: View>: UIHostingController<Content> {
     
     override func viewDidLoad() {

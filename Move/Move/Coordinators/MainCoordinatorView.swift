@@ -21,12 +21,7 @@ struct MainCoordinatorView: View {
                 }
                 .transition(.slide.animation(.default))
                 NavigationLink(destination: OnboardingCoordinatorView(userDefaultsService: userDefaultsService){
-                    if UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue) != nil {
-                        self.selection = OnboardingEnum.license
-                    }
-                    else {
-                        self.selection = .authentication
-                    }
+                    self.selection = .authentication
                 }.navigationBarHidden(true).preferredColorScheme(.dark), tag: .onboarding, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
@@ -70,27 +65,24 @@ struct MainCoordinatorView: View {
     
     func setFlowOfApplication() {
         let token = userDefaultsService.loadTokenFromDefaults()
+        print(token)
         if token != "" {
-            print("Token not null")
             AuthenticationAPI().getUser(token: token) { result in
-                print("In request")
                 switch result {
                 case .success(let user):
-                    print("Success")
                     self.userViewModel.sessionUser.user = user
                     self.userViewModel.sessionUser.token = token
-                    if user.drivinglicense != "" {
+                    if user.drivinglicense != nil {
+                        print(user.drivinglicense)
                         self.selection = .map
                     } else {
                         self.selection = .license
                     }
                 case .failure:
-                    print("Failure")
                     self.selection = .authentication
                 }
             }
         } else {
-            print("Here")
             self.selection = .onboarding
         }
         

@@ -100,7 +100,7 @@ class AuthenticationAPI {
     func logOut(loggedUser: LoggedUser, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
         let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
         
-        AF.request("\(baseUrl)/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
+        AF.request("\(baseUrl)/auth/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
             case .success(let data):
                 print("Success")

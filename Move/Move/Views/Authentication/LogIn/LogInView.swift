@@ -13,6 +13,10 @@ extension LogInView {
         @Published var showError: Bool = false
         @Published var waitingForResponse: Bool = false
         
+        func onLogInSuccessfull() {
+            
+        }
+        
     }
 }
 

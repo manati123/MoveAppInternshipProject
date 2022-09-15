@@ -117,7 +117,8 @@ class UserViewModel: ObservableObject {
             switch response {
             case .success(let user):
                 self.sessionUser = user
-                self.saveUserToUserDefaults()
+                print(user.token)
+                self.userDefaultsService.saveTokenToDefaults(token: user.token)
                 success()
             case .failure(let error):
                 self.loginErrorHandling(error: error)

@@ -18,7 +18,7 @@ class UserAccountViewModel: ObservableObject {
             case .success:
                 self.userDefaultsService.removeTokenFromDefaults()
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

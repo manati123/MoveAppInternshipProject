@@ -79,7 +79,7 @@ struct MapContainerScreen: View{
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView(scooter: selectedScooter.scooterData, getLocationHandler: {
+                ScooterCardView(isEnabled: self.viewModel.mapViewModel.locationIsDisabled(), scooter: selectedScooter.scooterData, getLocationHandler: {
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {self.viewModel.showUnlockingSheet = true})
                     .shadow(radius: 10)

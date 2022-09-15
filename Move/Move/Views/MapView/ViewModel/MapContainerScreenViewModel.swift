@@ -24,6 +24,7 @@ extension MapContainerScreen {
         }
         var scooterAPI: ScooterAPI = .init()
         init () {
+            
             self.convertUserCoordinatesToAddress()
             mapViewModel.onSelectedScooter = { scooter in
                 self.selectedScooter = scooter
