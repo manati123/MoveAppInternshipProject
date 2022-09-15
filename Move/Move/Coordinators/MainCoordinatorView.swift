@@ -57,9 +57,6 @@ struct MainCoordinatorView: View {
                 }.transition(.slide.animation(.default))
                 
             }.navigationBarHidden(true)
-                .onAppear {
-                    
-                }
         }
     }
     

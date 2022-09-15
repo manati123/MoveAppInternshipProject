@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainMenuView: View {
     @ObservedObject var userViewModel: UserViewModel
+    @StateObject var viewModel: ViewModel = .init()
     let onGoBack:() -> Void
     let onGoToAccount:() -> Void
     var body: some View {
@@ -16,13 +17,16 @@ struct MainMenuView: View {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
                 TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack)
-                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
+                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: \(viewModel.numberOfRides)", buttonText: "See all", onButtonHandler: {})
                     .padding(.leading, 15)
                 buttons
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 Spacer()
             }
             
+        }
+        .onAppear {
+                self.viewModel.getRides()
         }
     }
     

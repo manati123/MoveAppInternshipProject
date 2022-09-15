@@ -28,8 +28,17 @@ struct Scooter: Codable {
     var __v: Int?
 }
 
+struct Ride {
+    var rideId: Int
+    var locationsCoordinates: [CLLocation]
+}
+
 class ScooterAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com/scooter"
+    
+    func getAllRides(completionHandler: @escaping(Result<Int>) -> ()) {
+        completionHandler(.success(12))
+    }
     
     func getAllScooters(completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         AF.request("\(baseUrl)", method: .get)

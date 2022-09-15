@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300867728D32E9900F31763 /* MainMenuViewModel.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -110,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0300867728D32E9900F31763 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -233,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0300867628D32E8900F31763 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0300867728D32E9900F31763 /* MainMenuViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		03472A9828A252F5008F51DE /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +408,7 @@
 		03875A9228D067B900E751B0 /* UserMenu */ = {
 			isa = PBXGroup;
 			children = (
+				0300867628D32E8900F31763 /* ViewModels */,
 				03875A9328D067C900E751B0 /* MainMenuView.swift */,
 				03875A9C28D098FA00E751B0 /* UserAccountView.swift */,
 			);
@@ -899,6 +910,7 @@
 				F998FC0E28C0A17A00DBB961 /* ErrorExtensions.swift in Sources */,
 				03875A8A28CF171500E751B0 /* ScooterCardViewModel.swift in Sources */,
 				F94A968928BCA61F00231B2E /* AutnenticationAPI.swift in Sources */,
+				0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,

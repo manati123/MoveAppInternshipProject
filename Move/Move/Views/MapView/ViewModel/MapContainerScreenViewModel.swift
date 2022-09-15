@@ -70,7 +70,6 @@ extension MapContainerScreen {
         
         func loadScooters() {
             
-            
             self.scooterAPI.getScootersByLocation(userLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423)) { result in
                 switch result {
                 case .success(let result):

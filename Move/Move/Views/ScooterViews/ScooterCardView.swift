@@ -77,21 +77,21 @@ struct ScooterCardView: View {
                 HStack {
                     switch self.viewModel.scooterData.battery! {
                     case 80..<101:
-                        Image(systemName: "battery.100")
+                        Image(ImagesEnum.battery100.rawValue)
                             .foregroundColor(.green)
                     case 60..<80:
-                        Image(systemName: "battery.75")
+                        Image(ImagesEnum.battery80.rawValue)
                             .foregroundColor(.orange)
                     case 40..<60:
-                        Image(systemName: "battery.50")
+                        Image(ImagesEnum.battery50.rawValue)
                             .foregroundColor(.yellow)
                     case 20..<40:
-                        Image(systemName: "battery.25")
+                        Image(ImagesEnum.battery20.rawValue)
                             .foregroundColor(.red)
                     case 0..<20:
-                        Image(systemName: "battery.0")
+                        Image(ImagesEnum.battery0.rawValue)
                     default:
-                        Image(systemName: "minus.plus.batteryblock.fill")
+                        Image(ImagesEnum.batteryCharging.rawValue)
                     }
                     Text("\(self.viewModel.scooterData.battery!)")
                         .font(Font.baiJamjuree.smallText)
