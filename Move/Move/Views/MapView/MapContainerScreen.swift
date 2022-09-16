@@ -29,6 +29,7 @@ struct MapContainerScreen: View{
         }
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
+                
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
@@ -79,7 +80,7 @@ struct MapContainerScreen: View{
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView(isEnabled: self.viewModel.mapViewModel.locationIsDisabled(), scooter: selectedScooter.scooterData, getLocationHandler: {
+                ScooterCardView(isEnabled: self.viewModel.mapViewModel.checkMinimumDistanceAndLocationEnabled(selectedScooterLocation: selectedScooter.coordinate), scooter: selectedScooter.scooterData, getLocationHandler: {
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {self.viewModel.showUnlockingSheet = true})
                     .shadow(radius: 10)

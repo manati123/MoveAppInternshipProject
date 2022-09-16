@@ -11,6 +11,7 @@ enum MapCoordinatorStates: String {
     case mapView = "MapView"
     case menu = "Menu"
     case account = "Account"
+    case unlock = "Unlock"
 }
 
 struct MapCoordinatorView: View {
@@ -21,27 +22,11 @@ struct MapCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MapContainerScreen(onGoToMenu: {self.mapState = .menu})
+                NavigationLink(destination: MapContainerScreen(onGoToMenu: {onFinished()})
                     .navigationBarHidden(true)
                     .ignoresSafeArea()
                     .transition(.slide.animation(.default)),
                                tag: .mapView,
-                               selection: $mapState
-                ){
-                    EmptyView()
-                }.transition(.slide.animation(.default))
-                NavigationLink(destination: MainMenuView(userViewModel: userViewModel, onGoBack: {self.mapState = .mapView}, onGoToAccount: {self.mapState = .account})
-                    .navigationBarHidden(true)
-                    .transition(.slide.animation(.default)),
-                               tag: .menu,
-                               selection: $mapState
-                ){
-                    EmptyView()
-                }.transition(.slide.animation(.default))
-                NavigationLink(destination: UserAccountView(userViewModel: userViewModel, onLogOut: {logOut()}, onGoBack: {self.mapState = .menu})
-                    .navigationBarHidden(true)
-                    .transition(.slide.animation(.default)),
-                               tag: .account,
                                selection: $mapState
                 ){
                     EmptyView()

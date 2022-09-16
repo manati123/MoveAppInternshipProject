@@ -15,7 +15,7 @@ struct ScooterModel {
 }
 
 struct ScooterCardView: View {
-    var isEnabled: Bool
+    @State var isEnabled: Bool
     @StateObject private var viewModel: ViewModel
     let getLocationHandler:() -> Void
     let showSheet:() -> Void
@@ -42,6 +42,8 @@ struct ScooterCardView: View {
             }
             
     }
+    
+    //TODO: smaller spacing
     var bottomSide: some View {
         VStack{
             HStack(alignment: .top) {
@@ -76,10 +78,10 @@ struct ScooterCardView: View {
                     .fontWeight(.bold)
                 HStack {
                     switch self.viewModel.scooterData.battery! {
-                    case 80..<101:
+                    case 81..<101:
                         Image(ImagesEnum.battery100.rawValue)
                             .foregroundColor(.green)
-                    case 60..<80:
+                    case 60..<81:
                         Image(ImagesEnum.battery80.rawValue)
                             .foregroundColor(.orange)
                     case 40..<60:
@@ -93,7 +95,7 @@ struct ScooterCardView: View {
                     default:
                         Image(ImagesEnum.batteryCharging.rawValue)
                     }
-                    Text("\(self.viewModel.scooterData.battery!)")
+                    Text("\(self.viewModel.scooterData.battery!)%")
                         .font(Font.baiJamjuree.smallText)
                 }
                 HStack(spacing: 24) {

@@ -37,7 +37,9 @@ class ScooterAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com/scooter"
     
     func getAllRides(completionHandler: @escaping(Result<Int>) -> ()) {
-        completionHandler(.success(12))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            completionHandler(.success(12))
+        }
     }
     
     func getAllScooters(completionHandler: @escaping (Result<[Scooter]>) -> ()) {

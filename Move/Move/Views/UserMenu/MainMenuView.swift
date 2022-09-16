@@ -19,6 +19,7 @@ struct MainMenuView: View {
                 TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack)
                 PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: \(viewModel.numberOfRides)", buttonText: "See all", onButtonHandler: {})
                     .padding(.leading, 15)
+                    .id(UUID())
                 buttons
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 Spacer()
@@ -26,7 +27,10 @@ struct MainMenuView: View {
             
         }
         .onAppear {
-                self.viewModel.getRides()
+            self.viewModel.getRides() { value in
+                self.viewModel.numberOfRides = value
+                self.viewModel.objectWillChange.send()
+            }
         }
     }
     

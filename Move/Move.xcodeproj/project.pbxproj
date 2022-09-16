@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300867728D32E9900F31763 /* MainMenuViewModel.swift */; };
+		0300867B28D34C5D00F31763 /* PasscodeField in Frameworks */ = {isa = PBXBuildFile; productRef = 0300867A28D34C5D00F31763 /* PasscodeField */; };
+		0300867D28D4596000F31763 /* NFCTagReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300867C28D4596000F31763 /* NFCTagReader.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -55,6 +57,7 @@
 		03875A9928D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */; };
 		03875A9B28D086D300E751B0 /* BasicIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9A28D086D300E751B0 /* BasicIconButton.swift */; };
 		03875A9D28D098FA00E751B0 /* UserAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03875A9C28D098FA00E751B0 /* UserAccountView.swift */; };
+		03AE897628D485C300AC6AB7 /* MainMenuCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE897528D485C300AC6AB7 /* MainMenuCoordinatorView.swift */; };
 		03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */; };
 		03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */; };
 		03AFAD3028B8E9FC00DD0DE7 /* ValidatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */; };
@@ -112,6 +115,7 @@
 
 /* Begin PBXFileReference section */
 		0300867728D32E9900F31763 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
+		0300867C28D4596000F31763 /* NFCTagReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTagReader.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleBackgroundInformativeWithButton.swift; sourceTree = "<group>"; };
 		03875A9A28D086D300E751B0 /* BasicIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicIconButton.swift; sourceTree = "<group>"; };
 		03875A9C28D098FA00E751B0 /* UserAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountView.swift; sourceTree = "<group>"; };
+		03AE897528D485C300AC6AB7 /* MainMenuCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinatorView.swift; sourceTree = "<group>"; };
 		03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInformationView.swift; sourceTree = "<group>"; };
 		03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForValidationView.swift; sourceTree = "<group>"; };
 		03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedView.swift; sourceTree = "<group>"; };
@@ -213,6 +218,7 @@
 				036FF87428AB9F11004C913A /* NavigationStack in Frameworks */,
 				03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */,
 				BCEC1E2D35D19CE6D34D4EDF /* Pods_Move.framework in Frameworks */,
+				0300867B28D34C5D00F31763 /* PasscodeField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +329,7 @@
 				03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */,
 				03875A9A28D086D300E751B0 /* BasicIconButton.swift */,
 				0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */,
+				0300867C28D4596000F31763 /* NFCTagReader.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 				0300867628D32E8900F31763 /* ViewModels */,
 				03875A9328D067C900E751B0 /* MainMenuView.swift */,
 				03875A9C28D098FA00E751B0 /* UserAccountView.swift */,
+				03AE897528D485C300AC6AB7 /* MainMenuCoordinatorView.swift */,
 			);
 			path = UserMenu;
 			sourceTree = "<group>";
@@ -650,6 +658,7 @@
 				F9A1A81F28A1269C00E8DFB9 /* NavigationStack */,
 				03472A9428A24AB9008F51DE /* NavigationStack */,
 				036FF87328AB9F11004C913A /* NavigationStack */,
+				0300867A28D34C5D00F31763 /* PasscodeField */,
 			);
 			productName = Move;
 			productReference = F9A1A7EE28A1163200E8DFB9 /* Move.app */;
@@ -730,6 +739,7 @@
 				F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				036FF87228AB9F11004C913A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				0300867928D34C5D00F31763 /* XCRemoteSwiftPackageReference "PasscodeField" */,
 			);
 			productRefGroup = F9A1A7EF28A1163200E8DFB9 /* Products */;
 			projectDirPath = "";
@@ -915,6 +925,7 @@
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
 				03FDD40428C884DD001D7A44 /* ImagesEnum.swift in Sources */,
+				0300867D28D4596000F31763 /* NFCTagReader.swift in Sources */,
 				03875A9428D067CA00E751B0 /* MainMenuView.swift in Sources */,
 				F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */,
 				035033F428AE1FB80084762F /* Buttons.swift in Sources */,
@@ -923,6 +934,7 @@
 				0371A9E028D1EF46009FDF7F /* RideServices.swift in Sources */,
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
 				03875A9D28D098FA00E751B0 /* UserAccountView.swift in Sources */,
+				03AE897628D485C300AC6AB7 /* MainMenuCoordinatorView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
 				F9CFA18E28C74564007029F1 /* AuthenticationModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
@@ -1281,6 +1293,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0300867928D34C5D00F31763 /* XCRemoteSwiftPackageReference "PasscodeField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hengyu/PasscodeField.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		03472A9328A24AB9008F51DE /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
@@ -1308,6 +1328,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0300867A28D34C5D00F31763 /* PasscodeField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0300867928D34C5D00F31763 /* XCRemoteSwiftPackageReference "PasscodeField" */;
+			productName = PasscodeField;
+		};
 		03472A9428A24AB9008F51DE /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F9A1A81E28A1269C00E8DFB9 /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;

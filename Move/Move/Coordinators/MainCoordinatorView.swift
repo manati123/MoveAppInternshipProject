@@ -42,6 +42,7 @@ struct MainCoordinatorView: View {
                 NavigationLink(destination: DriverLicenseCoordinatorView(userDefaults: userDefaultsService){
                     self.selection = OnboardingEnum.authentication
                 } onFinished: {
+                    print("jsdnfjs")
                     self.selection = OnboardingEnum.map
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .license, selection: $selection) {
                     EmptyView()
@@ -51,10 +52,19 @@ struct MainCoordinatorView: View {
                     self.selection = OnboardingEnum.authentication
                     AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
                 } onFinished: {
-                    self.selection = OnboardingEnum.none
+                    self.selection = OnboardingEnum.menu
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                
+                
+                NavigationLink(destination: MainMenuCoordinatorView(userViewModel: userViewModel){
+                    self.selection = OnboardingEnum.authentication
+                    AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
+                }  onGoBack: {self.selection = .map}.preferredColorScheme(.light).navigationBarHidden(true), tag: .menu, selection: $selection) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
                 
             }.navigationBarHidden(true)
         }

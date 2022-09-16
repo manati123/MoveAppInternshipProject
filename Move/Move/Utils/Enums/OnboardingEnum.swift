@@ -13,5 +13,6 @@ enum OnboardingEnum: String {
     case authentication = "Authentication"
     case onboarding = "DoneOnboarding"
     case map = "MapView"
+    case menu = "Menu"
     case none = ""
 }

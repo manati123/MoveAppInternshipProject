@@ -82,6 +82,8 @@ struct LogInView: View {
         }
     }
     
+    
+    //TODO: change 
     var noAccount: some View {
         HStack(spacing: 0) {
             

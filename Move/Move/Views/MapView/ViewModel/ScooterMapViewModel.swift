@@ -70,6 +70,24 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         }
     }
     
+    func checkMinimumDistanceAndLocationEnabled(selectedScooterLocation: CLLocationCoordinate2D) -> Bool {
+        let locationDisabled = self.locationIsDisabled()
+        let scooterLocation = CLLocation(latitude: selectedScooterLocation.latitude, longitude: selectedScooterLocation.longitude)
+        if !locationDisabled {
+            let distanceToScooter = Int(self.locationManager?.location?.distance(from: scooterLocation) ?? 1000)
+            if distanceToScooter < 40 {
+                return false
+            }
+            else {
+//                ErrorService().showError(message: "User distance from scooter must be within 40 meters!")
+                return true
+            }
+        } else {
+//            ErrorService().showError(message: "User location is disabled!")
+            return true
+        }
+    }
+    
     func locationIsDisabled() -> Bool {
         guard let locationManager = locationManager else {
             return false

@@ -12,16 +12,17 @@ import SwiftUI
 extension MainMenuView {
     class ViewModel: ObservableObject {
         var scooterAPI: ScooterAPI = .init()
-        @Published var numberOfRides: Int = 12
+        @Published var numberOfRides: Int = 0
         
         
-        func getRides() {
+        func getRides(completionHandler: @escaping (Int)->()) {
 //            var val: Int = -1
             scooterAPI.getAllRides { result in
                 switch result {
                 case .success(let numberOfRides):
+                    completionHandler(numberOfRides)
 //                    val = numberOfRides
-                    self.numberOfRides = numberOfRides
+//                    self.numberOfRides = numberOfRides
                 case .failure:
                     print("Error")
                 }
