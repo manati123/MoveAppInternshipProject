@@ -37,9 +37,3 @@ struct MapCoordinatorView: View {
     }
 }
 
-struct MapCoordinatorView_Previews: PreviewProvider {
-    static var previews: some View {
-//        MapCoordinatorView(logOut: {}, onFinished: {})
-        Text("f")
-    }
-}

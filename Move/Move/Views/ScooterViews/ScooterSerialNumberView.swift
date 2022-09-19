@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PasscodeField
 
 struct ScooterSerialNumberView: View {
     var body: some View {
@@ -38,13 +37,7 @@ struct ScooterSerialNumberView: View {
                     .lineLimit(3)
                 
                 Spacer()
-                PasscodeField("") { digits, action in
-                    if "1234" == digits.concat {
-                        action(true)
-                    } else {
-                        action(false)
-                    }
-                }
+                PasscodeFieldView()
                 .foregroundColor(Color.black)
                     Spacer()
                     Text("Alternately you can unlock using")
