@@ -10,8 +10,7 @@ import SwiftUI
 enum MapCoordinatorStates: String {
     case mapView = "MapView"
     case menu = "Menu"
-    case account = "Account"
-    case unlock = "Unlock"
+    case unlockWithCode = "Code"
 }
 
 struct MapCoordinatorView: View {
@@ -22,7 +21,7 @@ struct MapCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MapContainerScreen(onGoToMenu: {onFinished()})
+                NavigationLink(destination: MapContainerScreen(onGoValidateWithCode: {self.mapState = .unlockWithCode}, onGoToMenu: {onFinished()})
                     .navigationBarHidden(true)
                     .ignoresSafeArea()
                     .transition(.slide.animation(.default)),
@@ -31,6 +30,17 @@ struct MapCoordinatorView: View {
                 ){
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: ScooterSerialNumberView(onGoBack: {self.mapState = .mapView})
+                    .navigationBarHidden(true)
+                    .ignoresSafeArea()
+                    .transition(.slide.animation(.default)),
+                               tag: .unlockWithCode,
+                               selection: $mapState
+                ){
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
             }
             .navigationBarHidden(true)
         }

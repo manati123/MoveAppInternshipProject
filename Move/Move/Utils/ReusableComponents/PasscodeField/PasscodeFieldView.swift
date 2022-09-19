@@ -7,8 +7,23 @@
 
 import SwiftUI
 import Foundation
-struct PasscodeFieldView: View {
+
+class PasscodeFieldViewModel: ObservableObject {
+    @Published var currentPin = ["", "", "", ""]
+    @FocusState var fieldFocusedState: Int?
+    let correctPin: String
     
+    init(correctPin: String) {
+        self.correctPin = correctPin
+    }
+    
+    func enteredPinIsCorrect() -> Bool {
+        let currentPinConcatenated = self.currentPin.joined()
+        return correctPin == currentPinConcatenated
+    }
+}
+
+struct PasscodeFieldView: View {
     @State var currentPin = ["", "", "", ""]
     @FocusState var fieldFocusedState: Int?
     var body: some View {
@@ -26,7 +41,6 @@ struct PasscodeFieldView: View {
                             } else {
                                 self.fieldFocusedState = 0
                             }
-                            
                         }
                 }
             }
@@ -39,7 +53,7 @@ struct PasscodeFieldView_Previews: PreviewProvider {
         ZStack {
             PurpleBackground()
             PasscodeFieldView()
-//            Text("ff")
+            //            Text("ff")
             
         }
     }

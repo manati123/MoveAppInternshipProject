@@ -62,7 +62,7 @@ struct ScooterCardView: View {
             }
             .padding(.horizontal, 20)
             .buttonStyle(.filledButton)
-            .disabled(self.isEnabled)
+//            .disabled(s)
             
         }
     }

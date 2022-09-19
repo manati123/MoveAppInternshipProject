@@ -13,8 +13,8 @@ struct ContentView: View {
    
     var body: some View {
 //        AuthenticationView()
-//        MainCoordinatorView()
-        ScooterSerialNumberView()
+        MainCoordinatorView()
+//        ScooterSerialNumberView()
 //        MyView()
 //        MapContainerScreen()
 //            .ignoresSafeArea()

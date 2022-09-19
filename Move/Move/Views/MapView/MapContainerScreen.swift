@@ -13,6 +13,7 @@ import MapKit
 struct MapContainerScreen: View{
     
     @StateObject private var viewModel: ViewModel = .init()
+    let onGoValidateWithCode:() -> Void
     let onGoToMenu:() -> Void
     var body: some View {
         ZStack(alignment: .top) {
@@ -92,7 +93,7 @@ struct MapContainerScreen: View{
     var scooterToBeUnlockedView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                UnlockScooterSheetView(scooter: selectedScooter.scooterData)
+                UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: self.onGoValidateWithCode)
             }
         }
     }
@@ -102,7 +103,7 @@ struct MapContainerScreen: View{
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainerScreen(onGoToMenu: {})
+        MapContainerScreen(onGoValidateWithCode: {}, onGoToMenu: {})
             .ignoresSafeArea()
     }
 }
