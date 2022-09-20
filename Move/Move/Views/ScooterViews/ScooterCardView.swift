@@ -131,7 +131,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-            ScooterCardView(isEnabled: false, scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
+            ScooterCardView(isEnabled: false, scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
         }
     }
 }

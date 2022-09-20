@@ -27,7 +27,7 @@ extension ScooterCardView {
                     self.objectWillChange.send()
                 }
                 else {
-                    print(error)
+                    print(error as Any)
                 }
             }
         }

@@ -216,6 +216,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         }
         
         if let scooterAnnotation = view.annotation as? ScooterAnnotation {
+            print("SELECTED SCOOTER")
             self.onSelectedScooter(scooterAnnotation)
         }
     }

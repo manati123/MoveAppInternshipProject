@@ -11,7 +11,7 @@ import MapKit
 
 
 struct MapContainerScreen: View{
-    
+    @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     @StateObject private var viewModel: ViewModel = .init()
     let onGoValidateWithCode:() -> Void
     let onGoToMenu:() -> Void
@@ -30,7 +30,6 @@ struct MapContainerScreen: View{
         }
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
-                
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
@@ -40,6 +39,7 @@ struct MapContainerScreen: View{
                     .transition(.opacity.animation(.default))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.vertical, 46)
+                    .id(UUID())
                     
             }
             
@@ -92,8 +92,14 @@ struct MapContainerScreen: View{
     @ViewBuilder
     var scooterToBeUnlockedView: some View {
         if let selectedScooter = viewModel.selectedScooter {
-            withAnimation {
-                UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: self.onGoValidateWithCode)
+             withAnimation {
+                UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: {
+                    self.onGoValidateWithCode()
+                    self.viewModel.showUnlockingSheet = false
+                    if let selectedScooterData = self.viewModel.selectedScooter?.scooterData {
+                        self.mapCoordinatorViewModel.selectedScooter = selectedScooterData
+                    }
+                })
             }
         }
     }
@@ -103,7 +109,7 @@ struct MapContainerScreen: View{
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainerScreen(onGoValidateWithCode: {}, onGoToMenu: {})
+        MapContainerScreen(mapCoordinatorViewModel: .init(), onGoValidateWithCode: {}, onGoToMenu: {})
             .ignoresSafeArea()
     }
 }

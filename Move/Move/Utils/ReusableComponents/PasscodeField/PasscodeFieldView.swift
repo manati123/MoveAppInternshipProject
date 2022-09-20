@@ -11,27 +11,55 @@ import Foundation
 class PasscodeFieldViewModel: ObservableObject {
     @Published var currentPin = ["", "", "", ""]
     @FocusState var fieldFocusedState: Int?
-    let correctPin: String
+    var selectedScooterNumber: Int?
+    let goToLoad:() -> Void
     
-    init(correctPin: String) {
-        self.correctPin = correctPin
+    init(correctPin: Int?, goToLoad:@escaping ()->Void) {
+        self.selectedScooterNumber = correctPin
+        self.goToLoad = goToLoad
     }
     
     func enteredPinIsCorrect() -> Bool {
         let currentPinConcatenated = self.currentPin.joined()
-        return correctPin == currentPinConcatenated
+        return selectedScooterNumber == Int(currentPinConcatenated)
+    }
+    
+    func checkAllPinsAreFilled() -> Bool{
+        for pin in currentPin {
+            if pin == "" {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func checkAll() {
+        if checkAllPinsAreFilled() {
+            if enteredPinIsCorrect() {
+                self.goToLoad()
+            }
+            else {
+                ErrorService().showError(message: "Entered pin does not conform to the one on the selected scooter. Please try again")
+                self.currentPin = ["", "", "", ""]
+            }
+        }
     }
 }
 
 struct PasscodeFieldView: View {
-    @State var currentPin = ["", "", "", ""]
     @FocusState var fieldFocusedState: Int?
+    @StateObject var viewModel: PasscodeFieldViewModel
+    
+    init(selectedScooterNumber: Int?, goToLoad:@escaping () -> Void) {
+        self._viewModel = StateObject(wrappedValue: PasscodeFieldViewModel(correctPin: selectedScooterNumber, goToLoad: goToLoad))
+    }
+    
     var body: some View {
         ZStack {
             HStack {
                 ForEach(0..<4, id: \.self) { index in
-                    PasscodeFieldTextBox(currentValue: $currentPin[index], focusedFieldIndex: _fieldFocusedState, index: index)
-                        .onChange(of: currentPin[index]) { newValue in
+                    PasscodeFieldTextBox(currentValue: $viewModel.currentPin[index], focusedFieldIndex: _fieldFocusedState, index: index)
+                        .onChange(of: viewModel.currentPin[index]) { newValue in
                             if let fieldFocusedState = fieldFocusedState {
                                 if newValue == "" {
                                     self.fieldFocusedState = fieldFocusedState - 1
@@ -41,6 +69,7 @@ struct PasscodeFieldView: View {
                             } else {
                                 self.fieldFocusedState = 0
                             }
+                            self.viewModel.checkAll()
                         }
                 }
             }
@@ -52,7 +81,7 @@ struct PasscodeFieldView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             PurpleBackground()
-            PasscodeFieldView()
+//            PasscodeFieldView()
             //            Text("ff")
             
         }

@@ -7,30 +7,8 @@
 
 import SwiftUI
 
-struct HalfSheetModal: View {
-    @State var showSheet = false
-    var body: some View {
-        
-        NavigationView {
-            Button {
-                print("ha?")
-            }label: {
-                Text("Present sheet")
-            }
-            .halfSheet(showSheet: $showSheet, sheetView: {
-                Text("ksjdnfksnfksn")
-            }, onEnd: {print("Dismissed")})
-        }
 
-        
-    }
-}
 
-struct HalfSheetModal_Previews: PreviewProvider {
-    static var previews: some View {
-        HalfSheetModal()
-    }
-}
 
 extension View {
     
@@ -66,6 +44,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
             sheetController.presentationController?.delegate = context.coordinator
             uiViewController.present(sheetController, animated: true)
         } else {
+//            onEnd()
             uiViewController.dismiss(animated: true)
         }
     }
@@ -79,6 +58,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
         }
         
         func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+            print("hihi?")
             parent.onEnd()
         }
     }
@@ -88,7 +68,7 @@ class CustomHostingController<Content: View>: UIHostingController<Content> {
     
     override func viewDidLoad() {
         if let presentationController = presentationController as? UISheetPresentationController {
-            presentationController.detents = [.medium(), .large()]
+            presentationController.detents = [.medium()]
             presentationController.prefersGrabberVisible = true
         }
     }

@@ -84,7 +84,7 @@ class AuthenticationAPI {
                 } catch {
                     print("error: ", error)
                 }
-            case .failure(let error):
+            case .failure(_):
                 do {
                     let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
                     completionHandler(.failure(MoveError.serverError(decodedMessage.message)))

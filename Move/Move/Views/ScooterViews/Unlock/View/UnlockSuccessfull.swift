@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct UnlockSuccessfull: View {
+    
+    let goToStartRide:() -> Void
+    
     var body: some View {
         ZStack {
             PurpleBackground()
@@ -29,11 +32,16 @@ struct UnlockSuccessfull: View {
             }
             .frame(maxHeight: .infinity)
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.goToStartRide()
+            }
+        }
     }
 }
 
 struct UnlockSuccessfull_Previews: PreviewProvider {
     static var previews: some View {
-        UnlockSuccessfull()
+        UnlockSuccessfull(goToStartRide: {print("Go Go Power Rangers!")})
     }
 }

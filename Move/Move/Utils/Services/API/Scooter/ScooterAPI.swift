@@ -19,7 +19,6 @@ struct Scooter: Codable {
     var location: Location?
     var _id: String?
     var number: Int?
-    var internal_id: Int?
     var battery: Int?
     var lockedStatus: Bool?
     var bookStatus: String?

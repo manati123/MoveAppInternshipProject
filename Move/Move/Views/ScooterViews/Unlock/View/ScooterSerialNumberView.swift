@@ -10,7 +10,8 @@ import SwiftUI
 struct ScooterSerialNumberView: View {
     
     let onGoBack:() -> Void
-    
+    let onGoToLoad:() -> Void
+    @State var selectedScooter: Scooter
     var body: some View {
         
         ZStack {
@@ -22,7 +23,7 @@ struct ScooterSerialNumberView: View {
                     bodyInformation
                     
                     Spacer()
-                    PasscodeFieldView()
+                    PasscodeFieldView(selectedScooterNumber: self.selectedScooter.number, goToLoad: onGoToLoad)
                         .foregroundColor(Color.black)
                     Spacer()
                     Text("Alternately you can unlock using")
@@ -92,6 +93,6 @@ struct ScooterSerialNumberView: View {
 
 struct ScooterSerialNumberView_Previews: PreviewProvider {
     static var previews: some View {
-        ScooterSerialNumberView(onGoBack: {})
+        ScooterSerialNumberView(onGoBack: {}, onGoToLoad: {}, selectedScooter: .init())
     }
 }

@@ -53,7 +53,7 @@ extension MapContainerScreen {
         func goToScooterLocation() {
             // Open and show coordinate
             let url = "maps://?saddr=&daddr=\( selectedScooter!.coordinate.latitude),\(selectedScooter!.coordinate.longitude)"
-            UIApplication.shared.openURL(URL(string:url)!)
+            UIApplication.shared.open(URL(string:url)!, options: [:], completionHandler: nil)
         }
         
         func convertUserCoordinatesToAddress() {
@@ -63,7 +63,7 @@ extension MapContainerScreen {
                     self.userLocation = placemarks?.first?.name ?? "Address Unavailable"
                 }
                 else {
-                    print(error)
+                    print(error as Any)
                 }
             }
         }

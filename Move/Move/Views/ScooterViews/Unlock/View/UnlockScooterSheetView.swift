@@ -130,6 +130,6 @@ struct UnlockScooterSheetView: View {
 
 struct UnlockScooterSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        UnlockScooterSheetView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), onGoValidateWithCode: {})
+        UnlockScooterSheetView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), onGoValidateWithCode: {})
     }
 }

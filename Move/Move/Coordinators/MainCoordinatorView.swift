@@ -53,7 +53,7 @@ struct MainCoordinatorView: View {
                     AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
                 } onFinished: {
                     self.selection = OnboardingEnum.menu
-                }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
+                } .preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
@@ -64,6 +64,8 @@ struct MainCoordinatorView: View {
                 }  onGoBack: {self.selection = .map}.preferredColorScheme(.light).navigationBarHidden(true), tag: .menu, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                
+//                NavigationLink(destination: UnlockCoordinatorView()
                 
                 
             }.navigationBarHidden(true)
@@ -80,7 +82,7 @@ struct MainCoordinatorView: View {
                     self.userViewModel.sessionUser.user = user
                     self.userViewModel.sessionUser.token = token
                     if user.drivinglicense != nil {
-                        print(user.drivinglicense)
+                        print(user.drivinglicense as Any)
                         self.selection = .map
                     } else {
                         self.selection = .license
