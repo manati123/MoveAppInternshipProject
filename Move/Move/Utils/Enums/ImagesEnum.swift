@@ -9,6 +9,7 @@ import Foundation
 
 
 enum ImagesEnum: String {
+    case lightbulb = "lightbulb"
     case codeButtonImage = "ButtonBlandPurple"
     case batteryCharging = "battery-charging"
     case battery0 = "battery-0"

@@ -10,6 +10,7 @@
 		0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300867728D32E9900F31763 /* MainMenuViewModel.swift */; };
 		0300867B28D34C5D00F31763 /* PasscodeField in Frameworks */ = {isa = PBXBuildFile; productRef = 0300867A28D34C5D00F31763 /* PasscodeField */; };
 		0300867D28D4596000F31763 /* NFCTagReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300867C28D4596000F31763 /* NFCTagReader.swift */; };
+		033C675D28D9906600F8D45D /* UnlockQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C675C28D9906600F8D45D /* UnlockQRCodeView.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		0300867728D32E9900F31763 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		0300867C28D4596000F31763 /* NFCTagReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTagReader.swift; sourceTree = "<group>"; };
+		033C675C28D9906600F8D45D /* UnlockQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockQRCodeView.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				03875A8628CD144700E751B0 /* UnlockScooterSheetView.swift */,
 				03875A8E28CF2C2700E751B0 /* ScooterSerialNumberView.swift */,
 				039C46CD28D8A39B00868F2B /* UnlockSuccessfull.swift */,
+				033C675C28D9906600F8D45D /* UnlockQRCodeView.swift */,
 			);
 			path = Unlock;
 			sourceTree = "<group>";
@@ -932,6 +935,7 @@
 				F9CFA18228C7231D007029F1 /* ScooterAnnotation.swift in Sources */,
 				03875A9928D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift in Sources */,
 				F9CFA18028C62A36007029F1 /* OpenedClusterView.swift in Sources */,
+				033C675D28D9906600F8D45D /* UnlockQRCodeView.swift in Sources */,
 				F9A1A7F428A1163200E8DFB9 /* ContentView.swift in Sources */,
 				0371A9E528D1F0BA009FDF7F /* HalfSheetModal.swift in Sources */,
 				03875A7A28CB11C800E751B0 /* ScooterAPI.swift in Sources */,
