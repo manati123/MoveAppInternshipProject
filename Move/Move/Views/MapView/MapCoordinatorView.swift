@@ -17,6 +17,7 @@ enum MapCoordinatorStates: String {
 class MapCoordinatorViewModel: ObservableObject {
     @Published var selectedScooter: Scooter = .init()
     @Published var mapState: MapCoordinatorStates? =  MapCoordinatorStates.mapView
+    @Published var showStartRideSheet = false
 }
 
 struct MapCoordinatorView: View {
@@ -37,7 +38,6 @@ struct MapCoordinatorView: View {
                 ){
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                
                 NavigationLink(destination: ScooterSerialNumberView(onGoBack: {self.viewModel.mapState = .mapView}, onGoToLoad: {self.viewModel.mapState = .success}, selectedScooter: self.viewModel.selectedScooter)
                     .navigationBarHidden(true)
                     .ignoresSafeArea()
@@ -49,7 +49,10 @@ struct MapCoordinatorView: View {
                 }.transition(.slide.animation(.default))
                 
                 
-                NavigationLink(destination: UnlockSuccessfull(goToStartRide: {self.viewModel.mapState = .mapView})
+                NavigationLink(destination: UnlockSuccessfull(goToStartRide: {
+                    self.viewModel.mapState = .mapView
+                    self.viewModel.showStartRideSheet = true
+                })
                     .navigationBarHidden(true)
                     .ignoresSafeArea()
                     .transition(.slide.animation(.default)),
@@ -58,8 +61,6 @@ struct MapCoordinatorView: View {
                 ){
                     EmptyView()
                 }.transition(.slide.animation(.default))
-//                NavigationLink(destination: UnlockSuccessfull(goToStartRide: <#T##() -> Void#>))
-                
             }
             .navigationBarHidden(true)
         }

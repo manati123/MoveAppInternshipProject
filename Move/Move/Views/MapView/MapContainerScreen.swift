@@ -23,7 +23,6 @@ struct MapContainerScreen: View{
                 }
             topTitleBar
         }
-        
         .onAppear{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
@@ -33,6 +32,12 @@ struct MapContainerScreen: View{
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
+//        .halfSheet(showSheet: self.$mapCoordinatorViewModel.showStartRideSheet) {
+//            startRideSheetView
+//        } onEnd: {
+//            self.mapCoordinatorViewModel.showStartRideSheet = false
+//        }
+        
         .overlay(content: {
             ZStack {
                 selectedScooterView
@@ -40,10 +45,9 @@ struct MapContainerScreen: View{
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.vertical, 46)
                     .id(UUID())
-                    
             }
-            
         })
+                
         .navigationBarHidden(true)
         
         
@@ -85,6 +89,17 @@ struct MapContainerScreen: View{
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {self.viewModel.showUnlockingSheet = true})
                     .shadow(radius: 10)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var startRideSheetView: some View {
+        if let selectedScooter = viewModel.selectedScooter {
+            withAnimation {
+                StartRideSheetView(scooter: selectedScooter.scooterData, onStartRide: {
+                    self.mapCoordinatorViewModel.showStartRideSheet = false
+                })
             }
         }
     }

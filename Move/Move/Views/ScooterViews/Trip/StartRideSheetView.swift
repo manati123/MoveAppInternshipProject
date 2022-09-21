@@ -13,21 +13,13 @@ struct StartRideSheetView: View {
     var body: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Scooter")
-                        .font(Font.baiJamjuree.caption1)
-                        .foregroundColor(Color.neutralPurple)
-                    Text(verbatim: "#\(scooter.number!)")
-                        .font(Font.baiJamjuree.heading1)
-                        .foregroundColor(Color.primaryPurple)
-                    BatteryView(battery: scooter.battery ?? 100)
-                }
-                .padding(.leading, 24)
+                scooterData
+                    .padding(.leading, 24)
                 scooterImage
                     .padding(.leading, 25)
             }
             Button{
-                
+                onStartRide()
             }label: {
                 Text("Start ride")
                     .font(Font.baiJamjuree.button1)
@@ -38,6 +30,18 @@ struct StartRideSheetView: View {
         }
     }
     
+    var scooterData: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Scooter")
+                .font(Font.baiJamjuree.caption1)
+                .foregroundColor(Color.neutralPurple)
+            Text(verbatim: "#\(scooter.number!)")
+                .font(Font.baiJamjuree.heading1)
+                .foregroundColor(Color.primaryPurple)
+            BatteryView(battery: scooter.battery ?? 100)
+        }
+        
+    }
     
     var scooterImage: some View {
         Image(ImagesEnum.cardViewScooterRightOrientation.rawValue)
@@ -56,6 +60,6 @@ struct StartRideSheetView: View {
 
 struct StartRideSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        StartRideSheetView(scooter: .init(number: 1234))
+        StartRideSheetView(scooter: .init(number: 1234), onStartRide: {})
     }
 }
