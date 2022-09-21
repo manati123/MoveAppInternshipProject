@@ -11,6 +11,8 @@
 		0300867B28D34C5D00F31763 /* PasscodeField in Frameworks */ = {isa = PBXBuildFile; productRef = 0300867A28D34C5D00F31763 /* PasscodeField */; };
 		033C675D28D9906600F8D45D /* UnlockQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C675C28D9906600F8D45D /* UnlockQRCodeView.swift */; };
 		033C676128D9ABE400F8D45D /* UnlockCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676028D9ABE400F8D45D /* UnlockCoordinatorView.swift */; };
+		033C676428DAEFD500F8D45D /* StartRideSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676328DAEFD500F8D45D /* StartRideSheetView.swift */; };
+		033C676628DAF06000F8D45D /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676528DAF06000F8D45D /* BatteryView.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -120,6 +122,8 @@
 		0300867728D32E9900F31763 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		033C675C28D9906600F8D45D /* UnlockQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockQRCodeView.swift; sourceTree = "<group>"; };
 		033C676028D9ABE400F8D45D /* UnlockCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockCoordinatorView.swift; sourceTree = "<group>"; };
+		033C676328DAEFD500F8D45D /* StartRideSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideSheetView.swift; sourceTree = "<group>"; };
+		033C676528DAF06000F8D45D /* BatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -274,6 +278,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		033C676228DAEFC300F8D45D /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				033C676328DAEFD500F8D45D /* StartRideSheetView.swift */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
 		03472A9828A252F5008F51DE /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +367,7 @@
 				03875A9828D06A3900E751B0 /* PurpleBackgroundInformativeWithButton.swift */,
 				03875A9A28D086D300E751B0 /* BasicIconButton.swift */,
 				0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */,
+				033C676528DAF06000F8D45D /* BatteryView.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -472,6 +485,7 @@
 		03FDD3C828C76630001D7A44 /* ScooterViews */ = {
 			isa = PBXGroup;
 			children = (
+				033C676228DAEFC300F8D45D /* Trip */,
 				039C46CC28D8A34100868F2B /* Unlock */,
 				03875A8828CF170400E751B0 /* ViewModels */,
 				F9CFA17F28C62A36007029F1 /* OpenedClusterView.swift */,
@@ -977,10 +991,12 @@
 				0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */,
 				03FF3B6F28D8466900165AA4 /* PasscodeFieldView.swift in Sources */,
 				03875A9D28D098FA00E751B0 /* UserAccountView.swift in Sources */,
+				033C676628DAF06000F8D45D /* BatteryView.swift in Sources */,
 				03AE897628D485C300AC6AB7 /* MainMenuCoordinatorView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
 				F9CFA18E28C74564007029F1 /* AuthenticationModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
+				033C676428DAEFD500F8D45D /* StartRideSheetView.swift in Sources */,
 				F998FC1228C0B47900DBB961 /* ScooterCardView.swift in Sources */,
 				03875A8F28CF2C2700E751B0 /* ScooterSerialNumberView.swift in Sources */,
 				036FF87A28ABBC3C004C913A /* FloatingTextField.swift in Sources */,
