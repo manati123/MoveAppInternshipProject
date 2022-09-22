@@ -79,7 +79,8 @@ struct TripDetailsSheetView: View {
                         .padding(.vertical, 3)
                 }
                 .buttonStyle(.filledButton)
-            }
+            }.padding(.horizontal, 24)
+                .padding(.bottom, 36)
         }.frame(maxWidth: .infinity)
     }
 }
