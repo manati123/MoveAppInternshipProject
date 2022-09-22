@@ -12,12 +12,13 @@ struct MainMenuView: View {
     @StateObject var viewModel: ViewModel = .init()
     let onGoBack:() -> Void
     let onGoToAccount:() -> Void
+    let onGoToHistory:() -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
-                TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack)
-                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: \(viewModel.numberOfRides)", buttonText: "See all", onButtonHandler: {})
+                TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack, icon: ImagesEnum.avatar.rawValue)
+                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: \(userViewModel.sessionUser.user.numberOfRides ?? 0)", buttonText: "See all", onButtonHandler: onGoToHistory)
                     .padding(.leading, 15)
                     .id(UUID())
                 buttons
@@ -26,12 +27,12 @@ struct MainMenuView: View {
             }
             
         }
-        .onAppear {
-            self.viewModel.getRides() { value in
-                self.viewModel.numberOfRides = value
-                self.viewModel.objectWillChange.send()
-            }
-        }
+//        .onAppear {
+//            self.viewModel.getRides() { value in
+//                self.viewModel.numberOfRides = value
+//                self.viewModel.objectWillChange.send()
+//            }
+//        }
     }
     
     var buttons: some View {

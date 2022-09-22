@@ -31,7 +31,7 @@ struct UserAccountView: View {
     let onGoBack:() -> Void
     var body: some View {
         VStack(spacing: 44) {
-            TopBarWithBackAndIcon(text: "Account", onGoBack: self.onGoBack)
+            TopBarWithBackAndIcon(text: "Account", onGoBack: self.onGoBack, icon: "")
             VStack(spacing: 28) {
                 FloatingTextField(title: "Username", isTouched: false, isSecured: false, isPasswordField: false, foregroundColor: Color.black, text: $userViewModel.sessionUser.user.name, icon: "")
                 

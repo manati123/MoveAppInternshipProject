@@ -9,7 +9,7 @@ import SwiftUI
 
 enum MainMenuCoordinatorState: String {
     case menu = "Menu"
-    case rides = "Rides"
+    case history = "History"
     case account = "Account"
     case password = "Password"
 }
@@ -23,11 +23,17 @@ struct MainMenuCoordinatorView: View {
         NavigationView {
             ZStack {
                 
-                NavigationLink(destination: MainMenuView(userViewModel: userViewModel, onGoBack: onGoBack, onGoToAccount: {menuState = .account}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: MainMenuCoordinatorState.menu, selection: $menuState) {
+                NavigationLink(destination: MainMenuView(userViewModel: userViewModel, onGoBack: onGoBack, onGoToAccount: {menuState = .account}, onGoToHistory: {menuState = .history}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: MainMenuCoordinatorState.menu, selection: $menuState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
                 NavigationLink(destination: UserAccountView(userViewModel: userViewModel, onLogOut: logOut, onGoBack: {self.menuState = .menu}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: MainMenuCoordinatorState.account, selection: $menuState) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: RideHistoryView(onGoBack: {
+                    self.menuState = .menu
+                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: MainMenuCoordinatorState.history, selection: $menuState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 

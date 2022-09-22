@@ -10,6 +10,7 @@ import SwiftUI
 struct TopBarWithBackAndIcon: View {
     var text: String
     let onGoBack:() -> Void
+    let icon: String
     var body: some View {
         HStack {
             Button {
@@ -22,7 +23,7 @@ struct TopBarWithBackAndIcon: View {
                 .font(Font.baiJamjuree.heading3)
                 .foregroundColor(Color.primaryPurple)
             Spacer()
-            Image(ImagesEnum.avatar.rawValue)
+            Image(icon)
                 .renderingMode(.original)
         }.frame(maxWidth: .infinity)
             .padding(.horizontal, 24)

@@ -16,6 +16,8 @@
 		033C676928DB12AA00F8D45D /* RideAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676828DB12AA00F8D45D /* RideAPI.swift */; };
 		03448F0328DC4F8E00199F6D /* FlexibleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */; };
 		03448F0528DC57B100199F6D /* TripDetailsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */; };
+		03448F0728DC8E7900199F6D /* RideInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0628DC8E7900199F6D /* RideInformationCard.swift */; };
+		03448F0928DCA97D00199F6D /* RideHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0828DCA97D00199F6D /* RideHistoryView.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -130,6 +132,8 @@
 		033C676828DB12AA00F8D45D /* RideAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideAPI.swift; sourceTree = "<group>"; };
 		03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleSheet.swift; sourceTree = "<group>"; };
 		03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsSheetView.swift; sourceTree = "<group>"; };
+		03448F0628DC8E7900199F6D /* RideInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideInformationCard.swift; sourceTree = "<group>"; };
+		03448F0828DCA97D00199F6D /* RideHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideHistoryView.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */,
 				033C676528DAF06000F8D45D /* BatteryView.swift */,
 				03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */,
+				03448F0628DC8E7900199F6D /* RideInformationCard.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				03875A9328D067C900E751B0 /* MainMenuView.swift */,
 				03875A9C28D098FA00E751B0 /* UserAccountView.swift */,
 				03AE897528D485C300AC6AB7 /* MainMenuCoordinatorView.swift */,
+				03448F0828DCA97D00199F6D /* RideHistoryView.swift */,
 			);
 			path = UserMenu;
 			sourceTree = "<group>";
@@ -970,10 +976,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03448F0728DC8E7900199F6D /* RideInformationCard.swift in Sources */,
 				039C46CE28D8A39B00868F2B /* UnlockSuccessfull.swift in Sources */,
 				036FF87728ABB925004C913A /* ViewExtensions.swift in Sources */,
 				0356772428AE629D00FDB6BC /* ForgotPasswordView.swift in Sources */,
 				036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */,
+				03448F0928DCA97D00199F6D /* RideHistoryView.swift in Sources */,
 				036FF88028AD01CB004C913A /* FontExtensions.swift in Sources */,
 				F9CFA18B28C74536007029F1 /* ErrorService.swift in Sources */,
 				F9CFA18228C7231D007029F1 /* ScooterAnnotation.swift in Sources */,
