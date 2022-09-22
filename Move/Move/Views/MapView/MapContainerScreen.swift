@@ -29,14 +29,14 @@ struct MapContainerScreen: View{
         }
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
+
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
-//        .halfSheet(showSheet: self.$mapCoordinatorViewModel.showStartRideSheet) {
-//            startRideSheetView
-//        } onEnd: {
-//            self.mapCoordinatorViewModel.showStartRideSheet = false
+//        .sheet(isPresented: self.$viewModel.showUnlockingSheet) {
+//            scooterToBeUnlockedView
 //        }
+
         
         .overlay(content: {
             ZStack {
@@ -47,6 +47,8 @@ struct MapContainerScreen: View{
                     .id(UUID())
             }
         })
+        
+        
                 
         .navigationBarHidden(true)
         
@@ -93,17 +95,7 @@ struct MapContainerScreen: View{
         }
     }
     
-    @ViewBuilder
-    var startRideSheetView: some View {
-        if let selectedScooter = viewModel.selectedScooter {
-            withAnimation {
-                StartRideSheetView(scooter: selectedScooter.scooterData, onStartRide: {
-                    self.mapCoordinatorViewModel.showStartRideSheet = false
-                })
-            }
-        }
-    }
-    
+
     @ViewBuilder
     var scooterToBeUnlockedView: some View {
         if let selectedScooter = viewModel.selectedScooter {
@@ -111,6 +103,7 @@ struct MapContainerScreen: View{
                 UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: {
                     self.onGoValidateWithCode()
                     self.viewModel.showUnlockingSheet = false
+//                    self.mapCoordinatorViewModel.showStartRideSheet = true
                     if let selectedScooterData = self.viewModel.selectedScooter?.scooterData {
                         self.mapCoordinatorViewModel.selectedScooter = selectedScooterData
                     }

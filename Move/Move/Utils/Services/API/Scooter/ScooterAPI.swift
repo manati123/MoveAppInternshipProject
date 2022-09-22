@@ -59,17 +59,17 @@ class ScooterAPI {
             "latitudine": "\(userLocation.latitude)",
             "longitudine": "\(userLocation.longitude)"
         ]
-//        print(headers)
         
         AF.request("\(baseUrl)", method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: [Scooter].self) { response in
                 
                 do {
-                    print(response.data!)
-                    let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
-                    
-                    completionHandler(.success(decoded))
+                    if response.data != nil {
+                        print(response.data!)
+                        let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
+                        completionHandler(.success(decoded))
+                    }
                 } catch {
                     completionHandler(.failure(error))
                 }

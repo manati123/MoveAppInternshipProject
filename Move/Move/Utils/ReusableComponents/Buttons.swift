@@ -55,7 +55,7 @@ struct TransparentButton: ButtonStyle {
                                 
                             ))
             .foregroundColor(isEnabled ? Color.accentPink : .neutralPurple)
-            .frame(width:96, height: 56)
+//            .frame(width:96, height: 56)
     }
 }
 

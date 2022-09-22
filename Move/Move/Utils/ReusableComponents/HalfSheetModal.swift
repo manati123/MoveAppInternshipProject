@@ -58,7 +58,6 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
         }
         
         func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-            print("hihi?")
             parent.onEnd()
         }
     }

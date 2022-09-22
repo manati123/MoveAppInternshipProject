@@ -41,12 +41,14 @@ class PasscodeFieldViewModel: ObservableObject {
             else {
                 ErrorService().showError(message: "Entered pin does not conform to the one on the selected scooter. Please try again")
                 self.currentPin = ["", "", "", ""]
+                
             }
         }
     }
 }
 
 struct PasscodeFieldView: View {
+    //TODO: move FocusState to PasscodeFieldViewModel
     @FocusState var fieldFocusedState: Int?
     @StateObject var viewModel: PasscodeFieldViewModel
     

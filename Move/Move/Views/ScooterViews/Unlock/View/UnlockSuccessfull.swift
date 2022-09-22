@@ -11,6 +11,11 @@ struct UnlockSuccessfull: View {
     
     let goToStartRide:() -> Void
     
+    init(goToStartRide:@escaping () -> Void) {
+        self.goToStartRide = goToStartRide
+        
+    }
+    
     var body: some View {
         ZStack {
             PurpleBackground()
@@ -21,7 +26,6 @@ struct UnlockSuccessfull: View {
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 102)
                     .padding(.horizontal, 65)
-//                    .padding(.top, 133)
                 Image(ImagesEnum.bigCheckmark.rawValue)
                 Text("Please respect all the driving regulations and other participants in traffic while using our scooters")
                     .font(Font.baiJamjuree.caption1)
@@ -34,7 +38,7 @@ struct UnlockSuccessfull: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.goToStartRide()
+                goToStartRide()
             }
         }
     }

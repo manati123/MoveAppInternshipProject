@@ -40,7 +40,7 @@ struct UnlockScooterSheetView: View {
             BatteryView(battery: self.scooter.battery!)
             HStack {
                 Button() {
-                    print("LMAO")
+                    
                 } label: {
                     Image(ImagesEnum.ringScooterPin.rawValue)
                 }
@@ -51,7 +51,7 @@ struct UnlockScooterSheetView: View {
             }
             HStack {
                 Button() {
-                    print("LMAO")
+                    
                 } label: {
                     Image(ImagesEnum.missingScooterPin.rawValue)
                 }
@@ -67,14 +67,14 @@ struct UnlockScooterSheetView: View {
         HStack(spacing: 21) {
             Spacer()
             Button() {
-                print("LMAO")
+                self.onGoValidateWithCode()
             } label: {
                 Text("NFC")
             }
             .buttonStyle(.transparentButton)
             
             Button() {
-                print("LMAO")
+                self.onGoValidateWithCode()
             } label: {
 //                    Image(ImagesEnum.missingScooterPin.rawValue)
                 Text("QR")

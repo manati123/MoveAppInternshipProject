@@ -10,6 +10,13 @@ import SwiftUI
 struct StartRideSheetView: View {
     var scooter: Scooter
     let onStartRide:() -> Void
+    
+    init(scooter: Scooter, onStartRide:@escaping () -> Void) {
+        self.scooter = scooter
+        self.onStartRide = onStartRide
+        print("SHEET VIEW INSTANTIATED")
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -27,7 +34,9 @@ struct StartRideSheetView: View {
             }
             .buttonStyle(.filledButton)
             .padding(.top, 41)
+            Spacer()
         }
+        
     }
     
     var scooterData: some View {
@@ -35,7 +44,7 @@ struct StartRideSheetView: View {
             Text("Scooter")
                 .font(Font.baiJamjuree.caption1)
                 .foregroundColor(Color.neutralPurple)
-            Text(verbatim: "#\(scooter.number!)")
+            Text(verbatim: "#\(scooter.number ?? 0000)")
                 .font(Font.baiJamjuree.heading1)
                 .foregroundColor(Color.primaryPurple)
             BatteryView(battery: scooter.battery ?? 100)
@@ -54,6 +63,7 @@ struct StartRideSheetView: View {
                 .offset(x: 0, y: 45)
                 .opacity(0.15)
             )
+            
             
     }
 }

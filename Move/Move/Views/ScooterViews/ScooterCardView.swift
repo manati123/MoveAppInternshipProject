@@ -54,7 +54,6 @@ struct ScooterCardView: View {
                     .foregroundColor(Color.primaryPurple)
             }
             Button() {
-                print("LMAO")
                 self.showSheet()
             } label: {
                 Text("Unlock")
@@ -100,7 +99,7 @@ struct ScooterCardView: View {
                 }
                 HStack(spacing: 24) {
                     Button() {
-                        print("LMAO")
+                        print("RING SCOOTER")
                     } label: {
                         Image(ImagesEnum.ringScooterPin.rawValue)
                     }

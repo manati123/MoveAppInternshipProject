@@ -51,7 +51,7 @@ struct UserAccountView: View {
                 }
             }
             Button {
-                print("jhs djfhs")
+                
             }label: {
                 Text("Save edits")
                     .foregroundColor(Color.neutralGray)

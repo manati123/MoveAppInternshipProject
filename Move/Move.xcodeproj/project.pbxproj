@@ -13,6 +13,9 @@
 		033C676128D9ABE400F8D45D /* UnlockCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676028D9ABE400F8D45D /* UnlockCoordinatorView.swift */; };
 		033C676428DAEFD500F8D45D /* StartRideSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676328DAEFD500F8D45D /* StartRideSheetView.swift */; };
 		033C676628DAF06000F8D45D /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676528DAF06000F8D45D /* BatteryView.swift */; };
+		033C676928DB12AA00F8D45D /* RideAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C676828DB12AA00F8D45D /* RideAPI.swift */; };
+		03448F0328DC4F8E00199F6D /* FlexibleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */; };
+		03448F0528DC57B100199F6D /* TripDetailsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */; };
 		03472A9528A24AB9008F51DE /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03472A9428A24AB9008F51DE /* NavigationStack */; };
 		03472A9A28A25328008F51DE /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9928A25328008F51DE /* AuthenticationModel.swift */; };
 		03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472A9B28A25336008F51DE /* AuthenticationView.swift */; };
@@ -124,6 +127,9 @@
 		033C676028D9ABE400F8D45D /* UnlockCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockCoordinatorView.swift; sourceTree = "<group>"; };
 		033C676328DAEFD500F8D45D /* StartRideSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideSheetView.swift; sourceTree = "<group>"; };
 		033C676528DAF06000F8D45D /* BatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
+		033C676828DB12AA00F8D45D /* RideAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideAPI.swift; sourceTree = "<group>"; };
+		03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleSheet.swift; sourceTree = "<group>"; };
+		03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsSheetView.swift; sourceTree = "<group>"; };
 		03472A9928A25328008F51DE /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		03472A9B28A25336008F51DE /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		03472A9E28A2611F008F51DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -282,8 +288,17 @@
 			isa = PBXGroup;
 			children = (
 				033C676328DAEFD500F8D45D /* StartRideSheetView.swift */,
+				03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */,
 			);
 			path = Trip;
+			sourceTree = "<group>";
+		};
+		033C676728DB129B00F8D45D /* Ride */ = {
+			isa = PBXGroup;
+			children = (
+				033C676828DB12AA00F8D45D /* RideAPI.swift */,
+			);
+			path = Ride;
 			sourceTree = "<group>";
 		};
 		03472A9828A252F5008F51DE /* Authentication */ = {
@@ -368,6 +383,7 @@
 				03875A9A28D086D300E751B0 /* BasicIconButton.swift */,
 				0371A9E428D1F0BA009FDF7F /* HalfSheetModal.swift */,
 				033C676528DAF06000F8D45D /* BatteryView.swift */,
+				03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -529,6 +545,7 @@
 		F94A968728BCA5F900231B2E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				033C676728DB129B00F8D45D /* Ride */,
 				03875A8228CCF92A00E751B0 /* DrivingLicense */,
 				03875A7828CB11B800E751B0 /* Scooter */,
 				F9CFA18C28C74553007029F1 /* Authentication */,
@@ -978,6 +995,8 @@
 				03875A8A28CF171500E751B0 /* ScooterCardViewModel.swift in Sources */,
 				F94A968928BCA61F00231B2E /* AutnenticationAPI.swift in Sources */,
 				0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */,
+				033C676928DB12AA00F8D45D /* RideAPI.swift in Sources */,
+				03448F0528DC57B100199F6D /* TripDetailsSheetView.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
@@ -994,6 +1013,7 @@
 				033C676628DAF06000F8D45D /* BatteryView.swift in Sources */,
 				03AE897628D485C300AC6AB7 /* MainMenuCoordinatorView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
+				03448F0328DC4F8E00199F6D /* FlexibleSheet.swift in Sources */,
 				F9CFA18E28C74564007029F1 /* AuthenticationModels.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
 				033C676428DAEFD500F8D45D /* StartRideSheetView.swift in Sources */,

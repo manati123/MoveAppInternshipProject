@@ -112,7 +112,6 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             print("Denied location")
             mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
         case .authorizedAlways, .authorizedWhenInUse:
-            print("f")
             mapView.centerCoordinate = locationManager.location!.coordinate
         @unknown default:
             break
@@ -122,9 +121,6 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
-        //        checkIfLocationServiceIsEnabled()
-        print("Checked")
-        //        print("checked")
     }
     
     func refreshScooterList() {

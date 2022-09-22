@@ -42,7 +42,6 @@ struct MainCoordinatorView: View {
                 NavigationLink(destination: DriverLicenseCoordinatorView(userDefaults: userDefaultsService){
                     self.selection = OnboardingEnum.authentication
                 } onFinished: {
-                    print("jsdnfjs")
                     self.selection = OnboardingEnum.map
                 }.preferredColorScheme(.light).navigationBarHidden(true), tag: .license, selection: $selection) {
                     EmptyView()
@@ -101,28 +100,6 @@ struct MainCoordinatorView: View {
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 setFlowOfApplication()
-//                if self.userDefaultsService.isOnboarded()  {
-//
-//                    let token = userDefaultsService.loadTokenFromDefaults()
-//                    print(token)
-//                    AuthenticationAPI().getUser(token: token) { result in
-//                        print(result)
-//                    }
-//                    if let decodedUser = try? self.userDefaultsService.loadUserFromDefaults() {
-//                        if decodedUser.user.validated ?? false {
-//                            print("MAP")
-//                            self.selection = .map
-//                        }
-//                        else {
-//                            self.selection = .license
-//                        }
-//                    } else {
-//                        self.selection = .authentication
-//                    }
-//                }
-//                else {
-//                    self.selection = .onboarding
-//                }
             }
         }.navigationBarHidden(true)
     }

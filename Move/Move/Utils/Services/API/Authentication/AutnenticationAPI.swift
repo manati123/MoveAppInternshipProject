@@ -25,7 +25,6 @@ class AuthenticationAPI {
             "email": user.email,
             "password": user.password
         ]
-        print(parameters)
         AF.request("\(baseUrl)/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
             switch response.result {
@@ -64,7 +63,6 @@ class AuthenticationAPI {
             response in
             switch response.result {
             case .success(let data):
-                //                   print("\n data: \(try! JSONDecoder().decode(User.self, from: data)) \n")
                 do {
                     let decodedUser = try JSONDecoder().decode(UserDTO.self, from: data)
                     print(decodedUser)
