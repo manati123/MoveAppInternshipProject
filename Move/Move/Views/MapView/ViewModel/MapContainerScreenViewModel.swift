@@ -23,6 +23,7 @@ extension MapContainerScreen {
             }
         }
         var scooterAPI: ScooterAPI = .init()
+        var rideAPI: RideAPI = .init()
         init () {
             
             self.convertUserCoordinatesToAddress()
@@ -30,9 +31,9 @@ extension MapContainerScreen {
                 self.selectedScooter = scooter
             }
             
-            mapViewModel.onDeselectedScooter = { 
-                self.selectedScooter = nil
-            }
+            //            mapViewModel.onDeselectedScooter = {
+            //                self.selectedScooter = nil
+            //            }
             
             self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
                 self.mapViewModel.refreshScooterList()
@@ -43,6 +44,19 @@ extension MapContainerScreen {
             })
             
             
+            
+        }
+        
+        func startRide(scooter: Scooter) {
+            print("\n START RIDE \n")
+            print(scooter)
+            if let location = self.mapViewModel.locationManager?.location {
+                print(location)
+                self.rideAPI.startRide(scooter: scooter, userLocation: location.coordinate, userToken: UserDefaultsService().loadTokenFromDefaults()) { result in
+                    print(result)
+                    
+                }
+            }
             
         }
         

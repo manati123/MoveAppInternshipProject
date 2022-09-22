@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct TripDetailsSheetView: View {
+    var scooter: Scooter
+    
     @State var lockStatus = true
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("Trip Details")
@@ -81,12 +84,13 @@ struct TripDetailsSheetView: View {
                 .buttonStyle(.filledButton)
             }.padding(.horizontal, 24)
                 .padding(.bottom, 36)
+            Spacer()
         }.frame(maxWidth: .infinity)
     }
 }
 
 struct TripDetailsSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        TripDetailsSheetView()
+        TripDetailsSheetView(scooter: Scooter(battery: 82))
     }
 }

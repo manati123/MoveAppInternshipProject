@@ -27,15 +27,21 @@ struct MapContainerScreen: View{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
         }
+        .overlay(
+            FlexibleSheet(sheetDetents: .constant(self.mapCoordinatorViewModel.sheetPresentationDetents)) {
+                
+                sheetMode
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.neutralWhite)
+                    .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
+            }
+        )
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
 
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
-//        .sheet(isPresented: self.$viewModel.showUnlockingSheet) {
-//            scooterToBeUnlockedView
-//        }
 
         
         .overlay(content: {
@@ -110,6 +116,23 @@ struct MapContainerScreen: View{
                 })
             }
         }
+    }
+    
+    @ViewBuilder
+    var sheetMode: some View {
+        switch mapCoordinatorViewModel.rideSheetState {
+        case .start:
+            StartRideSheetView(scooter: self.mapCoordinatorViewModel.selectedScooter, onStartRide: {
+                print("STARTING RIDE")
+                self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter)
+//                self.viewModel.sheetPresentationDetents = .none
+                self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+            })
+        case .detailsMinimized:
+            TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter)
+        
+        }
+        
     }
 }
 
