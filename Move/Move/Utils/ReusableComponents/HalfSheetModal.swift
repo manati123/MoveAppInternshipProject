@@ -45,9 +45,9 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
             uiViewController.present(sheetController, animated: true)
         } else {
 //            onEnd()
-            if uiViewController.presentedViewController === controller {
+//            if uiViewController.presentedViewController === controller {
                 uiViewController.dismiss(animated: true)
-            }
+//            }
         }
     }
     

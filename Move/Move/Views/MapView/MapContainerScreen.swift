@@ -93,7 +93,7 @@ struct MapContainerScreen: View{
     var selectedScooterView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                ScooterCardView(isEnabled: self.viewModel.mapViewModel.checkMinimumDistanceAndLocationEnabled(selectedScooterLocation: selectedScooter.coordinate), scooter: selectedScooter.scooterData, getLocationHandler: {
+                ScooterCardView(scooter: selectedScooter.scooterData, getLocationHandler: {
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {self.viewModel.showUnlockingSheet = true})
                     .shadow(radius: 10)
@@ -124,15 +124,19 @@ struct MapContainerScreen: View{
         case .start:
             StartRideSheetView(scooter: self.mapCoordinatorViewModel.selectedScooter, onStartRide: {
                 print("STARTING RIDE")
-                self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter)
-//                self.viewModel.sheetPresentationDetents = .none
-                self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+                self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter, completion: { response in
+                    switch response {
+                    case .success(let result):
+                        self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+                    case .failure(let error):
+                        ErrorService().showError(message: error.localizedDescription)
+                        self.mapCoordinatorViewModel.sheetPresentationDetents = .none
+                    }
+                })
             })
         case .detailsMinimized:
             TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter)
-        
         }
-        
     }
 }
 

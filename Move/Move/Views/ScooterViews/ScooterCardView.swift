@@ -15,15 +15,14 @@ struct ScooterModel {
 }
 
 struct ScooterCardView: View {
-    @State var isEnabled: Bool
+    
     @StateObject private var viewModel: ViewModel
     let getLocationHandler:() -> Void
     let showSheet:() -> Void
     
-    init(isEnabled: Bool, scooter: Scooter, getLocationHandler:@escaping () -> Void, showSheet:@escaping () -> Void) {
+    init(scooter: Scooter, getLocationHandler:@escaping () -> Void, showSheet:@escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter))
         self.getLocationHandler = getLocationHandler
-        self.isEnabled = isEnabled
         self.showSheet = showSheet
     }
     var body: some View {
@@ -40,7 +39,6 @@ struct ScooterCardView: View {
             .onAppear {
                 self.viewModel.convertLocation()
             }
-            
     }
     
     //TODO: smaller spacing
@@ -55,6 +53,7 @@ struct ScooterCardView: View {
             }
             Button() {
                 self.showSheet()
+                
             } label: {
                 Text("Unlock")
                     .frame(maxWidth: .infinity)
@@ -130,7 +129,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-            ScooterCardView(isEnabled: false, scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
+            ScooterCardView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
         }
     }
 }

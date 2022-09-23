@@ -28,12 +28,7 @@ struct MainCoordinatorView: View {
                 
                 
                 NavigationLink(destination: SignUpCoordinatorView(viewModel: userViewModel){
-                    switch userViewModel.user.drivinglicense != "" {
-                    case true:
-                        self.selection = OnboardingEnum.map
-                    case false:
-                        self.selection = OnboardingEnum.license
-                    }
+                    setFlowOfApplication()
                 }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
@@ -81,6 +76,7 @@ struct MainCoordinatorView: View {
                     self.userViewModel.sessionUser.user = user
                     self.userViewModel.sessionUser.token = token
                     if user.drivinglicense != nil {
+                        print("\n \n \n \(user.drivinglicense)\n \n \n")
                         print(user.drivinglicense as Any)
                         self.selection = .map
                     } else {

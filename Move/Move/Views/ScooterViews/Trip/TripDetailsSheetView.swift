@@ -9,10 +9,9 @@ import SwiftUI
 
 struct TripDetailsSheetView: View {
     @StateObject var viewModel: ViewModel
-    @State var lockStatus = true
     
     init(scooter: Scooter) {
-        self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter))
+        self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter, lockStatus: false))
     }
     
     var body: some View {
@@ -42,8 +41,6 @@ struct TripDetailsSheetView: View {
                             .padding(.bottom, 2)
                     }.foregroundColor(.primaryPurple)
                 }
-                
-                
                 VStack {
                     HStack(spacing: 4) {
                         Image(systemName: "map")
@@ -66,16 +63,16 @@ struct TripDetailsSheetView: View {
                 .padding(.bottom, 36)
             HStack(spacing: 20) {
                 Button {
-                    print("Locking")
+                    self.viewModel.lockStatus.toggle()
                 } label: {
                     HStack(spacing: 4) {
-                        Image(self.lockStatus ? ImagesEnum.lock.rawValue : ImagesEnum.unlock.rawValue)
-                        Text("Lock")
+                        Image(self.viewModel.lockStatus ? ImagesEnum.unlock.rawValue : ImagesEnum.lock.rawValue)
+                        Text(self.viewModel.lockStatus ? "Unlock" : "Lock")
+                            .frame(maxWidth: .infinity)
                             
                     }
                     .padding(.horizontal, 28)
                 }
-                
                 .buttonStyle(.transparentButton)
                 Button {
                     print("Ending ride")
@@ -95,17 +92,20 @@ struct TripDetailsSheetView: View {
 extension TripDetailsSheetView {
     class ViewModel: ObservableObject {
         @Published var scooter: Scooter
-        
-        init(scooter: Scooter) {
+        @Published var lockStatus: Bool
+        init(scooter: Scooter, lockStatus: Bool) {
             self.scooter = scooter
+            self.lockStatus = lockStatus
         }
         
         func lockScooter() {
-            
+            self.lockStatus = true
+            ScooterAPI().lockScooter(scooterNumber: scooter.number ?? 0000, token: UserDefaultsService().loadTokenFromDefaults())
         }
         
         func unlockScooter() {
-            
+            self.lockStatus = false
+            ScooterAPI().unlockScooter(scooterNumber: scooter.number ?? 0000, token: UserDefaultsService().loadTokenFromDefaults())
         }
     }
 }

@@ -31,9 +31,9 @@ extension MapContainerScreen {
                 self.selectedScooter = scooter
             }
             
-            //            mapViewModel.onDeselectedScooter = {
-            //                self.selectedScooter = nil
-            //            }
+                        mapViewModel.onDeselectedScooter = {
+                            self.selectedScooter = nil
+                        }
             
             self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
                 self.mapViewModel.refreshScooterList()
@@ -47,7 +47,7 @@ extension MapContainerScreen {
             
         }
         
-        func startRide(scooter: Scooter) {
+        func startRide(scooter: Scooter, completion:@escaping (Result<Any>) -> Void) {
             print("\n START RIDE \n")
             print(scooter)
             if let location = self.mapViewModel.locationManager?.location {
@@ -56,9 +56,9 @@ extension MapContainerScreen {
                     .loadTokenFromDefaults()) { result in
                         switch result {
                         case .success:
-                            print("STARTING RIDE")
+                            completion(.success(result))
                         case .failure(let error):
-                            ErrorService().showError(message: error.localizedDescription)
+                            completion(.failure(error))
                         }
                 }
             }
