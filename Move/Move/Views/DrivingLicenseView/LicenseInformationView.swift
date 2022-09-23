@@ -55,11 +55,7 @@ struct LicenseInformationView: View {
                         
                     }
                 }
-                
-//                .padding(.vertical, 24)
-                
-                
-                
+
             }.foregroundColor(Color.primaryPurple)
                 .background(.white)
                 
