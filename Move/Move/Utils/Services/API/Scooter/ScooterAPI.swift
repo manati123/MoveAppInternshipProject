@@ -35,11 +35,61 @@ struct Ride {
 class ScooterAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com/scooter"
     
-    func getAllRides(completionHandler: @escaping(Result<Int>) -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            completionHandler(.success(12))
-        }
+    
+    func getScooterByNumber(scooterNumber: Int, completionHandler:@escaping (Result<Scooter>) -> Void) {
+        AF.request("\(baseUrl)/\(scooterNumber)", method: .get)
+            .validate(statusCode: 200..<299)
+            .responseDecodable(of: Scooter.self) { response in
+                switch response.result {
+                case .success(let scooter):
+                    completionHandler(.success(scooter))
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+                
+            }
     }
+    
+    func lockScooter(scooterNumber: Int, token: String) {
+        let parameters = [
+            "scooterNumber": scooterNumber
+        ]
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/lock", method: .patch, parameters: parameters, headers: headers)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    print("Success")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+            }
+    }
+    
+    func unlockScooter(scooterNumber: Int, token: String) {
+        let parameters = [
+            "scooterNumber": scooterNumber
+        ]
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/unlock", method: .patch, parameters: parameters, headers: headers)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    print("Success")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+            }
+    }
+    
     
     func getAllScooters(completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         AF.request("\(baseUrl)", method: .get)
@@ -54,6 +104,8 @@ class ScooterAPI {
             }
     }
     
+    
+    
     func getScootersByLocation(userLocation: CLLocationCoordinate2D, completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         let parameters = [
             "latitudine": "\(userLocation.latitude)",
@@ -63,7 +115,6 @@ class ScooterAPI {
         AF.request("\(baseUrl)", method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: [Scooter].self) { response in
-                
                 do {
                     if response.data != nil {
                         print(response.data!)

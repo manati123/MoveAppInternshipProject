@@ -13,7 +13,7 @@ class RideAPI {
     static let shareInstance = RideAPI()
     
     func startRide(scooter: Scooter, userLocation: CLLocationCoordinate2D, userToken: String, completionHandler:@escaping (Result<Any>)-> Void) {
-//        print("jshbfj")
+        
         let header: HTTPHeaders = ["Authorization": "Bearer \(userToken)"]
         
         let parameters = [
@@ -32,13 +32,8 @@ class RideAPI {
                 case .success(let data):
                     completionHandler(.success(data))
                 case .failure(let error):
-                    do {
-                        let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
-                        completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
-                    } catch(let error) {
-                        completionHandler(.failure(error))
-                    }
-//                    completionHandler(.failure(error))
+                        let decodedMessage = try? JSONDecoder().decode(ServerError.self, from: response.data!)
+                    completionHandler(.failure(MoveError.serverError(decodedMessage?.message ?? "IDK")))
                 }
             }
         

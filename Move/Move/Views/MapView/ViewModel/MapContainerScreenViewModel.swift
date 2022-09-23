@@ -52,13 +52,19 @@ extension MapContainerScreen {
             print(scooter)
             if let location = self.mapViewModel.locationManager?.location {
                 print(location)
-                self.rideAPI.startRide(scooter: scooter, userLocation: location.coordinate, userToken: UserDefaultsService().loadTokenFromDefaults()) { result in
-                    print(result)
-                    
+                self.rideAPI.startRide(scooter: scooter, userLocation: location.coordinate, userToken: UserDefaultsService()
+                    .loadTokenFromDefaults()) { result in
+                        switch result {
+                        case .success:
+                            print("STARTING RIDE")
+                        case .failure(let error):
+                            ErrorService().showError(message: error.localizedDescription)
+                        }
                 }
             }
-            
         }
+        
+        
         
         func followingUser() -> Bool {
             return self.mapViewModel.mapView.userTrackingMode == .followWithHeading

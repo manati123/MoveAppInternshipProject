@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct TripDetailsSheetView: View {
-    var scooter: Scooter
-    
+    @StateObject var viewModel: ViewModel
     @State var lockStatus = true
+    
+    init(scooter: Scooter) {
+        self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter))
+    }
     
     var body: some View {
         VStack(alignment: .center) {
@@ -18,7 +21,7 @@ struct TripDetailsSheetView: View {
                 .font(Font.baiJamjuree.heading2)
                 .foregroundColor(Color.primaryPurple)
                 .padding(.vertical, 20)
-            BatteryView(battery: 82)
+            BatteryView(battery: self.viewModel.scooter.battery ?? 100)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 25)
                 .padding(.bottom, 24)
@@ -86,6 +89,24 @@ struct TripDetailsSheetView: View {
                 .padding(.bottom, 36)
             Spacer()
         }.frame(maxWidth: .infinity)
+    }
+}
+
+extension TripDetailsSheetView {
+    class ViewModel: ObservableObject {
+        @Published var scooter: Scooter
+        
+        init(scooter: Scooter) {
+            self.scooter = scooter
+        }
+        
+        func lockScooter() {
+            
+        }
+        
+        func unlockScooter() {
+            
+        }
     }
 }
 
