@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct RideInformation {
+struct RideInformation: Hashable{
+    let id = UUID()
     let initialAddress: String
     let finishAddress: String
     let distance: Double

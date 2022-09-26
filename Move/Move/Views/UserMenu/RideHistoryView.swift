@@ -8,20 +8,36 @@
 import SwiftUI
 
 struct RideHistoryView: View {
-    let rides: [RideInformation] = .init()
+    @State var rides: [RideInformation] = .init()
+    
     let onGoBack:() -> Void
+    @State var numberOfRides = 10
+    @State var dragged = false
     var body: some View {
         VStack {
             TopBarWithBackAndIcon(text: "History", onGoBack: onGoBack, icon: "")
                 .padding(.bottom, 44)
             ScrollView {
+                PullToRefresh(coordinateSpaceName: "pullToRefresh") {
+                    print("haha")
+                    if !dragged {
+                        self.numberOfRides = 0
+                    } else {
+                        self.numberOfRides = 10
+                    }
+                    dragged.toggle()
+                    }
                 VStack(spacing: 12) {
-                    ForEach(0..<10, id: \.self) { _ in
+                    ForEach(0..<self.numberOfRides, id: \.self) { _ in
                         RideInformationCard(ride: RideInformation(initialAddress: "Caminul 16 Hasdeu", finishAddress: "Str. Lunii 2A", distance: 4.2, time: "00:15 min"))
                     }
+//                    ForEach(rides, id:\.self) { ride in
+//                        RideInformationCard(ride: ride)
+//
+//                    }
                 }
                 .padding(.top, 10)
-            }
+            }.coordinateSpace(name: "pullToRefresh")
         }
     }
 }
