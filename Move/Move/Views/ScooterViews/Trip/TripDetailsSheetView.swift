@@ -24,43 +24,7 @@ struct TripDetailsSheetView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 25)
                 .padding(.bottom, 24)
-            HStack(spacing: 55) {
-                
-                VStack {
-                    HStack(spacing: 4) {
-                        Image(systemName: "clock")
-                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-                        Text("Travel time")
-                    }
-                    
-                    HStack(alignment: .bottom) {
-                        Text("00:12")
-                            .font(Font.baiJamjuree.heading1)
-                        Text("min")
-                            .font(Font.baiJamjuree.heading3)
-                            .padding(.bottom, 2)
-                    }.foregroundColor(.primaryPurple)
-                }
-                VStack {
-                    HStack(spacing: 4) {
-                        Image(systemName: "map")
-                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-                        Text("Distance")
-                    }
-                    HStack(alignment: .bottom) {
-                        Text("2.7")
-                            .font(Font.baiJamjuree.heading1)
-                        Text("km")
-                            .font(Font.baiJamjuree.heading3)
-                            .padding(.bottom, 2)
-                    }.foregroundColor(.primaryPurple)
-                }
-            }.frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color.neutralGray)
-                .font(Font.baiJamjuree.caption1)
-                .padding(.leading, 24)
-                .padding(.trailing, 83)
-                .padding(.bottom, 36)
+            TripTimeAndDistanceView(timeIsRunning: self.$viewModel.timerIsRunning)
             HStack(spacing: 20) {
                 Button {
                     self.viewModel.lockStatus.toggle()
@@ -76,6 +40,7 @@ struct TripDetailsSheetView: View {
                 .buttonStyle(.transparentButton)
                 Button {
                     print("Ending ride")
+                    self.viewModel.timerIsRunning = false
                 } label: {
                         Text("End ride")
                         .padding(.horizontal, 28)
@@ -93,6 +58,12 @@ extension TripDetailsSheetView {
     class ViewModel: ObservableObject {
         @Published var scooter: Scooter
         @Published var lockStatus: Bool
+        @Published var timerIsRunning = true {
+            didSet {
+                print("VALUE OF timerIsRunning = \(timerIsRunning)")
+                self.objectWillChange.send()
+            }
+        }
         init(scooter: Scooter, lockStatus: Bool) {
             self.scooter = scooter
             self.lockStatus = lockStatus

@@ -19,6 +19,7 @@ extension CLLocationCoordinate2D {
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var firstPopulation = false
+    @Published var mapSnapshot: UIImage = .init()
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -42,6 +43,26 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             mapView.userTrackingMode = .followWithHeading
         }
     }
+    
+    func saveMapViewImage() {
+        let options = MKMapSnapshotter.Options()
+        options.region = self.mapView.region
+        options.size = self.mapView.frame.size
+        options.scale = UIScreen.main.scale
+        
+        let snapshotter = MKMapSnapshotter(options: options)
+        snapshotter.start() {snapshot, error in
+            guard snapshot != nil else {
+                print(error as Any)
+                return
+            }
+            self.mapSnapshot = snapshot!.image
+        }
+        
+    }
+    
+    
+    
     
     func centerOnUser() {
         let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)

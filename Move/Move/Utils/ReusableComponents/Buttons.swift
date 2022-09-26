@@ -34,6 +34,24 @@ struct FilledButton: ButtonStyle {
     }
 }
 
+struct ApplePayButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(Font.baiJamjuree.button1)
+            .padding(.horizontal,98)
+            .padding(.vertical, 16)
+            .background(AnyView(
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundColor(Color.black)
+//                                .frame(width: .infinity)
+            )
+                        
+            )
+            .foregroundColor(Color.neutralWhite)
+        
+    }
+}
+
 struct TransparentButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
@@ -55,6 +73,7 @@ struct TransparentButton: ButtonStyle {
                                 
                             ))
             .foregroundColor(isEnabled ? Color.accentPink : .neutralPurple)
+            
 //            .frame(width:96, height: 56)
     }
 }
@@ -117,6 +136,12 @@ extension ButtonStyle where Self == SimpleMapButton {
     }
 }
 
+extension ButtonStyle where Self == ApplePayButton {
+    static var applePayButton: Self {
+        return .init()
+    }
+}
+
 extension ButtonStyle where Self == FilledButton {
     static var filledButton: Self {
         return .init()
@@ -154,30 +179,12 @@ struct Buttons_Previews: PreviewProvider {
         ZStack {
             //            Color.primaryPurple
             PurpleBackground()
-            HStack {
-//                TextField("", text: self.$ab)
-            
-                Button {
-                    
-                } label: {
-                    //            Image("UserNotCenteredPin")
-                    Text("")
-                }
-                Button {
-                    
-                } label: {
-                    //            Image("UserNotCenteredPin")
-                    Text("")
-                }
+            Button {
                 
-                    Button {
-                        
-                    } label: {
-                        //            Image("UserNotCenteredPin")
-                        Text("")
-                    }
+            }label: {
+                Text("Pay with apple pay")
             }
-            .buttonStyle(.pinCodeButton)
+            .buttonStyle(.applePayButton)
         }
     }
 }

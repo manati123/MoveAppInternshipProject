@@ -42,6 +42,9 @@
 		035033F828AE26C00084762F /* PurpleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035033F728AE26C00084762F /* PurpleBackground.swift */; };
 		0356772128AE3CFF00FDB6BC /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0356772028AE3CFF00FDB6BC /* LogInView.swift */; };
 		0356772428AE629D00FDB6BC /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0356772328AE629D00FDB6BC /* ForgotPasswordView.swift */; };
+		036235F828E17CC5004B83D6 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036235F728E17CC5004B83D6 /* TimerView.swift */; };
+		036235FA28E18C83004B83D6 /* TripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036235F928E18C83004B83D6 /* TripSummaryView.swift */; };
+		036235FC28E1A047004B83D6 /* TripTimeAndDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036235FB28E1A047004B83D6 /* TripTimeAndDistanceView.swift */; };
 		036FF87128AB8F97004C913A /* OnboardingCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */; };
 		036FF87428AB9F11004C913A /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 036FF87328AB9F11004C913A /* NavigationStack */; };
 		036FF87728ABB925004C913A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036FF87628ABB925004C913A /* ViewExtensions.swift */; };
@@ -158,6 +161,9 @@
 		035033F728AE26C00084762F /* PurpleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleBackground.swift; sourceTree = "<group>"; };
 		0356772028AE3CFF00FDB6BC /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		0356772328AE629D00FDB6BC /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		036235F728E17CC5004B83D6 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		036235F928E18C83004B83D6 /* TripSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSummaryView.swift; sourceTree = "<group>"; };
+		036235FB28E1A047004B83D6 /* TripTimeAndDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTimeAndDistanceView.swift; sourceTree = "<group>"; };
 		036FF87028AB8F97004C913A /* OnboardingCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorView.swift; sourceTree = "<group>"; };
 		036FF87628ABB925004C913A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		036FF87928ABBC3C004C913A /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 			children = (
 				033C676328DAEFD500F8D45D /* StartRideSheetView.swift */,
 				03448F0428DC57B100199F6D /* TripDetailsSheetView.swift */,
+				036235F928E18C83004B83D6 /* TripSummaryView.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -389,6 +396,8 @@
 				033C676528DAF06000F8D45D /* BatteryView.swift */,
 				03448F0228DC4F8E00199F6D /* FlexibleSheet.swift */,
 				03448F0628DC8E7900199F6D /* RideInformationCard.swift */,
+				036235F728E17CC5004B83D6 /* TimerView.swift */,
+				036235FB28E1A047004B83D6 /* TripTimeAndDistanceView.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -1004,14 +1013,17 @@
 				F94A968928BCA61F00231B2E /* AutnenticationAPI.swift in Sources */,
 				0300867828D32E9900F31763 /* MainMenuViewModel.swift in Sources */,
 				033C676928DB12AA00F8D45D /* RideAPI.swift in Sources */,
+				036235F828E17CC5004B83D6 /* TimerView.swift in Sources */,
 				03448F0528DC57B100199F6D /* TripDetailsSheetView.swift in Sources */,
 				035033F628AE20540084762F /* ColorExtensions.swift in Sources */,
 				03AFAD2E28B8E76A00DD0DE7 /* WaitingForValidationView.swift in Sources */,
 				03472AA128A2655E008F51DE /* SlideIndicatorView.swift in Sources */,
 				03FDD40428C884DD001D7A44 /* ImagesEnum.swift in Sources */,
 				03875A9428D067CA00E751B0 /* MainMenuView.swift in Sources */,
+				036235FC28E1A047004B83D6 /* TripTimeAndDistanceView.swift in Sources */,
 				F9CFA17928C5D1C3007029F1 /* ActivityIndicator.swift in Sources */,
 				035033F428AE1FB80084762F /* Buttons.swift in Sources */,
+				036235FA28E18C83004B83D6 /* TripSummaryView.swift in Sources */,
 				03875A8728CD144700E751B0 /* UnlockScooterSheetView.swift in Sources */,
 				F998FC1428C0B5E400DBB961 /* LicenseViewModel.swift in Sources */,
 				0371A9E028D1EF46009FDF7F /* RideServices.swift in Sources */,

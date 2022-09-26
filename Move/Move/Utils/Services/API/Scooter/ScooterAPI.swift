@@ -16,6 +16,7 @@ struct Location: Codable {
 
 struct Scooter: Codable {
     var address: String?
+    var internalId: String?
     var location: Location?
     var _id: String?
     var number: Int?

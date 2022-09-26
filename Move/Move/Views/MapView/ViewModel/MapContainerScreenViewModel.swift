@@ -47,6 +47,8 @@ extension MapContainerScreen {
             
         }
         
+        
+        
         func startRide(scooter: Scooter, completion:@escaping (Result<Any>) -> Void) {
             print("\n START RIDE \n")
             print(scooter)
