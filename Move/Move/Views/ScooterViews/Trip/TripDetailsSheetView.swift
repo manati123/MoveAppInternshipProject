@@ -10,11 +10,12 @@ import SwiftUI
 struct TripDetailsSheetView: View {
     @StateObject var viewModel: ViewModel
     let endRide:() -> Void
-    @State var tripDetails: TripDetailsModel
-    init(scooter: Scooter, tripDetails: TripDetailsModel ,endRide:@escaping () -> Void) {
-        self.tripDetails = tripDetails
+    @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
+    init(scooter: Scooter, mapCoordinatorViewModel: MapCoordinatorViewModel ,endRide:@escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter, lockStatus: false))
         self.endRide = endRide
+        self.mapCoordinatorViewModel = mapCoordinatorViewModel
+        
     }
     
     var body: some View {
@@ -27,7 +28,7 @@ struct TripDetailsSheetView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 25)
                 .padding(.bottom, 24)
-            TripTimeAndDistanceView(tripDetails: self.tripDetails, timeIsRunning: self.$viewModel.timerIsRunning)
+            TripTimeAndDistanceView(mapCoordinatorViewModel: self.mapCoordinatorViewModel, timeIsRunning: self.$viewModel.timerIsRunning)
             HStack(spacing: 20) {
                 Button {
                     self.viewModel.lockStatus.toggle()

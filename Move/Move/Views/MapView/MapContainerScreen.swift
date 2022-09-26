@@ -128,11 +128,13 @@ struct MapContainerScreen: View{
                 })
             })
         case .detailsMinimized:
-            TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter, tripDetails: self.mapCoordinatorViewModel.tripDetails, endRide: {
+            TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter, mapCoordinatorViewModel: self.mapCoordinatorViewModel, endRide: {
+                self.mapCoordinatorViewModel.sheetPresentationDetents = .full
                 self.mapCoordinatorViewModel.rideSheetState = .tripSummary
+                
             })
         case .tripSummary:
-            TripSummaryView(tripDetails: $mapCoordinatorViewModel.tripDetails, onPayment: {
+            TripSummaryView(mapCoordinatorViewModel: mapCoordinatorViewModel, onPayment: {
                 self.mapCoordinatorViewModel.sheetPresentationDetents = .none
             })
         }

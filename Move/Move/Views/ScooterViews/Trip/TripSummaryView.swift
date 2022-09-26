@@ -13,7 +13,8 @@ struct TripSummaryView: View {
     let initialAddres = "Str. Avram Iancu nr. 26 Cladirea 2"
     let finalAddress = "Gradina Miko"
 //    let travelTime = "00:12 min"
-    @Binding var tripDetails: TripDetailsModel
+//    @Binding var tripDetails: TripDetailsModel
+    @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     let onPayment:() -> Void
 //    let distance = 0.0
 //    init(mapSnapshot: UIImage) {
@@ -60,7 +61,7 @@ struct TripSummaryView: View {
                 RoundedRectangle(cornerRadius: 26)
 //                    .frame(width: .infinity, height: 132)
                     .foregroundColor(Color.neutralGray.opacity(0.15)))
-            TripTimeAndDistanceView(tripDetails: tripDetails ,timeIsRunning: .constant(false))
+            TripTimeAndDistanceView(mapCoordinatorViewModel: self.mapCoordinatorViewModel ,timeIsRunning: .constant(false))
             Spacer()
             
             Button{

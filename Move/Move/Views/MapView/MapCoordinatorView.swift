@@ -25,7 +25,7 @@ class MapCoordinatorViewModel: ObservableObject {
     @Published var selectedScooter: Scooter = .init()
     @Published var rideSheetState: RideSheetState = .start
     @Published var sheetPresentationDetents: SheetDetents = .none
-    @Published var tripDetails: TripDetailsModel = .init(time: "00:12", distance: 0.0)
+    @Published var tripDetails: TripDetailsModel = .init(time: "00:00", distance: 0.0)
     @Published var mapState: MapCoordinatorStates? =  MapCoordinatorStates.mapView
     @Published var showStartRideSheet = false  {
         didSet {

@@ -13,7 +13,8 @@ struct TripDetailsModel {
 }
 
 struct TripTimeAndDistanceView: View {
-    @State var tripDetails: TripDetailsModel
+//    @State var tripDetails: TripDetailsModel
+    @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     @Binding var timeIsRunning: Bool {
         didSet {
             print(timeIsRunning)
@@ -31,7 +32,7 @@ struct TripTimeAndDistanceView: View {
                 .padding(.trailing, 30)
                 
                 HStack(alignment: .bottom) {
-                    TimerView(timerIsRunning: self.$timeIsRunning, tripDetails: tripDetails)
+                    TimerView(timerIsRunning: self.$timeIsRunning, tripDetails: mapCoordinatorViewModel.tripDetails)
                     Text("min")
                         .font(Font.baiJamjuree.heading3)
                         .padding(.bottom, 2)
@@ -44,7 +45,7 @@ struct TripTimeAndDistanceView: View {
                     Text("Distance")
                 }
                 HStack(alignment: .bottom) {
-                    Text("\(self.tripDetails.distance, specifier: "%.1f")")
+                    Text("\(self.mapCoordinatorViewModel.tripDetails.distance, specifier: "%.1f")")
                         .font(Font.baiJamjuree.heading1)
                         .animation(.none)
                     Text("km")
@@ -66,7 +67,7 @@ struct TripTimeAndDistanceView: View {
     func incrementDistance() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if timeIsRunning {
-                self.tripDetails.distance += 0.1
+                self.mapCoordinatorViewModel.tripDetails.distance += 0.1
                 incrementDistance()
             }
         }
