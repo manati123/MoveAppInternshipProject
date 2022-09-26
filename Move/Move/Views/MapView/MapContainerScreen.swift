@@ -136,6 +136,7 @@ struct MapContainerScreen: View{
         case .tripSummary:
             TripSummaryView(mapCoordinatorViewModel: mapCoordinatorViewModel, onPayment: {
                 self.mapCoordinatorViewModel.sheetPresentationDetents = .none
+                self.viewModel.mapViewModel.refreshScooterList()
             })
         }
     }
