@@ -9,14 +9,16 @@ import SwiftUI
 
 struct TimerView: View {
     @StateObject var viewModel: ViewModel
+    
 //    @Binding var timerIsRunning: Bool
-    init(timerIsRunning: Binding<Bool>) {
+    init(timerIsRunning: Binding<Bool>, tripDetails: TripDetailsModel) {
 //        self.timerIsRunning = timerIsRunning
-        self._viewModel = StateObject(wrappedValue: ViewModel(timerIsRunning: timerIsRunning))
+//        self.tripDetails = tripDetails
+        self._viewModel = StateObject(wrappedValue: ViewModel(timerIsRunning: timerIsRunning, tripDetails: tripDetails))
     }
     
     var body: some View {
-        Text(viewModel.displayedTime)
+        Text(viewModel.tripDetails.time)
             .font(Font.baiJamjuree.heading1)
             .foregroundColor(Color.primaryPurple)
     }
@@ -25,12 +27,13 @@ struct TimerView: View {
 
 extension TimerView {
     class ViewModel: ObservableObject {
+        @Published var tripDetails: TripDetailsModel
         @Published var timerIsRunning: Binding<Bool>
-        @Published var displayedTime = "00:00"
         @Published var minutes = 0
         @Published var hours = 0
         
-        init(timerIsRunning: Binding<Bool>) {
+        init(timerIsRunning: Binding<Bool>, tripDetails: TripDetailsModel) {
+            self.tripDetails = tripDetails
             self.timerIsRunning = Binding<Bool>.init(projectedValue: timerIsRunning.self)
             print(self.timerIsRunning)
             Timer.scheduledTimer(withTimeInterval: 60.0, repeats: timerIsRunning.wrappedValue) { [self] timer in
@@ -54,7 +57,7 @@ extension TimerView {
                 } else {
                     hourStr = "\(hours)"
                 }
-                displayedTime = "\(hourStr):\(minStr)"
+                self.tripDetails.time = "\(hourStr):\(minStr)"
             }
             
         }
@@ -62,8 +65,8 @@ extension TimerView {
 }
 
 
-struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimerView(timerIsRunning: .constant(true))
-    }
-}
+//struct TimerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TimerView(timerIsRunning: .constant(true))
+//    }
+//}

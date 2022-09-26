@@ -9,24 +9,29 @@ import SwiftUI
 
 
 struct TripSummaryView: View {
-    let mapSnapshot: UIImage
+//    let mapSnapshot: UIImage
     let initialAddres = "Str. Avram Iancu nr. 26 Cladirea 2"
     let finalAddress = "Gradina Miko"
-    let travelTime = "00:12 min"
-    init(mapSnapshot: UIImage) {
-        self.mapSnapshot = mapSnapshot
-    }
+//    let travelTime = "00:12 min"
+    @Binding var tripDetails: TripDetailsModel
+    let onPayment:() -> Void
+//    let distance = 0.0
+//    init(mapSnapshot: UIImage) {
+//        self.mapSnapshot = mapSnapshot
+//    }
     
     var body: some View {
         VStack(spacing: 36) {
             Text("Trip Summary")
                 .font(Font.baiJamjuree.heading2)
                 .foregroundColor(Color.primaryPurple)
+                .padding(.top, 54)
             
             RoundedRectangle(cornerRadius: 26)
                 .frame(maxWidth: 327, maxHeight: 172)
-                .overlay(Image(uiImage: mapSnapshot))
-                .foregroundColor(Color.primaryPurple)
+                .overlay(Image("MockMapImage")
+                    .cornerRadius(26)
+                )
             
             VStack(alignment: .leading, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -53,13 +58,14 @@ struct TripSummaryView: View {
                 .padding(.bottom, 12)
             }.background(
                 RoundedRectangle(cornerRadius: 26)
-                    .frame(width: .infinity, height: 132)
+//                    .frame(width: .infinity, height: 132)
                     .foregroundColor(Color.neutralGray.opacity(0.15)))
-            TripTimeAndDistanceView(timeIsRunning: .constant(false))
+            TripTimeAndDistanceView(tripDetails: tripDetails ,timeIsRunning: .constant(false))
             Spacer()
             
             Button{
                 print("MONEY")
+                onPayment()
             }label: {
                 Text("Pay with \(Image(systemName: "apple.logo"))Pay")
             }
@@ -70,8 +76,9 @@ struct TripSummaryView: View {
     }
 }
 
-struct TripSummaryView_Previews: PreviewProvider {
-    static var previews: some View {
-        TripSummaryView(mapSnapshot: .init(named: ImagesEnum.scooterLocationPin.rawValue)!)
-    }
-}
+//struct TripSummaryView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        TripSummaryView(mapSnapshot: .init(named: ImagesEnum.scooterLocationPin.rawValue)!)
+//        TripSummaryView()
+//    }
+//}

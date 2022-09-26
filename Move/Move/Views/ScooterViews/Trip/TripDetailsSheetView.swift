@@ -9,9 +9,12 @@ import SwiftUI
 
 struct TripDetailsSheetView: View {
     @StateObject var viewModel: ViewModel
-    
-    init(scooter: Scooter) {
+    let endRide:() -> Void
+    @State var tripDetails: TripDetailsModel
+    init(scooter: Scooter, tripDetails: TripDetailsModel ,endRide:@escaping () -> Void) {
+        self.tripDetails = tripDetails
         self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter, lockStatus: false))
+        self.endRide = endRide
     }
     
     var body: some View {
@@ -24,7 +27,7 @@ struct TripDetailsSheetView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 25)
                 .padding(.bottom, 24)
-            TripTimeAndDistanceView(timeIsRunning: self.$viewModel.timerIsRunning)
+            TripTimeAndDistanceView(tripDetails: self.tripDetails, timeIsRunning: self.$viewModel.timerIsRunning)
             HStack(spacing: 20) {
                 Button {
                     self.viewModel.lockStatus.toggle()
@@ -40,6 +43,7 @@ struct TripDetailsSheetView: View {
                 .buttonStyle(.transparentButton)
                 Button {
                     print("Ending ride")
+                    endRide()
                     self.viewModel.timerIsRunning = false
                 } label: {
                         Text("End ride")
@@ -81,8 +85,10 @@ extension TripDetailsSheetView {
     }
 }
 
-struct TripDetailsSheetView_Previews: PreviewProvider {
-    static var previews: some View {
-        TripDetailsSheetView(scooter: Scooter(battery: 82))
-    }
-}
+//struct TripDetailsSheetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TripDetailsSheetView(scooter: Scooter(battery: 82), endRide: {
+//            print("Ending ride")
+//        })
+//    }
+//}

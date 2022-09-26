@@ -53,12 +53,7 @@ struct MapContainerScreen: View{
                     .id(UUID())
             }
         })
-        
-        
-                
         .navigationBarHidden(true)
-        
-        
     }
     
     var topTitleBar: some View {
@@ -109,7 +104,6 @@ struct MapContainerScreen: View{
                 UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: {
                     self.onGoValidateWithCode()
                     self.viewModel.showUnlockingSheet = false
-//                    self.mapCoordinatorViewModel.showStartRideSheet = true
                     if let selectedScooterData = self.viewModel.selectedScooter?.scooterData {
                         self.mapCoordinatorViewModel.selectedScooter = selectedScooterData
                     }
@@ -123,10 +117,9 @@ struct MapContainerScreen: View{
         switch mapCoordinatorViewModel.rideSheetState {
         case .start:
             StartRideSheetView(scooter: self.mapCoordinatorViewModel.selectedScooter, onStartRide: {
-                print("STARTING RIDE")
                 self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter, completion: { response in
                     switch response {
-                    case .success(let result):
+                    case .success:
                         self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
                     case .failure(let error):
                         ErrorService().showError(message: error.localizedDescription)
@@ -135,7 +128,13 @@ struct MapContainerScreen: View{
                 })
             })
         case .detailsMinimized:
-            TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter)
+            TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter, tripDetails: self.mapCoordinatorViewModel.tripDetails, endRide: {
+                self.mapCoordinatorViewModel.rideSheetState = .tripSummary
+            })
+        case .tripSummary:
+            TripSummaryView(tripDetails: $mapCoordinatorViewModel.tripDetails, onPayment: {
+                self.mapCoordinatorViewModel.sheetPresentationDetents = .none
+            })
         }
     }
 }

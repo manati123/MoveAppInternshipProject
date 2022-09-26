@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+struct TripDetailsModel {
+    var time: String
+    var distance: Double
+}
+
 struct TripTimeAndDistanceView: View {
-    @State var time = "00:12"
-    @State var distance: Double = 0.0
+    @State var tripDetails: TripDetailsModel
     @Binding var timeIsRunning: Bool {
         didSet {
             print(timeIsRunning)
@@ -27,7 +31,7 @@ struct TripTimeAndDistanceView: View {
                 .padding(.trailing, 30)
                 
                 HStack(alignment: .bottom) {
-                    TimerView(timerIsRunning: self.$timeIsRunning)
+                    TimerView(timerIsRunning: self.$timeIsRunning, tripDetails: tripDetails)
                     Text("min")
                         .font(Font.baiJamjuree.heading3)
                         .padding(.bottom, 2)
@@ -40,7 +44,7 @@ struct TripTimeAndDistanceView: View {
                     Text("Distance")
                 }
                 HStack(alignment: .bottom) {
-                    Text("\(self.distance, specifier: "%.1f")")
+                    Text("\(self.tripDetails.distance, specifier: "%.1f")")
                         .font(Font.baiJamjuree.heading1)
                         .animation(.none)
                     Text("km")
@@ -61,15 +65,17 @@ struct TripTimeAndDistanceView: View {
     
     func incrementDistance() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.distance += 0.1
-            incrementDistance()
+            if timeIsRunning {
+                self.tripDetails.distance += 0.1
+                incrementDistance()
+            }
         }
     }
-        
+    
 }
 
-struct TripTimeAndDistanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        TripTimeAndDistanceView(timeIsRunning: .constant(true))
-    }
-}
+//struct TripTimeAndDistanceView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TripTimeAndDistanceView(timeIsRunning: .constant(false))
+//    }
+//}

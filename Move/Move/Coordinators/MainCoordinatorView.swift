@@ -76,7 +76,6 @@ struct MainCoordinatorView: View {
                     self.userViewModel.sessionUser.user = user
                     self.userViewModel.sessionUser.token = token
                     if user.drivinglicense != nil {
-                        print("\n \n \n \(user.drivinglicense)\n \n \n")
                         print(user.drivinglicense as Any)
                         self.selection = .map
                     } else {

@@ -12,17 +12,20 @@ enum MapCoordinatorStates: String {
     case menu = "Menu"
     case unlockWithCode = "Code"
     case success = "Success"
+    case summary = "Summary"
 }
 
 enum RideSheetState: String {
     case start = "Start"
     case detailsMinimized = "DetailsMinimized"
+    case tripSummary = "TripSummary"
 }
 
 class MapCoordinatorViewModel: ObservableObject {
     @Published var selectedScooter: Scooter = .init()
     @Published var rideSheetState: RideSheetState = .start
     @Published var sheetPresentationDetents: SheetDetents = .none
+    @Published var tripDetails: TripDetailsModel = .init(time: "00:12", distance: 0.0)
     @Published var mapState: MapCoordinatorStates? =  MapCoordinatorStates.mapView
     @Published var showStartRideSheet = false  {
         didSet {
@@ -41,15 +44,6 @@ struct MapCoordinatorView: View {
         NavigationView {
             ZStack {
                     NavigationLink(destination: MapContainerScreen(mapCoordinatorViewModel: viewModel, onGoValidateWithCode: {self.viewModel.mapState = .unlockWithCode}, onGoToMenu: {onFinished()})
-//                        .overlay(
-//                            FlexibleSheet(sheetDetents: .constant(self.viewModel.sheetPresentationDetents)) {
-//                                
-//                                sheetMode
-//                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                                    .background(Color.neutralWhite)
-//                                    .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
-//                            }
-//                        )
                         .navigationBarHidden(true)
                         .ignoresSafeArea()
                         .transition(.slide.animation(.default)),
@@ -68,8 +62,6 @@ struct MapCoordinatorView: View {
                 ){
                     EmptyView()
                 }.transition(.slide.animation(.default))
-                
-                
                 NavigationLink(destination: UnlockSuccessfull(goToStartRide: {
                     self.viewModel.mapState = .mapView
 //                    self.viewModel.showStartRideSheet = true
@@ -88,22 +80,6 @@ struct MapCoordinatorView: View {
         }
     }
     
-    //TODO: move this into MapContainerScreen to gain access to user location
-    
-    @ViewBuilder
-    var sheetMode: some View {
-        switch viewModel.rideSheetState {
-        case .start:
-            StartRideSheetView(scooter: self.viewModel.selectedScooter, onStartRide: {
-                print("STARTING RIDE")
-//                self.viewModel.sheetPresentationDetents = .none
-                self.viewModel.rideSheetState = .detailsMinimized
-            })
-        case .detailsMinimized:
-            TripDetailsSheetView(scooter: viewModel.selectedScooter)
-        
-        }
-        
-    }
+
 }
 
