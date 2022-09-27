@@ -44,6 +44,9 @@ extension MapContainerScreen {
             })
             
             
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                self.mapViewModel.drawTrip()
+//            }
             
         }
         

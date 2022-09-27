@@ -19,7 +19,10 @@ extension CLLocationCoordinate2D {
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var firstPopulation = false
-    @Published var mapSnapshot: UIImage = .init()
+//    @Published var mapSnapshot: UIImage = .init()
+    @Published var mockedTripCoordinates = Trip.getMockedTrip()
+    var routeOverlay: MKOverlay?
+    @Published var mapSnapshot: UIImage = UIImage()
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -32,9 +35,14 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.drawTrip()
+//        }
         return mapView
         
     }()
+    
+    
     
     func toggleUserTrackingMode() {
         if mapView.userTrackingMode == .followWithHeading {
@@ -57,6 +65,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
                 return
             }
             self.mapSnapshot = snapshot!.image
+            self.objectWillChange.send()
         }
         
     }
@@ -100,11 +109,11 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
                 return false
             }
             else {
-//                ErrorService().showError(message: "User distance from scooter must be within 40 meters!")
+                //                ErrorService().showError(message: "User distance from scooter must be within 40 meters!")
                 return true
             }
         } else {
-//            ErrorService().showError(message: "User location is disabled!")
+            //            ErrorService().showError(message: "User location is disabled!")
             return true
         }
     }
@@ -179,7 +188,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         
         
         
-        if annotation is MKUserLocation { 
+        if annotation is MKUserLocation {
             let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
             userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
             
@@ -240,6 +249,58 @@ extension ScooterMapViewModel: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         self.onDeselectedScooter()
+    }
+    
+    func drawTrip() {
+        if self.mockedTripCoordinates.coordinates.count == 0 {
+            print("No coordinates to count")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.routeOverlay = MKPolyline(coordinates: self.mockedTripCoordinates.coordinates, count: self.mockedTripCoordinates.coordinates.count)
+            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
+            let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
+            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
+            self.saveSnaphotOfTrip()
+        }
+    }
+    
+    func saveSnaphotOfTrip() {
+        let screenWidth = UIScreen.main.bounds.width
+            let screenHeight = UIScreen.main.bounds.height
+
+        let region = self.mapView.region
+
+        let mapOptions = MKMapSnapshotter.Options()
+            mapOptions.region = region
+            mapOptions.size = CGSize(width: screenWidth, height: screenHeight)
+            mapOptions.showsBuildings = false
+
+            let snapshotter = MKMapSnapshotter(options: mapOptions)
+            snapshotter.start { (snapshotOrNil, errorOrNil) in
+            if let error = errorOrNil {
+                print(error)
+                return
+            }
+            if let snapshot = snapshotOrNil {
+                //set main class snapshot image = snapshot.image
+                self.mapSnapshot = snapshot.image
+            }
+
+            }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.setColors([
+            UIColor(Color.accentPink)
+
+        ], locations: [])
+        renderer.lineCap = .round
+        renderer.lineWidth = 3.0
+        
+        return renderer
     }
     
     

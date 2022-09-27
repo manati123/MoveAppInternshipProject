@@ -27,14 +27,10 @@ struct RideHistoryView: View {
                     }
                     dragged.toggle()
                     }
-                VStack(spacing: 12) {
+                LazyVStack(spacing: 12) {
                     ForEach(0..<self.numberOfRides, id: \.self) { _ in
                         RideInformationCard(ride: RideInformation(initialAddress: "Caminul 16 Hasdeu", finishAddress: "Str. Lunii 2A", distance: 4.2, time: "00:15 min"))
                     }
-//                    ForEach(rides, id:\.self) { ride in
-//                        RideInformationCard(ride: ride)
-//
-//                    }
                 }
                 .padding(.top, 10)
             }.coordinateSpace(name: "pullToRefresh")

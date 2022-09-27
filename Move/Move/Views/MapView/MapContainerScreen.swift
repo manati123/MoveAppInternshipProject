@@ -17,11 +17,13 @@ struct MapContainerScreen: View{
     let onGoToMenu:() -> Void
     var body: some View {
         ZStack(alignment: .top) {
+            
             ScooterMapView(viewModel: viewModel.mapViewModel)
                 .onAppear {
                     viewModel.mapViewModel.checkIfLocationServiceIsEnabled()
                 }
             topTitleBar
+//            Image(uiImage: self.viewModel.mapViewModel.mapSnapshot)
         }
         .onAppear{
             viewModel.loadScooters()
@@ -43,6 +45,7 @@ struct MapContainerScreen: View{
             self.viewModel.showUnlockingSheet = false
         }
 
+        
         
         .overlay(content: {
             ZStack {
