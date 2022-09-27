@@ -18,8 +18,8 @@ class RideAPI {
         
         let parameters = [
             "_id": scooter._id! as String,
-            "scooterNumber": scooter.number! as Int,
             "latUser": userLocation.latitude,
+            "scooterNumber": scooter.number! as Int,
             "longUser": userLocation.longitude
         ] as [String : Any]
         print("\n \n \n PARAMETERS FOR START RIDE REQUEST: \(parameters)")

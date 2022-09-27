@@ -19,7 +19,6 @@ extension CLLocationCoordinate2D {
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var firstPopulation = false
-//    @Published var mapSnapshot: UIImage = .init()
     @Published var mockedTripCoordinates = Trip.getMockedTrip()
     var routeOverlay: MKOverlay?
     @Published var mapSnapshot: UIImage = UIImage()
@@ -35,9 +34,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            self.drawTrip()
-//        }
+
         return mapView
         
     }()
@@ -142,7 +139,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             print("Denied location")
             mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
         case .authorizedAlways, .authorizedWhenInUse:
-            mapView.centerCoordinate = locationManager.location!.coordinate
+            mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 46.770439, longitude: locationManager.location?.coordinate.longitude ?? 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+//            mapView.centerCoordinate = locationManager.location!.coordinate
         @unknown default:
             break
         }
@@ -262,7 +260,9 @@ extension ScooterMapViewModel: MKMapViewDelegate {
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
             let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
             self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
-            self.saveSnaphotOfTrip()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.saveSnaphotOfTrip()
+//            }
         }
     }
     
@@ -285,7 +285,23 @@ extension ScooterMapViewModel: MKMapViewDelegate {
             }
             if let snapshot = snapshotOrNil {
                 //set main class snapshot image = snapshot.image
-                self.mapSnapshot = snapshot.image
+                let sourceImageSize = snapshot.image.size
+                let sideLength = min(
+                    snapshot.image.size.width,
+                    snapshot.image.size.height
+                )
+                let yOffset = (sourceImageSize.height - sideLength) / 0.4
+//                let yOffset = (sourceImageSize.height - sideLength) / 3.0
+                let cropRect = CGRect(
+                    x: 0,
+                    y: yOffset,
+                    width: sideLength * 4.1,
+                    height: sideLength * 2
+                ).integral
+                let sourceCGImage = snapshot.image.cgImage!
+                let croppedCGImage = sourceCGImage.cropping(to: cropRect)!
+                
+                self.mapSnapshot = UIImage(cgImage: croppedCGImage, scale: snapshot.image.imageRendererFormat.scale, orientation: snapshot.image.imageOrientation)
             }
 
             }

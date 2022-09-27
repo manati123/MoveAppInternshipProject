@@ -9,17 +9,12 @@ import SwiftUI
 
 
 struct TripSummaryView: View {
-//    let mapSnapshot: UIImage
     let initialAddres = "Str. Avram Iancu nr. 26 Cladirea 2"
     let finalAddress = "Gradina Miko"
-//    let travelTime = "00:12 min"
-//    @Binding var tripDetails: TripDetailsModel
+    let mapImage: UIImage
+    @State private var frameHeight: CGFloat = 50
     @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     let onPayment:() -> Void
-//    let distance = 0.0
-//    init(mapSnapshot: UIImage) {
-//        self.mapSnapshot = mapSnapshot
-//    }
     
     var body: some View {
         VStack(spacing: 36) {
@@ -28,11 +23,16 @@ struct TripSummaryView: View {
                 .foregroundColor(Color.primaryPurple)
                 .padding(.top, 54)
             
-            RoundedRectangle(cornerRadius: 26)
-                .frame(maxWidth: 327, maxHeight: 172)
-                .overlay(Image("MockMapImage")
-                    .cornerRadius(26)
-                )
+            Image(uiImage: self.mapImage)
+                .centerCropped()
+                .cornerRadius(26)
+                .frame(width: 327, height: 172)
+//            Slider(value: self.$frameHeight, in: 50...7000)
+//                .padding(.horizontal, 20)
+//                .resizable()
+//                .scaledToFill()
+//                .cornerRadius(26)
+//                .frame(width: 327, height: 172, alignment: .center)
             
             VStack(alignment: .leading, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -59,7 +59,6 @@ struct TripSummaryView: View {
                 .padding(.bottom, 12)
             }.background(
                 RoundedRectangle(cornerRadius: 26)
-//                    .frame(width: .infinity, height: 132)
                     .foregroundColor(Color.neutralGray.opacity(0.15)))
             TripTimeAndDistanceView(mapCoordinatorViewModel: self.mapCoordinatorViewModel ,timeIsRunning: .constant(false))
             Spacer()

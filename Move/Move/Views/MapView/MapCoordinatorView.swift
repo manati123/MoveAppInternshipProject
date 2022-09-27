@@ -63,9 +63,9 @@ struct MapCoordinatorView: View {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 NavigationLink(destination: UnlockSuccessfull(goToStartRide: {
-//                    self.viewModel.mapState = .mapView
+                    self.viewModel.mapState = .mapView
 //                    self.viewModel.showStartRideSheet = true
-//                    self.viewModel.sheetPresentationDetents = .third
+                    self.viewModel.sheetPresentationDetents = .third
                 })
                     .navigationBarHidden(true)
                     .ignoresSafeArea()

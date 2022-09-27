@@ -31,12 +31,7 @@ struct TripTimeAndDistanceView: View {
                 }
                 .padding(.trailing, 30)
                 
-                HStack(alignment: .bottom) {
-                    TimerView(timerIsRunning: self.$timeIsRunning, tripDetails: mapCoordinatorViewModel.tripDetails)
-                    Text("min")
-                        .font(Font.baiJamjuree.heading3)
-                        .padding(.bottom, 2)
-                }.foregroundColor(.primaryPurple)
+                TimerView(timerIsRunning: self.$timeIsRunning, tripDetails: mapCoordinatorViewModel.tripDetails)
             }
             VStack {
                 HStack(spacing: 4) {

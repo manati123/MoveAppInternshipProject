@@ -18,9 +18,14 @@ struct TimerView: View {
     }
     
     var body: some View {
-        Text(viewModel.tripDetails.time)
-            .font(Font.baiJamjuree.heading1)
-            .foregroundColor(Color.primaryPurple)
+        HStack(alignment: .bottom) {
+            Text(viewModel.tripDetails.time)
+                .font(Font.baiJamjuree.heading1)
+                .foregroundColor(Color.primaryPurple)
+            Text(viewModel.hours != 0 ? "h" : "min")
+                .font(Font.baiJamjuree.heading3)
+                .padding(.bottom, 2)
+        }.foregroundColor(.primaryPurple)
     }
     
 }
@@ -65,8 +70,8 @@ extension TimerView {
 }
 
 
-//struct TimerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TimerView(timerIsRunning: .constant(true))
-//    }
-//}
+struct TimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimerView(timerIsRunning: .constant(true), tripDetails: TripDetailsModel(time: "00:00", distance: 0.0))
+    }
+}
