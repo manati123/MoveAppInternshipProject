@@ -42,6 +42,8 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
         self._isPresented = isPresented
     }
     
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.image = Image(uiImage: image)

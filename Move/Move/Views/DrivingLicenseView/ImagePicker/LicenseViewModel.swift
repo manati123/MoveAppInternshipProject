@@ -6,11 +6,17 @@
 //
 
 import Foundation
-
+import UIKit
+import SwiftUI
 
 class LicenseViewModel: ObservableObject {
     @Published var showingSheet = false
     @Published var imageViewModel = ImagePickerViewModel()
+    @Published var showImagePicker = false
+    @Published var imagePickerSheetDetents: SheetDetents = .none
+    @Published var inputImage: UIImage?
+    @Published var image: Image?
+    
     
     func sendImageForUpload(onUploadDone: @escaping () -> Void, onFailure: @escaping () -> Void) {
         DriverLicenseAPI().uploadForValidation(image: imageViewModel.image) { result in
@@ -22,6 +28,11 @@ class LicenseViewModel: ObservableObject {
                 ErrorService().showError(message: error.localizedDescription)
             }
         }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
     
     func logOut(onLogOut: () -> Void) {

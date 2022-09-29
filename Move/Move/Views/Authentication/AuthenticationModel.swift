@@ -81,32 +81,41 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    
     //TODO: move this
     func signUpErrorHandling(error: Error) {
         var errorString = ""
-        if !self.fieldsAreLongEnoughSignUp() {
-            errorString +=  "Username or password are not long enough!\n"
-        }
         if !self.validateEmail() {
             errorString += "Email is not valid!"
         }
-        if errorString == "" {
-            errorString += "User with that email already exists!"
-        }
-        errorString += error.localizedDescription
+        errorString += getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
     }
     
-    func authenticate() {
+    func getServerErrorMessage(_ serverError : Error) -> String {
+          let objectDescription = String(describing: serverError)
+          let localizedDescription = serverError.localizedDescription
+          if localizedDescription != "" {
+             if localizedDescription.contains(objectDescription) {
+                return localizedDescription
+             }
+             if !objectDescription.contains(localizedDescription) {
+//                print(objectDescription + ": " + localizedDescription)
+                 let startIndex = objectDescription.index(objectDescription.startIndex, offsetBy: 13)
+                 let endIndex = objectDescription.index(objectDescription.endIndex, offsetBy: -3)
+                 return (String(objectDescription[startIndex...endIndex]))
+             }
+          }
+        return objectDescription
+       }
+    
+    func authenticate(onSuccess:@escaping () -> Void) {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
             switch result {
             case .success(let user):
                 self.sessionUser.user = user.user
+                onSuccess()
             case .failure(let error):
                 self.signUpErrorHandling(error: error)
-                
-                
             }
         })
     }

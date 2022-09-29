@@ -37,6 +37,8 @@
 		03472B1628A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */; };
 		03472B1728A27ED0008F51DE /* BaiJamjuree-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */; };
 		03472B2728AB83D4008F51DE /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */; };
+		03478D3E28E581EF0048BF0C /* ImagePickerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03478D3D28E581EF0048BF0C /* ImagePickerView2.swift */; };
+		03478D4028E58A910048BF0C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03478D3F28E58A910048BF0C /* ImagePicker.swift */; };
 		035033F428AE1FB80084762F /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035033F328AE1FB80084762F /* Buttons.swift */; };
 		035033F628AE20540084762F /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035033F528AE20540084762F /* ColorExtensions.swift */; };
 		035033F828AE26C00084762F /* PurpleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035033F728AE26C00084762F /* PurpleBackground.swift */; };
@@ -158,6 +160,8 @@
 		03472B0A28A27ED0008F51DE /* BaiJamjuree-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-ExtraLight.ttf"; sourceTree = "<group>"; };
 		03472B0B28A27ED0008F51DE /* BaiJamjuree-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Medium.ttf"; sourceTree = "<group>"; };
 		03472B2628AB83D4008F51DE /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
+		03478D3D28E581EF0048BF0C /* ImagePickerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView2.swift; sourceTree = "<group>"; };
+		03478D3F28E58A910048BF0C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		035033F328AE1FB80084762F /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		035033F528AE20540084762F /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		035033F728AE26C00084762F /* PurpleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleBackground.swift; sourceTree = "<group>"; };
@@ -515,6 +519,7 @@
 				03AFACAE28B8AB9800DD0DE7 /* LicenseInformationView.swift */,
 				03AFAD2D28B8E76A00DD0DE7 /* WaitingForValidationView.swift */,
 				03AFAD2F28B8E9FB00DD0DE7 /* ValidatedView.swift */,
+				03478D3D28E581EF0048BF0C /* ImagePickerView2.swift */,
 			);
 			path = DrivingLicenseView;
 			sourceTree = "<group>";
@@ -616,6 +621,7 @@
 				F95C0B3228BCE3420081122D /* ImagePickerView.swift */,
 				F998FC0928C0978A00DBB961 /* ImagePickerUIKit.swift */,
 				F998FC1328C0B5E400DBB961 /* LicenseViewModel.swift */,
+				03478D3F28E58A910048BF0C /* ImagePicker.swift */,
 			);
 			path = ImagePicker;
 			sourceTree = "<group>";
@@ -1041,6 +1047,7 @@
 				03AE897628D485C300AC6AB7 /* MainMenuCoordinatorView.swift in Sources */,
 				03472AA328A26950008F51DE /* OnboardingViewModel.swift in Sources */,
 				03448F0328DC4F8E00199F6D /* FlexibleSheet.swift in Sources */,
+				03478D3E28E581EF0048BF0C /* ImagePickerView2.swift in Sources */,
 				F9CFA18E28C74564007029F1 /* AuthenticationModels.swift in Sources */,
 				036235FE28E1D9C3004B83D6 /* PullToRefresh.swift in Sources */,
 				F9A1A81D28A11C9100E8DFB9 /* SplashView.swift in Sources */,
@@ -1067,6 +1074,7 @@
 				F95C0B3328BCE3420081122D /* ImagePickerView.swift in Sources */,
 				03AFACAF28B8AB9800DD0DE7 /* LicenseInformationView.swift in Sources */,
 				03FF3B7228D846E600165AA4 /* PasscodeFieldTextBox.swift in Sources */,
+				03478D4028E58A910048BF0C /* ImagePicker.swift in Sources */,
 				03472A9C28A25336008F51DE /* AuthenticationView.swift in Sources */,
 				03472A9F28A2611F008F51DE /* OnboardingView.swift in Sources */,
 			);

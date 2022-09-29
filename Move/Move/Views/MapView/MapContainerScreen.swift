@@ -28,9 +28,9 @@ struct MapContainerScreen: View{
         .onAppear{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.viewModel.mapViewModel.drawTrip()
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                self.viewModel.mapViewModel.drawTrip()
+//            }
         }
         .overlay(
             FlexibleSheet(sheetDetents: .constant(self.mapCoordinatorViewModel.sheetPresentationDetents)) {
@@ -43,6 +43,7 @@ struct MapContainerScreen: View{
         )
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
+                
 
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
@@ -97,10 +98,9 @@ struct MapContainerScreen: View{
                 ScooterCardView(scooter: selectedScooter.scooterData, getLocationHandler: {
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {
-//                    self.viewModel.showUnlockingSheet = true
-//                    self.viewModel.mapViewModel.saveSnaphotOfTrip()
-                    self.mapCoordinatorViewModel.rideSheetState = .tripSummary
-                    self.mapCoordinatorViewModel.sheetPresentationDetents = .full
+                    self.viewModel.showUnlockingSheet = true
+//                    self.mapCoordinatorViewModel.rideSheetState = .tripSummary
+                    self.mapCoordinatorViewModel.sheetPresentationDetents = .none
                     
                 })
                     .shadow(radius: 10)

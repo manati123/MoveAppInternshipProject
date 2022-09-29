@@ -30,8 +30,8 @@ struct AuthenticationView: View {
                                 textFields
                                 termsAndConditions
                                 Button() {
-                                    self.viewModel.authenticate()
-                                    self.onFinished()
+                                    self.viewModel.authenticate(onSuccess: self.onFinished)
+//                                    self.onFinished()
                                 } label: {
                                     Text("Get started!")
                                         .frame(maxWidth: .infinity)

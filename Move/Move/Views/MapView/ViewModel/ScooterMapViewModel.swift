@@ -27,6 +27,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             refreshScooterList()
         }
     }
+    
     var onSelectedScooter: (ScooterAnnotation) -> Void = { _ in }
     var onDeselectedScooter: () -> Void = {}
     
@@ -175,6 +176,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(scooterAnnotations)
         }
+//        print("\(scooters.count) != \(scooterAnnotations.count)")
     }
 }
 
@@ -260,9 +262,10 @@ extension ScooterMapViewModel: MKMapViewDelegate {
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
             let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
             self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.saveSnaphotOfTrip()
-//            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                self.saveSnaphotOfTrip()
+            self.mapSnapshot = self.mapView.snapshot ?? UIImage()
+            }
         }
     }
     
@@ -318,6 +321,5 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         
         return renderer
     }
-    
-    
 }
+

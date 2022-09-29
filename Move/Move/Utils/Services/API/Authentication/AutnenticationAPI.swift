@@ -33,16 +33,20 @@ class AuthenticationAPI {
                     let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
                     print(decodedUser)
                     completionHandler(.success(decodedUser))
+                } catch {
+                    completionHandler(.failure(MoveError.serverError("Something happend while fetching user...")))
+                }
+            case .failure(let serverError):
+                do {
+                    if response.response?.statusCode != 503 {
+                        let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
+                        completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
+                    }
+                    else {
+                        completionHandler(.failure(MoveError.serverError("Server is down...")))
+                    }
                 } catch(let error) {
                     print(error)
-                    completionHandler(.failure(error))
-                }
-            case .failure:
-                do {
-                    let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
-                    completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
-                } catch(let error) {
-                    completionHandler(.failure(error))
                 }
             }
         }
@@ -68,26 +72,21 @@ class AuthenticationAPI {
                     print(decodedUser)
                     completionHandler(.success(decodedUser))
                     
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
-                }
-            case .failure(_):
-                do {
-                    let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
-                    completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
                 } catch(let error) {
-                    completionHandler(.failure(error))
+                    print(error)
+                }
+            case .failure(let serverError):
+                do {
+                    
+                    if response.response?.statusCode == 503{
+                        completionHandler(.failure(MoveError.serverError("Server is down...")))
+                    } else {
+                        let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
+                        completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
+                    }
+                } catch(let error) {
+//                    completionHandler(.failure(serverError))
+                    print(error)
                 }
                 //                   throw error
             }
@@ -118,8 +117,8 @@ class AuthenticationAPI {
                 switch response.result {
                 case .success(let user):
                     do {
-                    let decodedUser = try JSONDecoder().decode(User.self, from: user)
-                    completionHandler(.success(decodedUser))
+                        let decodedUser = try JSONDecoder().decode(User.self, from: user)
+                        completionHandler(.success(decodedUser))
                     } catch {
                         completionHandler(.failure(error))
                     }

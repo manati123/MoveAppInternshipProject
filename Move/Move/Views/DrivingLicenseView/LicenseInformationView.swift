@@ -38,6 +38,7 @@ struct LicenseInformationView: View {
                     
                     Button() {
                         viewModel.showingSheet.toggle()
+//                        viewModel.imagePickerSheetDetents = .quarter
                     } label: {
                         Text("Add driving license")
                             .frame(maxWidth: .infinity)
@@ -47,12 +48,22 @@ struct LicenseInformationView: View {
                     .animation(.default)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 14)
+//                    .overlay(
+//
+//                        FlexibleSheet(sheetDetents: self.$viewModel.imagePickerSheetDetents, content: {
+//                            ImagePicker(image: self.$viewModel.inputImage)
+//                            Spacer()
+//                        })
+//                    )
+//                    .onChange(of: viewModel.inputImage) { _ in
+//                        viewModel.loadImage()
+//                    }
                     .sheet(isPresented: $viewModel.showingSheet) {
                         ImagePickerView(viewModel: self.viewModel.imageViewModel, onUpload: {
                             self.viewModel.sendImageForUpload(onUploadDone: self.onUploadDone, onFailure: onUploadFailed)
                             self.onFinished()
                         })
-                        
+
                     }
                 }
 

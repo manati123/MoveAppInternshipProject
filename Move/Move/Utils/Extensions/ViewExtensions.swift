@@ -70,6 +70,18 @@ extension View {
     }
 }
 
+public extension UIView {
+    var snapshot: UIImage? {
+        get {
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+    }
+}
+
 
 extension Image {
     func centerCropped() -> some View {
