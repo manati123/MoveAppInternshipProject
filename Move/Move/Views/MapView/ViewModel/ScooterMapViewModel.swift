@@ -21,11 +21,23 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     @Published var firstPopulation = false
     @Published var mockedTripCoordinates = Trip.getMockedTrip()
     var routeOverlay: MKOverlay?
+    @Published var locationAllowed: Bool?
     @Published var mapSnapshot: UIImage = UIImage()
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard let locationManager = locationManager else {
+            self.locationAllowed =  false
+            return
+        }
+        if locationManager.authorizationStatus == .denied {
+            self.locationAllowed = false
+        }
+        self.locationAllowed = true
     }
     
     var onSelectedScooter: (ScooterAnnotation) -> Void = { _ in }
@@ -107,11 +119,9 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
                 return false
             }
             else {
-                //                ErrorService().showError(message: "User distance from scooter must be within 40 meters!")
                 return true
             }
         } else {
-            //            ErrorService().showError(message: "User location is disabled!")
             return true
         }
     }
@@ -139,8 +149,10 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         case .denied:
             print("Denied location")
             mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+            self.locationAllowed = false
         case .authorizedAlways, .authorizedWhenInUse:
             mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 46.770439, longitude: locationManager.location?.coordinate.longitude ?? 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+            self.locationAllowed = true
 //            mapView.centerCoordinate = locationManager.location!.coordinate
         @unknown default:
             break

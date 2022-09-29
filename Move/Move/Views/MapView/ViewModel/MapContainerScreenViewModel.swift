@@ -69,9 +69,10 @@ extension MapContainerScreen {
         
         
         
-        func followingUser() -> Bool {
-            return self.mapViewModel.mapView.userTrackingMode == .followWithHeading
-        }
+//        func followingUser() -> Bool {
+//            return self.mapViewModel.locationIsDisabled()
+////            return self.mapViewModel.mapView.userTrackingMode == .followWithHeading
+//        }
         
         func goToScooterLocation() {
             // Open and show coordinate
@@ -80,7 +81,6 @@ extension MapContainerScreen {
         }
         
         func convertUserCoordinatesToAddress() {
-            //            let location = self.mapViewModel.locationManager?.location
             CLGeocoder().reverseGeocodeLocation(self.mapViewModel.locationManager?.location ?? CLLocation(latitude: 0, longitude: 0)) { placemarks, error in
                 if error == nil {
                     self.userLocation = placemarks?.first?.name ?? "Address Unavailable"

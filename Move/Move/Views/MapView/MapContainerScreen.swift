@@ -73,9 +73,15 @@ struct MapContainerScreen: View{
             .buttonStyle(.simpleMapButton)
             
             Spacer()
-            Text(self.viewModel.mapViewModel.locationIsDisabled() ? "Allow location" : self.viewModel.userLocation)
+            Text(self.viewModel.mapViewModel.locationAllowed == false ? "Allow location" : self.viewModel.userLocation)
                 .font(Font.baiJamjuree.heading2)
                 .foregroundColor(Color.primaryPurple)
+                .onTapGesture {
+                    if self.viewModel.mapViewModel.locationIsDisabled() {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }
+                }
+                .id(UUID())
             Spacer()
             
             Button {
@@ -83,8 +89,9 @@ struct MapContainerScreen: View{
                     self.viewModel.mapViewModel.toggleUserTrackingMode()
                 }
             } label: {
-                Image(self.viewModel.followingUser() ? ImagesEnum.centerMapOnUserPin.rawValue : ImagesEnum.mapNotCenteredOnUser.rawValue)
-                    .animation(.default, value: self.viewModel.followingUser())
+                Image(self.viewModel.mapViewModel.locationAllowed == false ? ImagesEnum.mapNotCenteredOnUser.rawValue : ImagesEnum.centerMapOnUserPin.rawValue)
+                    .animation(.default, value: self.viewModel.mapViewModel.locationIsDisabled())
+                    .id(UUID())
             }
             .buttonStyle(.simpleMapButton)
         }.padding(.vertical, 64)
@@ -134,7 +141,7 @@ struct MapContainerScreen: View{
                     case .success:
                         self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
                     case .failure(let error):
-                        ErrorService().showError(message: error.localizedDescription)
+                        ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
                         self.mapCoordinatorViewModel.sheetPresentationDetents = .none
                     }
                 })

@@ -17,7 +17,7 @@ class RideAPI {
         let header: HTTPHeaders = ["Authorization": "Bearer \(userToken)"]
         
         let parameters = [
-            "_id": scooter._id! as String,
+            "idScooter": scooter._id! as String,
             "latUser": userLocation.latitude,
             "scooterNumber": scooter.number! as Int,
             "longUser": userLocation.longitude
@@ -37,6 +37,31 @@ class RideAPI {
                 }
             }
         
+    }
+    
+    func endRide(rideId: String, userLocation: CLLocationCoordinate2D, userToken: String , completionHandler:@escaping (Result<Any>) -> Void) {
+        
+        let header: HTTPHeaders = ["Authorization": "Bearer \(userToken)"]
+        
+        let parameters = [
+            "idRide": rideId,
+            "latitude": userLocation.latitude,
+            "longitude": userLocation.longitude
+        ] as [String : Any]
+        
+        AF.request("\(baseUrl)/ride/end", method: .patch, parameters: parameters, headers: header)
+            .validate(statusCode: 200..<299)
+            .responseData {
+                response in
+                switch response.result {
+                case .success(let data):
+                    completionHandler(.success(data))
+                    print(data)
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                    print(error)
+                }
+            }
     }
     
     

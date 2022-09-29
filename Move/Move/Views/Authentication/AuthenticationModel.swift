@@ -87,26 +87,11 @@ class UserViewModel: ObservableObject {
         if !self.validateEmail() {
             errorString += "Email is not valid!"
         }
-        errorString += getServerErrorMessage(error)
+        errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
     }
     
-    func getServerErrorMessage(_ serverError : Error) -> String {
-          let objectDescription = String(describing: serverError)
-          let localizedDescription = serverError.localizedDescription
-          if localizedDescription != "" {
-             if localizedDescription.contains(objectDescription) {
-                return localizedDescription
-             }
-             if !objectDescription.contains(localizedDescription) {
-//                print(objectDescription + ": " + localizedDescription)
-                 let startIndex = objectDescription.index(objectDescription.startIndex, offsetBy: 13)
-                 let endIndex = objectDescription.index(objectDescription.endIndex, offsetBy: -3)
-                 return (String(objectDescription[startIndex...endIndex]))
-             }
-          }
-        return objectDescription
-       }
+    
     
     func authenticate(onSuccess:@escaping () -> Void) {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in

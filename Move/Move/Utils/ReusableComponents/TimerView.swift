@@ -42,27 +42,29 @@ extension TimerView {
             self.timerIsRunning = Binding<Bool>.init(projectedValue: timerIsRunning.self)
             print(self.timerIsRunning)
             Timer.scheduledTimer(withTimeInterval: 60.0, repeats: timerIsRunning.wrappedValue) { [self] timer in
-                minutes += 1
-                if minutes == 60 {
-                    hours += 1
-                    minutes = 0
+                if timerIsRunning.wrappedValue {
+                    minutes += 1
+                    if minutes == 60 {
+                        hours += 1
+                        minutes = 0
+                    }
+                    
+                    var minStr = ""
+                    var hourStr = ""
+                    
+                    if minutes / 10 == 0 {
+                        minStr = "0\(minutes)"
+                    } else {
+                        minStr = "\(minutes)"
+                    }
+                    
+                    if hours / 10 == 0 {
+                        hourStr = "0\(hours)"
+                    } else {
+                        hourStr = "\(hours)"
+                    }
+                    self.tripDetails.time = "\(hourStr):\(minStr)"
                 }
-                
-                var minStr = ""
-                var hourStr = ""
-                
-                if minutes / 10 == 0 {
-                    minStr = "0\(minutes)"
-                } else {
-                    minStr = "\(minutes)"
-                }
-                
-                if hours / 10 == 0 {
-                    hourStr = "0\(hours)"
-                } else {
-                    hourStr = "\(hours)"
-                }
-                self.tripDetails.time = "\(hourStr):\(minStr)"
             }
             
         }
