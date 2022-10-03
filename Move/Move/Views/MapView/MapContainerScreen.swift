@@ -13,6 +13,8 @@ import MapKit
 struct MapContainerScreen: View{
     @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     @StateObject private var viewModel: ViewModel = .init()
+    @Environment(\.scenePhase) var scenePhase
+    
     let onGoValidateWithCode:() -> Void
     let onGoToMenu:() -> Void
     var body: some View {
@@ -23,32 +25,42 @@ struct MapContainerScreen: View{
                     viewModel.mapViewModel.checkIfLocationServiceIsEnabled()
                 }
             topTitleBar
-//            Image(uiImage: self.viewModel.mapViewModel.mapSnapshot)
+            //            Image(uiImage: self.viewModel.mapViewModel.mapSnapshot)
         }
+        .onChange(of: scenePhase, perform: { newPhase in
+            if newPhase == .active {
+                print("Active")
+            } else if newPhase == .inactive {
+                print("Inactive")
+            } else if newPhase == .background {
+                print("Background")
+            }
+        })
         .onAppear{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                self.viewModel.mapViewModel.drawTrip()
-//            }
+            
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            //                self.viewModel.mapViewModel.drawTrip()
+            //            }
         }
         .overlay(
             FlexibleSheet(sheetDetents: .constant(self.mapCoordinatorViewModel.sheetPresentationDetents)) {
                 
                 sheetMode
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.neutralWhite)
                     .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
             }
         )
         .halfSheet(showSheet: self.$viewModel.showUnlockingSheet) {
             scooterToBeUnlockedView
-                
-
+            
+            
         } onEnd: {
             self.viewModel.showUnlockingSheet = false
         }
-
+        
         
         
         .overlay(content: {
@@ -106,20 +118,21 @@ struct MapContainerScreen: View{
                     self.viewModel.goToScooterLocation()
                 }, showSheet: {
                     self.viewModel.showUnlockingSheet = true
-//                    self.mapCoordinatorViewModel.rideSheetState = .tripSummary
+                    
+                    //                    self.mapCoordinatorViewModel.rideSheetState = .tripSummary
                     self.mapCoordinatorViewModel.sheetPresentationDetents = .none
                     
                 })
-                    .shadow(radius: 10)
+                .shadow(radius: 10)
             }
         }
     }
     
-
+    
     @ViewBuilder
     var scooterToBeUnlockedView: some View {
         if let selectedScooter = viewModel.selectedScooter {
-             withAnimation {
+            withAnimation {
                 UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: {
                     self.onGoValidateWithCode()
                     self.viewModel.showUnlockingSheet = false
@@ -138,7 +151,7 @@ struct MapContainerScreen: View{
             StartRideSheetView(scooter: self.mapCoordinatorViewModel.selectedScooter, onStartRide: {
                 self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter, completion: { response in
                     switch response {
-                    case .success:
+                    case .success(let data):
                         self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
                     case .failure(let error):
                         ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
@@ -154,9 +167,16 @@ struct MapContainerScreen: View{
             })
         case .tripSummary:
             TripSummaryView(mapImage: self.viewModel.mapViewModel.mapSnapshot, mapCoordinatorViewModel: mapCoordinatorViewModel, onPayment: {
+                self.viewModel.endRide()
                 self.mapCoordinatorViewModel.sheetPresentationDetents = .none
                 self.viewModel.mapViewModel.refreshScooterList()
             })
+        }
+    }
+    
+    func hasActiveRide() {
+        if let id = UserDefaults.standard.string(forKey: UserDefaultsEnum.activeRide.rawValue) {
+            
         }
     }
 }

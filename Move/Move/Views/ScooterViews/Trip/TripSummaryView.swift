@@ -13,6 +13,8 @@ struct TripSummaryView: View {
     let finalAddress = "Gradina Miko"
     let mapImage: UIImage
     @State private var frameHeight: CGFloat = 50
+    
+    
     @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     let onPayment:() -> Void
     
@@ -46,7 +48,6 @@ struct TripSummaryView: View {
                 }
                 .padding(.leading, 20)
                 .padding(.top, 12)
-                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("To")
                         .font(Font.baiJamjuree.caption2)
@@ -72,6 +73,23 @@ struct TripSummaryView: View {
             .buttonStyle(.applePayButton)
             .padding(.bottom, 46)
             
+        }
+    }
+}
+
+extension TripSummaryView {
+    class ViewModel: ObservableObject {
+        @Published var rideDetails: LiveRide = .init(battery: 0, distance: 0, duration: 0)
+        private var rideAPI: RideAPI = .init()
+        func getFinalRideDetails() {
+            self.rideAPI.viewUserRide(token: UserDefaultsService().loadTokenFromDefaults()) { result in
+                switch result {
+                case .success(let data):
+                    self.rideDetails = data
+                case .failure(let error):
+                    ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
+                }
+            }
         }
     }
 }

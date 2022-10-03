@@ -66,19 +66,8 @@ class UserViewModel: ObservableObject {
         if !self.validateEmail() {
             errorString += "Email is not valid!"
         }
-        errorString += error.localizedDescription
+        errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
-    }
-    
-    
-    func saveUserToUserDefaults() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(self.sessionUser)
-            UserDefaults.standard.set(data, forKey: "LoggedUser")
-        } catch {
-            print("Unable to Encode LoggedUser (\(error))")
-        }
     }
     
     //TODO: move this

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreLocation
+
 
 struct TripDetailsSheetView: View {
     @StateObject var viewModel: ViewModel
@@ -45,6 +47,7 @@ struct TripDetailsSheetView: View {
                 Button {
                     print("Ending ride")
                     endRide()
+//                    self.viewModel.endRide(idRide: <#T##String#>, userLocation: <#T##CLLocationCoordinate2D#>, userToken: <#T##String#>, onSuccess: <#T##() -> Void#>)
                     self.viewModel.timerIsRunning = false
                 } label: {
                         Text("End ride")
@@ -85,11 +88,3 @@ extension TripDetailsSheetView {
         }
     }
 }
-
-//struct TripDetailsSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TripDetailsSheetView(scooter: Scooter(battery: 82), endRide: {
-//            print("Ending ride")
-//        })
-//    }
-//}

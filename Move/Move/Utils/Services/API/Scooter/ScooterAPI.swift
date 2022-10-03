@@ -14,6 +14,17 @@ struct Location: Codable {
     var coordinates: [Double]?
 }
 
+struct LiveRide: Codable {
+    let id = UUID()
+    let battery: Int?
+    let distance: Int?
+    let duration: Int?
+}
+
+
+
+
+
 struct Scooter: Codable {
     var address: String?
     var internalId: String?
@@ -28,9 +39,17 @@ struct Scooter: Codable {
     var __v: Int?
 }
 
-struct Ride {
-    var rideId: Int
-    var locationsCoordinates: [CLLocation]
+//struct Ride {
+//    var rideId: Int
+//    var locationsCoordinates: [CLLocation]
+//}
+
+
+struct Ride: Decodable {
+    let _id: String?
+    let userId: String?
+    let scooterId: String?
+    let distance: Int?
 }
 
 class ScooterAPI {
@@ -127,4 +146,26 @@ class ScooterAPI {
                 }
             }
     }
+    
+    func pingScooter(scooterId: String, token: String) {
+        let parameters = ["id" : scooterId]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/scooter/ping",method: .get, parameters: parameters, headers: headers)
+            .validate(statusCode: 200..<299)
+            .responseData {
+                response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    
+    
+    
+    
 }

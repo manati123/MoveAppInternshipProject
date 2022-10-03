@@ -78,14 +78,18 @@ struct LogInView: View {
             
             ActivityIndicator(isAnimating: .constant(self.viewModel.waitingForResponse), color: .white, style: .large)
                 .frame(maxWidth: .infinity, alignment: .center)
-            noAccount
+            HStack {
+                Spacer()
+                noAccount
+                Spacer()
+            }
         }
     }
     
     
     //TODO: change 
     var noAccount: some View {
-        HStack(spacing: 0) {
+        VStack(spacing: 0) {
             
             Text("Don’t have an account? You can")
                 .font(Font.baiJamjuree.smallText)

@@ -65,25 +65,24 @@ struct AuthenticationView: View {
     
     
     var logInText: some View {
-        HStack(spacing: 0) {
+        VStack(spacing: 0) {
             Text("You already have an account? You can")
                 .font(Font.baiJamjuree.smallText)
                 .foregroundColor(.white)
+                
             Button {
                 onFinished()
-            } label: {
-                
-                
+            }label: {
                 Text(" log in here")
                     .underline()
                     .font(Font.baiJamjuree.smallText)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .accentColor(.white)
-                
+                   
             }
-            
-        }.frame(maxWidth: .infinity)
+//            Spacer()
+        }
+            .accentColor(.white)
         
     }
     
@@ -98,23 +97,22 @@ struct AuthenticationView: View {
                 Text("[Terms and Conditions](https://tapptitude.com)")
                     .underline()
                     .font(Font.baiJamjuree.smallText.bold())
-                    .accentColor(.neutralWhite)
-                
+                    
+                +
                 Text(" and ")
                     .foregroundColor(.neutralWhite)
                     .font(Font.baiJamjuree.smallText)
-                
+                +
                 Text("[Privacy Policy](https://tapptitude.com)")
                     .underline()
-                    .accentColor(.neutralWhite)
                     .font(Font.baiJamjuree.smallText
                         .bold())
-                
-            }.padding(.trailing, 82)
+            }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .frame(maxHeight: .infinity)
                 .minimumScaleFactor(0.01)
                 .navigationBarHidden(true)
+                .accentColor(Color.neutralWhite)
             
         }.frame(maxWidth: .infinity)
         
@@ -126,13 +124,15 @@ struct AuthenticationView: View {
 }
 
 //
-//struct AuthenticationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
-//                .previewInterfaceOrientation(.portrait)
-//            AuthenticationView(viewModel: UserViewModel(), onFinished: {})
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
+struct AuthenticationView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
+                .previewInterfaceOrientation(.portrait)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewInterfaceOrientation(.portrait)
+        }
+    }
+}
