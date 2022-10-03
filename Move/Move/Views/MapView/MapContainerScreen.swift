@@ -153,6 +153,7 @@ struct MapContainerScreen: View{
                     switch response {
                     case .success(let data):
                         self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+                        self.viewModel.rideRunning = true
                     case .failure(let error):
                         ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
                         self.mapCoordinatorViewModel.sheetPresentationDetents = .none
@@ -167,8 +168,10 @@ struct MapContainerScreen: View{
             })
         case .tripSummary:
             TripSummaryView(mapImage: self.viewModel.mapViewModel.mapSnapshot, mapCoordinatorViewModel: mapCoordinatorViewModel, onPayment: {
+                self.viewModel.rideRunning = false
                 self.viewModel.endRide()
                 self.mapCoordinatorViewModel.sheetPresentationDetents = .none
+                self.mapCoordinatorViewModel.rideSheetState = .start
                 self.viewModel.mapViewModel.refreshScooterList()
             })
         }

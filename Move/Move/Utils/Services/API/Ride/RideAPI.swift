@@ -112,7 +112,7 @@ class RideAPI {
             "latitude": currentLocation.latitude
         ] as [String: Any]
         
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        let headers: HTTPHeaders = ["Authorization" : "Bearer \(token)"]
         
         AF.request("\(baseUrl)/ride/update", method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<299)

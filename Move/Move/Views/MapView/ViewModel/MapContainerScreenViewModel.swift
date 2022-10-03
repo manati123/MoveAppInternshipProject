@@ -31,11 +31,17 @@ extension MapContainerScreen {
             if let rideId = UserDefaults.standard.string(forKey: UserDefaultsEnum.activeRide.rawValue) {
                 self.currentRideId = rideId
             }
+            print("RIDE ID IS -------> \(self.currentRideId)")
+            
+            if let lastScooter = UserDefaults.standard.string(forKey: "lastSelectedScooter") {
+                self.currentScooterId = lastScooter
+            }
             
             self.convertUserCoordinatesToAddress()
             mapViewModel.onSelectedScooter = { scooter in
                 self.selectedScooter = scooter
                 self.currentScooterId = scooter.scooterData._id!
+                UserDefaults.standard.set(self.currentScooterId, forKey: "lastSelectedScooter")
             }
             
             mapViewModel.onDeselectedScooter = {
@@ -50,14 +56,14 @@ extension MapContainerScreen {
                 self.convertUserCoordinatesToAddress()
             })
             
-            self.updateRide = Timer.scheduledTimer(withTimeInterval: 5, repeats: self.rideRunning, block: { _ in
-                if self.rideRunning {
-                    self.updateRide(token: UserDefaultsService().loadTokenFromDefaults(), currentLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), scooterId: self.selectedScooter?.scooterData._id ?? "633ae86a9cfdaa167dd6a4da") { result in
-                        print("RESULT OF UPDATE RIDE IS \(result)")
-                    }
-                }
-                
-            })
+//            self.updateRide = Timer.scheduledTimer(withTimeInterval: 5, repeats: self.rideRunning, block: { _ in
+//                if self.rideRunning {
+//                    self.updateRide(token: UserDefaultsService().loadTokenFromDefaults(), currentLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), scooterId: self.selectedScooter?.scooterData._id ?? "633ae86a9cfdaa167dd6a4da") { result in
+//                        print("RESULT OF UPDATE RIDE IS \(result)")
+//                    }
+//                }
+//
+//            })
             
         }
         
@@ -76,7 +82,6 @@ extension MapContainerScreen {
         
         //TODO: MKMAPDidChangeRegion
         func endRide() {
-            self.callUpdate()
             RideAPI().endRide(idRide: self.currentRideId , userLocation: self.mapViewModel.locationManager?.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), userToken: UserDefaultsService().loadTokenFromDefaults()) { result in
                 switch result {
                 case .success(let data):
@@ -115,7 +120,7 @@ extension MapContainerScreen {
                                 self.currentRideId = id
                                 UserDefaults.standard.set(id, forKey: UserDefaultsEnum.activeRide.rawValue)
                                 self.rideRunning = true
-                                self.callUpdate()
+                                
                                 completion(.success(data.updateRide!))
                             }
                             
