@@ -8,11 +8,16 @@
 import Foundation
 import CoreLocation
 import Alamofire
+
+struct RideDTO: Codable {
+    var updateRide: Ride?
+}
+
 class RideAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com"
     static let shareInstance = RideAPI()
     
-    func startRide(scooter: Scooter, userLocation: CLLocationCoordinate2D, userToken: String, completionHandler:@escaping (Result<Ride>)-> Void) {
+    func startRide(scooter: Scooter, userLocation: CLLocationCoordinate2D, userToken: String, completionHandler:@escaping (Result<RideDTO>)-> Void) {
         
         let header: HTTPHeaders = ["Authorization": "Bearer \(userToken)"]
         
@@ -31,7 +36,7 @@ class RideAPI {
                 switch response.result {
                 case .success(let data):
                     do {
-                        let decodedRide = try JSONDecoder().decode(Ride.self, from: response.data!)
+                        let decodedRide = try JSONDecoder().decode(RideDTO.self, from: response.data!)
                         completionHandler(.success(decodedRide))
                     } catch {
                         print(error)

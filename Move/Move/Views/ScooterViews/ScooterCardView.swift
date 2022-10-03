@@ -98,7 +98,7 @@ struct ScooterCardView: View {
                 }
                 HStack(spacing: 24) {
                     Button() {
-                        print("RING SCOOTER")
+                        ScooterAPI().pingScooter(scooterId: "61fa56c7e47c4209abcd7837", token: UserDefaultsService().loadTokenFromDefaults())
                     } label: {
                         Image(ImagesEnum.ringScooterPin.rawValue)
                     }

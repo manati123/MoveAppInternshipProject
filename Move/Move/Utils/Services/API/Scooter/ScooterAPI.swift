@@ -45,7 +45,7 @@ struct Scooter: Codable {
 //}
 
 
-struct Ride: Decodable {
+struct Ride: Codable {
     let _id: String?
     let userId: String?
     let scooterId: String?
@@ -148,10 +148,10 @@ class ScooterAPI {
     }
     
     func pingScooter(scooterId: String, token: String) {
-        let parameters = ["id" : scooterId]
+        let parameters = ["idScooter" : scooterId]
         let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
         
-        AF.request("\(baseUrl)/scooter/ping",method: .get, parameters: parameters, headers: headers)
+        AF.request("\(baseUrl)/ping/\(scooterId)",method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<299)
             .responseData {
                 response in
