@@ -48,13 +48,17 @@ extension MapContainerScreen {
                 self.selectedScooter = nil
             }
             
+            mapViewModel.didChangeCenterRegion = { value in
+                self.userLocation = value
+            }
+            
             self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
                 self.mapViewModel.refreshScooterList()
             })
             
-            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
-                self.convertUserCoordinatesToAddress()
-            })
+//            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
+//                self.convertUserCoordinatesToAddress()
+//            })
             
 //            self.updateRide = Timer.scheduledTimer(withTimeInterval: 5, repeats: self.rideRunning, block: { _ in
 //                if self.rideRunning {

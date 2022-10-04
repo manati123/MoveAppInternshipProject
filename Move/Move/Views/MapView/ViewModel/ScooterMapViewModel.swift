@@ -19,10 +19,13 @@ extension CLLocationCoordinate2D {
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var firstPopulation = false
+    @Published var lastCenterRegion = CLLocation(latitude: 0, longitude: 0)
     @Published var mockedTripCoordinates = Trip.getMockedTrip()
     var routeOverlay: MKOverlay?
     @Published var locationAllowed: Bool?
+    @Published var centerRegion = ""
     @Published var mapSnapshot: UIImage = UIImage()
+    var didChangeCenterRegion: (String) -> Void = { _ in }
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -161,7 +164,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
+//        if mapView.centerCoordinate.distanceFromLocation
+            convertUserCoordinatesToAddress()
     }
     
     func refreshScooterList() {
@@ -230,6 +234,22 @@ extension ScooterMapViewModel: MKMapViewDelegate {
             }
         }
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        self.lastCenterRegion = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        //change address when changing center region
+        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+        print("here")
+        print(location.distance(from: self.lastCenterRegion))
+        if location.distance(from: self.lastCenterRegion) > 500 {
+            convertUserCoordinatesToAddress()
+            self.didChangeCenterRegion(self.centerRegion)
+        }
+        
     }
     
     
@@ -332,6 +352,19 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         renderer.lineWidth = 3.0
         
         return renderer
+    }
+    
+    func convertUserCoordinatesToAddress() {
+        print("CONVERTING COORDINATES")
+        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            if error == nil {
+                self.centerRegion = placemarks?.first?.name ?? "Address Unavailable"
+            }
+            else {
+                print(error as Any)
+            }
+        }
     }
 }
 
