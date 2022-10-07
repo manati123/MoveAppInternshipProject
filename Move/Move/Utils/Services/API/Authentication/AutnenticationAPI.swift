@@ -101,6 +101,7 @@ class AuthenticationAPI {
             switch response.result {
             case .success:
                 print("Success")
+                
             case .failure(let error):
                 print(error)
             }

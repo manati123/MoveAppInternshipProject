@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BatteryView: View {
-    var battery: Int
+    @State var battery: Int
     var body: some View {
         HStack {
             switch self.battery {
@@ -33,6 +33,8 @@ struct BatteryView: View {
                 .font(Font.baiJamjuree.smallText)
         }
     }
+    
+    
 }
 
 struct BatteryView_Previews: PreviewProvider {

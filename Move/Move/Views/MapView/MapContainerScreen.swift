@@ -13,9 +13,12 @@ import MapKit
 struct MapContainerScreen: View{
     @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     @StateObject private var viewModel: ViewModel = .init()
+    @State var currentRideId = ""
+    @State var lastSelectedScooter = ""
     @Environment(\.scenePhase) var scenePhase
     
     let onGoValidateWithCode:() -> Void
+    let onGoValidateWithQR:() -> Void
     let onGoToMenu:() -> Void
     var body: some View {
         ZStack(alignment: .top) {
@@ -39,7 +42,20 @@ struct MapContainerScreen: View{
         .onAppear{
             viewModel.loadScooters()
             viewModel.convertUserCoordinatesToAddress()
+            if let rideId = UserDefaults.standard.string(forKey: UserDefaultsEnum.activeRide.rawValue) {
+                self.currentRideId = rideId
+            }
             
+            if let lastScooterId = UserDefaults.standard.string(forKey: "lastSelectedScooter") {
+                self.lastSelectedScooter = lastScooterId
+            }
+            
+            if self.currentRideId != "" && self.lastSelectedScooter != "" {
+                print("Here")
+                self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+                self.mapCoordinatorViewModel.sheetPresentationDetents = .quarter
+//                self.viewModel.callUpdate()
+            }
             //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             //                self.viewModel.mapViewModel.drawTrip()
             //            }
@@ -133,8 +149,15 @@ struct MapContainerScreen: View{
     var scooterToBeUnlockedView: some View {
         if let selectedScooter = viewModel.selectedScooter {
             withAnimation {
-                UnlockScooterSheetView(scooter: selectedScooter.scooterData, onGoValidateWithCode: {
+                UnlockScooterSheetView(scooter: selectedScooter.scooterData,
+                    onGoValidateWithCode: {
                     self.onGoValidateWithCode()
+                    self.viewModel.showUnlockingSheet = false
+                    if let selectedScooterData = self.viewModel.selectedScooter?.scooterData {
+                        self.mapCoordinatorViewModel.selectedScooter = selectedScooterData
+                    }
+                }, onGoValidateWithQR: {
+                    self.onGoValidateWithQR()
                     self.viewModel.showUnlockingSheet = false
                     if let selectedScooterData = self.viewModel.selectedScooter?.scooterData {
                         self.mapCoordinatorViewModel.selectedScooter = selectedScooterData
@@ -152,9 +175,13 @@ struct MapContainerScreen: View{
                 self.viewModel.startRide(scooter: self.mapCoordinatorViewModel.selectedScooter, completion: { response in
                     switch response {
                     case .success(let data):
+                        print("success!")
+                        print(data)
                         self.mapCoordinatorViewModel.rideSheetState = .detailsMinimized
+                        self.mapCoordinatorViewModel.sheetPresentationDetents = .quarter
                         self.viewModel.rideRunning = true
                     case .failure(let error):
+                        print("failure!")
                         ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
                         self.mapCoordinatorViewModel.sheetPresentationDetents = .none
                     }
@@ -164,7 +191,10 @@ struct MapContainerScreen: View{
             TripDetailsSheetView(scooter: mapCoordinatorViewModel.selectedScooter, mapCoordinatorViewModel: self.mapCoordinatorViewModel, endRide: {
                 self.mapCoordinatorViewModel.sheetPresentationDetents = .full
                 self.mapCoordinatorViewModel.rideSheetState = .tripSummary
+                self.viewModel.mapViewModel.drawTrip()
                 
+            }, updateRide: {
+                self.viewModel.callUpdate()
             })
         case .tripSummary:
             TripSummaryView(mapImage: self.viewModel.mapViewModel.mapSnapshot, mapCoordinatorViewModel: mapCoordinatorViewModel, onPayment: {
@@ -178,17 +208,15 @@ struct MapContainerScreen: View{
     }
     
     func hasActiveRide() {
-        if let id = UserDefaults.standard.string(forKey: UserDefaultsEnum.activeRide.rawValue) {
-            
-        }
+        
     }
 }
 
 
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapContainerScreen(mapCoordinatorViewModel: .init(), onGoValidateWithCode: {}, onGoToMenu: {})
-            .ignoresSafeArea()
-    }
-}
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapContainerScreen(mapCoordinatorViewModel: .init(), onGoValidateWithCode: {}, onGoToMenu: {})
+//            .ignoresSafeArea()
+//    }
+//}

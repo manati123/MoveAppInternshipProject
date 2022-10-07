@@ -33,7 +33,7 @@ class PasscodeFieldViewModel: ObservableObject {
         return true
     }
     
-    func checkAll() {
+    func checkAll(handleError:@escaping () -> Void) {
         if checkAllPinsAreFilled() {
             if enteredPinIsCorrect() {
                 self.goToLoad()
@@ -41,7 +41,7 @@ class PasscodeFieldViewModel: ObservableObject {
             else {
                 ErrorService().showError(message: "Entered pin does not conform to the one on the selected scooter. Please try again")
                 self.currentPin = ["", "", "", ""]
-                
+                handleError()
             }
         }
     }
@@ -62,17 +62,21 @@ struct PasscodeFieldView: View {
                 ForEach(0..<4, id: \.self) { index in
                     PasscodeFieldTextBox(currentValue: $viewModel.currentPin[index], focusedFieldIndex: _fieldFocusedState, index: index)
                         .onChange(of: viewModel.currentPin[index]) { newValue in
+//                            self.fieldFocusedState = 1
                             if let fieldFocusedState = fieldFocusedState {
                                 if newValue == "" {
                                     self.fieldFocusedState = fieldFocusedState - 1
                                 } else {
                                     self.fieldFocusedState = fieldFocusedState + 1
                                 }
-                            } else {
-                                self.fieldFocusedState = 0
+                                self.viewModel.checkAll() {
+                                    self.fieldFocusedState = 0
+                                }
                             }
-                            self.viewModel.checkAll()
+                            
                         }
+                }.onAppear{
+                    self.fieldFocusedState = 0
                 }
             }
         }

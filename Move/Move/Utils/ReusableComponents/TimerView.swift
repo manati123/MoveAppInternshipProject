@@ -74,6 +74,6 @@ extension TimerView {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(timerIsRunning: .constant(true), tripDetails: TripDetailsModel(time: "00:00", distance: 0.0))
+        TimerView(timerIsRunning: .constant(true), tripDetails: TripDetailsModel(battery: 100, time: "00:00", distance: 0.0))
     }
 }

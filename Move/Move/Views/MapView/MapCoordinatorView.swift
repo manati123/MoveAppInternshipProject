@@ -11,6 +11,7 @@ enum MapCoordinatorStates: String {
     case mapView = "MapView"
     case menu = "Menu"
     case unlockWithCode = "Code"
+    case unlockWithQR = "QR"
     case success = "Success"
     case summary = "Summary"
 }
@@ -25,7 +26,7 @@ class MapCoordinatorViewModel: ObservableObject {
     @Published var selectedScooter: Scooter = .init()
     @Published var rideSheetState: RideSheetState = .start
     @Published var sheetPresentationDetents: SheetDetents = .none
-    @Published var tripDetails: TripDetailsModel = .init(time: "00:00", distance: 0.0)
+    @Published var tripDetails: TripDetailsModel = .init(battery: 100, time: "00:00", distance: 0.0)
     @Published var mapState: MapCoordinatorStates? =  MapCoordinatorStates.mapView
     @Published var showStartRideSheet = false  {
         didSet {
@@ -43,7 +44,9 @@ struct MapCoordinatorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                    NavigationLink(destination: MapContainerScreen(mapCoordinatorViewModel: viewModel, onGoValidateWithCode: {self.viewModel.mapState = .unlockWithCode}, onGoToMenu: {onFinished()})
+                NavigationLink(destination: MapContainerScreen(mapCoordinatorViewModel: viewModel, onGoValidateWithCode: {self.viewModel.mapState = .unlockWithCode},onGoValidateWithQR: {self.viewModel.mapState = .unlockWithQR} , onGoToMenu: {
+                        onFinished()
+                    })
                         .navigationBarHidden(true)
                         .ignoresSafeArea()
                         .transition(.slide.animation(.default)),
@@ -62,6 +65,17 @@ struct MapCoordinatorView: View {
                 ){
                     EmptyView()
                 }.transition(.slide.animation(.default))
+                
+                NavigationLink(destination: UnlockQRCodeView(selectedScooter: self.viewModel.selectedScooter, onGoToLoad: {self.viewModel.mapState = .success}, onGoBack: {self.viewModel.mapState = .mapView})
+                    .navigationBarHidden(true)
+                    .ignoresSafeArea()
+                    .transition(.slide.animation(.default)),
+                               tag: .unlockWithQR,
+                               selection: $viewModel.mapState
+                ) {
+                    EmptyView()
+                }
+                
                 NavigationLink(destination: UnlockSuccessfull(goToStartRide: {
                     self.viewModel.mapState = .mapView
 //                    self.viewModel.showStartRideSheet = true

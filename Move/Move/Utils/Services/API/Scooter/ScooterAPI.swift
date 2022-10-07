@@ -17,13 +17,9 @@ struct Location: Codable {
 struct LiveRide: Codable {
     let id = UUID()
     let battery: Int?
-    let distance: Int?
-    let duration: Int?
+    let distance: Double?
+    let time: Int?
 }
-
-
-
-
 
 struct Scooter: Codable {
     var address: String?

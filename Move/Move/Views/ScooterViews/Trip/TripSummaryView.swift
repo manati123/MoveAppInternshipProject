@@ -79,7 +79,7 @@ struct TripSummaryView: View {
 
 extension TripSummaryView {
     class ViewModel: ObservableObject {
-        @Published var rideDetails: LiveRide = .init(battery: 0, distance: 0, duration: 0)
+        @Published var rideDetails: LiveRide = .init(battery: 0, distance: 0, time: 0)
         private var rideAPI: RideAPI = .init()
         func getFinalRideDetails() {
             self.rideAPI.viewUserRide(token: UserDefaultsService().loadTokenFromDefaults()) { result in

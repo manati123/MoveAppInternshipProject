@@ -48,17 +48,18 @@ extension MapContainerScreen {
                 self.selectedScooter = nil
             }
             
-            mapViewModel.didChangeCenterRegion = { value in
-                self.userLocation = value
-            }
+//            mapViewModel.didChangeCenterRegion = { value in
+//                self.userLocation = value
+//            }
             
             self.refreshScooterTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
                 self.mapViewModel.refreshScooterList()
             })
             
-//            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
-//                self.convertUserCoordinatesToAddress()
-//            })
+            self.refreshUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
+                self.convertUserCoordinatesToAddress()
+                print("converted")
+            })
             
 //            self.updateRide = Timer.scheduledTimer(withTimeInterval: 5, repeats: self.rideRunning, block: { _ in
 //                if self.rideRunning {
@@ -92,6 +93,7 @@ extension MapContainerScreen {
                     
                     UserDefaults.standard.removeObject(forKey: UserDefaultsEnum.activeRide.rawValue)
                     self.rideRunning = false
+                    
                     print(data)
                 case .failure(let error):
                     ErrorService().showError(message: ErrorService().getServerErrorMessage(error))
@@ -99,7 +101,7 @@ extension MapContainerScreen {
             }
         }
         
-        func updateRide(token: String, currentLocation: CLLocationCoordinate2D, scooterId: String, completionHandler: @escaping (Result<Ride>) -> ()) {
+        func updateRide(token: String, currentLocation: CLLocationCoordinate2D, scooterId: String, completionHandler: @escaping (Result<RideDTO>) -> ()) {
             rideAPI.updateRide(token: token, currentLocation: currentLocation, scooterId: scooterId) { result in
                 switch result {
                 case .success(let data):
@@ -115,16 +117,16 @@ extension MapContainerScreen {
             print(scooter)
             if let location = self.mapViewModel.locationManager?.location {
                 print(location)
-                self.rideAPI.startRide(scooter: scooter, userLocation: location.coordinate, userToken: UserDefaultsService()
-                    .loadTokenFromDefaults()) { result in
+                self.rideAPI.startRide(scooter: scooter, userLocation: location.coordinate, userToken: UserDefaultsService().loadTokenFromDefaults()) { result in
                         switch result {
                         case .success(let data):
                             if let id = data.updateRide?._id {
                                 
                                 self.currentRideId = id
                                 UserDefaults.standard.set(id, forKey: UserDefaultsEnum.activeRide.rawValue)
+                                UserDefaults.standard.set(scooter._id, forKey: "lastSelectedScooter")
                                 self.rideRunning = true
-                                
+                                self.mapViewModel.refreshScooterList()
                                 completion(.success(data.updateRide!))
                             }
                             

@@ -19,6 +19,12 @@ struct MainMenuCoordinatorView: View {
     @ObservedObject var userViewModel: UserViewModel
     let logOut:() -> Void
     let onGoBack:() -> Void
+    
+    func getNumberOfRidesOfuser() {
+        
+    }
+    
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,7 +37,7 @@ struct MainMenuCoordinatorView: View {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
-                NavigationLink(destination: RideHistoryView(onGoBack: {
+                NavigationLink(destination: RideHistoryView(userViewModel: self.userViewModel, onGoBack: {
                     self.menuState = .menu
                 }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: MainMenuCoordinatorState.history, selection: $menuState) {
                     EmptyView()

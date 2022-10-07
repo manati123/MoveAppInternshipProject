@@ -33,6 +33,7 @@ struct FloatingTextField: View {
                             .onTapGesture {
                                 self.isTouched = true
                             }
+                            .padding(.bottom, 6)
                         Divider()
                             .frame(height: 1)
                             .frame(maxWidth: .infinity)
@@ -65,6 +66,7 @@ struct FloatingTextField: View {
                             .onTapGesture {
                                 self.isTouched = true
                             }
+                            .padding(.bottom, 6)
                         Divider()
                             .frame(height: 1)
                             .padding(.horizontal, 10)

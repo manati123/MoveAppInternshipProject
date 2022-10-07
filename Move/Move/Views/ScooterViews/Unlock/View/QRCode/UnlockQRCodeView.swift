@@ -6,8 +6,27 @@
 //
 
 import SwiftUI
+import AVFoundation
+import UIKit
+
+class ScannerViewModel: ObservableObject {
+    let scanInterval = 1.0
+    
+    @Published var torchIsOn = false
+    @Published var lastQrCode = "QR-Code Goes Here"
+    
+    
+    
+    func onFoundQrCode(_ code: String ) {
+        self.lastQrCode = code
+    }
+}
+
 
 struct UnlockQRCodeView: View {
+    @StateObject var viewModel = ScannerViewModel()
+    @State var selectedScooter: Scooter
+    let onGoToLoad:() -> Void
     let onGoBack:() -> Void
     
     var body: some View {
@@ -37,6 +56,9 @@ struct UnlockQRCodeView: View {
                 .foregroundColor(Color.neutralWhite)
             Spacer()
             Image(ImagesEnum.lightbulb.rawValue)
+                .onTapGesture {
+                    self.viewModel.torchIsOn.toggle()
+                }
         }.padding(.horizontal, 24)
             .padding(.top, 54)
     }
@@ -56,10 +78,23 @@ struct UnlockQRCodeView: View {
     }
     
     var centerRoundedRectangle: some View {
-        RoundedRectangle(cornerRadius: 26)
-            .stroke(Color.neutralWhite, lineWidth: 2)
-            .frame(maxWidth: UIScreen.main.bounds.width * 0.9, maxHeight: UIScreen.main.bounds.height * 0.25)
-            .padding(.top, 60)
+        QRCodeScannerView()
+            .found(r: { readValue in
+                if let scooterNumber = self.selectedScooter.number {
+                    print(scooterNumber)
+                    if readValue == String(scooterNumber) {
+                        self.onGoToLoad()
+                    }
+                }
+                
+            })
+            .torchLight(isOn: self.viewModel.torchIsOn)
+            .interval(delay: self.viewModel.scanInterval)
+            .clipShape(
+                RoundedRectangle(cornerRadius: 26)
+            ).padding(.top, 60)
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.9, maxHeight: UIScreen.main.bounds.height * 0.4)
+            
     }
     
     var bottomSideAlternatives: some View {
@@ -92,8 +127,8 @@ struct UnlockQRCodeView: View {
     }
 }
 
-struct UnlockQRCodeView_Previews: PreviewProvider {
-    static var previews: some View {
-        UnlockQRCodeView(onGoBack: {})
-    }
-}
+//struct UnlockQRCodeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UnlockQRCodeView(onGoBack: {})
+//    }
+//}

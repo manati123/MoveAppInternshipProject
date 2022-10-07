@@ -88,7 +88,6 @@ struct MainCoordinatorView: View {
         } else {
             self.selection = .onboarding
         }
-        
     }
     
     func getSplashView() -> some View {

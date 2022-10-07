@@ -64,7 +64,7 @@ class UserViewModel: ObservableObject {
             errorString +=  "Password not long enough!\n"
         }
         if !self.validateEmail() {
-            errorString += "Email is not valid!"
+            errorString += "Email is not valid!\n"
         }
         errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
@@ -74,7 +74,7 @@ class UserViewModel: ObservableObject {
     func signUpErrorHandling(error: Error) {
         var errorString = ""
         if !self.validateEmail() {
-            errorString += "Email is not valid!"
+            errorString += "Email is not valid!\n"
         }
         errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
@@ -82,12 +82,13 @@ class UserViewModel: ObservableObject {
     
     
     
-    func authenticate(onSuccess:@escaping () -> Void) {
+    func authenticate(onSuccess:@escaping () -> Void, waiting: @escaping () -> Void) {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
             switch result {
             case .success(let user):
-                self.sessionUser.user = user.user
-                onSuccess()
+//                self.sessionUser.user = user.user
+//                onSuccess()
+                self.login(waiting: waiting, success: onSuccess)
             case .failure(let error):
                 self.signUpErrorHandling(error: error)
             }

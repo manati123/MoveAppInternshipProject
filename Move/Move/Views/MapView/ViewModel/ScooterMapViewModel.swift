@@ -25,7 +25,6 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     @Published var locationAllowed: Bool?
     @Published var centerRegion = ""
     @Published var mapSnapshot: UIImage = UIImage()
-    var didChangeCenterRegion: (String) -> Void = { _ in }
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
@@ -165,7 +164,8 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 //        if mapView.centerCoordinate.distanceFromLocation
-            convertUserCoordinatesToAddress()
+//            convertUserCoordinatesToAddress()
+        checkLocationAuthorization()
     }
     
     func refreshScooterList() {
@@ -236,21 +236,21 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         return annotationView
     }
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        self.lastCenterRegion = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-    }
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        //change address when changing center region
-        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
-        print("here")
-        print(location.distance(from: self.lastCenterRegion))
-        if location.distance(from: self.lastCenterRegion) > 500 {
-            convertUserCoordinatesToAddress()
-            self.didChangeCenterRegion(self.centerRegion)
-        }
-        
-    }
+//    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+//        self.lastCenterRegion = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+//    }
+//
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//        //change address when changing center region
+//        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+//        print("here")
+//        print(location.distance(from: self.lastCenterRegion))
+//        if location.distance(from: self.lastCenterRegion) > 500 {
+//            convertUserCoordinatesToAddress()
+//            self.didChangeCenterRegion(self.centerRegion)
+//        }
+//
+//    }
     
     
     
@@ -289,16 +289,16 @@ extension ScooterMapViewModel: MKMapViewDelegate {
             return
         }
         
-        DispatchQueue.main.async {
-            self.routeOverlay = MKPolyline(coordinates: self.mockedTripCoordinates.coordinates, count: self.mockedTripCoordinates.coordinates.count)
-            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
-            let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
-            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//        DispatchQueue.main.async {
+//            self.routeOverlay = MKPolyline(coordinates: self.mockedTripCoordinates.coordinates, count: self.mockedTripCoordinates.coordinates.count)
+//            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
+//            let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
+//            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 //                self.saveSnaphotOfTrip()
             self.mapSnapshot = self.mapView.snapshot ?? UIImage()
-            }
-        }
+//            }
+//        }
     }
     
     func saveSnaphotOfTrip() {

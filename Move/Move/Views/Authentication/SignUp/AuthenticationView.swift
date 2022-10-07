@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftMessages
 struct AuthenticationView: View {
     @ObservedObject var viewModel: UserViewModel
+    @State var waitingForResponse = false
     let onFinished: () -> Void
+    let onGoLogIn:() -> Void
     
     var body: some View {
         ZStack {
@@ -30,8 +32,10 @@ struct AuthenticationView: View {
                                 textFields
                                 termsAndConditions
                                 Button() {
-                                    self.viewModel.authenticate(onSuccess: self.onFinished)
-//                                    self.onFinished()
+                                    self.waitingForResponse = true
+                                    self.viewModel.authenticate(onSuccess: self.onFinished, waiting: {
+                                        self.waitingForResponse = false
+                                    })
                                 } label: {
                                     Text("Get started!")
                                         .frame(maxWidth: .infinity)
@@ -39,6 +43,8 @@ struct AuthenticationView: View {
                                 .buttonStyle(.filledButton)
                                 .disabled(fieldsAreFilled() ? false : true)
                                 .animation(.default, value: fieldsAreFilled())
+                                ActivityIndicator(isAnimating: .constant(self.waitingForResponse), color: .white, style: .large)
+                                    .frame(maxWidth: .infinity, alignment: .center)
                                 logInText
                                 //                                Spacer()
                             }
@@ -47,6 +53,10 @@ struct AuthenticationView: View {
                     .padding()
                     
                 }
+            }.onAppear {
+                self.viewModel.user.password = ""
+                self.viewModel.user.name = ""
+                self.viewModel.user.email = ""
             }
         }
         
@@ -56,6 +66,7 @@ struct AuthenticationView: View {
         VStack(spacing: 20) {
             FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $viewModel.user.email, icon: ImagesEnum.clearTextFieldIcon.rawValue)
                 .font(Font.baiJamjuree.caption2)
+                .keyboardType(.emailAddress)
             FloatingTextField(title: "Username", isSecured: false, isPasswordField: false, text: $viewModel.user.name, icon: "")
                 .font(Font.baiJamjuree.caption2)
             FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $viewModel.user.password, icon: ImagesEnum.closedEyeIcon.rawValue)
@@ -71,7 +82,7 @@ struct AuthenticationView: View {
                 .foregroundColor(.white)
                 
             Button {
-                onFinished()
+                self.onGoLogIn()
             }label: {
                 Text(" log in here")
                     .underline()
@@ -124,15 +135,15 @@ struct AuthenticationView: View {
 }
 
 //
-struct AuthenticationView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
-                .previewInterfaceOrientation(.portrait)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewInterfaceOrientation(.portrait)
-        }
-    }
-}
+//struct AuthenticationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
+//                .previewInterfaceOrientation(.portrait)
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+//            AuthenticationView(viewModel: UserViewModel(userDefaultsService: .init()), onFinished: {})
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+//                .previewInterfaceOrientation(.portrait)
+//        }
+//    }
+//}

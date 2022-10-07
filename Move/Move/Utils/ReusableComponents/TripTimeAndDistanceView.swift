@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TripDetailsModel {
+    var battery: Int
     var time: String
     var distance: Double
 }
 
 struct TripTimeAndDistanceView: View {
-//    @State var tripDetails: TripDetailsModel
     @ObservedObject var mapCoordinatorViewModel: MapCoordinatorViewModel
     @Binding var timeIsRunning: Bool {
         didSet {
@@ -22,7 +22,6 @@ struct TripTimeAndDistanceView: View {
     }
     var body: some View {
         HStack(spacing: 55) {
-            
             VStack {
                 HStack(spacing: 4) {
                     Image(systemName: "clock")
@@ -54,24 +53,6 @@ struct TripTimeAndDistanceView: View {
             .padding(.leading, 24)
             .padding(.trailing, 83)
             .padding(.bottom, 36)
-            .onAppear {
-                incrementDistance()
-            }
+            
     }
-    
-    func incrementDistance() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if timeIsRunning {
-                self.mapCoordinatorViewModel.tripDetails.distance += 0.1
-                incrementDistance()
-            }
-        }
-    }
-    
 }
-
-//struct TripTimeAndDistanceView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TripTimeAndDistanceView(timeIsRunning: .constant(false))
-//    }
-//}
