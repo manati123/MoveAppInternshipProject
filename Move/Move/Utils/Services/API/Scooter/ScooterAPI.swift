@@ -14,12 +14,19 @@ struct Location: Codable {
     var coordinates: [Double]?
 }
 
+struct LiveRide: Codable {
+    let id = UUID()
+    let battery: Int?
+    let distance: Double?
+    let time: Int?
+}
+
 struct Scooter: Codable {
     var address: String?
+    var internalId: String?
     var location: Location?
     var _id: String?
     var number: Int?
-    var internal_id: Int?
     var battery: Int?
     var lockedStatus: Bool?
     var bookStatus: String?
@@ -28,8 +35,77 @@ struct Scooter: Codable {
     var __v: Int?
 }
 
+//struct Ride {
+//    var rideId: Int
+//    var locationsCoordinates: [CLLocation]
+//}
+
+
+struct Ride: Codable {
+    let _id: String?
+    let userId: String?
+    let scooterId: String?
+    let distance: Int?
+}
+
 class ScooterAPI {
     private let baseUrl = "https://scooter-app.herokuapp.com/scooter"
+    
+    
+    func getScooterByNumber(scooterNumber: Int, completionHandler:@escaping (Result<Scooter>) -> Void) {
+        AF.request("\(baseUrl)/\(scooterNumber)", method: .get)
+            .validate(statusCode: 200..<299)
+            .responseDecodable(of: Scooter.self) { response in
+                switch response.result {
+                case .success(let scooter):
+                    completionHandler(.success(scooter))
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+                
+            }
+    }
+    
+    func lockScooter(scooterNumber: Int, token: String) {
+        let parameters = [
+            "scooterNumber": scooterNumber
+        ]
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/lock", method: .patch, parameters: parameters, headers: headers)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    print("Success")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+            }
+    }
+    
+    func unlockScooter(scooterNumber: Int, token: String) {
+        let parameters = [
+            "scooterNumber": scooterNumber
+        ]
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/unlock", method: .patch, parameters: parameters, headers: headers)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    print("Success")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+            }
+    }
+    
     
     func getAllScooters(completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         AF.request("\(baseUrl)", method: .get)
@@ -44,25 +120,48 @@ class ScooterAPI {
             }
     }
     
+    
+    
     func getScootersByLocation(userLocation: CLLocationCoordinate2D, completionHandler: @escaping (Result<[Scooter]>) -> ()) {
         let parameters = [
             "latitudine": "\(userLocation.latitude)",
             "longitudine": "\(userLocation.longitude)"
         ]
-//        print(headers)
         
         AF.request("\(baseUrl)", method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: [Scooter].self) { response in
-                
                 do {
-                    print(response.data!)
-                    let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
-                    
-                    completionHandler(.success(decoded))
+                    if response.data != nil {
+                        print(response.data!)
+                        let decoded = try JSONDecoder().decode([Scooter].self, from: response.data!)
+                        completionHandler(.success(decoded))
+                    }
                 } catch {
                     completionHandler(.failure(error))
                 }
             }
     }
+    
+    func pingScooter(scooterId: String, token: String) {
+        let parameters = ["idScooter" : scooterId]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+        
+        AF.request("\(baseUrl)/ping/\(scooterId)",method: .get, parameters: nil, headers: headers)
+            .validate(statusCode: 200..<299)
+            .responseData {
+                response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    
+    
+    
+    
 }

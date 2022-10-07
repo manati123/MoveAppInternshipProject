@@ -64,49 +64,33 @@ class UserViewModel: ObservableObject {
             errorString +=  "Password not long enough!\n"
         }
         if !self.validateEmail() {
-            errorString += "Email is not valid!"
+            errorString += "Email is not valid!\n"
         }
-        errorString += error.localizedDescription
+        errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
     }
-    
-    
-    func saveUserToUserDefaults() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(self.sessionUser)
-            UserDefaults.standard.set(data, forKey: "LoggedUser")
-        } catch {
-            print("Unable to Encode LoggedUser (\(error))")
-        }
-    }
-    
     
     //TODO: move this
     func signUpErrorHandling(error: Error) {
         var errorString = ""
-        if !self.fieldsAreLongEnoughSignUp() {
-            errorString +=  "Username or password are not long enough!\n"
-        }
         if !self.validateEmail() {
-            errorString += "Email is not valid!"
+            errorString += "Email is not valid!\n"
         }
-        if errorString == "" {
-            errorString += "User with that email already exists!"
-        }
-        errorString += error.localizedDescription
+        errorString += ErrorService().getServerErrorMessage(error)
         ErrorService().showError(message: errorString)
     }
     
-    func authenticate() {
+    
+    
+    func authenticate(onSuccess:@escaping () -> Void, waiting: @escaping () -> Void) {
         AuthenticationAPI().registerUser(user: self.user, completionHandler: { result in
             switch result {
             case .success(let user):
-                self.sessionUser.user = user.user
+//                self.sessionUser.user = user.user
+//                onSuccess()
+                self.login(waiting: waiting, success: onSuccess)
             case .failure(let error):
                 self.signUpErrorHandling(error: error)
-                
-                
             }
         })
     }

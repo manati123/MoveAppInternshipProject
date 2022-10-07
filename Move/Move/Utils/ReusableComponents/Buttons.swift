@@ -34,6 +34,24 @@ struct FilledButton: ButtonStyle {
     }
 }
 
+struct ApplePayButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(Font.baiJamjuree.button1)
+            .padding(.horizontal,98)
+            .padding(.vertical, 16)
+            .background(AnyView(
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundColor(Color.black)
+//                                .frame(width: .infinity)
+            )
+                        
+            )
+            .foregroundColor(Color.neutralWhite)
+        
+    }
+}
+
 struct TransparentButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
@@ -55,7 +73,8 @@ struct TransparentButton: ButtonStyle {
                                 
                             ))
             .foregroundColor(isEnabled ? Color.accentPink : .neutralPurple)
-            .frame(width:96, height: 56)
+            
+//            .frame(width:96, height: 56)
     }
 }
 
@@ -81,15 +100,22 @@ struct TransparentWhiteButton: ButtonStyle {
     }
 }
 
-//struct ButtonWithIconAndBoldText: ButtonStyle {
-//    var icon: String
-//
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration.label
-//            .font(Font.baiJamjuree.button1)
-//            .foregroundColor(<#T##color: Color?##Color?#>)
-//    }
-//}
+struct PinCodeButton: ButtonStyle {
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(Font.baiJamjuree.heading2)
+            .frame(width:32,  height: 32)
+            .padding(15)
+            .foregroundColor(.black)
+            .background( !configuration.isPressed ?
+                RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(.neutralGray) :
+                RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(.neutralWhite)
+            )
+    }
+}
 
 struct SimpleMapButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -106,6 +132,12 @@ struct SimpleMapButton: ButtonStyle {
 
 extension ButtonStyle where Self == SimpleMapButton {
     static var simpleMapButton: Self {
+        return .init()
+    }
+}
+
+extension ButtonStyle where Self == ApplePayButton {
+    static var applePayButton: Self {
         return .init()
     }
 }
@@ -127,6 +159,13 @@ extension ButtonStyle where Self == TransparentWhiteButton {
         return .init()
     }
 }
+
+extension ButtonStyle where Self == PinCodeButton {
+    static var pinCodeButton: Self {
+        return .init()
+    }
+}
+
 //
 //extension ButtonStyle where Self == ButtonWithIconAndBoldText {
 //    static var buttonWithIconAndBoldText: Self {
@@ -135,26 +174,17 @@ extension ButtonStyle where Self == TransparentWhiteButton {
 //}
 
 struct Buttons_Previews: PreviewProvider {
+    @State var ab = "1"
     static var previews: some View {
         ZStack {
             //            Color.primaryPurple
             PurpleBackground()
-            VStack {
             Button {
                 
-            } label: {
-                //            Image("UserNotCenteredPin")
-                Text("NFC")
+            }label: {
+                Text("Pay with apple pay")
             }
-            
-                Button {
-                    
-                } label: {
-                    //            Image("UserNotCenteredPin")
-                    Text("QR")
-                }
-            }
-            .buttonStyle(.transparentWhiteButton)
+            .buttonStyle(.applePayButton)
         }
     }
 }

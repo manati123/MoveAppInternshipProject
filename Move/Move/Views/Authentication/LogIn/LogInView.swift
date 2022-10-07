@@ -18,12 +18,18 @@ extension LogInView {
         }
         
     }
+    private enum Field: Int, CaseIterable {
+           case email, password
+       }
+
 }
+
 
 struct LogInView: View {
     //TODO: go back to injection
     @ObservedObject var userViewModel: UserViewModel
     @StateObject private var viewModel = ViewModel()
+    @FocusState private var fieldFocusedState: Field?
     let onFinished: () -> Void
     let onGoAuth: () -> Void
     let onForgotPassword: () -> Void
@@ -78,12 +84,18 @@ struct LogInView: View {
             
             ActivityIndicator(isAnimating: .constant(self.viewModel.waitingForResponse), color: .white, style: .large)
                 .frame(maxWidth: .infinity, alignment: .center)
-            noAccount
+            HStack {
+                Spacer()
+                noAccount
+                Spacer()
+            }
         }
     }
     
+    
+    //TODO: change 
     var noAccount: some View {
-        HStack(spacing: 0) {
+        VStack(spacing: 0) {
             
             Text("Don’t have an account? You can")
                 .font(Font.baiJamjuree.smallText)
@@ -103,13 +115,17 @@ struct LogInView: View {
     var textFields: some View {
         VStack(spacing: 20) {
             FloatingTextField(title: "Email", isSecured: false, isPasswordField: false, text: $userViewModel.user.email, icon: "")
+                .keyboardType(.emailAddress)
+                .focused($fieldFocusedState, equals: .email)
             FloatingTextField(title: "Password", isSecured: true, isPasswordField: true, text: $userViewModel.user.password, icon: ImagesEnum.closedEyeIcon.rawValue)
                 .font(Font.baiJamjuree.caption2)
+                .focused($fieldFocusedState, equals: .password)
         }
     }
     
     func callLogin() {
         self.viewModel.waitingForResponse = true
+        self.fieldFocusedState = nil
         self.userViewModel.login(waiting: {
             self.viewModel.waitingForResponse = false
         }, success: onFinished)

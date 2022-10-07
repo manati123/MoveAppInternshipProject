@@ -14,6 +14,11 @@ struct ContentView: View {
     var body: some View {
 //        AuthenticationView()
         MainCoordinatorView()
+//        TripDetailsSheetView(scooter: Scooter(battery: 10))
+//            .id(UUID())
+//        TimerView()
+//        ScooterSerialNumberView()
+//        MyView()
 //        MapContainerScreen()
 //            .ignoresSafeArea()
        

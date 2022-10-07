@@ -15,15 +15,14 @@ struct ScooterModel {
 }
 
 struct ScooterCardView: View {
-    var isEnabled: Bool
+    
     @StateObject private var viewModel: ViewModel
     let getLocationHandler:() -> Void
     let showSheet:() -> Void
     
-    init(isEnabled: Bool, scooter: Scooter, getLocationHandler:@escaping () -> Void, showSheet:@escaping () -> Void) {
+    init(scooter: Scooter, getLocationHandler:@escaping () -> Void, showSheet:@escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: ViewModel(scooter: scooter))
         self.getLocationHandler = getLocationHandler
-        self.isEnabled = isEnabled
         self.showSheet = showSheet
     }
     var body: some View {
@@ -40,8 +39,9 @@ struct ScooterCardView: View {
             .onAppear {
                 self.viewModel.convertLocation()
             }
-            
     }
+    
+    //TODO: smaller spacing
     var bottomSide: some View {
         VStack{
             HStack(alignment: .top) {
@@ -52,15 +52,15 @@ struct ScooterCardView: View {
                     .foregroundColor(Color.primaryPurple)
             }
             Button() {
-                print("LMAO")
                 self.showSheet()
+                
             } label: {
                 Text("Unlock")
                     .frame(maxWidth: .infinity)
             }
             .padding(.horizontal, 20)
             .buttonStyle(.filledButton)
-            .disabled(self.isEnabled)
+//            .disabled(s)
             
         }
     }
@@ -76,29 +76,29 @@ struct ScooterCardView: View {
                     .fontWeight(.bold)
                 HStack {
                     switch self.viewModel.scooterData.battery! {
-                    case 80..<101:
-                        Image(systemName: "battery.100")
+                    case 81..<101:
+                        Image(ImagesEnum.battery100.rawValue)
                             .foregroundColor(.green)
-                    case 60..<80:
-                        Image(systemName: "battery.75")
+                    case 60..<81:
+                        Image(ImagesEnum.battery80.rawValue)
                             .foregroundColor(.orange)
                     case 40..<60:
-                        Image(systemName: "battery.50")
+                        Image(ImagesEnum.battery50.rawValue)
                             .foregroundColor(.yellow)
                     case 20..<40:
-                        Image(systemName: "battery.25")
+                        Image(ImagesEnum.battery20.rawValue)
                             .foregroundColor(.red)
                     case 0..<20:
-                        Image(systemName: "battery.0")
+                        Image(ImagesEnum.battery0.rawValue)
                     default:
-                        Image(systemName: "minus.plus.batteryblock.fill")
+                        Image(ImagesEnum.batteryCharging.rawValue)
                     }
-                    Text("\(self.viewModel.scooterData.battery!)")
+                    Text("\(self.viewModel.scooterData.battery!)%")
                         .font(Font.baiJamjuree.smallText)
                 }
                 HStack(spacing: 24) {
                     Button() {
-                        print("LMAO")
+                        ScooterAPI().pingScooter(scooterId: "61fa56c7e47c4209abcd7837", token: UserDefaultsService().loadTokenFromDefaults())
                     } label: {
                         Image(ImagesEnum.ringScooterPin.rawValue)
                     }
@@ -129,7 +129,7 @@ struct ScooterCardView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black
-            ScooterCardView(isEnabled: false, scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
+            ScooterCardView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), getLocationHandler: {}, showSheet: {})
         }
     }
 }

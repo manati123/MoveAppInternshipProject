@@ -28,12 +28,7 @@ struct MainCoordinatorView: View {
                 
                 
                 NavigationLink(destination: SignUpCoordinatorView(viewModel: userViewModel){
-                    switch userViewModel.user.drivinglicense != "" {
-                    case true:
-                        self.selection = OnboardingEnum.map
-                    case false:
-                        self.selection = OnboardingEnum.license
-                    }
+                    setFlowOfApplication()
                 }.preferredColorScheme(.dark).navigationBarHidden(true), tag: .authentication, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
@@ -49,17 +44,25 @@ struct MainCoordinatorView: View {
                 
                 NavigationLink(destination: MapCoordinatorView(userViewModel: userViewModel){
                     self.selection = OnboardingEnum.authentication
-                    AuthenticationAPI().logOut(loggedUser: self.userViewModel.sessionUser, completionHandler: {_ in })
+                    AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
                 } onFinished: {
-                    self.selection = OnboardingEnum.none
-                }.preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
+                    self.selection = OnboardingEnum.menu
+                } .preferredColorScheme(.light).navigationBarHidden(true), tag: .map, selection: $selection) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 
+                
+                NavigationLink(destination: MainMenuCoordinatorView(userViewModel: userViewModel){
+                    self.selection = OnboardingEnum.authentication
+                    AuthenticationAPI().logOut(token: self.userViewModel.sessionUser.token, completionHandler: {_ in })
+                }  onGoBack: {self.selection = .map}.preferredColorScheme(.light).navigationBarHidden(true), tag: .menu, selection: $selection) {
+                    EmptyView()
+                }.transition(.slide.animation(.default))
+                
+//                NavigationLink(destination: UnlockCoordinatorView()
+                
+                
             }.navigationBarHidden(true)
-                .onAppear {
-                    
-                }
         }
     }
     
@@ -73,7 +76,7 @@ struct MainCoordinatorView: View {
                     self.userViewModel.sessionUser.user = user
                     self.userViewModel.sessionUser.token = token
                     if user.drivinglicense != nil {
-                        print(user.drivinglicense)
+                        print(user.drivinglicense as Any)
                         self.selection = .map
                     } else {
                         self.selection = .license
@@ -85,35 +88,12 @@ struct MainCoordinatorView: View {
         } else {
             self.selection = .onboarding
         }
-        
     }
     
     func getSplashView() -> some View {
         return SplashView() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 setFlowOfApplication()
-//                if self.userDefaultsService.isOnboarded()  {
-//
-//                    let token = userDefaultsService.loadTokenFromDefaults()
-//                    print(token)
-//                    AuthenticationAPI().getUser(token: token) { result in
-//                        print(result)
-//                    }
-//                    if let decodedUser = try? self.userDefaultsService.loadUserFromDefaults() {
-//                        if decodedUser.user.validated ?? false {
-//                            print("MAP")
-//                            self.selection = .map
-//                        }
-//                        else {
-//                            self.selection = .license
-//                        }
-//                    } else {
-//                        self.selection = .authentication
-//                    }
-//                }
-//                else {
-//                    self.selection = .onboarding
-//                }
             }
         }.navigationBarHidden(true)
     }

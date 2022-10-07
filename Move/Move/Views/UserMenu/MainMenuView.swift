@@ -9,21 +9,45 @@ import SwiftUI
 
 struct MainMenuView: View {
     @ObservedObject var userViewModel: UserViewModel
+    @StateObject var viewModel: ViewModel = .init()
     let onGoBack:() -> Void
+    @State var numberOfRides = 0
     let onGoToAccount:() -> Void
+    let onGoToHistory:() -> Void
+    
+    func setNumberOfRides() {
+        AuthenticationAPI().getUser(token: UserDefaultsService().loadTokenFromDefaults()) { result in
+            switch result {
+            case .success(let user):
+                self.userViewModel.user = user
+                self.numberOfRides = user.numberOfRides ?? 0
+//                print(user)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             Image(ImagesEnum.scooterWithShadow.rawValue)
             VStack(spacing: 32) {
-                TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack)
-                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: 12", buttonText: "See all", onButtonHandler: {})
+                TopBarWithBackAndIcon(text: "Hi \(userViewModel.sessionUser.user.name)!", onGoBack: onGoBack, icon: ImagesEnum.avatar.rawValue)
+                PurpleBackgroundInformativeWithButton(headingTitle: "History", subtitle: "Total rides: \(self.numberOfRides)", buttonText: "See all", onButtonHandler: onGoToHistory)
                     .padding(.leading, 15)
+                    .id(UUID())
                 buttons
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 Spacer()
             }
             
         }
+//        .onAppear {
+//            self.viewModel.getRides() { value in
+//                self.viewModel.numberOfRides = value
+//                self.viewModel.objectWillChange.send()
+//            }
+//        }
     }
     
     var buttons: some View {
@@ -72,6 +96,9 @@ struct MainMenuView: View {
             }
             .padding(.leading, 75)
             BasicIconButton(iconName: "star", buttonText: "Rate Us")
+        }
+        .onAppear{
+            self.setNumberOfRides()
         }
     }
 }

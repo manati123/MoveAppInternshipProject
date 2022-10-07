@@ -19,11 +19,29 @@ extension CLLocationCoordinate2D {
 class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var firstPopulation = false
+    @Published var lastCenterRegion = CLLocation(latitude: 0, longitude: 0)
+    @Published var mockedTripCoordinates = Trip.getMockedTrip()
+    var routeOverlay: MKOverlay?
+    @Published var locationAllowed: Bool?
+    @Published var centerRegion = ""
+    @Published var mapSnapshot: UIImage = UIImage()
     var scooters: [ScooterAnnotation] = [] {
         didSet {
             refreshScooterList()
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard let locationManager = locationManager else {
+            self.locationAllowed =  false
+            return
+        }
+        if locationManager.authorizationStatus == .denied {
+            self.locationAllowed = false
+        }
+        self.locationAllowed = true
+    }
+    
     var onSelectedScooter: (ScooterAnnotation) -> Void = { _ in }
     var onDeselectedScooter: () -> Void = {}
     
@@ -31,9 +49,12 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = self
         mapView.showsUserLocation = true
+
         return mapView
         
     }()
+    
+    
     
     func toggleUserTrackingMode() {
         if mapView.userTrackingMode == .followWithHeading {
@@ -42,6 +63,27 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             mapView.userTrackingMode = .followWithHeading
         }
     }
+    
+    func saveMapViewImage() {
+        let options = MKMapSnapshotter.Options()
+        options.region = self.mapView.region
+        options.size = self.mapView.frame.size
+        options.scale = UIScreen.main.scale
+        
+        let snapshotter = MKMapSnapshotter(options: options)
+        snapshotter.start() {snapshot, error in
+            guard snapshot != nil else {
+                print(error as Any)
+                return
+            }
+            self.mapSnapshot = snapshot!.image
+            self.objectWillChange.send()
+        }
+        
+    }
+    
+    
+    
     
     func centerOnUser() {
         let mapRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -70,6 +112,22 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         }
     }
     
+    func checkMinimumDistanceAndLocationEnabled(selectedScooterLocation: CLLocationCoordinate2D) -> Bool {
+        let locationDisabled = self.locationIsDisabled()
+        let scooterLocation = CLLocation(latitude: selectedScooterLocation.latitude, longitude: selectedScooterLocation.longitude)
+        if !locationDisabled {
+            let distanceToScooter = Int(self.locationManager?.location?.distance(from: scooterLocation) ?? 1000)
+            if distanceToScooter < 40 {
+                return false
+            }
+            else {
+                return true
+            }
+        } else {
+            return true
+        }
+    }
+    
     func locationIsDisabled() -> Bool {
         guard let locationManager = locationManager else {
             return false
@@ -93,9 +151,11 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         case .denied:
             print("Denied location")
             mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+            self.locationAllowed = false
         case .authorizedAlways, .authorizedWhenInUse:
-            print("f")
-            mapView.centerCoordinate = locationManager.location!.coordinate
+            mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 46.770439, longitude: locationManager.location?.coordinate.longitude ?? 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+            self.locationAllowed = true
+//            mapView.centerCoordinate = locationManager.location!.coordinate
         @unknown default:
             break
         }
@@ -103,10 +163,9 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+//        if mapView.centerCoordinate.distanceFromLocation
+//            convertUserCoordinatesToAddress()
         checkLocationAuthorization()
-        //        checkIfLocationServiceIsEnabled()
-        print("Checked")
-        //        print("checked")
     }
     
     func refreshScooterList() {
@@ -133,6 +192,7 @@ class ScooterMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(scooterAnnotations)
         }
+//        print("\(scooters.count) != \(scooterAnnotations.count)")
     }
 }
 
@@ -144,7 +204,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         
         
         
-        if annotation is MKUserLocation { 
+        if annotation is MKUserLocation {
             let userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "userLocation")
             userAnnotationView.image = UIImage(named: ImagesEnum.userLocationMapPin.rawValue)
             
@@ -176,6 +236,22 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         return annotationView
     }
     
+//    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+//        self.lastCenterRegion = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+//    }
+//
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//        //change address when changing center region
+//        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+//        print("here")
+//        print(location.distance(from: self.lastCenterRegion))
+//        if location.distance(from: self.lastCenterRegion) > 500 {
+//            convertUserCoordinatesToAddress()
+//            self.didChangeCenterRegion(self.centerRegion)
+//        }
+//
+//    }
+    
     
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -198,6 +274,7 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         }
         
         if let scooterAnnotation = view.annotation as? ScooterAnnotation {
+            print("SELECTED SCOOTER")
             self.onSelectedScooter(scooterAnnotation)
         }
     }
@@ -206,5 +283,88 @@ extension ScooterMapViewModel: MKMapViewDelegate {
         self.onDeselectedScooter()
     }
     
+    func drawTrip() {
+        if self.mockedTripCoordinates.coordinates.count == 0 {
+            print("No coordinates to count")
+            return
+        }
+        
+//        DispatchQueue.main.async {
+//            self.routeOverlay = MKPolyline(coordinates: self.mockedTripCoordinates.coordinates, count: self.mockedTripCoordinates.coordinates.count)
+//            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
+//            let customeEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
+//            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customeEdgePadding, animated: false)
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                self.saveSnaphotOfTrip()
+            self.mapSnapshot = self.mapView.snapshot ?? UIImage()
+//            }
+//        }
+    }
     
+    func saveSnaphotOfTrip() {
+        let screenWidth = UIScreen.main.bounds.width
+            let screenHeight = UIScreen.main.bounds.height
+
+        let region = self.mapView.region
+
+        let mapOptions = MKMapSnapshotter.Options()
+            mapOptions.region = region
+            mapOptions.size = CGSize(width: screenWidth, height: screenHeight)
+            mapOptions.showsBuildings = false
+
+            let snapshotter = MKMapSnapshotter(options: mapOptions)
+            snapshotter.start { (snapshotOrNil, errorOrNil) in
+            if let error = errorOrNil {
+                print(error)
+                return
+            }
+            if let snapshot = snapshotOrNil {
+                //set main class snapshot image = snapshot.image
+                let sourceImageSize = snapshot.image.size
+                let sideLength = min(
+                    snapshot.image.size.width,
+                    snapshot.image.size.height
+                )
+                let yOffset = (sourceImageSize.height - sideLength) / 0.4
+//                let yOffset = (sourceImageSize.height - sideLength) / 3.0
+                let cropRect = CGRect(
+                    x: 0,
+                    y: yOffset,
+                    width: sideLength * 4.1,
+                    height: sideLength * 2
+                ).integral
+                let sourceCGImage = snapshot.image.cgImage!
+                let croppedCGImage = sourceCGImage.cropping(to: cropRect)!
+                
+                self.mapSnapshot = UIImage(cgImage: croppedCGImage, scale: snapshot.image.imageRendererFormat.scale, orientation: snapshot.image.imageOrientation)
+            }
+
+            }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.setColors([
+            UIColor(Color.accentPink)
+
+        ], locations: [])
+        renderer.lineCap = .round
+        renderer.lineWidth = 3.0
+        
+        return renderer
+    }
+    
+    func convertUserCoordinatesToAddress() {
+        print("CONVERTING COORDINATES")
+        let location = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            if error == nil {
+                self.centerRegion = placemarks?.first?.name ?? "Address Unavailable"
+            }
+            else {
+                print(error as Any)
+            }
+        }
+    }
 }
+

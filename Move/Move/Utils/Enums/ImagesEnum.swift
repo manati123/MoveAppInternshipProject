@@ -9,6 +9,16 @@ import Foundation
 
 
 enum ImagesEnum: String {
+    case lock = "lock"
+    case unlock = "unlock"
+    case lightbulb = "lightbulb"
+    case codeButtonImage = "ButtonBlandPurple"
+    case batteryCharging = "battery-charging"
+    case battery0 = "battery-0"
+    case battery20 = "battery-20"
+    case battery50 = "battery-50"
+    case battery80 = "battery-80"
+    case battery100 = "battery-100"
     case scooterWithShadow = "ScooterWithShadow"
     case menuHighlightBackground = "MenuHighlightBackground"
     case avatar = "Avatar"

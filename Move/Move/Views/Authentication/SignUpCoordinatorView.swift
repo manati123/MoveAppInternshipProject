@@ -21,8 +21,8 @@ struct SignUpCoordinatorView: View {
         NavigationView {
             ZStack {
                 NavigationLink(destination: AuthenticationView(viewModel: viewModel, onFinished: {
-                    logState = .logIn
-                }).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .signUp, selection: $logState) {
+                    onFinished()
+                }, onGoLogIn: {logState = .logIn}).navigationBarHidden(true).transition(.slide.animation(.default)), tag: .signUp, selection: $logState) {
                     EmptyView()
                 }.transition(.slide.animation(.default))
                 NavigationLink(destination: LogInView(userViewModel: viewModel ,onFinished: {

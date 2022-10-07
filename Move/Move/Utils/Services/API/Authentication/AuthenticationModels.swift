@@ -19,6 +19,7 @@ struct User: Hashable, Codable  {
     var createdAt: String?
     var drivinglicense: String?
     var validated: Bool?
+    var numberOfRides: Int?
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -30,6 +31,7 @@ struct User: Hashable, Codable  {
         case createdAt = "createdAt"
         case drivinglicense = "drivinglicense"
         case validated = "validated"
+        case numberOfRides = "numberOfRides"
        }
 }
 
@@ -49,5 +51,5 @@ struct ServerError: Decodable {
 
 
 typealias Result<Success> = Swift.Result<Success, Error>
-
+typealias StartRideResult<Success> = Swift.Result<Success, AFError>
 typealias UploadResult<Success> = DataResponse<LoggedUser, AFError>

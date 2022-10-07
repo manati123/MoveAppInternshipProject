@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import AVFoundation
 
 class ImagePickerViewModel: ObservableObject {
     @Published var image: Image = Image("")
@@ -14,6 +15,39 @@ class ImagePickerViewModel: ObservableObject {
     @Published var shouldPresentImagePicker = false
     @Published var shouldPresentActionScheet = false
     @Published var shouldPresentCamera = false
+    
+    func checkCameraAuthorization() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+            
+        case .notDetermined:
+//            DispatchQueue.main.async {
+                AVCaptureDevice.requestAccess(for: .video) { accessGranted in
+                    if accessGranted {
+                        self.shouldPresentCamera = true
+                        self.shouldPresentImagePicker = true
+                    } else {
+                        ErrorService().showErrorWithButton(message: "Enable permissions from settings", title: "You have not granted access for camera usage", completion: {UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)})
+                        
+                    }
+                }
+//            }
+        case .restricted:
+            ErrorService().showError(message: "Camera usage is restricted!")
+            self.shouldPresentCamera = false
+//            self.shouldPresentImagePicker = true
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        case .denied:
+            ErrorService().showErrorWithButton(message: "Enable permissions", title: "Please enable camera access", completion: {UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)})
+            self.shouldPresentCamera = false
+//            self.shouldPresentImagePicker = true
+//            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        case .authorized:
+            self.shouldPresentCamera = true
+            self.shouldPresentImagePicker = true
+        @unknown default:
+            print("undefined behaviour")
+        }
+    }
 }
 
 struct ImagePickerView: View {
@@ -32,8 +66,11 @@ struct ImagePickerView: View {
                     SUImagePickerView(sourceType: self.viewModel.shouldPresentCamera ? .camera : .photoLibrary, image: self.$viewModel.image, isPresented: self.$viewModel.shouldPresentImagePicker)
                 }.actionSheet(isPresented: $viewModel.shouldPresentActionScheet) { () -> ActionSheet in
                     ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                        self.viewModel.shouldPresentImagePicker = true
-                        self.viewModel.shouldPresentCamera = true
+                        viewModel.checkCameraAuthorization()
+                        
+//                        self.viewModel.shouldPresentImagePicker = true
+//                        self.viewModel.shouldPresentCamera = true
+                        
                     }), ActionSheet.Button.default(Text("Photo Library"), action: {
                         self.viewModel.shouldPresentImagePicker = true
                         self.viewModel.shouldPresentCamera = false
@@ -45,7 +82,7 @@ struct ImagePickerView: View {
             }.buttonStyle(.filledButton)
                 .disabled(false)
                 .animation(.default, value: viewModel.image != Image(""))
-            Button("Upload selected photo?") {
+            Button("Upload selected photo") {
                 self.onUpload()
                 
             }.buttonStyle(.filledButton)
@@ -54,6 +91,8 @@ struct ImagePickerView: View {
             
         }
     }
+    
+    
 }
 
 struct ImagePickerView_Previews: PreviewProvider {

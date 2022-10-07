@@ -6,11 +6,17 @@
 //
 
 import Foundation
-
+import UIKit
+import SwiftUI
 
 class LicenseViewModel: ObservableObject {
     @Published var showingSheet = false
     @Published var imageViewModel = ImagePickerViewModel()
+    @Published var showImagePicker = false
+    @Published var imagePickerSheetDetents: SheetDetents = .none
+    @Published var inputImage: UIImage?
+    @Published var image: Image?
+    
     
     func sendImageForUpload(onUploadDone: @escaping () -> Void, onFailure: @escaping () -> Void) {
         DriverLicenseAPI().uploadForValidation(image: imageViewModel.image) { result in
@@ -24,10 +30,14 @@ class LicenseViewModel: ObservableObject {
         }
     }
     
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
+    
     func logOut(onLogOut: () -> Void) {
-        let encodedUser = UserDefaults.standard.value(forKey: UserDefaultsEnum.loggedUser.rawValue)
-        let decodedUser = try! JSONDecoder().decode(LoggedUser.self, from: encodedUser as! Data)
-        AuthenticationAPI().logOut(loggedUser: decodedUser) { result in
+        let token = UserDefaultsService().loadTokenFromDefaults()
+        AuthenticationAPI().logOut(token: token) { result in
             print(result)
             switch result {
             case .success:

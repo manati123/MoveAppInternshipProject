@@ -11,4 +11,6 @@ enum UserDefaultsEnum: String {
     case loggedUser = "LoggedUser"
     case onboarded = "DoneOnboarding"
     case token = "Token"
+    case activeRide = "activeRide"
+    case lastSelectedScooter = "lastSelectedScooter"
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UnlockScooterSheetView: View {
     var scooter: Scooter
+    let onGoValidateWithCode:() -> Void
+    let onGoValidateWithQR:() -> Void
     var body: some View {
         VStack(spacing: 20) {
             Text("You can unlock this scooter through these methods:")
@@ -36,32 +38,10 @@ struct UnlockScooterSheetView: View {
             Text(verbatim: "#\(self.scooter.number!)")
                 .font(Font.baiJamjuree.heading1)
                 .foregroundColor(Color.primaryPurple)
-            HStack {
-                switch self.scooter.battery! {
-                case 80..<101:
-                    Image(systemName: "battery.100")
-                        .foregroundColor(.green)
-                case 75..<80:
-                    Image(systemName: "battery.75")
-                        .foregroundColor(.orange)
-                case 50..<75:
-                    Image(systemName: "battery.50")
-                        .foregroundColor(.yellow)
-                case 25..<50:
-                    Image(systemName: "battery.25")
-                        .foregroundColor(.red)
-                case 0..<25:
-                    Image(systemName: "battery.0")
-                default:
-                    Image(systemName: "minus.plus.batteryblock.fill")
-                }
-                Text("\(self.scooter.battery!)%")
-                    .font(Font.baiJamjuree.smallText)
-                    .foregroundColor(Color.primaryPurple)
-            }
+            BatteryView(battery: self.scooter.battery!)
             HStack {
                 Button() {
-                    print("LMAO")
+                    
                 } label: {
                     Image(ImagesEnum.ringScooterPin.rawValue)
                 }
@@ -72,7 +52,7 @@ struct UnlockScooterSheetView: View {
             }
             HStack {
                 Button() {
-                    print("LMAO")
+                    
                 } label: {
                     Image(ImagesEnum.missingScooterPin.rawValue)
                 }
@@ -88,14 +68,14 @@ struct UnlockScooterSheetView: View {
         HStack(spacing: 21) {
             Spacer()
             Button() {
-                print("LMAO")
+                self.onGoValidateWithCode()
             } label: {
                 Text("NFC")
             }
             .buttonStyle(.transparentButton)
             
             Button() {
-                print("LMAO")
+                self.onGoValidateWithQR()
             } label: {
 //                    Image(ImagesEnum.missingScooterPin.rawValue)
                 Text("QR")
@@ -103,7 +83,7 @@ struct UnlockScooterSheetView: View {
             .buttonStyle(.transparentButton)
             
             Button() {
-                print("LMAO")
+                self.onGoValidateWithCode()
             } label: {
                 Text("123")
             }
@@ -127,8 +107,8 @@ struct UnlockScooterSheetView: View {
     }
 }
 
-struct UnlockScooterSheetView_Previews: PreviewProvider {
-    static var previews: some View {
-        UnlockScooterSheetView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, internal_id: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123))
-    }
-}
+//struct UnlockScooterSheetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UnlockScooterSheetView(scooter: Scooter(address: "skjdbfsdbfjs skdkjfbsdf skdfbksd sdkjfbks ksdjfb", _id: "", number: 1234, battery: 90, lockedStatus: true, bookStatus: "", createdAt: "", updatedAt: "", __v: 123), onGoValidateWithCode: {})
+//    }
+//}

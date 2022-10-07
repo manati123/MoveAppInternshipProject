@@ -25,7 +25,6 @@ class AuthenticationAPI {
             "email": user.email,
             "password": user.password
         ]
-        print(parameters)
         AF.request("\(baseUrl)/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate(statusCode: 200 ..< 299).responseData {
             response in
             switch response.result {
@@ -34,16 +33,20 @@ class AuthenticationAPI {
                     let decodedUser = try JSONDecoder().decode(LoggedUser.self, from: data)
                     print(decodedUser)
                     completionHandler(.success(decodedUser))
+                } catch {
+                    completionHandler(.failure(MoveError.serverError("Something happend while fetching user...")))
+                }
+            case .failure(let serverError):
+                do {
+                    if response.response?.statusCode != 503 {
+                        let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
+                        completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
+                    }
+                    else {
+                        completionHandler(.failure(MoveError.serverError("Server is down...")))
+                    }
                 } catch(let error) {
                     print(error)
-                    completionHandler(.failure(error))
-                }
-            case .failure(let error):
-                do {
-                    let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
-                    completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
-                } catch(let error) {
-                    completionHandler(.failure(error))
                 }
             }
         }
@@ -64,32 +67,26 @@ class AuthenticationAPI {
             response in
             switch response.result {
             case .success(let data):
-                //                   print("\n data: \(try! JSONDecoder().decode(User.self, from: data)) \n")
                 do {
                     let decodedUser = try JSONDecoder().decode(UserDTO.self, from: data)
                     print(decodedUser)
                     completionHandler(.success(decodedUser))
                     
-                } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
-                } catch let DecodingError.keyNotFound(key, context) {
-                    print("Key '\(key)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.valueNotFound(value, context) {
-                    print("Value '\(value)' not found:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch let DecodingError.typeMismatch(type, context)  {
-                    print("Type '\(type)' mismatch:", context.debugDescription)
-                    print("codingPath:", context.codingPath)
-                } catch {
-                    print("error: ", error)
-                }
-            case .failure(let error):
-                do {
-                    let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
-                    completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
                 } catch(let error) {
-                    completionHandler(.failure(error))
+                    print(error)
+                }
+            case .failure(let serverError):
+                do {
+                    
+                    if response.response?.statusCode == 503{
+                        completionHandler(.failure(MoveError.serverError("Server is down...")))
+                    } else {
+                        let decodedMessage = try JSONDecoder().decode(ServerError.self, from: response.data!)
+                        completionHandler(.failure(MoveError.serverError(decodedMessage.message)))
+                    }
+                } catch(let error) {
+//                    completionHandler(.failure(serverError))
+                    print(error)
                 }
                 //                   throw error
             }
@@ -97,13 +94,14 @@ class AuthenticationAPI {
         
     }
     
-    func logOut(loggedUser: LoggedUser, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
-        let header : HTTPHeaders = ["Authorization": "Bearer \(loggedUser.token)"]
+    func logOut(token: String, completionHandler: @escaping (Result<LoggedUser>) -> ()) {
+        let header : HTTPHeaders = ["Authorization": "Bearer \(token)"]
         
         AF.request("\(baseUrl)/auth/logout", method: .delete, parameters: nil, headers: header).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
-            case .success(let data):
+            case .success:
                 print("Success")
+                
             case .failure(let error):
                 print(error)
             }
@@ -120,8 +118,8 @@ class AuthenticationAPI {
                 switch response.result {
                 case .success(let user):
                     do {
-                    let decodedUser = try JSONDecoder().decode(User.self, from: user)
-                    completionHandler(.success(decodedUser))
+                        let decodedUser = try JSONDecoder().decode(User.self, from: user)
+                        completionHandler(.success(decodedUser))
                     } catch {
                         completionHandler(.failure(error))
                     }
